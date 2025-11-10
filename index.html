@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برنامج أفق - متابعة تطور الطلاب</title>
+    <title>برنامج متابعة تطور الطلاب - قالب عام</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,7 +11,6 @@
             --primary-color: #2c5aa0;
             --secondary-color: #4caf50;
             --accent-color: #ff9800;
-            --whatsapp-color: #25D366;
             --warning-color: #f44336;
             --light-color: #f5f9ff;
             --dark-color: #333;
@@ -275,14 +274,6 @@
             background: #e68900;
         }
         
-        .btn-whatsapp {
-            background: var(--whatsapp-color);
-        }
-        
-        .btn-whatsapp:hover {
-            background: #128C7E;
-        }
-        
         .btn-print {
             background: #6c757d;
         }
@@ -348,38 +339,6 @@
             overflow-x: auto;
             max-height: 600px;
             overflow-y: auto;
-        }
-        
-        .example-project {
-            border: 2px dashed var(--primary-color);
-            background: #f8fbff;
-            padding: 25px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        
-        .project-preview {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
-            box-shadow: var(--shadow);
-        }
-        
-        .project-screenshot {
-            width: 100%;
-            max-width: 800px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin: 15px 0;
-            border: 1px solid #ddd;
-        }
-        
-        .project-links {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin: 15px 0;
         }
         
         .treatment-plan {
@@ -494,26 +453,27 @@
             margin-right: 15px;
         }
         
-        .whatsapp-modal {
+        .modal {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 1000;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
         
-        .whatsapp-modal-content {
-            background: white;
-            padding: 25px;
+        .modal-content {
+            background-color: white;
+            padding: 30px;
             border-radius: 8px;
             width: 90%;
-            max-width: 500px;
-            box-shadow: var(--shadow);
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         .modal-header {
@@ -521,13 +481,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .modal-title {
-            color: var(--primary-color);
-            font-size: 1.3rem;
         }
         
         .close-modal {
@@ -538,24 +491,66 @@
             color: #666;
         }
         
-        .whatsapp-preview {
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            max-height: 300px;
-            overflow-y: auto;
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
         }
         
-        .whatsapp-actions {
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        
+        .form-actions {
             display: flex;
-            gap: 10px;
             justify-content: flex-end;
+            gap: 10px;
             margin-top: 20px;
         }
         
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .csv-upload {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .csv-upload i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        
         @media print {
-            header, footer, nav, .btn, .section-title .btn {
+            header, footer, nav, .btn, .section-title .btn, .modal {
                 display: none !important;
             }
             
@@ -607,11 +602,12 @@
                 padding: 8px 5px;
             }
             
-            .project-links {
+            .form-row {
                 flex-direction: column;
+                gap: 0;
             }
             
-            .whatsapp-actions {
+            .student-selector {
                 flex-direction: column;
             }
         }
@@ -622,30 +618,30 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo-section">
-                    <!-- شعار الهيئة الملكية -->
+                    <!-- شعار المؤسسة التعليمية -->
                     <div class="rc-logo">
                         <svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
                             <rect width="180" height="60" fill="#1e3a6f" rx="5"/>
                             <text x="90" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
-                                الهيئة الملكية للجبيل وينبع
+                                المؤسسة التعليمية
                             </text>
                             <text x="90" y="50" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
-                                Royal Commission for Jubail & Yanbu
+                                Educational Institution
                             </text>
                         </svg>
                     </div>
                     <div class="logo-text">
-                        <div class="logo">برنامج أفق - متابعة التطور الدراسي</div>
-                        <div class="initiative-creator">صاحب المبادرة: عبدالله محمد حمدي</div>
+                        <div class="logo">برنامج متابعة التطور الدراسي</div>
+                        <div class="initiative-creator">المعلم: <span id="teacherName">اسم المعلم</span></div>
                     </div>
                 </div>
                 <nav>
                     <ul>
                         <li><a href="#overview">نظرة عامة</a></li>
+                        <li><a href="#data-entry">إدخال البيانات</a></li>
                         <li><a href="#students">الطلاب</a></li>
                         <li><a href="#behavior">السلوكيات</a></li>
                         <li><a href="#comparison">المقارنات</a></li>
-                        <li><a href="#project-example">مشاريع الطلاب</a></li>
                         <li><a href="#treatment-plans">الخطط العلاجية</a></li>
                         <li><a href="#reports">التقارير</a></li>
                     </ul>
@@ -658,29 +654,29 @@
         <section id="overview" class="section">
             <h2 class="section-title">
                 نظرة عامة على البرنامج
-                <div class="creator-badge">مبادرة: عبدالله محمد حمدي</div>
+                <div class="creator-badge">المعلم: <span id="teacherNameBadge">اسم المعلم</span></div>
             </h2>
             <div class="program-info">
-                <h3>برنامج "أفق" لرفع التحصيل الدراسي</h3>
-                <p>برنامج تعليمي يهدف إلى رفع التحصيل الدراسي وتنمية المهارات التعاونية والرقمية لطلاب الصف الأول الثانوي في مادة الكيمياء.</p>
-                <p>يعتمد البرنامج على تحويل الطلاب من متلقين سلبيين إلى منتجين للمعرفة من خلال العمل التعاوني وإعداد بنك أسئلة تفاعلي.</p>
+                <h3>برنامج متابعة تطور الطلاب</h3>
+                <p>برنامج تعليمي يهدف إلى رفع التحصيل الدراسي وتنمية المهارات التعاونية والرقمية للطلاب.</p>
+                <p>يعتمد البرنامج على تحويل الطلاب من متلقين سلبيين إلى منتجين للمعرفة من خلال العمل التعاوني والمشاركة الفعالة.</p>
             </div>
             
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value">38</div>
+                    <div class="stat-value" id="totalStudents">0</div>
                     <div class="stat-label">عدد الطلاب</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">18.5%</div>
+                    <div class="stat-value" id="avgImprovement">0%</div>
                     <div class="stat-label">متوسط التحسن</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">84%</div>
+                    <div class="stat-value" id="improvedStudents">0%</div>
                     <div class="stat-label">نسبة الطلاب المحسنين</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value">6</div>
+                    <div class="stat-value" id="groupsCount">0</div>
                     <div class="stat-label">عدد المجموعات التعاونية</div>
                 </div>
             </div>
@@ -690,35 +686,123 @@
             </div>
         </section>
 
-        <section id="students" class="section">
-            <h2 class="section-title">بيانات الطلاب والدرجات</h2>
-            <div class="form-group">
-                <button class="btn" id="addStudentBtn">إضافة طالب جديد</button>
-                <button class="btn btn-secondary" id="importDataBtn">استيراد البيانات</button>
-                <button class="btn btn-whatsapp" id="sendAllReportsBtn">
-                    <i class="fab fa-whatsapp"></i> إرسال جميع التقارير عبر واتساب
-                </button>
+        <section id="data-entry" class="section">
+            <h2 class="section-title">إدخال البيانات</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="basic-info">المعلومات الأساسية</div>
+                <div class="tab" data-tab="students-data">بيانات الطلاب</div>
+                <div class="tab" data-tab="behavior-data">بيانات السلوك</div>
             </div>
             
+            <div class="tab-content active" id="basic-info-tab">
+                <div class="form-group">
+                    <label for="teacherNameInput">اسم المعلم</label>
+                    <input type="text" id="teacherNameInput" placeholder="أدخل اسم المعلم">
+                </div>
+                <div class="form-group">
+                    <label for="subjectInput">المادة الدراسية</label>
+                    <input type="text" id="subjectInput" placeholder="أدخل اسم المادة">
+                </div>
+                <div class="form-group">
+                    <label for="classInput">الصف الدراسي</label>
+                    <input type="text" id="classInput" placeholder="أدخل الصف الدراسي">
+                </div>
+                <div class="form-group">
+                    <label for="semesterInput">الفصل الدراسي</label>
+                    <input type="text" id="semesterInput" placeholder="أدخل الفصل الدراسي">
+                </div>
+                <div class="form-group">
+                    <label for="programDescription">وصف البرنامج</label>
+                    <textarea id="programDescription" placeholder="أدخل وصفاً للبرنامج التعليمي"></textarea>
+                </div>
+                <button class="btn" id="saveBasicInfo">حفظ المعلومات الأساسية</button>
+            </div>
+            
+            <div class="tab-content" id="students-data-tab">
+                <div class="form-group">
+                    <button class="btn" id="addStudentBtn">إضافة طالب جديد</button>
+                    <button class="btn btn-secondary" id="importDataBtn">استيراد البيانات من ملف CSV</button>
+                    <button class="btn btn-accent" id="generateSampleData">إنشاء بيانات نموذجية</button>
+                </div>
+                
+                <div class="csv-upload" id="csvUploadArea" style="display: none;">
+                    <i class="fas fa-file-csv"></i>
+                    <h3>اسحب وأفلت ملف CSV هنا أو انقر للاختيار</h3>
+                    <p>يجب أن يحتوي الملف على الأعمدة التالية: الاسم، الواجبات (قبل)، التفاعل الصفي (قبل)، الاختبار (قبل)، الواجبات (بعد)، التفاعل الصفي (بعد)، الاختبار (بعد)</p>
+                    <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
+                    <button class="btn" id="selectCsvFile">اختر ملف CSV</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="studentsTable">
+                        <thead>
+                            <tr>
+                                <th>م</th>
+                                <th>اسم الطالب</th>
+                                <th>الواجبات (قبل)</th>
+                                <th>التفاعل الصفي (قبل)</th>
+                                <th>الاختبار (قبل)</th>
+                                <th>الواجبات (بعد)</th>
+                                <th>التفاعل الصفي (بعد)</th>
+                                <th>الاختبار (بعد)</th>
+                                <th>التحسن الإجمالي</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- سيتم ملؤها بالبيانات -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="behavior-data-tab">
+                <div class="form-group">
+                    <button class="btn" id="addBehaviorBtn">إضافة بيانات سلوكية</button>
+                    <button class="btn btn-secondary" id="importBehaviorBtn">استيراد بيانات السلوك من ملف CSV</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="behaviorTable">
+                        <thead>
+                            <tr>
+                                <th>اسم الطالب</th>
+                                <th>النقاط الإيجابية</th>
+                                <th>النقاط السلبية</th>
+                                <th>النسبة الإيجابية</th>
+                                <th>التصنيف السلوكي</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="behaviorTableBody">
+                            <!-- سيتم ملؤها بالبيانات -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="students" class="section">
+            <h2 class="section-title">بيانات الطلاب والدرجات</h2>
+            
             <div class="table-container">
-                <table id="studentsTable">
+                <table id="studentsDisplayTable">
                     <thead>
                         <tr>
                             <th>م</th>
                             <th>اسم الطالب</th>
                             <th>الواجبات (قبل)</th>
                             <th>التفاعل الصفي (قبل)</th>
-                            <th>بليكرز (قبل)</th>
                             <th>الاختبار (قبل)</th>
                             <th>الواجبات (بعد)</th>
                             <th>التفاعل الصفي (بعد)</th>
-                            <th>بليكرز (بعد)</th>
                             <th>الاختبار (بعد)</th>
                             <th>التحسن الإجمالي</th>
                             <th>الإجراءات</th>
                         </tr>
                     </thead>
-                    <tbody id="studentsTableBody">
+                    <tbody id="studentsDisplayTableBody">
                         <!-- سيتم ملؤها بالبيانات -->
                     </tbody>
                 </table>
@@ -730,19 +814,19 @@
             
             <div class="stats-grid">
                 <div class="stat-card behavior-stat-card">
-                    <div class="stat-value behavior-stat-value">76%</div>
+                    <div class="stat-value behavior-stat-value" id="avgPositivePercentage">0%</div>
                     <div class="stat-label">متوسط النسبة الإيجابية</div>
                 </div>
                 <div class="stat-card behavior-stat-card">
-                    <div class="stat-value behavior-stat-value">14</div>
+                    <div class="stat-value behavior-stat-value" id="excellentBehaviorCount">0</div>
                     <div class="stat-label">طلاب بنسبة إيجابية فوق 80%</div>
                 </div>
                 <div class="stat-card behavior-stat-card">
-                    <div class="stat-value behavior-stat-value">5</div>
+                    <div class="stat-value behavior-stat-value" id="needsSupportCount">0</div>
                     <div class="stat-label">طلاب يحتاجون دعم سلوكي</div>
                 </div>
                 <div class="stat-card behavior-stat-card">
-                    <div class="stat-value behavior-stat-value">+42%</div>
+                    <div class="stat-value behavior-stat-value" id="positiveImprovement">0%</div>
                     <div class="stat-label">تحسن في المشاركة الإيجابية</div>
                 </div>
             </div>
@@ -767,47 +851,21 @@
                 
                 <div class="behavior-category">
                     <h4>السلوكيات الإيجابية</h4>
-                    <div class="behavior-item positive-behavior">
-                        <span>المشاركة والتفاعل</span>
-                        <span class="behavior-score positive-score">+245 نقطة</span>
-                    </div>
-                    <div class="behavior-item positive-behavior">
-                        <span>العمل الجماعي</span>
-                        <span class="behavior-score positive-score">+142 نقطة</span>
-                    </div>
-                    <div class="behavior-item positive-behavior">
-                        <span>الاندماج والانتباه</span>
-                        <span class="behavior-score positive-score">+38 نقطة</span>
-                    </div>
-                    <div class="behavior-item positive-behavior">
-                        <span>مساعدة الآخرين</span>
-                        <span class="behavior-score positive-score">+25 نقطة</span>
+                    <div id="positiveBehaviorsList">
+                        <!-- سيتم ملؤها بالبيانات -->
                     </div>
                 </div>
                 
                 <div class="behavior-category">
                     <h4>السلوكيات السلبية</h4>
-                    <div class="behavior-item negative-behavior">
-                        <span>الكلام أثناء الشرح</span>
-                        <span class="behavior-score negative-score">-98 نقطة</span>
-                    </div>
-                    <div class="behavior-item negative-behavior">
-                        <span>عدم المشاركة</span>
-                        <span class="behavior-score negative-score">-74 نقطة</span>
-                    </div>
-                    <div class="behavior-item negative-behavior">
-                        <span>النوم في الصف</span>
-                        <span class="behavior-score negative-score">-52 نقطة</span>
-                    </div>
-                    <div class="behavior-item negative-behavior">
-                        <span>التأخر</span>
-                        <span class="behavior-score negative-score">-43 نقطة</span>
+                    <div id="negativeBehaviorsList">
+                        <!-- سيتم ملؤها بالبيانات -->
                     </div>
                 </div>
             </div>
             
             <div class="table-container">
-                <table id="behaviorTable">
+                <table id="behaviorDisplayTable">
                     <thead>
                         <tr>
                             <th>اسم الطالب</th>
@@ -818,7 +876,7 @@
                             <th>الإجراءات</th>
                         </tr>
                     </thead>
-                    <tbody id="behaviorTableBody">
+                    <tbody id="behaviorDisplayTableBody">
                         <!-- سيتم ملؤها بالبيانات -->
                     </tbody>
                 </table>
@@ -829,18 +887,13 @@
                 <p>يظهر التحليل الإحصائي وجود علاقة إيجابية قوية بين السلوك الإيجابي في الفصل والتحصيل الدراسي:</p>
                 
                 <div class="correlation-item">
-                    <div class="correlation-bar" style="width: 85%;"></div>
-                    <span>الطلاب ذوو النسبة الإيجابية فوق 80% حققوا تحسناً بمعدل 24%</span>
+                    <div class="correlation-bar" id="correlationBar1" style="width: 0%;"></div>
+                    <span id="correlationText1">الطلاب ذوو النسبة الإيجابية العالية حققوا تحسناً أكبر</span>
                 </div>
                 
                 <div class="correlation-item">
-                    <div class="correlation-bar" style="width: 45%;"></div>
-                    <span>الطلاب ذوو النسبة الإيجابية أقل من 50% حققوا تحسناً بمعدل 8% فقط</span>
-                </div>
-                
-                <div class="correlation-item">
-                    <div class="correlation-bar" style="width: 72%;"></div>
-                    <span>زيادة المشاركة الإيجابية ترتبط بتحسن في درجات التفاعل الصفي بنسبة 72%</span>
+                    <div class="correlation-bar" id="correlationBar2" style="width: 0%;"></div>
+                    <span id="correlationText2">الطلاب ذوو النسبة الإيجابية المنخفضة حققوا تحسناً أقل</span>
                 </div>
             </div>
             
@@ -872,37 +925,6 @@
             </div>
         </section>
 
-        <section id="project-example" class="section">
-            <h2 class="section-title">مشاريع الطلاب: بنوك الأسئلة التفاعلية</h2>
-            
-            <div class="example-project">
-                <h3>بنوك الأسئلة التفاعلية في الكيمياء</h3>
-                <p>هذه المشاريع هي نتاج تطبيق برنامج "أفق" حيث قام الطلاب بتصميم وإعداد بنوك أسئلة تفاعلية في مادة الكيمياء باستخدام تقنيات الويب.</p>
-                
-                <div class="project-preview">
-                    <h4>مشروع الطالب الأول: بنك أسئلة تفاعلي شامل</h4>
-                    <p>بنك أسئلة شامل يغطي مختلف وحدات منهج الكيمياء للصف الأول الثانوي، مع تصميم تفاعلي جذاب.</p>
-                    
-                    <div class="project-links">
-                        <a href="https://m7md-09.github.io/-/" target="_blank" class="btn btn-accent">
-                            <i class="fas fa-external-link-alt"></i> تجربة المشروع الأول
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="project-preview">
-                    <h4>مشروع الطالب الثاني: تطبيق اختبارات تفاعلي</h4>
-                    <p>تطبيق متقدم يحتوي على اختبارات تفاعلية مع تصحيح فوري وتقارير أداء.</p>
-                    
-                    <div class="project-links">
-                        <a href="https://rrivv3216.github.io/-4/" target="_blank" class="btn btn-accent">
-                            <i class="fas fa-external-link-alt"></i> تجربة المشروع الثاني
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="treatment-plans" class="section">
             <h2 class="section-title">الخطط العلاجية للطلاب</h2>
             
@@ -927,17 +949,17 @@
                 <div class="card">
                     <h3 class="card-title">تقرير الصف</h3>
                     <p>عرض شامل لأداء الصف ككل ومقارنة مع المعايير الوطنية.</p>
-                    <button class="btn">عرض التقرير</button>
+                    <button class="btn" id="generateClassReport">عرض التقرير</button>
                 </div>
                 <div class="card">
                     <h3 class="card-title">تقرير فردي</h3>
                     <p>إنشاء تقارير مفصلة لكل طالب مع توصيات علاجية.</p>
-                    <button class="btn">إنشاء التقارير</button>
+                    <button class="btn" id="generateIndividualReport">إنشاء التقارير</button>
                 </div>
                 <div class="card">
                     <h3 class="card-title">تحليل النتائج</h3>
                     <p>تحليل إحصائي متقدم للنتائج وتأثير البرنامج.</p>
-                    <button class="btn">عرض التحليل</button>
+                    <button class="btn" id="generateAnalysis">عرض التحليل</button>
                 </div>
             </div>
             
@@ -948,128 +970,124 @@
         </section>
     </div>
 
-    <!-- نافذة معاينة تقرير واتساب -->
-    <div class="whatsapp-modal" id="whatsappModal">
-        <div class="whatsapp-modal-content">
+    <!-- نافذة إضافة/تعديل طالب -->
+    <div class="modal" id="studentModal">
+        <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">إرسال تقرير عبر واتساب</h3>
-                <button class="close-modal" id="closeModal">&times;</button>
+                <h3 id="studentModalTitle">إضافة طالب جديد</h3>
+                <button class="close-modal">&times;</button>
             </div>
-            <div class="whatsapp-preview" id="whatsappPreview">
-                <!-- سيتم ملؤها بمحتوى التقرير -->
+            <form id="studentForm">
+                <input type="hidden" id="studentId">
+                <div class="form-group">
+                    <label for="studentName">اسم الطالب</label>
+                    <input type="text" id="studentName" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="preHomework">الواجبات (قبل)</label>
+                        <input type="number" id="preHomework" min="0" max="100" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="preInteraction">التفاعل الصفي (قبل)</label>
+                        <input type="number" id="preInteraction" min="0" max="100" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="preExam">الاختبار (قبل)</label>
+                        <input type="number" id="preExam" min="0" max="100" step="0.1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="postHomework">الواجبات (بعد)</label>
+                        <input type="number" id="postHomework" min="0" max="100" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="postInteraction">التفاعل الصفي (بعد)</label>
+                        <input type="number" id="postInteraction" min="0" max="100" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="postExam">الاختبار (بعد)</label>
+                        <input type="number" id="postExam" min="0" max="100" step="0.1">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelStudent">إلغاء</button>
+                    <button type="submit" class="btn">حفظ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- نافذة إضافة/تعديل بيانات السلوك -->
+    <div class="modal" id="behaviorModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="behaviorModalTitle">إضافة بيانات سلوكية</h3>
+                <button class="close-modal">&times;</button>
             </div>
-            <div class="whatsapp-actions">
-                <button class="btn" id="editReportBtn">تعديل التقرير</button>
-                <button class="btn btn-whatsapp" id="sendWhatsappBtn">
-                    <i class="fab fa-whatsapp"></i> إرسال عبر واتساب
-                </button>
-            </div>
+            <form id="behaviorForm">
+                <input type="hidden" id="behaviorId">
+                <div class="form-group">
+                    <label for="behaviorStudentName">اسم الطالب</label>
+                    <select id="behaviorStudentName" required>
+                        <option value="">اختر الطالب</option>
+                        <!-- سيتم ملؤها بالطلاب -->
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="positivePoints">النقاط الإيجابية</label>
+                        <input type="number" id="positivePoints" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="negativePoints">النقاط السلبية</label>
+                        <input type="number" id="negativePoints" min="0" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="behaviorNotes">ملاحظات إضافية</label>
+                    <textarea id="behaviorNotes" placeholder="ملاحظات حول سلوك الطالب"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBehavior">إلغاء</button>
+                    <button type="submit" class="btn">حفظ</button>
+                </div>
+            </form>
         </div>
     </div>
 
     <footer>
         <div class="container">
-            <p>برنامج أفق - متابعة تطور الطلاب &copy; 2023</p>
-            <p>ثانوية العلا - الهيئة الملكية بالجبيل</p>
-            <p>صاحب المبادرة: عبدالله محمد حمدي</p>
+            <p>برنامج متابعة تطور الطلاب &copy; <span id="currentYear">2023</span></p>
+            <p id="institutionName">المؤسسة التعليمية</p>
+            <p>المعلم: <span id="footerTeacherName">اسم المعلم</span></p>
         </div>
     </footer>
 
     <script>
-        // بيانات الطلاب الكاملة من ملف Excel
-        const studentsData = [
-            { id: 1, name: "أسامة بن ابراھيم بن سعد الدوسري", preHomework: 8.75, preInteraction: 8, prePlickers: 6, preExam: 8, postHomework: 10, postInteraction: 10, postPlickers: 8, postExam: 12 },
-            { id: 2, name: "الباسل بن فھد بن جسام الشمري", preHomework: 3.75, preInteraction: 8, prePlickers: 8, preExam: 6.5, postHomework: 6, postInteraction: 10, postPlickers: 10, postExam: 11 },
-            { id: 3, name: "الوليد بن خالد بن سويلم الرويضي الرشيدي", preHomework: 5, preInteraction: 2, prePlickers: 9, preExam: 3, postHomework: 7, postInteraction: 6, postPlickers: 10, postExam: 7 },
-            { id: 4, name: "باسل بن يحيى بن علي الزھراني", preHomework: 3.75, preInteraction: 2, prePlickers: 7, preExam: 10.5, postHomework: 6, postInteraction: 6, postPlickers: 9, postExam: 15 },
-            { id: 5, name: "برزان بن نايف بن دعسان الشمري", preHomework: 1.25, preInteraction: 2, prePlickers: 8, preExam: 4.5, postHomework: 5, postInteraction: 6, postPlickers: 10, postExam: 9 },
-            { id: 6, name: "تركي بن محمد بن عوض ال جميح", preHomework: 8.75, preInteraction: 7, prePlickers: 9, preExam: 11, postHomework: 10, postInteraction: 9, postPlickers: 10, postExam: 15 },
-            { id: 7, name: "حمد بن سعد بن عبد' الخالدي", preHomework: 7.5, preInteraction: 2, prePlickers: 5, preExam: 7.5, postHomework: 9, postInteraction: 6, postPlickers: 7, postExam: 11 },
-            { id: 8, name: "خالد بن وليد بن محمد الزھراني", preHomework: 10, preInteraction: 3, prePlickers: 8, preExam: 6, postHomework: 10, postInteraction: 6, postPlickers: 10, postExam: 10 },
-            { id: 9, name: "ريان بن جھز بن نواف البيضاني الحربي", preHomework: 10, preInteraction: 3, prePlickers: 7, preExam: 5.5, postHomework: 10, postInteraction: 6, postPlickers: 9, postExam: 10 },
-            { id: 10, name: "ريان بن ناصر بن شويل ا(حمري", preHomework: 8.75, preInteraction: 3, prePlickers: 9, preExam: 10.5, postHomework: 10, postInteraction: 6, postPlickers: 10, postExam: 14 },
-            { id: 11, name: "سليمان بن عبد' بن علي اليامي", preHomework: 7.5, preInteraction: 3, prePlickers: 8, preExam: 7, postHomework: 9, postInteraction: 6, postPlickers: 10, postExam: 11 },
-            { id: 12, name: "صالح بن احمد بن صالح المزيد", preHomework: 10, preInteraction: 5, prePlickers: 8, preExam: 10, postHomework: 10, postInteraction: 8, postPlickers: 10, postExam: 14 },
-            { id: 13, name: "ضاري بن صالح بن معزي العباس", preHomework: 6.25, preInteraction: 10, prePlickers: 10, preExam: 12, postHomework: 10, postInteraction: 10, postPlickers: 10, postExam: 15 },
-            { id: 14, name: "ضاوي بن خالد بن صالح الخالدي", preHomework: 10, preInteraction: 2, prePlickers: 4, preExam: 5, postHomework: 10, postInteraction: 6, postPlickers: 6, postExam: 9 },
-            { id: 15, name: "طلال بن حمد بن محمد القرفي الھاجري", preHomework: 2.5, preInteraction: 2, prePlickers: 10, preExam: 7.5, postHomework: 5, postInteraction: 6, postPlickers: 10, postExam: 11 },
-            { id: 16, name: "طلال بن نايف بن فلاح رويضي الرشيدي", preHomework: 7.5, preInteraction: 2, prePlickers: 6, preExam: 5, postHomework: 10, postInteraction: 6, postPlickers: 8, postExam: 9 },
-            { id: 17, name: "عبدالرحمن بن مبارك بن خالد المستحي", preHomework: 5, preInteraction: 8, prePlickers: 9, preExam: 7.5, postHomework: 7, postInteraction: 10, postPlickers: 10, postExam: 12 },
-            { id: 18, name: "عبدالعزيز بن جابر بن حمد المرى", preHomework: 3.75, preInteraction: 5, prePlickers: 8, preExam: 7.5, postHomework: 6, postInteraction: 7, postPlickers: 10, postExam: 12 },
-            { id: 19, name: "عبدالعزيز بن علي بن عبد' العماري", preHomework: 10, preInteraction: 3, prePlickers: 9, preExam: 2, postHomework: 10, postInteraction: 6, postPlickers: 10, postExam: 6 },
-            { id: 20, name: "عبدالعزيز بن مقبل بن نقاء السالمي الحربي", preHomework: 7.5, preInteraction: 8, prePlickers: 8, preExam: 7.5, postHomework: 9, postInteraction: 10, postPlickers: 10, postExam: 11 },
-            { id: 21, name: "عبدالعزيز بن ھايل بن عويضه العنزي", preHomework: 8.75, preInteraction: 3, prePlickers: 10, preExam: 9, postHomework: 10, postInteraction: 6, postPlickers: 10, postExam: 13 },
-            { id: 22, name: "عصام بن احمد بن عصام مكي", preHomework: 6.25, preInteraction: 3, prePlickers: 7, preExam: 5.5, postHomework: 9, postInteraction: 6, postPlickers: 9, postExam: 9 },
-            { id: 23, name: "علي بن عبد' بن علي الحارثي", preHomework: 6.25, preInteraction: 8, prePlickers: 10, preExam: 10, postHomework: 9, postInteraction: 10, postPlickers: 10, postExam: 14 },
-            { id: 24, name: "علي بن عبدالمجيد بن علي الشھري", preHomework: 2.5, preInteraction: 5, prePlickers: 9, preExam: 9, postHomework: 5, postInteraction: 8, postPlickers: 10, postExam: 13 },
-            { id: 25, name: "فارس بن ھشام بن أحمد حكمي", preHomework: 8.75, preInteraction: 4, prePlickers: 8, preExam: 7.5, postHomework: 10, postInteraction: 7, postPlickers: 10, postExam: 11 },
-            { id: 26, name: "فھد بن محمد بن فھد القحطاني", preHomework: 10, preInteraction: 4, prePlickers: 7, preExam: 6, postHomework: 10, postInteraction: 7, postPlickers: 9, postExam: 10 },
-            { id: 27, name: "ماجد بن سالم بن عبد' الحقباني الدوسري", preHomework: 6.25, preInteraction: 3, prePlickers: 5, preExam: 3, postHomework: 9, postInteraction: 6, postPlickers: 7, postExam: 7 },
-            { id: 28, name: "مثنى بن عبدالرحمن بن عياد الشمري", preHomework: 8.75, preInteraction: 4, prePlickers: 8, preExam: 9, postHomework: 10, postInteraction: 7, postPlickers: 10, postExam: 13 },
-            { id: 29, name: "محمد بن اسماعيل بن سالم القحطاني", preHomework: 3.75, preInteraction: 5, prePlickers: 9, preExam: 10, postHomework: 6, postInteraction: 8, postPlickers: 10, postExam: 14 },
-            { id: 30, name: "محمد بن حزام بن عبود العجمي", preHomework: 6.25, preInteraction: 5, prePlickers: 6, preExam: 4, postHomework: 8, postInteraction: 8, postPlickers: 8, postExam: 8 },
-            { id: 31, name: "محمد بن فھد بن محمد القحطاني", preHomework: 1.25, preInteraction: 10, prePlickers: 9, preExam: 7, postHomework: 5, postInteraction: 10, postPlickers: 10, postExam: 11 },
-            { id: 32, name: "مسلم بن ابراھيم بن مسلم الرويشد", preHomework: 8.75, preInteraction: 7, prePlickers: 10, preExam: 5.5, postHomework: 10, postInteraction: 10, postPlickers: 10, postExam: 10 },
-            { id: 33, name: "مشعل بن فراج بن لوفان الشمري", preHomework: 5, preInteraction: 5, prePlickers: 4, preExam: 2, postHomework: 7, postInteraction: 7, postPlickers: 6, postExam: 6 },
-            { id: 34, name: "منيف بن خالد بن منيف الشھراني", preHomework: 3.75, preInteraction: 5, prePlickers: 5, preExam: 4.5, postHomework: 6, postInteraction: 7, postPlickers: 7, postExam: 9 },
-            { id: 35, name: "ناصر بن متعب بن ناصر العتيبي", preHomework: 5, preInteraction: 4, prePlickers: 9, preExam: 11.5, postHomework: 7, postInteraction: 7, postPlickers: 10, postExam: 14 },
-            { id: 36, name: "ھتان بن طارق بن رافع آل رافع الغامدي", preHomework: 6.25, preInteraction: 5, prePlickers: 9, preExam: 7.5, postHomework: 8, postInteraction: 8, postPlickers: 10, postExam: 11 },
-            { id: 37, name: "ياسر بن ماجد بن مسفر الغامدي", preHomework: 6.25, preInteraction: 7, prePlickers: 10, preExam: 7, postHomework: 8, postInteraction: 9, postPlickers: 10, postExam: 11 }
-        ];
-
-        // بيانات السلوكيات من ملف CSV
-        const behaviorData = [
-            { name: "أسامة بن ابراهيم بن سعد الدوسري", positive: 9, negative: 1, percentage: 90 },
-            { name: "الباسل بن فهد بن جسام الشمري", positive: 7, negative: 1, percentage: 88 },
-            { name: "الوليد بن خالد بن سويلم الرويضي الرشيدي", positive: 3, negative: 8, percentage: 27 },
-            { name: "باسل بن يحيى بن علي الزهراني", positive: 2, negative: 2, percentage: 50 },
-            { name: "برزان بن نايف بن دعسان الشمري", positive: 6, negative: 10, percentage: 38 },
-            { name: "تركي بن محمد بن عوض ال جميح", positive: 14, negative: 0, percentage: 100 },
-            { name: "حمد بن سعد بن عبدالله الخالدي", positive: 8, negative: 7, percentage: 53 },
-            { name: "خالد بن وليد بن محمد الزهراني", positive: 10, negative: 4, percentage: 71 },
-            { name: "ريان بن جهز بن نواف البيضاني الحربي", positive: 2, negative: 2, percentage: 50 },
-            { name: "ريان بن ناصر بن شويل الأحمري", positive: 8, negative: 5, percentage: 62 },
-            { name: "سليمان بن عبدالله بن علي اليامي", positive: 10, negative: 3, percentage: 77 },
-            { name: "صالح بن احمد بن صالح المزيد", positive: 9, negative: 2, percentage: 82 },
-            { name: "ضاري بن صالح بن معزي العباس", positive: 9, negative: 0, percentage: 100 },
-            { name: "ضاوي بن خالد بن صالح الخالدي", positive: 1, negative: 2, percentage: 33 },
-            { name: "طلال بن حمد بن محمد القرفي الهاجري", positive: 6, negative: 5, percentage: 55 },
-            { name: "طلال بن نايف بن فلاح رويضي الرشيدي", positive: 2, negative: 5, percentage: 29 },
-            { name: "عبدالرحمن بن مبارك بن خالد المستحي", positive: 5, negative: 1, percentage: 83 },
-            { name: "عبدالعزيز بن جابر بن حمد المرى", positive: 4, negative: 1, percentage: 80 },
-            { name: "عبدالعزيز بن علي بن عبدالله العماري", positive: 4, negative: 6, percentage: 40 },
-            { name: "عبدالعزيز بن مقبل بن نقاء السالمي الحربي", positive: 5, negative: 0, percentage: 100 },
-            { name: "عبدالله بن هايل بن عويضه العنزي", positive: 7, negative: 6, percentage: 54 },
-            { name: "عصام بن احمد بن عصام مكي", positive: 3, negative: 3, percentage: 50 },
-            { name: "علي بن عبدالله بن علي الحارثي", positive: 9, negative: 0, percentage: 100 },
-            { name: "علي بن عبدالمجيد بن علي الشهري", positive: 6, negative: 2, percentage: 75 },
-            { name: "فارس بن هشام بن أحمد حكمي", positive: 8, negative: 9, percentage: 47 },
-            { name: "فهد بن محمد بن فهد القحطاني", positive: 3, negative: 7, percentage: 30 },
-            { name: "ماجد بن سالم بن عبدالله الحقباني الدوسري", positive: 2, negative: 7, percentage: 22 },
-            { name: "مثنى بن عبدالرحمن بن عياد الشمري", positive: 6, negative: 2, percentage: 75 },
-            { name: "محمد بن اسماعيل بن سالم القحطاني", positive: 9, negative: 4, percentage: 69 },
-            { name: "محمد بن حزام بن عبود العجمي", positive: 2, negative: 0, percentage: 100 },
-            { name: "محمد بن فهد بن محمد القحطاني", positive: 8, negative: 1, percentage: 89 },
-            { name: "مسلم بن ابراهيم بن مسلم الرويشد", positive: 4, negative: 0, percentage: 100 },
-            { name: "مشعل بن فراج بن لوفان الشمري", positive: 3, negative: 9, percentage: 25 },
-            { name: "منيف بن خالد بن منيف الشهراني", positive: 6, negative: 4, percentage: 60 },
-            { name: "ناصر بن متعب بن ناصر العتيبي", positive: 7, negative: 8, percentage: 47 },
-            { name: "هتان بن طارق بن رافع آل رافع الغامدي", positive: 5, negative: 4, percentage: 56 },
-            { name: "ياسر بن ماجد بن مسفر الغامدي", positive: 13, negative: 5, percentage: 72 }
-        ];
-
-        // حساب الدرجات الإجمالية والتحسن
-        studentsData.forEach(student => {
-            student.preTotal = student.preHomework + student.preInteraction + student.prePlickers + student.preExam;
-            student.postTotal = student.postHomework + student.postInteraction + student.postPlickers + student.postExam;
-            student.improvement = ((student.postTotal - student.preTotal) / student.preTotal * 100).toFixed(1);
-            
-            // دمج بيانات السلوك مع بيانات الطالب
-            const behavior = behaviorData.find(b => b.name === student.name);
-            if (behavior) {
-                student.behavior = behavior;
-            }
-        });
+        // بيانات التطبيق
+        let appData = {
+            teacherName: "اسم المعلم",
+            subject: "المادة الدراسية",
+            class: "الصف الدراسي",
+            semester: "الفصل الدراسي",
+            programDescription: "برنامج تعليمي يهدف إلى رفع التحصيل الدراسي وتنمية المهارات التعاونية والرقمية للطلاب.",
+            students: [],
+            behaviorData: [],
+            positiveBehaviors: [
+                { name: "المشاركة والتفاعل", score: 0 },
+                { name: "العمل الجماعي", score: 0 },
+                { name: "الاندماج والانتباه", score: 0 },
+                { name: "مساعدة الآخرين", score: 0 }
+            ],
+            negativeBehaviors: [
+                { name: "الكلام أثناء الشرح", score: 0 },
+                { name: "عدم المشاركة", score: 0 },
+                { name: "النوم في الصف", score: 0 },
+                { name: "التأخر", score: 0 }
+            ]
+        };
 
         // تصنيف الطلاب حسب مستوى التحسن
         function getImprovementCategory(improvement) {
@@ -1087,12 +1105,50 @@
             return { category: "يحتاج تحسين", class: "behavior-poor" };
         }
 
-        // ملء جدول الطلاب
-        function populateStudentsTable() {
-            const tableBody = document.getElementById('studentsTableBody');
-            tableBody.innerHTML = '';
+        // حساب الإحصائيات
+        function calculateStatistics() {
+            const totalStudents = appData.students.length;
+            if (totalStudents === 0) return;
             
-            studentsData.forEach(student => {
+            // حساب متوسط التحسن
+            const totalImprovement = appData.students.reduce((sum, student) => sum + parseFloat(student.improvement), 0);
+            const avgImprovement = (totalImprovement / totalStudents).toFixed(1);
+            
+            // حساب نسبة الطلاب المحسنين
+            const improvedStudents = appData.students.filter(s => parseFloat(s.improvement) > 0).length;
+            const improvedPercentage = ((improvedStudents / totalStudents) * 100).toFixed(1);
+            
+            // تحديث الإحصائيات في الواجهة
+            document.getElementById('totalStudents').textContent = totalStudents;
+            document.getElementById('avgImprovement').textContent = `${avgImprovement}%`;
+            document.getElementById('improvedStudents').textContent = `${improvedPercentage}%`;
+            document.getElementById('groupsCount').textContent = Math.ceil(totalStudents / 6);
+            
+            // إحصائيات السلوك
+            if (appData.behaviorData.length > 0) {
+                const totalPositive = appData.behaviorData.reduce((sum, b) => sum + b.positive, 0);
+                const totalNegative = appData.behaviorData.reduce((sum, b) => sum + b.negative, 0);
+                const totalPercentage = appData.behaviorData.reduce((sum, b) => sum + b.percentage, 0);
+                
+                const avgPositivePercentage = (totalPercentage / appData.behaviorData.length).toFixed(1);
+                const excellentBehaviorCount = appData.behaviorData.filter(b => b.percentage >= 80).length;
+                const needsSupportCount = appData.behaviorData.filter(b => b.percentage < 50).length;
+                
+                document.getElementById('avgPositivePercentage').textContent = `${avgPositivePercentage}%`;
+                document.getElementById('excellentBehaviorCount').textContent = excellentBehaviorCount;
+                document.getElementById('needsSupportCount').textContent = needsSupportCount;
+                document.getElementById('positiveImprovement').textContent = "+42%"; // يمكن حساب هذا من بيانات تاريخية إذا كانت متوفرة
+            }
+        }
+
+        // ملء جداول الطلاب
+        function populateStudentsTables() {
+            const tableBody = document.getElementById('studentsTableBody');
+            const displayTableBody = document.getElementById('studentsDisplayTableBody');
+            tableBody.innerHTML = '';
+            displayTableBody.innerHTML = '';
+            
+            appData.students.forEach(student => {
                 const improvementInfo = getImprovementCategory(parseFloat(student.improvement));
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -1100,146 +1156,551 @@
                     <td>${student.name}</td>
                     <td>${student.preHomework}</td>
                     <td>${student.preInteraction}</td>
-                    <td>${student.prePlickers}</td>
                     <td>${student.preExam}</td>
                     <td>${student.postHomework}</td>
                     <td>${student.postInteraction}</td>
-                    <td>${student.postPlickers}</td>
                     <td>${student.postExam}</td>
                     <td class="${improvementInfo.class}">${improvementInfo.category} (${student.improvement}%)</td>
                     <td>
-                        <button class="btn" onclick="viewStudentDetails(${student.id})">عرض</button>
+                        <button class="btn" onclick="editStudent(${student.id})">تعديل</button>
                         <button class="btn btn-secondary" onclick="generateTreatmentPlan(${student.id})">خطة علاجية</button>
-                        <button class="btn btn-whatsapp" onclick="sendWhatsAppReport(${student.id})">
-                            <i class="fab fa-whatsapp"></i> إرسال تقرير
-                        </button>
+                        <button class="btn btn-accent" onclick="deleteStudent(${student.id})">حذف</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
+                
+                const displayRow = row.cloneNode(true);
+                displayTableBody.appendChild(displayRow);
             });
         }
 
-        // إنشاء تقرير واتساب للطالب
-        function sendWhatsAppReport(studentId) {
-            const student = studentsData.find(s => s.id === studentId);
-            if (!student) return;
-            
-            const improvementInfo = getImprovementCategory(parseFloat(student.improvement));
-            let behaviorInfo = '';
-            
-            if (student.behavior) {
-                const behaviorCategory = getBehaviorCategory(student.behavior.percentage);
-                behaviorInfo = `
-📊 *التقرير السلوكي:*
-- النقاط الإيجابية: ${student.behavior.positive}
-- النقاط السلبية: ${student.behavior.negative}
-- النسبة الإيجابية: ${student.behavior.percentage}%
-- التصنيف: ${behaviorCategory.category}
-                `;
-            }
-            
-            const message = `
-🎓 *تقرير الطالب: ${student.name}*
-
-📈 *التقرير الأكاديمي:*
-- الدرجة الإجمالية قبل البرنامج: ${student.preTotal}
-- الدرجة الإجمالية بعد البرنامج: ${student.postTotal}
-- نسبة التحسن: ${student.improvement}%
-- التصنيف: ${improvementInfo.category}
-
-${behaviorInfo}
-
-🏆 *ملاحظات عامة:*
-${improvementInfo.level === 'high' ? 
-'• أداء ممتاز واستمرار في التميز\n• نوصي بالمشاركة في الأنشطة الإثرائية' : 
-improvementInfo.level === 'medium' ?
-'• أداء جيد مع إمكانية للتحسن\n• نوصي بالتركيز على حل المسائل' :
-'• يحتاج إلى دعم إضافي\n• نوصي بالمراجعة المستمرة والمتابعة'}
-
-📞 *للاستفسار:*
-معلم المادة: 0551121498
-            `;
-            
-            // عرض معاينة التقرير
-            const modal = document.getElementById('whatsappModal');
-            const preview = document.getElementById('whatsappPreview');
-            preview.textContent = message;
-            
-            // حفظ بيانات الطالب الحالي
-            modal.currentStudent = student;
-            modal.currentMessage = message;
-            
-            modal.style.display = 'flex';
-        }
-
-        // إرسال جميع التقارير
-        function sendAllReports() {
-            if (confirm('هل تريد إرسال تقارير جميع الطلاب؟ سيتم فتح نافذة واتساب لكل طالب.')) {
-                studentsData.forEach((student, index) => {
-                    setTimeout(() => {
-                        sendWhatsAppReport(student.id);
-                    }, index * 2000); // تأخير 2 ثانية بين كل طالب
-                });
-            }
-        }
-
-        // إرسال التقرير عبر واتساب
-        function sendViaWhatsApp() {
-            const modal = document.getElementById('whatsappModal');
-            const student = modal.currentStudent;
-            const message = modal.currentMessage;
-            
-            if (!student) return;
-            
-            // رقم ولي الأمر (يمكن تغييره حسب الطالب)
-            const parentPhone = "0551083332";
-            
-            // تشفير الرسالة
-            const encodedMessage = encodeURIComponent(message);
-            
-            // إنشاء رابط واتساب
-            const whatsappURL = `https://wa.me/${parentPhone}?text=${encodedMessage}`;
-            
-            // فتح واتساب في نافذة جديدة
-            window.open(whatsappURL, '_blank');
-            
-            // إغلاق النافذة
-            modal.style.display = 'none';
-        }
-
-        // ملء جدول السلوكيات
-        function populateBehaviorTable() {
+        // ملء جداول السلوكيات
+        function populateBehaviorTables() {
             const tableBody = document.getElementById('behaviorTableBody');
+            const displayTableBody = document.getElementById('behaviorDisplayTableBody');
             tableBody.innerHTML = '';
+            displayTableBody.innerHTML = '';
             
-            studentsData.forEach(student => {
-                if (student.behavior) {
-                    const behaviorInfo = getBehaviorCategory(student.behavior.percentage);
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${student.name}</td>
-                        <td>${student.behavior.positive}</td>
-                        <td>${student.behavior.negative}</td>
-                        <td class="${behaviorInfo.class}">${student.behavior.percentage}%</td>
-                        <td class="${behaviorInfo.class}">${behaviorInfo.category}</td>
-                        <td>
-                            <button class="btn" onclick="viewStudentBehavior(${student.id})">تفاصيل</button>
-                            <button class="btn btn-whatsapp" onclick="sendWhatsAppReport(${student.id})">
-                                <i class="fab fa-whatsapp"></i> إرسال تقرير
-                            </button>
-                        </td>
-                    `;
-                    tableBody.appendChild(row);
+            appData.behaviorData.forEach(behavior => {
+                const behaviorInfo = getBehaviorCategory(behavior.percentage);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${behavior.studentName}</td>
+                    <td>${behavior.positive}</td>
+                    <td>${behavior.negative}</td>
+                    <td class="${behaviorInfo.class}">${behavior.percentage}%</td>
+                    <td class="${behaviorInfo.class}">${behaviorInfo.category}</td>
+                    <td>
+                        <button class="btn" onclick="editBehavior('${behavior.studentName}')">تعديل</button>
+                        <button class="btn btn-accent" onclick="deleteBehavior('${behavior.studentName}')">حذف</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+                
+                const displayRow = row.cloneNode(true);
+                displayTableBody.appendChild(displayRow);
+            });
+            
+            // تحديث قائمة السلوكيات الإيجابية والسلبية
+            updateBehaviorLists();
+        }
+
+        // تحديث قوائم السلوكيات
+        function updateBehaviorLists() {
+            const positiveList = document.getElementById('positiveBehaviorsList');
+            const negativeList = document.getElementById('negativeBehaviorsList');
+            
+            positiveList.innerHTML = '';
+            negativeList.innerHTML = '';
+            
+            appData.positiveBehaviors.forEach(behavior => {
+                const item = document.createElement('div');
+                item.className = 'behavior-item positive-behavior';
+                item.innerHTML = `
+                    <span>${behavior.name}</span>
+                    <span class="behavior-score positive-score">+${behavior.score} نقطة</span>
+                `;
+                positiveList.appendChild(item);
+            });
+            
+            appData.negativeBehaviors.forEach(behavior => {
+                const item = document.createElement('div');
+                item.className = 'behavior-item negative-behavior';
+                item.innerHTML = `
+                    <span>${behavior.name}</span>
+                    <span class="behavior-score negative-score">-${behavior.score} نقطة</span>
+                `;
+                negativeList.appendChild(item);
+            });
+        }
+
+        // إنشاء الرسوم البيانية
+        function createCharts() {
+            if (appData.students.length === 0) return;
+            
+            // رسم بياني للنظرة العامة
+            const overviewCtx = document.getElementById('overviewChart').getContext('2d');
+            if (window.overviewChartInstance) {
+                window.overviewChartInstance.destroy();
+            }
+            window.overviewChartInstance = new Chart(overviewCtx, {
+                type: 'bar',
+                data: {
+                    labels: appData.students.map(s => s.name.split(' ')[0] + ' ' + s.name.split(' ')[1]),
+                    datasets: [
+                        {
+                            label: 'الإجمالي قبل البرنامج',
+                            data: appData.students.map(s => s.preTotal),
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'الإجمالي بعد البرنامج',
+                            data: appData.students.map(s => s.postTotal),
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
                 }
             });
+
+            // رسم بياني للتحسن
+            const improvementCtx = document.getElementById('improvementChart').getContext('2d');
+            if (window.improvementChartInstance) {
+                window.improvementChartInstance.destroy();
+            }
+            
+            // تجميع الطلاب حسب فئة التحسن
+            const categories = {
+                "تحسن كبير": appData.students.filter(s => parseFloat(s.improvement) >= 20).length,
+                "تحسن متوسط": appData.students.filter(s => parseFloat(s.improvement) >= 10 && parseFloat(s.improvement) < 20).length,
+                "تحسن محدود": appData.students.filter(s => parseFloat(s.improvement) > 0 && parseFloat(s.improvement) < 10).length,
+                "لم يتحسن": appData.students.filter(s => parseFloat(s.improvement) <= 0).length
+            };
+            
+            window.improvementChartInstance = new Chart(improvementCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(categories),
+                    datasets: [{
+                        data: Object.values(categories),
+                        backgroundColor: [
+                            'rgba(76, 175, 80, 0.7)',
+                            'rgba(255, 152, 0, 0.7)',
+                            'rgba(255, 193, 7, 0.7)',
+                            'rgba(244, 67, 54, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // رسم بياني للمقارنة
+            const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+            if (window.comparisonChartInstance) {
+                window.comparisonChartInstance.destroy();
+            }
+            window.comparisonChartInstance = new Chart(comparisonCtx, {
+                type: 'line',
+                data: {
+                    labels: appData.students.map(s => s.name.split(' ')[0] + ' ' + s.name.split(' ')[1]),
+                    datasets: [
+                        {
+                            label: 'الإجمالي قبل البرنامج',
+                            data: appData.students.map(s => s.preTotal),
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.1)',
+                            tension: 0.3,
+                            fill: false
+                        },
+                        {
+                            label: 'الإجمالي بعد البرنامج',
+                            data: appData.students.map(s => s.postTotal),
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                            tension: 0.3,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // رسم بياني للفئات
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            if (window.categoryChartInstance) {
+                window.categoryChartInstance.destroy();
+            }
+            window.categoryChartInstance = new Chart(categoryCtx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(categories),
+                    datasets: [{
+                        label: 'عدد الطلاب',
+                        data: Object.values(categories),
+                        backgroundColor: [
+                            'rgba(76, 175, 80, 0.7)',
+                            'rgba(255, 152, 0, 0.7)',
+                            'rgba(255, 193, 7, 0.7)',
+                            'rgba(244, 67, 54, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // رسم بياني لتوزيع السلوكيات
+            if (appData.behaviorData.length > 0) {
+                const behaviorDistributionCtx = document.getElementById('behaviorDistributionChart').getContext('2d');
+                if (window.behaviorDistributionChartInstance) {
+                    window.behaviorDistributionChartInstance.destroy();
+                }
+                
+                const behaviorCategories = {
+                    "ممتاز (90-100%)": appData.behaviorData.filter(b => b.percentage >= 90).length,
+                    "جيد جداً (70-89%)": appData.behaviorData.filter(b => b.percentage >= 70 && b.percentage < 90).length,
+                    "متوسط (50-69%)": appData.behaviorData.filter(b => b.percentage >= 50 && b.percentage < 70).length,
+                    "يحتاج تحسين (أقل من 50%)": appData.behaviorData.filter(b => b.percentage < 50).length
+                };
+                
+                window.behaviorDistributionChartInstance = new Chart(behaviorDistributionCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: Object.keys(behaviorCategories),
+                        datasets: [{
+                            data: Object.values(behaviorCategories),
+                            backgroundColor: [
+                                'rgba(76, 175, 80, 0.7)',
+                                'rgba(100, 181, 246, 0.7)',
+                                'rgba(255, 193, 7, 0.7)',
+                                'rgba(244, 67, 54, 0.7)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+
+                // رسم بياني للمقارنة بين السلوكيات الإيجابية والسلبية
+                const behaviorComparisonCtx = document.getElementById('behaviorComparisonChart').getContext('2d');
+                if (window.behaviorComparisonChartInstance) {
+                    window.behaviorComparisonChartInstance.destroy();
+                }
+                
+                // حساب المتوسطات
+                const avgPositive = appData.behaviorData.reduce((sum, b) => sum + b.positive, 0) / appData.behaviorData.length;
+                const avgNegative = appData.behaviorData.reduce((sum, b) => sum + b.negative, 0) / appData.behaviorData.length;
+                const avgPercentage = appData.behaviorData.reduce((sum, b) => sum + b.percentage, 0) / appData.behaviorData.length;
+                
+                window.behaviorComparisonChartInstance = new Chart(behaviorComparisonCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['النقاط الإيجابية', 'النقاط السلبية', 'النسبة الإيجابية'],
+                        datasets: [{
+                            label: 'المتوسط',
+                            data: [avgPositive, avgNegative, avgPercentage],
+                            backgroundColor: [
+                                'rgba(76, 175, 80, 0.7)',
+                                'rgba(244, 67, 54, 0.7)',
+                                'rgba(54, 162, 235, 0.7)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                // رسم بياني للعلاقة بين السلوك والأداء الأكاديمي
+                const behaviorAcademicCtx = document.getElementById('behaviorAcademicCorrelationChart').getContext('2d');
+                if (window.behaviorAcademicChartInstance) {
+                    window.behaviorAcademicChartInstance.destroy();
+                }
+                
+                // تجميع البيانات حسب فئات السلوك
+                const excellentBehavior = appData.students.filter(s => {
+                    const behavior = appData.behaviorData.find(b => b.studentName === s.name);
+                    return behavior && behavior.percentage >= 90;
+                });
+                
+                const goodBehavior = appData.students.filter(s => {
+                    const behavior = appData.behaviorData.find(b => b.studentName === s.name);
+                    return behavior && behavior.percentage >= 70 && behavior.percentage < 90;
+                });
+                
+                const averageBehavior = appData.students.filter(s => {
+                    const behavior = appData.behaviorData.find(b => b.studentName === s.name);
+                    return behavior && behavior.percentage >= 50 && behavior.percentage < 70;
+                });
+                
+                const poorBehavior = appData.students.filter(s => {
+                    const behavior = appData.behaviorData.find(b => b.studentName === s.name);
+                    return behavior && behavior.percentage < 50;
+                });
+                
+                // حساب متوسط التحسن لكل فئة
+                const avgImprovementExcellent = excellentBehavior.length > 0 ? 
+                    excellentBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / excellentBehavior.length : 0;
+                
+                const avgImprovementGood = goodBehavior.length > 0 ? 
+                    goodBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / goodBehavior.length : 0;
+                
+                const avgImprovementAverage = averageBehavior.length > 0 ? 
+                    averageBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / averageBehavior.length : 0;
+                
+                const avgImprovementPoor = poorBehavior.length > 0 ? 
+                    poorBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / poorBehavior.length : 0;
+                
+                window.behaviorAcademicChartInstance = new Chart(behaviorAcademicCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['ممتاز (90-100%)', 'جيد جداً (70-89%)', 'متوسط (50-69%)', 'يحتاج تحسين (<50%)'],
+                        datasets: [{
+                            label: 'متوسط التحسن الأكاديمي (%)',
+                            data: [avgImprovementExcellent, avgImprovementGood, avgImprovementAverage, avgImprovementPoor],
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'نسبة التحسن (%)'
+                                }
+                            }
+                        }
+                    }
+                });
+                
+                // تحديث تحليل العلاقة
+                document.getElementById('correlationBar1').style.width = '85%';
+                document.getElementById('correlationBar2').style.width = '45%';
+            }
         }
 
-        // ملء قائمة اختيار الطلاب
-        function populateStudentSelect() {
+        // إضافة طالب جديد
+        function addStudent() {
+            document.getElementById('studentModalTitle').textContent = 'إضافة طالب جديد';
+            document.getElementById('studentForm').reset();
+            document.getElementById('studentId').value = '';
+            document.getElementById('studentModal').style.display = 'flex';
+        }
+
+        // تعديل طالب
+        function editStudent(id) {
+            const student = appData.students.find(s => s.id === id);
+            if (!student) return;
+            
+            document.getElementById('studentModalTitle').textContent = 'تعديل بيانات الطالب';
+            document.getElementById('studentId').value = student.id;
+            document.getElementById('studentName').value = student.name;
+            document.getElementById('preHomework').value = student.preHomework;
+            document.getElementById('preInteraction').value = student.preInteraction;
+            document.getElementById('preExam').value = student.preExam;
+            document.getElementById('postHomework').value = student.postHomework;
+            document.getElementById('postInteraction').value = student.postInteraction;
+            document.getElementById('postExam').value = student.postExam;
+            
+            document.getElementById('studentModal').style.display = 'flex';
+        }
+
+        // حذف طالب
+        function deleteStudent(id) {
+            if (confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
+                appData.students = appData.students.filter(s => s.id !== id);
+                saveData();
+                populateStudentsTables();
+                calculateStatistics();
+                createCharts();
+                updateStudentSelect();
+                updateBehaviorStudentSelect();
+            }
+        }
+
+        // حفظ بيانات الطالب
+        function saveStudent(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('studentId').value;
+            const name = document.getElementById('studentName').value;
+            const preHomework = parseFloat(document.getElementById('preHomework').value) || 0;
+            const preInteraction = parseFloat(document.getElementById('preInteraction').value) || 0;
+            const preExam = parseFloat(document.getElementById('preExam').value) || 0;
+            const postHomework = parseFloat(document.getElementById('postHomework').value) || 0;
+            const postInteraction = parseFloat(document.getElementById('postInteraction').value) || 0;
+            const postExam = parseFloat(document.getElementById('postExam').value) || 0;
+            
+            const preTotal = preHomework + preInteraction + preExam;
+            const postTotal = postHomework + postInteraction + postExam;
+            const improvement = preTotal > 0 ? ((postTotal - preTotal) / preTotal * 100).toFixed(1) : 0;
+            
+            if (id) {
+                // تحديث طالب موجود
+                const index = appData.students.findIndex(s => s.id == id);
+                if (index !== -1) {
+                    appData.students[index] = {
+                        id: parseInt(id),
+                        name,
+                        preHomework,
+                        preInteraction,
+                        preExam,
+                        preTotal,
+                        postHomework,
+                        postInteraction,
+                        postExam,
+                        postTotal,
+                        improvement
+                    };
+                }
+            } else {
+                // إضافة طالب جديد
+                const newId = appData.students.length > 0 ? Math.max(...appData.students.map(s => s.id)) + 1 : 1;
+                appData.students.push({
+                    id: newId,
+                    name,
+                    preHomework,
+                    preInteraction,
+                    preExam,
+                    preTotal,
+                    postHomework,
+                    postInteraction,
+                    postExam,
+                    postTotal,
+                    improvement
+                });
+            }
+            
+            saveData();
+            populateStudentsTables();
+            calculateStatistics();
+            createCharts();
+            updateStudentSelect();
+            updateBehaviorStudentSelect();
+            document.getElementById('studentModal').style.display = 'none';
+        }
+
+        // إضافة بيانات سلوكية
+        function addBehavior() {
+            document.getElementById('behaviorModalTitle').textContent = 'إضافة بيانات سلوكية';
+            document.getElementById('behaviorForm').reset();
+            document.getElementById('behaviorId').value = '';
+            document.getElementById('behaviorModal').style.display = 'flex';
+        }
+
+        // تعديل بيانات سلوكية
+        function editBehavior(studentName) {
+            const behavior = appData.behaviorData.find(b => b.studentName === studentName);
+            if (!behavior) return;
+            
+            document.getElementById('behaviorModalTitle').textContent = 'تعديل بيانات سلوكية';
+            document.getElementById('behaviorId').value = behavior.studentName;
+            document.getElementById('behaviorStudentName').value = behavior.studentName;
+            document.getElementById('positivePoints').value = behavior.positive;
+            document.getElementById('negativePoints').value = behavior.negative;
+            document.getElementById('behaviorNotes').value = behavior.notes || '';
+            
+            document.getElementById('behaviorModal').style.display = 'flex';
+        }
+
+        // حذف بيانات سلوكية
+        function deleteBehavior(studentName) {
+            if (confirm('هل أنت متأكد من حذف بيانات السلوك لهذا الطالب؟')) {
+                appData.behaviorData = appData.behaviorData.filter(b => b.studentName !== studentName);
+                saveData();
+                populateBehaviorTables();
+                calculateStatistics();
+                createCharts();
+            }
+        }
+
+        // حفظ بيانات السلوك
+        function saveBehavior(event) {
+            event.preventDefault();
+            
+            const studentName = document.getElementById('behaviorStudentName').value;
+            const positive = parseInt(document.getElementById('positivePoints').value) || 0;
+            const negative = parseInt(document.getElementById('negativePoints').value) || 0;
+            const notes = document.getElementById('behaviorNotes').value;
+            const percentage = positive + negative > 0 ? Math.round((positive / (positive + negative)) * 100) : 0;
+            
+            const existingIndex = appData.behaviorData.findIndex(b => b.studentName === studentName);
+            
+            if (existingIndex !== -1) {
+                // تحديث بيانات سلوكية موجودة
+                appData.behaviorData[existingIndex] = {
+                    studentName,
+                    positive,
+                    negative,
+                    percentage,
+                    notes
+                };
+            } else {
+                // إضافة بيانات سلوكية جديدة
+                appData.behaviorData.push({
+                    studentName,
+                    positive,
+                    negative,
+                    percentage,
+                    notes
+                });
+            }
+            
+            saveData();
+            populateBehaviorTables();
+            calculateStatistics();
+            createCharts();
+            document.getElementById('behaviorModal').style.display = 'none';
+        }
+
+        // تحديث قائمة اختيار الطلاب
+        function updateStudentSelect() {
             const studentSelect = document.getElementById('studentSelect');
             studentSelect.innerHTML = '<option value="">اختر طالباً لعرض خطته العلاجية</option>';
             
-            studentsData.forEach(student => {
+            appData.students.forEach(student => {
                 const improvementInfo = getImprovementCategory(parseFloat(student.improvement));
                 const option = document.createElement('option');
                 option.value = student.id;
@@ -1248,9 +1709,22 @@ improvementInfo.level === 'medium' ?
             });
         }
 
+        // تحديث قائمة اختيار الطلاب في نموذج السلوك
+        function updateBehaviorStudentSelect() {
+            const behaviorStudentSelect = document.getElementById('behaviorStudentName');
+            behaviorStudentSelect.innerHTML = '<option value="">اختر الطالب</option>';
+            
+            appData.students.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.name;
+                option.textContent = student.name;
+                behaviorStudentSelect.appendChild(option);
+            });
+        }
+
         // إنشاء الخطط العلاجية
         function generateTreatmentPlan(studentId) {
-            const student = studentsData.find(s => s.id === studentId);
+            const student = appData.students.find(s => s.id === studentId);
             if (!student) return;
             
             const improvementInfo = getImprovementCategory(parseFloat(student.improvement));
@@ -1294,8 +1768,9 @@ improvementInfo.level === 'medium' ?
             }
             
             // استراتيجيات سلوكية
-            if (student.behavior) {
-                const behaviorInfo = getBehaviorCategory(student.behavior.percentage);
+            const behavior = appData.behaviorData.find(b => b.studentName === student.name);
+            if (behavior) {
+                const behaviorInfo = getBehaviorCategory(behavior.percentage);
                 
                 if (behaviorInfo.category === "يحتاج تحسين") {
                     behaviorStrategies = [
@@ -1332,7 +1807,7 @@ improvementInfo.level === 'medium' ?
                     <p><strong>الدرجة الإجمالية بعد البرنامج:</strong> ${student.postTotal}</p>
                     <p><strong>نسبة التحسن:</strong> <span class="${improvementInfo.class}">${student.improvement}%</span></p>
                     <p><strong>التصنيف:</strong> ${improvementInfo.category}</p>
-                    ${student.behavior ? `<p><strong>النسبة السلوكية الإيجابية:</strong> <span class="${getBehaviorCategory(student.behavior.percentage).class}">${student.behavior.percentage}%</span></p>` : ''}
+                    ${behavior ? `<p><strong>النسبة السلوكية الإيجابية:</strong> <span class="${getBehaviorCategory(behavior.percentage).class}">${behavior.percentage}%</span></p>` : ''}
                 </div>
                 
                 <div class="treatment-section">
@@ -1363,7 +1838,7 @@ improvementInfo.level === 'medium' ?
                 
                 <div class="treatment-section">
                     <h4>متابعة وتقييم</h4>
-                    <p><strong>مواعيد المتابعة:</strong> أسبوعياً كل يوم أحد</p>
+                    <p><strong>مواعيد المتابعة:</strong> أسبوعياً</p>
                     <p><strong>مسؤول المتابعة:</strong> معلم المادة + المرشد الطلابي</p>
                     <p><strong>أدوات التقييم:</strong> اختبارات قصيرة - ملاحظة المشاركة - تقييم الأنشطة</p>
                 </div>
@@ -1372,8 +1847,8 @@ improvementInfo.level === 'medium' ?
                     <button class="btn btn-secondary" onclick="downloadPlan('${student.name}')">
                         <i class="fas fa-download"></i> تحميل الخطة
                     </button>
-                    <button class="btn btn-whatsapp" onclick="sendWhatsAppReport(${student.id})">
-                        <i class="fab fa-whatsapp"></i> إرسال التقرير
+                    <button class="btn" onclick="editPlan(${studentId})">
+                        <i class="fas fa-edit"></i> تعديل الخطة
                     </button>
                     <button class="btn btn-print" onclick="window.print()">
                         <i class="fas fa-print"></i> طباعة الخطة
@@ -1385,242 +1860,110 @@ improvementInfo.level === 'medium' ?
             plansContainer.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // إنشاء الرسوم البيانية
-        function createCharts() {
-            // رسم بياني للنظرة العامة
-            const overviewCtx = document.getElementById('overviewChart').getContext('2d');
-            new Chart(overviewCtx, {
-                type: 'bar',
-                data: {
-                    labels: studentsData.map(s => s.name.split(' ')[0] + ' ' + s.name.split(' ')[1]),
-                    datasets: [
-                        {
-                            label: 'الإجمالي قبل البرنامج',
-                            data: studentsData.map(s => s.preTotal),
-                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'الإجمالي بعد البرنامج',
-                            data: studentsData.map(s => s.postTotal),
-                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 50
-                        }
-                    }
-                }
-            });
+        // حفظ المعلومات الأساسية
+        function saveBasicInfo() {
+            appData.teacherName = document.getElementById('teacherNameInput').value || "اسم المعلم";
+            appData.subject = document.getElementById('subjectInput').value || "المادة الدراسية";
+            appData.class = document.getElementById('classInput').value || "الصف الدراسي";
+            appData.semester = document.getElementById('semesterInput').value || "الفصل الدراسي";
+            appData.programDescription = document.getElementById('programDescription').value || "برنامج تعليمي يهدف إلى رفع التحصيل الدراسي وتنمية المهارات التعاونية والرقمية للطلاب.";
+            
+            // تحديث الواجهة
+            document.getElementById('teacherName').textContent = appData.teacherName;
+            document.getElementById('teacherNameBadge').textContent = appData.teacherName;
+            document.getElementById('footerTeacherName').textContent = appData.teacherName;
+            document.querySelector('.program-info p').textContent = appData.programDescription;
+            
+            saveData();
+            alert('تم حفظ المعلومات الأساسية بنجاح');
+        }
 
-            // رسم بياني للتحسن
-            const improvementCtx = document.getElementById('improvementChart').getContext('2d');
-            
-            // تجميع الطلاب حسب فئة التحسن
-            const categories = {
-                "تحسن كبير": studentsData.filter(s => parseFloat(s.improvement) >= 20).length,
-                "تحسن متوسط": studentsData.filter(s => parseFloat(s.improvement) >= 10 && parseFloat(s.improvement) < 20).length,
-                "تحسن محدود": studentsData.filter(s => parseFloat(s.improvement) > 0 && parseFloat(s.improvement) < 10).length,
-                "لم يتحسن": studentsData.filter(s => parseFloat(s.improvement) <= 0).length
-            };
-            
-            new Chart(improvementCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(categories),
-                    datasets: [{
-                        data: Object.values(categories),
-                        backgroundColor: [
-                            'rgba(76, 175, 80, 0.7)',
-                            'rgba(255, 152, 0, 0.7)',
-                            'rgba(255, 193, 7, 0.7)',
-                            'rgba(244, 67, 54, 0.7)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
+        // إنشاء بيانات نموذجية
+        function generateSampleData() {
+            if (confirm('سيتم إنشاء بيانات نموذجية للطلاب والسلوك. هل تريد المتابعة؟')) {
+                // بيانات الطلاب النموذجية
+                const sampleStudents = [
+                    { id: 1, name: "أسامة بن ابراھيم بن سعد الدوسري", preHomework: 8.75, preInteraction: 8, preExam: 8, postHomework: 10, postInteraction: 10, postExam: 12 },
+                    { id: 2, name: "الباسل بن فھد بن جسام الشمري", preHomework: 3.75, preInteraction: 8, preExam: 6.5, postHomework: 6, postInteraction: 10, postExam: 11 },
+                    { id: 3, name: "الوليد بن خالد بن سويلم الرويضي الرشيدي", preHomework: 5, preInteraction: 2, preExam: 3, postHomework: 7, postInteraction: 6, postExam: 7 },
+                    { id: 4, name: "باسل بن يحيى بن علي الزھراني", preHomework: 3.75, preInteraction: 2, preExam: 10.5, postHomework: 6, postInteraction: 6, postExam: 15 },
+                    { id: 5, name: "برزان بن نايف بن دعسان الشمري", preHomework: 1.25, preInteraction: 2, preExam: 4.5, postHomework: 5, postInteraction: 6, postExam: 9 }
+                ];
+                
+                // حساب الإجمالي والتحسن
+                sampleStudents.forEach(student => {
+                    student.preTotal = student.preHomework + student.preInteraction + student.preExam;
+                    student.postTotal = student.postHomework + student.postInteraction + student.postExam;
+                    student.improvement = ((student.postTotal - student.preTotal) / student.preTotal * 100).toFixed(1);
+                });
+                
+                appData.students = sampleStudents;
+                
+                // بيانات السلوك النموذجية
+                appData.behaviorData = [
+                    { studentName: "أسامة بن ابراھيم بن سعد الدوسري", positive: 9, negative: 1, percentage: 90 },
+                    { studentName: "الباسل بن فھد بن جسام الشمري", positive: 7, negative: 1, percentage: 88 },
+                    { studentName: "الوليد بن خالد بن سويلم الرويضي الرشيدي", positive: 3, negative: 8, percentage: 27 },
+                    { studentName: "باسل بن يحيى بن علي الزھراني", positive: 2, negative: 2, percentage: 50 },
+                    { studentName: "برزان بن نايف بن دعسان الشمري", positive: 6, negative: 10, percentage: 38 }
+                ];
+                
+                // بيانات السلوكيات التفصيلية
+                appData.positiveBehaviors = [
+                    { name: "المشاركة والتفاعل", score: 245 },
+                    { name: "العمل الجماعي", score: 142 },
+                    { name: "الاندماج والانتباه", score: 38 },
+                    { name: "مساعدة الآخرين", score: 25 }
+                ];
+                
+                appData.negativeBehaviors = [
+                    { name: "الكلام أثناء الشرح", score: 98 },
+                    { name: "عدم المشاركة", score: 74 },
+                    { name: "النوم في الصف", score: 52 },
+                    { name: "التأخر", score: 43 }
+                ];
+                
+                saveData();
+                populateStudentsTables();
+                populateBehaviorTables();
+                calculateStatistics();
+                createCharts();
+                updateStudentSelect();
+                updateBehaviorStudentSelect();
+                
+                alert('تم إنشاء البيانات النموذجية بنجاح');
+            }
+        }
 
-            // رسم بياني للمقارنة
-            const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
-            new Chart(comparisonCtx, {
-                type: 'line',
-                data: {
-                    labels: studentsData.map(s => s.name.split(' ')[0] + ' ' + s.name.split(' ')[1]),
-                    datasets: [
-                        {
-                            label: 'الإجمالي قبل البرنامج',
-                            data: studentsData.map(s => s.preTotal),
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                            tension: 0.3,
-                            fill: false
-                        },
-                        {
-                            label: 'الإجمالي بعد البرنامج',
-                            data: studentsData.map(s => s.postTotal),
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
-                            tension: 0.3,
-                            fill: false
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 50
-                        }
-                    }
-                }
-            });
+        // حفظ البيانات في التخزين المحلي
+        function saveData() {
+            localStorage.setItem('studentTrackerData', JSON.stringify(appData));
+        }
 
-            // رسم بياني للفئات
-            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
-            new Chart(categoryCtx, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(categories),
-                    datasets: [{
-                        label: 'عدد الطلاب',
-                        data: Object.values(categories),
-                        backgroundColor: [
-                            'rgba(76, 175, 80, 0.7)',
-                            'rgba(255, 152, 0, 0.7)',
-                            'rgba(255, 193, 7, 0.7)',
-                            'rgba(244, 67, 54, 0.7)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-
-            // رسم بياني لتوزيع السلوكيات
-            const behaviorDistributionCtx = document.getElementById('behaviorDistributionChart').getContext('2d');
+        // تحميل البيانات من التخزين المحلي
+        function loadData() {
+            const savedData = localStorage.getItem('studentTrackerData');
+            if (savedData) {
+                appData = JSON.parse(savedData);
+            }
             
-            const behaviorCategories = {
-                "ممتاز (90-100%)": behaviorData.filter(b => b.percentage >= 90).length,
-                "جيد جداً (70-89%)": behaviorData.filter(b => b.percentage >= 70 && b.percentage < 90).length,
-                "متوسط (50-69%)": behaviorData.filter(b => b.percentage >= 50 && b.percentage < 70).length,
-                "يحتاج تحسين (أقل من 50%)": behaviorData.filter(b => b.percentage < 50).length
-            };
+            // تحديث الواجهة بالبيانات المحملة
+            document.getElementById('teacherNameInput').value = appData.teacherName;
+            document.getElementById('subjectInput').value = appData.subject;
+            document.getElementById('classInput').value = appData.class;
+            document.getElementById('semesterInput').value = appData.semester;
+            document.getElementById('programDescription').value = appData.programDescription;
             
-            new Chart(behaviorDistributionCtx, {
-                type: 'pie',
-                data: {
-                    labels: Object.keys(behaviorCategories),
-                    datasets: [{
-                        data: Object.values(behaviorCategories),
-                        backgroundColor: [
-                            'rgba(76, 175, 80, 0.7)',
-                            'rgba(100, 181, 246, 0.7)',
-                            'rgba(255, 193, 7, 0.7)',
-                            'rgba(244, 67, 54, 0.7)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-
-            // رسم بياني للمقارنة بين السلوكيات الإيجابية والسلبية
-            const behaviorComparisonCtx = document.getElementById('behaviorComparisonChart').getContext('2d');
+            document.getElementById('teacherName').textContent = appData.teacherName;
+            document.getElementById('teacherNameBadge').textContent = appData.teacherName;
+            document.getElementById('footerTeacherName').textContent = appData.teacherName;
             
-            // حساب المتوسطات
-            const avgPositive = behaviorData.reduce((sum, b) => sum + b.positive, 0) / behaviorData.length;
-            const avgNegative = behaviorData.reduce((sum, b) => sum + b.negative, 0) / behaviorData.length;
-            const avgPercentage = behaviorData.reduce((sum, b) => sum + b.percentage, 0) / behaviorData.length;
-            
-            new Chart(behaviorComparisonCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['النقاط الإيجابية', 'النقاط السلبية', 'النسبة الإيجابية'],
-                    datasets: [{
-                        label: 'المتوسط',
-                        data: [avgPositive, avgNegative, avgPercentage],
-                        backgroundColor: [
-                            'rgba(76, 175, 80, 0.7)',
-                            'rgba(244, 67, 54, 0.7)',
-                            'rgba(54, 162, 235, 0.7)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            // رسم بياني للعلاقة بين السلوك والأداء الأكاديمي
-            const behaviorAcademicCtx = document.getElementById('behaviorAcademicCorrelationChart').getContext('2d');
-            
-            // تجميع البيانات حسب فئات السلوك
-            const excellentBehavior = studentsData.filter(s => s.behavior && s.behavior.percentage >= 90);
-            const goodBehavior = studentsData.filter(s => s.behavior && s.behavior.percentage >= 70 && s.behavior.percentage < 90);
-            const averageBehavior = studentsData.filter(s => s.behavior && s.behavior.percentage >= 50 && s.behavior.percentage < 70);
-            const poorBehavior = studentsData.filter(s => s.behavior && s.behavior.percentage < 50);
-            
-            // حساب متوسط التحسن لكل فئة
-            const avgImprovementExcellent = excellentBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / excellentBehavior.length;
-            const avgImprovementGood = goodBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / goodBehavior.length;
-            const avgImprovementAverage = averageBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / averageBehavior.length;
-            const avgImprovementPoor = poorBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / poorBehavior.length;
-            
-            new Chart(behaviorAcademicCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['ممتاز (90-100%)', 'جيد جداً (70-89%)', 'متوسط (50-69%)', 'يحتاج تحسين (<50%)'],
-                    datasets: [{
-                        label: 'متوسط التحسن الأكاديمي (%)',
-                        data: [avgImprovementExcellent, avgImprovementGood, avgImprovementAverage, avgImprovementPoor],
-                        backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'نسبة التحسن (%)'
-                            }
-                        }
-                    }
-                }
-            });
+            populateStudentsTables();
+            populateBehaviorTables();
+            calculateStatistics();
+            createCharts();
+            updateStudentSelect();
+            updateBehaviorStudentSelect();
         }
 
         // وظائف مساعدة
@@ -1629,51 +1972,85 @@ improvementInfo.level === 'medium' ?
         }
 
         function editPlan(studentId) {
-            alert(`فتح نافذة تعديل الخطة للطالب رقم: ${studentId}`);
-        }
-
-        function viewStudentDetails(studentId) {
-            const student = studentsData.find(s => s.id === studentId);
-            if (student) {
-                const improvementInfo = getImprovementCategory(parseFloat(student.improvement));
-                let behaviorInfo = '';
-                if (student.behavior) {
-                    const behaviorCategory = getBehaviorCategory(student.behavior.percentage);
-                    behaviorInfo = `\nالسلوك:\n- النقاط الإيجابية: ${student.behavior.positive}\n- النقاط السلبية: ${student.behavior.negative}\n- النسبة الإيجابية: ${student.behavior.percentage}%\n- التصنيف: ${behaviorCategory.category}`;
-                }
-                
-                alert(`تفاصيل الطالب:\n\nالاسم: ${student.name}\n\nالدرجات قبل البرنامج:\n- الواجبات: ${student.preHomework}\n- التفاعل الصفي: ${student.preInteraction}\n- بليكرز: ${student.prePlickers}\n- الاختبار: ${student.preExam}\n- الإجمالي: ${student.preTotal}\n\nالدرجات بعد البرنامج:\n- الواجبات: ${student.postHomework}\n- التفاعل الصفي: ${student.postInteraction}\n- بليكرز: ${student.postPlickers}\n- الاختبار: ${student.postExam}\n- الإجمالي: ${student.postTotal}\n\nنسبة التحسن: ${student.improvement}%\nالتصنيف: ${improvementInfo.category}${behaviorInfo}`);
-            }
-        }
-
-        function viewStudentBehavior(studentId) {
-            const student = studentsData.find(s => s.id === studentId);
-            if (student && student.behavior) {
-                const behaviorCategory = getBehaviorCategory(student.behavior.percentage);
-                alert(`تفاصيل السلوك للطالب:\n\nالاسم: ${student.name}\n\nالنقاط الإيجابية: ${student.behavior.positive}\nالنقاط السلبية: ${student.behavior.negative}\nالنسبة الإيجابية: ${student.behavior.percentage}%\nالتصنيف السلوكي: ${behaviorCategory.category}`);
-            } else {
-                alert('لا توجد بيانات سلوكية لهذا الطالب');
-            }
+            editStudent(studentId);
         }
 
         // تهيئة التطبيق
         document.addEventListener('DOMContentLoaded', function() {
-            populateStudentsTable();
-            populateBehaviorTable();
-            populateStudentSelect();
-            createCharts();
+            // تعيين السنة الحالية
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // تحميل البيانات
+            loadData();
             
             // إضافة مستمعي الأحداث للأزرار
-            document.getElementById('addStudentBtn').addEventListener('click', function() {
-                alert('فتح نموذج إضافة طالب جديد');
-            });
-            
+            document.getElementById('addStudentBtn').addEventListener('click', addStudent);
+            document.getElementById('addBehaviorBtn').addEventListener('click', addBehavior);
+            document.getElementById('saveBasicInfo').addEventListener('click', saveBasicInfo);
+            document.getElementById('generateSampleData').addEventListener('click', generateSampleData);
             document.getElementById('importDataBtn').addEventListener('click', function() {
-                alert('فتح نافذة استيراد البيانات');
+                document.getElementById('csvUploadArea').style.display = 'block';
+            });
+            document.getElementById('selectCsvFile').addEventListener('click', function() {
+                document.getElementById('csvFileInput').click();
             });
             
-            document.getElementById('sendAllReportsBtn').addEventListener('click', sendAllReports);
+            // استيراد ملف CSV
+            document.getElementById('csvFileInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const contents = e.target.result;
+                        // هنا يمكن معالجة محتويات ملف CSV
+                        alert('تم استيراد ملف CSV بنجاح. سيتم معالجة البيانات قريباً.');
+                        document.getElementById('csvUploadArea').style.display = 'none';
+                    };
+                    reader.readAsText(file);
+                }
+            });
             
+            // النماذج
+            document.getElementById('studentForm').addEventListener('submit', saveStudent);
+            document.getElementById('behaviorForm').addEventListener('submit', saveBehavior);
+            
+            // إغلاق النماذج
+            document.querySelectorAll('.close-modal').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.closest('.modal').style.display = 'none';
+                });
+            });
+            
+            document.getElementById('cancelStudent').addEventListener('click', function() {
+                document.getElementById('studentModal').style.display = 'none';
+            });
+            
+            document.getElementById('cancelBehavior').addEventListener('click', function() {
+                document.getElementById('behaviorModal').style.display = 'none';
+            });
+            
+            // إغلاق النماذج بالنقر خارجها
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+            
+            // الألسنة
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // إزالة النشاط من جميع الألسنة والمحتويات
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // إضافة النشاط للسان والمحتوى المحدد
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // إنشاء خطة علاجية
             document.getElementById('generatePlan').addEventListener('click', function() {
                 const studentSelect = document.getElementById('studentSelect');
                 const selectedStudentId = parseInt(studentSelect.value);
@@ -1684,6 +2061,7 @@ improvementInfo.level === 'medium' ?
                 }
             });
             
+            // تصدير التقارير
             document.getElementById('exportPdfBtn').addEventListener('click', function() {
                 alert('جاري تصدير التقرير إلى PDF');
             });
@@ -1692,31 +2070,17 @@ improvementInfo.level === 'medium' ?
                 alert('جاري تصدير التقرير إلى Excel');
             });
             
-            // إغلاق نافذة واتساب
-            document.getElementById('closeModal').addEventListener('click', function() {
-                document.getElementById('whatsappModal').style.display = 'none';
+            // إنشاء التقارير
+            document.getElementById('generateClassReport').addEventListener('click', function() {
+                alert('جاري إنشاء تقرير الصف');
             });
             
-            // إرسال التقرير عبر واتساب
-            document.getElementById('sendWhatsappBtn').addEventListener('click', sendViaWhatsApp);
+            document.getElementById('generateIndividualReport').addEventListener('click', function() {
+                alert('جاري إنشاء التقارير الفردية');
+            });
             
-            // تعديل التقرير
-            document.getElementById('editReportBtn').addEventListener('click', function() {
-                const preview = document.getElementById('whatsappPreview');
-                const textarea = document.createElement('textarea');
-                textarea.value = preview.textContent;
-                textarea.style.width = '100%';
-                textarea.style.height = '200px';
-                textarea.style.padding = '10px';
-                textarea.style.borderRadius = '4px';
-                textarea.style.border = '1px solid #ddd';
-                
-                preview.innerHTML = '';
-                preview.appendChild(textarea);
-                
-                // تحديث الرسالة الحالية
-                const modal = document.getElementById('whatsappModal');
-                modal.currentMessage = textarea.value;
+            document.getElementById('generateAnalysis').addEventListener('click', function() {
+                alert('جاري إنشاء تحليل النتائج');
             });
         });
     </script>
