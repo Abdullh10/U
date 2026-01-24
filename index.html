@@ -3,2086 +3,1194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برنامج متابعة تطور الطلاب - قالب عام</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>مختبر الكيمياء الافتراضي - الصف الثاني الثانوي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2c5aa0;
-            --secondary-color: #4caf50;
-            --accent-color: #ff9800;
-            --warning-color: #f44336;
-            --light-color: #f5f9ff;
-            --dark-color: #333;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #1abc9c;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --text-color: #333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            background-color: #f0f4f8;
-            color: var(--dark-color);
+            font-family: 'Cairo', sans-serif;
+            color: var(--text-color);
+            background-color: #f9f9f9;
             line-height: 1.6;
         }
-        
-        .container {
-            width: 90%;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
+
+        /* الترويسة */
         header {
-            background: linear-gradient(135deg, var(--primary-color), #1e3a6f);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 15px 0;
-            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        
-        .header-content {
+
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-        
-        .logo-section {
+
+        .logo {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
-        .rc-logo {
-            height: 60px;
-            width: auto;
+
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
         }
-        
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .logo {
+
+        .logo h1 {
             font-size: 1.8rem;
-            font-weight: bold;
+            font-weight: 700;
         }
-        
-        .initiative-creator {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
+
+        .logo span {
+            color: var(--accent-color);
         }
-        
+
         nav ul {
             display: flex;
             list-style: none;
-            flex-wrap: wrap;
+            gap: 2rem;
         }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        nav ul li a {
+
+        nav a {
             color: white;
             text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
         }
-        
-        nav ul li a:hover {
-            background: rgba(255, 255, 255, 0.2);
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
-        
-        .section {
-            background: white;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
+
+        nav a.active {
+            background-color: var(--accent-color);
         }
-        
-        .section-title {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--light-color);
+
+        .user-actions {
             display: flex;
-            justify-content: space-between;
+            gap: 1rem;
             align-items: center;
         }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Cairo', sans-serif;
         }
-        
-        .card {
-            background: var(--light-color);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
         }
-        
-        .card:hover {
-            transform: translateY(-5px);
+
+        .btn-primary:hover {
+            background-color: #16a085;
+            transform: translateY(-3px);
         }
-        
-        .card-title {
-            color: var(--primary-color);
-            margin-bottom: 15px;
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
         }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .stat-card {
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .behavior-stat-card {
-            border-left: 4px solid var(--accent-color);
-        }
-        
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
+
+        .btn-secondary:hover {
+            background-color: white;
             color: var(--primary-color);
         }
-        
-        .behavior-stat-value {
-            color: var(--accent-color);
+
+        /* المحتوى الرئيسي */
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 2rem;
         }
-        
-        .stat-label {
-            font-size: 0.9rem;
-            color: #666;
+
+        /* الشريط الجانبي */
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.5rem;
+            height: fit-content;
         }
-        
-        table {
+
+        .sidebar h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-color);
+            font-size: 1.4rem;
+        }
+
+        .units-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .units-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .units-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .units-list a:hover {
+            background-color: var(--light-color);
+            transform: translateX(-5px);
+        }
+
+        .units-list a.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .units-list i {
+            font-size: 1.2rem;
+        }
+
+        .filter-section {
+            margin-top: 2rem;
+        }
+
+        .filter-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        select {
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 0.9rem;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Cairo', sans-serif;
+            background-color: white;
         }
-        
-        table th, table td {
-            padding: 12px 10px;
-            text-align: right;
-            border-bottom: 1px solid #ddd;
+
+        /* منطقة المحاكاة */
+        .simulation-area {
+            flex: 1;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
         }
-        
-        table th {
+
+        .simulation-header {
             background-color: var(--primary-color);
             color: white;
-            position: sticky;
-            top: 0;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        table tr:nth-child(even) {
-            background-color: #f9f9f9;
+
+        .simulation-header h2 {
+            font-size: 1.6rem;
         }
-        
-        table tr:hover {
-            background-color: #f1f1f1;
+
+        .experiment-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-        
-        .improvement-good {
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-        
-        .improvement-medium {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-        
-        .improvement-low {
-            color: var(--warning-color);
-            font-weight: bold;
-        }
-        
-        .behavior-excellent {
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-        
-        .behavior-good {
-            color: #4caf50;
-            font-weight: bold;
-        }
-        
-        .behavior-average {
-            color: var(--accent-color);
-            font-weight: bold;
-        }
-        
-        .behavior-poor {
-            color: var(--warning-color);
-            font-weight: bold;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: var(--primary-color);
+
+        .difficulty {
+            background-color: var(--warning-color);
             color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.3s;
-            margin: 3px;
-            font-size: 0.85rem;
-        }
-        
-        .btn:hover {
-            background: #1e3a6f;
-        }
-        
-        .btn-secondary {
-            background: var(--secondary-color);
-        }
-        
-        .btn-secondary:hover {
-            background: #3d8b40;
-        }
-        
-        .btn-accent {
-            background: var(--accent-color);
-        }
-        
-        .btn-accent:hover {
-            background: #e68900;
-        }
-        
-        .btn-print {
-            background: #6c757d;
-        }
-        
-        .btn-print:hover {
-            background: #5a6268;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin: 20px 0;
-        }
-        
-        .program-info {
-            background: linear-gradient(135deg, var(--light-color), #e6efff);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .creator-badge {
-            background: linear-gradient(135deg, #ff9800, #f57c00);
-            color: white;
-            padding: 5px 15px;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.9rem;
-            display: inline-block;
-            margin-top: 10px;
         }
-        
-        footer {
-            background: var(--dark-color);
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
+
+        .simulation-container {
+            display: flex;
+            height: 600px;
         }
-        
-        .table-container {
-            overflow-x: auto;
-            max-height: 600px;
+
+        .control-panel {
+            width: 300px;
+            padding: 1.5rem;
+            border-left: 1px solid #eee;
             overflow-y: auto;
         }
-        
-        .treatment-plan {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-            box-shadow: var(--shadow);
+
+        .control-panel h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
         }
-        
-        .treatment-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 15px;
-            border-radius: 8px 8px 0 0;
-            margin: -20px -20px 20px -20px;
+
+        .control-group {
+            margin-bottom: 1.5rem;
         }
-        
-        .treatment-section {
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px dashed #ddd;
+
+        .control-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
         }
-        
-        .treatment-section:last-child {
-            border-bottom: none;
-        }
-        
-        .plan-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .student-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .plan-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 20px;
-        }
-        
-        .behavior-analysis {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-        
-        .behavior-category {
-            margin-bottom: 25px;
-        }
-        
-        .behavior-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            padding: 8px;
-            background: white;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        
-        .positive-behavior {
-            border-right: 4px solid var(--secondary-color);
-        }
-        
-        .negative-behavior {
-            border-right: 4px solid var(--warning-color);
-        }
-        
-        .behavior-score {
-            font-weight: bold;
-        }
-        
-        .positive-score {
-            color: var(--secondary-color);
-        }
-        
-        .negative-score {
-            color: var(--warning-color);
-        }
-        
-        .correlation-analysis {
-            background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        
-        .correlation-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: white;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .correlation-bar {
-            height: 20px;
-            background: var(--primary-color);
-            border-radius: 10px;
-            margin-right: 15px;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+
+        input[type="range"] {
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+            margin-bottom: 0.5rem;
         }
-        
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .modal-header {
+
+        .value-display {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+            font-size: 0.9rem;
             color: #666;
         }
-        
-        .form-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .form-row .form-group {
+
+        .simulation-visualization {
             flex: 1;
-            margin-bottom: 0;
-        }
-        
-        .form-actions {
+            padding: 1.5rem;
             display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            position: relative;
         }
-        
-        .tabs {
+
+        .molecules-container {
             display: flex;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 20px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 400px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
-        
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
+
+        .molecule {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
         }
-        
-        .tab.active {
-            border-bottom-color: var(--primary-color);
-            color: var(--primary-color);
+
+        .atom {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
         }
-        
-        .tab-content {
-            display: none;
+
+        .atom-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark-color);
         }
-        
-        .tab-content.active {
-            display: block;
+
+        .bond {
+            position: absolute;
+            height: 5px;
+            background-color: #333;
+            transform-origin: left center;
         }
-        
-        .csv-upload {
-            border: 2px dashed #ddd;
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            margin-bottom: 20px;
+
+        .data-display {
+            margin-top: 2rem;
+            width: 100%;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
         }
-        
-        .csv-upload i {
+
+        .data-display h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .results-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .result-card {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border-right: 4px solid var(--secondary-color);
+        }
+
+        .result-card h5 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* مكتبة التجارب */
+        .experiments-library {
+            margin-top: 3rem;
+        }
+
+        .library-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .library-header h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            padding: 0.7rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            width: 300px;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .experiments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .experiment-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .experiment-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .experiment-image {
+            height: 180px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
             font-size: 3rem;
+        }
+
+        .experiment-content {
+            padding: 1.5rem;
+        }
+
+        .experiment-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .experiment-content p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .experiment-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* التذييل */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 2rem 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
             color: #ddd;
-            margin-bottom: 15px;
+            text-decoration: none;
+            transition: var(--transition);
         }
-        
-        @media print {
-            header, footer, nav, .btn, .section-title .btn, .modal {
-                display: none !important;
-            }
-            
-            .section {
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
-            
-            .treatment-plan {
-                break-inside: avoid;
-            }
+
+        .footer-section a:hover {
+            color: var(--accent-color);
+            padding-right: 5px;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 1200px) {
+            .main-container {
                 flex-direction: column;
-                text-align: center;
             }
             
-            .logo-section {
-                justify-content: center;
-                margin-bottom: 15px;
+            .sidebar {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .simulation-container {
+                flex-direction: column;
+                height: auto;
+            }
+            
+            .control-panel {
+                width: 100%;
+                border-left: none;
+                border-top: 1px solid #eee;
+            }
+            
+            .experiments-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
             
             nav ul {
-                margin-top: 15px;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .user-actions {
+                width: 100%;
                 justify-content: center;
             }
             
-            nav ul li {
-                margin: 0 10px;
-            }
-            
-            .grid, .plan-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
+            .library-header {
                 flex-direction: column;
+                gap: 1rem;
                 align-items: flex-start;
             }
             
-            table {
-                font-size: 0.8rem;
+            .search-box {
+                width: 100%;
             }
             
-            table th, table td {
-                padding: 8px 5px;
+            .search-box input {
+                width: 100%;
             }
             
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            .student-selector {
-                flex-direction: column;
+            .experiments-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- الترويسة -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo-section">
-                    <!-- شعار المؤسسة التعليمية -->
-                    <div class="rc-logo">
-                        <svg width="180" height="60" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="180" height="60" fill="#1e3a6f" rx="5"/>
-                            <text x="90" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
-                                المؤسسة التعليمية
-                            </text>
-                            <text x="90" y="50" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
-                                Educational Institution
-                            </text>
-                        </svg>
-                    </div>
-                    <div class="logo-text">
-                        <div class="logo">برنامج متابعة التطور الدراسي</div>
-                        <div class="initiative-creator">المعلم: <span id="teacherName">اسم المعلم</span></div>
-                    </div>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-flask"></i>
+                <div>
+                    <h1>مختبر <span>الكيمياء</span> الافتراضي</h1>
+                    <p>محاكاة تفاعلية للصف الثاني الثانوي</p>
                 </div>
-                <nav>
-                    <ul>
-                        <li><a href="#overview">نظرة عامة</a></li>
-                        <li><a href="#data-entry">إدخال البيانات</a></li>
-                        <li><a href="#students">الطلاب</a></li>
-                        <li><a href="#behavior">السلوكيات</a></li>
-                        <li><a href="#comparison">المقارنات</a></li>
-                        <li><a href="#treatment-plans">الخطط العلاجية</a></li>
-                        <li><a href="#reports">التقارير</a></li>
-                    </ul>
-                </nav>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#"><i class="fas fa-vial"></i> التجارب</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> التقدم</a></li>
+                    <li><a href="#"><i class="fas fa-graduation-cap"></i> الدروس</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> المساعدة</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <button class="btn btn-secondary"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+                <button class="btn btn-primary"><i class="fas fa-user-plus"></i> حساب جديد</button>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        <section id="overview" class="section">
-            <h2 class="section-title">
-                نظرة عامة على البرنامج
-                <div class="creator-badge">المعلم: <span id="teacherNameBadge">اسم المعلم</span></div>
-            </h2>
-            <div class="program-info">
-                <h3>برنامج متابعة تطور الطلاب</h3>
-                <p>برنامج تعليمي يهدف إلى رفع التحصيل الدراسي وتنمية المهارات التعاونية والرقمية للطلاب.</p>
-                <p>يعتمد البرنامج على تحويل الطلاب من متلقين سلبيين إلى منتجين للمعرفة من خلال العمل التعاوني والمشاركة الفعالة.</p>
-            </div>
+    <!-- المحتوى الرئيسي -->
+    <div class="main-container">
+        <!-- الشريط الجانبي -->
+        <aside class="sidebar">
+            <h2><i class="fas fa-book-open"></i> وحدات المنهج</h2>
+            <ul class="units-list">
+                <li><a href="#" class="active"><i class="fas fa-fire"></i> الحرارة والطاقة</a></li>
+                <li><a href="#"><i class="fas fa-tachometer-alt"></i> سرعة التفاعلات</a></li>
+                <li><a href="#"><i class="fas fa-atom"></i> الكيمياء العضوية</a></li>
+                <li><a href="#"><i class="fas fa-dna"></i> الكيمياء الحيوية</a></li>
+            </ul>
             
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value" id="totalStudents">0</div>
-                    <div class="stat-label">عدد الطلاب</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="avgImprovement">0%</div>
-                    <div class="stat-label">متوسط التحسن</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="improvedStudents">0%</div>
-                    <div class="stat-label">نسبة الطلاب المحسنين</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" id="groupsCount">0</div>
-                    <div class="stat-label">عدد المجموعات التعاونية</div>
-                </div>
-            </div>
-            
-            <div class="chart-container">
-                <canvas id="overviewChart"></canvas>
-            </div>
-        </section>
-
-        <section id="data-entry" class="section">
-            <h2 class="section-title">إدخال البيانات</h2>
-            
-            <div class="tabs">
-                <div class="tab active" data-tab="basic-info">المعلومات الأساسية</div>
-                <div class="tab" data-tab="students-data">بيانات الطلاب</div>
-                <div class="tab" data-tab="behavior-data">بيانات السلوك</div>
-            </div>
-            
-            <div class="tab-content active" id="basic-info-tab">
-                <div class="form-group">
-                    <label for="teacherNameInput">اسم المعلم</label>
-                    <input type="text" id="teacherNameInput" placeholder="أدخل اسم المعلم">
-                </div>
-                <div class="form-group">
-                    <label for="subjectInput">المادة الدراسية</label>
-                    <input type="text" id="subjectInput" placeholder="أدخل اسم المادة">
-                </div>
-                <div class="form-group">
-                    <label for="classInput">الصف الدراسي</label>
-                    <input type="text" id="classInput" placeholder="أدخل الصف الدراسي">
-                </div>
-                <div class="form-group">
-                    <label for="semesterInput">الفصل الدراسي</label>
-                    <input type="text" id="semesterInput" placeholder="أدخل الفصل الدراسي">
-                </div>
-                <div class="form-group">
-                    <label for="programDescription">وصف البرنامج</label>
-                    <textarea id="programDescription" placeholder="أدخل وصفاً للبرنامج التعليمي"></textarea>
-                </div>
-                <button class="btn" id="saveBasicInfo">حفظ المعلومات الأساسية</button>
-            </div>
-            
-            <div class="tab-content" id="students-data-tab">
-                <div class="form-group">
-                    <button class="btn" id="addStudentBtn">إضافة طالب جديد</button>
-                    <button class="btn btn-secondary" id="importDataBtn">استيراد البيانات من ملف CSV</button>
-                    <button class="btn btn-accent" id="generateSampleData">إنشاء بيانات نموذجية</button>
-                </div>
-                
-                <div class="csv-upload" id="csvUploadArea" style="display: none;">
-                    <i class="fas fa-file-csv"></i>
-                    <h3>اسحب وأفلت ملف CSV هنا أو انقر للاختيار</h3>
-                    <p>يجب أن يحتوي الملف على الأعمدة التالية: الاسم، الواجبات (قبل)، التفاعل الصفي (قبل)، الاختبار (قبل)، الواجبات (بعد)، التفاعل الصفي (بعد)، الاختبار (بعد)</p>
-                    <input type="file" id="csvFileInput" accept=".csv" style="display: none;">
-                    <button class="btn" id="selectCsvFile">اختر ملف CSV</button>
-                </div>
-                
-                <div class="table-container">
-                    <table id="studentsTable">
-                        <thead>
-                            <tr>
-                                <th>م</th>
-                                <th>اسم الطالب</th>
-                                <th>الواجبات (قبل)</th>
-                                <th>التفاعل الصفي (قبل)</th>
-                                <th>الاختبار (قبل)</th>
-                                <th>الواجبات (بعد)</th>
-                                <th>التفاعل الصفي (بعد)</th>
-                                <th>الاختبار (بعد)</th>
-                                <th>التحسن الإجمالي</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="studentsTableBody">
-                            <!-- سيتم ملؤها بالبيانات -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="behavior-data-tab">
-                <div class="form-group">
-                    <button class="btn" id="addBehaviorBtn">إضافة بيانات سلوكية</button>
-                    <button class="btn btn-secondary" id="importBehaviorBtn">استيراد بيانات السلوك من ملف CSV</button>
-                </div>
-                
-                <div class="table-container">
-                    <table id="behaviorTable">
-                        <thead>
-                            <tr>
-                                <th>اسم الطالب</th>
-                                <th>النقاط الإيجابية</th>
-                                <th>النقاط السلبية</th>
-                                <th>النسبة الإيجابية</th>
-                                <th>التصنيف السلوكي</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="behaviorTableBody">
-                            <!-- سيتم ملؤها بالبيانات -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section id="students" class="section">
-            <h2 class="section-title">بيانات الطلاب والدرجات</h2>
-            
-            <div class="table-container">
-                <table id="studentsDisplayTable">
-                    <thead>
-                        <tr>
-                            <th>م</th>
-                            <th>اسم الطالب</th>
-                            <th>الواجبات (قبل)</th>
-                            <th>التفاعل الصفي (قبل)</th>
-                            <th>الاختبار (قبل)</th>
-                            <th>الواجبات (بعد)</th>
-                            <th>التفاعل الصفي (بعد)</th>
-                            <th>الاختبار (بعد)</th>
-                            <th>التحسن الإجمالي</th>
-                            <th>الإجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody id="studentsDisplayTableBody">
-                        <!-- سيتم ملؤها بالبيانات -->
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="behavior" class="section">
-            <h2 class="section-title">تحليل السلوكيات الصفية</h2>
-            
-            <div class="stats-grid">
-                <div class="stat-card behavior-stat-card">
-                    <div class="stat-value behavior-stat-value" id="avgPositivePercentage">0%</div>
-                    <div class="stat-label">متوسط النسبة الإيجابية</div>
-                </div>
-                <div class="stat-card behavior-stat-card">
-                    <div class="stat-value behavior-stat-value" id="excellentBehaviorCount">0</div>
-                    <div class="stat-label">طلاب بنسبة إيجابية فوق 80%</div>
-                </div>
-                <div class="stat-card behavior-stat-card">
-                    <div class="stat-value behavior-stat-value" id="needsSupportCount">0</div>
-                    <div class="stat-label">طلاب يحتاجون دعم سلوكي</div>
-                </div>
-                <div class="stat-card behavior-stat-card">
-                    <div class="stat-value behavior-stat-value" id="positiveImprovement">0%</div>
-                    <div class="stat-label">تحسن في المشاركة الإيجابية</div>
-                </div>
-            </div>
-            
-            <div class="grid">
-                <div class="card">
-                    <h3 class="card-title">توزيع النسب الإيجابية</h3>
-                    <div class="chart-container">
-                        <canvas id="behaviorDistributionChart"></canvas>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">السلوكيات الإيجابية والسلبية</h3>
-                    <div class="chart-container">
-                        <canvas id="behaviorComparisonChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="behavior-analysis">
-                <h3>تحليل مفصل للسلوكيات</h3>
-                
-                <div class="behavior-category">
-                    <h4>السلوكيات الإيجابية</h4>
-                    <div id="positiveBehaviorsList">
-                        <!-- سيتم ملؤها بالبيانات -->
-                    </div>
-                </div>
-                
-                <div class="behavior-category">
-                    <h4>السلوكيات السلبية</h4>
-                    <div id="negativeBehaviorsList">
-                        <!-- سيتم ملؤها بالبيانات -->
-                    </div>
-                </div>
-            </div>
-            
-            <div class="table-container">
-                <table id="behaviorDisplayTable">
-                    <thead>
-                        <tr>
-                            <th>اسم الطالب</th>
-                            <th>النقاط الإيجابية</th>
-                            <th>النقاط السلبية</th>
-                            <th>النسبة الإيجابية</th>
-                            <th>التصنيف السلوكي</th>
-                            <th>الإجراءات</th>
-                        </tr>
-                    </thead>
-                    <tbody id="behaviorDisplayTableBody">
-                        <!-- سيتم ملؤها بالبيانات -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="correlation-analysis">
-                <h3>تحليل العلاقة بين السلوك والأداء الأكاديمي</h3>
-                <p>يظهر التحليل الإحصائي وجود علاقة إيجابية قوية بين السلوك الإيجابي في الفصل والتحصيل الدراسي:</p>
-                
-                <div class="correlation-item">
-                    <div class="correlation-bar" id="correlationBar1" style="width: 0%;"></div>
-                    <span id="correlationText1">الطلاب ذوو النسبة الإيجابية العالية حققوا تحسناً أكبر</span>
-                </div>
-                
-                <div class="correlation-item">
-                    <div class="correlation-bar" id="correlationBar2" style="width: 0%;"></div>
-                    <span id="correlationText2">الطلاب ذوو النسبة الإيجابية المنخفضة حققوا تحسناً أقل</span>
-                </div>
-            </div>
-            
-            <div class="chart-container">
-                <canvas id="behaviorAcademicCorrelationChart"></canvas>
-            </div>
-        </section>
-
-        <section id="comparison" class="section">
-            <h2 class="section-title">مقارنة الأداء قبل وبعد البرنامج</h2>
-            
-            <div class="grid">
-                <div class="card">
-                    <h3 class="card-title">توزيع التحسن</h3>
-                    <div class="chart-container">
-                        <canvas id="improvementChart"></canvas>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">مقارنة حسب الفئات</h3>
-                    <div class="chart-container">
-                        <canvas id="categoryChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="chart-container">
-                <canvas id="comparisonChart"></canvas>
-            </div>
-        </section>
-
-        <section id="treatment-plans" class="section">
-            <h2 class="section-title">الخطط العلاجية للطلاب</h2>
-            
-            <div class="student-selector">
-                <select id="studentSelect" class="form-control">
-                    <option value="">اختر طالباً لعرض خطته العلاجية</option>
-                    <!-- سيتم ملؤها بالطلاب -->
-                </select>
-                <button class="btn" id="generatePlan">إنشاء خطة علاجية</button>
-                <button class="btn btn-print" onclick="window.print()"><i class="fas fa-print"></i> طباعة الخطط</button>
-            </div>
-            
-            <div class="plan-grid" id="plansContainer">
-                <!-- سيتم إضافة الخطط العلاجية هنا -->
-            </div>
-        </section>
-
-        <section id="reports" class="section">
-            <h2 class="section-title">التقارير والتحليلات</h2>
-            
-            <div class="grid">
-                <div class="card">
-                    <h3 class="card-title">تقرير الصف</h3>
-                    <p>عرض شامل لأداء الصف ككل ومقارنة مع المعايير الوطنية.</p>
-                    <button class="btn" id="generateClassReport">عرض التقرير</button>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">تقرير فردي</h3>
-                    <p>إنشاء تقارير مفصلة لكل طالب مع توصيات علاجية.</p>
-                    <button class="btn" id="generateIndividualReport">إنشاء التقارير</button>
-                </div>
-                <div class="card">
-                    <h3 class="card-title">تحليل النتائج</h3>
-                    <p>تحليل إحصائي متقدم للنتائج وتأثير البرنامج.</p>
-                    <button class="btn" id="generateAnalysis">عرض التحليل</button>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <button class="btn" id="exportPdfBtn">تصدير إلى PDF</button>
-                <button class="btn btn-secondary" id="exportExcelBtn">تصدير إلى Excel</button>
-            </div>
-        </section>
-    </div>
-
-    <!-- نافذة إضافة/تعديل طالب -->
-    <div class="modal" id="studentModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="studentModalTitle">إضافة طالب جديد</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="studentForm">
-                <input type="hidden" id="studentId">
-                <div class="form-group">
-                    <label for="studentName">اسم الطالب</label>
-                    <input type="text" id="studentName" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="preHomework">الواجبات (قبل)</label>
-                        <input type="number" id="preHomework" min="0" max="100" step="0.1">
-                    </div>
-                    <div class="form-group">
-                        <label for="preInteraction">التفاعل الصفي (قبل)</label>
-                        <input type="number" id="preInteraction" min="0" max="100" step="0.1">
-                    </div>
-                    <div class="form-group">
-                        <label for="preExam">الاختبار (قبل)</label>
-                        <input type="number" id="preExam" min="0" max="100" step="0.1">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="postHomework">الواجبات (بعد)</label>
-                        <input type="number" id="postHomework" min="0" max="100" step="0.1">
-                    </div>
-                    <div class="form-group">
-                        <label for="postInteraction">التفاعل الصفي (بعد)</label>
-                        <input type="number" id="postInteraction" min="0" max="100" step="0.1">
-                    </div>
-                    <div class="form-group">
-                        <label for="postExam">الاختبار (بعد)</label>
-                        <input type="number" id="postExam" min="0" max="100" step="0.1">
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="cancelStudent">إلغاء</button>
-                    <button type="submit" class="btn">حفظ</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- نافذة إضافة/تعديل بيانات السلوك -->
-    <div class="modal" id="behaviorModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="behaviorModalTitle">إضافة بيانات سلوكية</h3>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="behaviorForm">
-                <input type="hidden" id="behaviorId">
-                <div class="form-group">
-                    <label for="behaviorStudentName">اسم الطالب</label>
-                    <select id="behaviorStudentName" required>
-                        <option value="">اختر الطالب</option>
-                        <!-- سيتم ملؤها بالطلاب -->
+            <div class="filter-section">
+                <h3><i class="fas fa-filter"></i> تصفية التجارب</h3>
+                <div class="filter-group">
+                    <label for="difficulty">مستوى الصعوبة</label>
+                    <select id="difficulty">
+                        <option value="all">جميع المستويات</option>
+                        <option value="1">سهل</option>
+                        <option value="2" selected>متوسط</option>
+                        <option value="3">صعب</option>
                     </select>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="positivePoints">النقاط الإيجابية</label>
-                        <input type="number" id="positivePoints" min="0" required>
+                
+                <div class="filter-group">
+                    <label for="time">مدة التجربة</label>
+                    <select id="time">
+                        <option value="all">أي مدة</option>
+                        <option value="short">قصيرة (أقل من 10 دقائق)</option>
+                        <option value="medium" selected>متوسطة (10-20 دقيقة)</option>
+                        <option value="long">طويلة (أكثر من 20 دقيقة)</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fas fa-search"></i> بحث</button>
+            </div>
+            
+            <div class="recent-experiments" style="margin-top: 2rem;">
+                <h3><i class="fas fa-history"></i> تجارب حديثة</h3>
+                <ul style="list-style: none; margin-top: 1rem;">
+                    <li style="margin-bottom: 0.7rem;"><a href="#" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-vial"></i> تفاعل الاحتراق</a></li>
+                    <li style="margin-bottom: 0.7rem;"><a href="#" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-vial"></i> قياس التغير في المحتوى الحراري</a></li>
+                    <li style="margin-bottom: 0.7rem;"><a href="#" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-vial"></i> العوامل المؤثرة على سرعة التفاعل</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- منطقة المحاكاة الرئيسية -->
+        <main class="simulation-area">
+            <div class="simulation-header">
+                <h2>تفاعل الاحتراق (ميثان + أكسجين)</h2>
+                <div class="experiment-info">
+                    <span class="difficulty">مستوى متوسط</span>
+                    <span><i class="far fa-clock"></i> 15 دقيقة</span>
+                    <span><i class="fas fa-fire"></i> الحرارة والطاقة</span>
+                </div>
+            </div>
+            
+            <div class="simulation-container">
+                <div class="simulation-visualization">
+                    <div class="molecules-container" id="molecules-container">
+                        <!-- ستعرض جافاسكريبت الجزيئات هنا -->
                     </div>
-                    <div class="form-group">
-                        <label for="negativePoints">النقاط السلبية</label>
-                        <input type="number" id="negativePoints" min="0" required>
+                    
+                    <div class="data-display">
+                        <h4><i class="fas fa-chart-bar"></i> النتائج والملاحظات</h4>
+                        <div class="results-container" id="results-container">
+                            <!-- ستعرض جافاسكريبت النتائج هنا -->
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="behaviorNotes">ملاحظات إضافية</label>
-                    <textarea id="behaviorNotes" placeholder="ملاحظات حول سلوك الطالب"></textarea>
+                
+                <div class="control-panel">
+                    <h3><i class="fas fa-sliders-h"></i> لوحة التحكم</h3>
+                    
+                    <div class="control-group">
+                        <label for="temperature">درجة الحرارة (°C)</label>
+                        <input type="range" id="temperature" min="0" max="500" value="25" step="1">
+                        <div class="value-display">
+                            <span>0°C</span>
+                            <span id="temp-value">25°C</span>
+                            <span>500°C</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="pressure">الضغط (atm)</label>
+                        <input type="range" id="pressure" min="0.5" max="5" value="1" step="0.1">
+                        <div class="value-display">
+                            <span>0.5 atm</span>
+                            <span id="pressure-value">1 atm</span>
+                            <span>5 atm</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="methane">كمية الميثان (mol)</label>
+                        <input type="range" id="methane" min="0.1" max="2" value="1" step="0.1">
+                        <div class="value-display">
+                            <span>0.1 mol</span>
+                            <span id="methane-value">1 mol</span>
+                            <span>2 mol</span>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="oxygen">نسبة الأكسجين</label>
+                        <input type="range" id="oxygen" min="1" max="4" value="2" step="0.1">
+                        <div class="value-display">
+                            <span>نقص أكسجين</span>
+                            <span id="oxygen-value">نسبة مثالية (2)</span>
+                            <span>فائض أكسجين</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="start-experiment" style="width: 100%; margin-top: 1.5rem;">
+                        <i class="fas fa-play"></i> بدء التجربة
+                    </button>
+                    
+                    <button class="btn btn-secondary" id="reset-experiment" style="width: 100%; margin-top: 0.8rem;">
+                        <i class="fas fa-redo"></i> إعادة الضبط
+                    </button>
+                    
+                    <div class="instructions" style="margin-top: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: var(--border-radius);">
+                        <h4><i class="fas fa-info-circle"></i> تعليمات</h4>
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">قم بتغيير المعلمات في لوحة التحكم ثم اضغط على "بدء التجربة" لمشاهدة تأثيرها على التفاعل الكيميائي.</p>
+                    </div>
                 </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="cancelBehavior">إلغاء</button>
-                    <button type="submit" class="btn">حفظ</button>
+            </div>
+            
+            <!-- مكتبة التجارب -->
+            <div class="experiments-library">
+                <div class="library-header">
+                    <h2><i class="fas fa-book"></i> مكتبة التجارب التفاعلية</h2>
+                    <div class="search-box">
+                        <input type="text" placeholder="ابحث عن تجربة...">
+                        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
-            </form>
-        </div>
+                
+                <div class="experiments-grid">
+                    <!-- التجربة 1 -->
+                    <div class="experiment-card">
+                        <div class="experiment-image" style="background-color: #3498db;">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="experiment-content">
+                            <h3>قياس التغير في المحتوى الحراري</h3>
+                            <p>تجربة لقياس كمية الحرارة المنطلقة أو الممتصة في التفاعلات الكيميائية باستخدام المسعر.</p>
+                            <div class="experiment-meta">
+                                <span><i class="fas fa-fire"></i> الحرارة والطاقة</span>
+                                <span><i class="fas fa-signal"></i> متوسط</span>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%;">بدء التجربة</button>
+                        </div>
+                    </div>
+                    
+                    <!-- التجربة 2 -->
+                    <div class="experiment-card">
+                        <div class="experiment-image" style="background-color: #e74c3c;">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="experiment-content">
+                            <h3>العوامل المؤثرة على سرعة التفاعل</h3>
+                            <p>استكشاف تأثير التركيز، درجة الحرارة، والعوامل الحفازة على سرعة التفاعل الكيميائي.</p>
+                            <div class="experiment-meta">
+                                <span><i class="fas fa-tachometer-alt"></i> سرعة التفاعلات</span>
+                                <span><i class="fas fa-signal"></i> سهل</span>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%;">بدء التجربة</button>
+                        </div>
+                    </div>
+                    
+                    <!-- التجربة 3 -->
+                    <div class="experiment-card">
+                        <div class="experiment-image" style="background-color: #1abc9c;">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="experiment-content">
+                            <h3>بناء الجزيئات العضوية</h3>
+                            <p>محاكاة لبناء جزيئات الهيدروكربونات المختلفة وتسميتها وفق نظام الأيوباك.</p>
+                            <div class="experiment-meta">
+                                <span><i class="fas fa-atom"></i> الكيمياء العضوية</span>
+                                <span><i class="fas fa-signal"></i> صعب</span>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%;">بدء التجربة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
+    <!-- التذييل -->
     <footer>
-        <div class="container">
-            <p>برنامج متابعة تطور الطلاب &copy; <span id="currentYear">2023</span></p>
-            <p id="institutionName">المؤسسة التعليمية</p>
-            <p>المعلم: <span id="footerTeacherName">اسم المعلم</span></p>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>مختبر الكيمياء الافتراضي</h3>
+                <p>منصة تعليمية تفاعلية تهدف إلى تعزيز فهم مادة الكيمياء للصف الثاني الثانوي من خلال المحاكاة والتجارب الافتراضية.</p>
+                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i> جميع التجارب</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i> خطط الدروس</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i> أدلة المعلم</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i> الأسئلة الشائعة</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i> اتصل بنا</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>الوحدات التعليمية</h3>
+                <ul>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i> الحرارة والطاقة</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i> سرعة التفاعلات</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i> الكيمياء العضوية</a></li>
+                    <li><a href="#"><i class="fas fa-arrow-left"></i> الكيمياء الحيوية</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>النشرة الإخبارية</h3>
+                <p>اشترك في نشرتنا الإخبارية للحصول على آخر التجارب والإضافات.</p>
+                <div style="margin-top: 1rem; display: flex;">
+                    <input type="email" placeholder="بريدك الإلكتروني" style="padding: 0.7rem; border: none; border-radius: var(--border-radius) 0 0 var(--border-radius); flex: 1;">
+                    <button class="btn btn-primary" style="border-radius: 0 var(--border-radius) var(--border-radius) 0;"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2023 مختبر الكيمياء الافتراضي. جميع الحقوق محفوظة. | تم التطوير بأيدي عربية</p>
         </div>
     </footer>
 
     <script>
-        // بيانات التطبيق
-        let appData = {
-            teacherName: "اسم المعلم",
-            subject: "المادة الدراسية",
-            class: "الصف الدراسي",
-            semester: "الفصل الدراسي",
-            programDescription: "برنامج تعليمي يهدف إلى رفع التحصيل الدراسي وتنمية المهارات التعاونية والرقمية للطلاب.",
-            students: [],
-            behaviorData: [],
-            positiveBehaviors: [
-                { name: "المشاركة والتفاعل", score: 0 },
-                { name: "العمل الجماعي", score: 0 },
-                { name: "الاندماج والانتباه", score: 0 },
-                { name: "مساعدة الآخرين", score: 0 }
-            ],
-            negativeBehaviors: [
-                { name: "الكلام أثناء الشرح", score: 0 },
-                { name: "عدم المشاركة", score: 0 },
-                { name: "النوم في الصف", score: 0 },
-                { name: "التأخر", score: 0 }
-            ]
-        };
-
-        // تصنيف الطلاب حسب مستوى التحسن
-        function getImprovementCategory(improvement) {
-            if (improvement >= 20) return { category: "تحسن كبير", class: "improvement-good", level: "high" };
-            if (improvement >= 10) return { category: "تحسن متوسط", class: "improvement-medium", level: "medium" };
-            if (improvement > 0) return { category: "تحسن محدود", class: "improvement-low", level: "low" };
-            return { category: "لم يتحسن", class: "improvement-low", level: "none" };
-        }
-
-        // تصنيف السلوكيات
-        function getBehaviorCategory(percentage) {
-            if (percentage >= 90) return { category: "ممتاز", class: "behavior-excellent" };
-            if (percentage >= 70) return { category: "جيد جداً", class: "behavior-good" };
-            if (percentage >= 50) return { category: "متوسط", class: "behavior-average" };
-            return { category: "يحتاج تحسين", class: "behavior-poor" };
-        }
-
-        // حساب الإحصائيات
-        function calculateStatistics() {
-            const totalStudents = appData.students.length;
-            if (totalStudents === 0) return;
-            
-            // حساب متوسط التحسن
-            const totalImprovement = appData.students.reduce((sum, student) => sum + parseFloat(student.improvement), 0);
-            const avgImprovement = (totalImprovement / totalStudents).toFixed(1);
-            
-            // حساب نسبة الطلاب المحسنين
-            const improvedStudents = appData.students.filter(s => parseFloat(s.improvement) > 0).length;
-            const improvedPercentage = ((improvedStudents / totalStudents) * 100).toFixed(1);
-            
-            // تحديث الإحصائيات في الواجهة
-            document.getElementById('totalStudents').textContent = totalStudents;
-            document.getElementById('avgImprovement').textContent = `${avgImprovement}%`;
-            document.getElementById('improvedStudents').textContent = `${improvedPercentage}%`;
-            document.getElementById('groupsCount').textContent = Math.ceil(totalStudents / 6);
-            
-            // إحصائيات السلوك
-            if (appData.behaviorData.length > 0) {
-                const totalPositive = appData.behaviorData.reduce((sum, b) => sum + b.positive, 0);
-                const totalNegative = appData.behaviorData.reduce((sum, b) => sum + b.negative, 0);
-                const totalPercentage = appData.behaviorData.reduce((sum, b) => sum + b.percentage, 0);
-                
-                const avgPositivePercentage = (totalPercentage / appData.behaviorData.length).toFixed(1);
-                const excellentBehaviorCount = appData.behaviorData.filter(b => b.percentage >= 80).length;
-                const needsSupportCount = appData.behaviorData.filter(b => b.percentage < 50).length;
-                
-                document.getElementById('avgPositivePercentage').textContent = `${avgPositivePercentage}%`;
-                document.getElementById('excellentBehaviorCount').textContent = excellentBehaviorCount;
-                document.getElementById('needsSupportCount').textContent = needsSupportCount;
-                document.getElementById('positiveImprovement').textContent = "+42%"; // يمكن حساب هذا من بيانات تاريخية إذا كانت متوفرة
-            }
-        }
-
-        // ملء جداول الطلاب
-        function populateStudentsTables() {
-            const tableBody = document.getElementById('studentsTableBody');
-            const displayTableBody = document.getElementById('studentsDisplayTableBody');
-            tableBody.innerHTML = '';
-            displayTableBody.innerHTML = '';
-            
-            appData.students.forEach(student => {
-                const improvementInfo = getImprovementCategory(parseFloat(student.improvement));
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${student.id}</td>
-                    <td>${student.name}</td>
-                    <td>${student.preHomework}</td>
-                    <td>${student.preInteraction}</td>
-                    <td>${student.preExam}</td>
-                    <td>${student.postHomework}</td>
-                    <td>${student.postInteraction}</td>
-                    <td>${student.postExam}</td>
-                    <td class="${improvementInfo.class}">${improvementInfo.category} (${student.improvement}%)</td>
-                    <td>
-                        <button class="btn" onclick="editStudent(${student.id})">تعديل</button>
-                        <button class="btn btn-secondary" onclick="generateTreatmentPlan(${student.id})">خطة علاجية</button>
-                        <button class="btn btn-accent" onclick="deleteStudent(${student.id})">حذف</button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-                
-                const displayRow = row.cloneNode(true);
-                displayTableBody.appendChild(displayRow);
-            });
-        }
-
-        // ملء جداول السلوكيات
-        function populateBehaviorTables() {
-            const tableBody = document.getElementById('behaviorTableBody');
-            const displayTableBody = document.getElementById('behaviorDisplayTableBody');
-            tableBody.innerHTML = '';
-            displayTableBody.innerHTML = '';
-            
-            appData.behaviorData.forEach(behavior => {
-                const behaviorInfo = getBehaviorCategory(behavior.percentage);
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${behavior.studentName}</td>
-                    <td>${behavior.positive}</td>
-                    <td>${behavior.negative}</td>
-                    <td class="${behaviorInfo.class}">${behavior.percentage}%</td>
-                    <td class="${behaviorInfo.class}">${behaviorInfo.category}</td>
-                    <td>
-                        <button class="btn" onclick="editBehavior('${behavior.studentName}')">تعديل</button>
-                        <button class="btn btn-accent" onclick="deleteBehavior('${behavior.studentName}')">حذف</button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-                
-                const displayRow = row.cloneNode(true);
-                displayTableBody.appendChild(displayRow);
-            });
-            
-            // تحديث قائمة السلوكيات الإيجابية والسلبية
-            updateBehaviorLists();
-        }
-
-        // تحديث قوائم السلوكيات
-        function updateBehaviorLists() {
-            const positiveList = document.getElementById('positiveBehaviorsList');
-            const negativeList = document.getElementById('negativeBehaviorsList');
-            
-            positiveList.innerHTML = '';
-            negativeList.innerHTML = '';
-            
-            appData.positiveBehaviors.forEach(behavior => {
-                const item = document.createElement('div');
-                item.className = 'behavior-item positive-behavior';
-                item.innerHTML = `
-                    <span>${behavior.name}</span>
-                    <span class="behavior-score positive-score">+${behavior.score} نقطة</span>
-                `;
-                positiveList.appendChild(item);
-            });
-            
-            appData.negativeBehaviors.forEach(behavior => {
-                const item = document.createElement('div');
-                item.className = 'behavior-item negative-behavior';
-                item.innerHTML = `
-                    <span>${behavior.name}</span>
-                    <span class="behavior-score negative-score">-${behavior.score} نقطة</span>
-                `;
-                negativeList.appendChild(item);
-            });
-        }
-
-        // إنشاء الرسوم البيانية
-        function createCharts() {
-            if (appData.students.length === 0) return;
-            
-            // رسم بياني للنظرة العامة
-            const overviewCtx = document.getElementById('overviewChart').getContext('2d');
-            if (window.overviewChartInstance) {
-                window.overviewChartInstance.destroy();
-            }
-            window.overviewChartInstance = new Chart(overviewCtx, {
-                type: 'bar',
-                data: {
-                    labels: appData.students.map(s => s.name.split(' ')[0] + ' ' + s.name.split(' ')[1]),
-                    datasets: [
-                        {
-                            label: 'الإجمالي قبل البرنامج',
-                            data: appData.students.map(s => s.preTotal),
-                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'الإجمالي بعد البرنامج',
-                            data: appData.students.map(s => s.postTotal),
-                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            // رسم بياني للتحسن
-            const improvementCtx = document.getElementById('improvementChart').getContext('2d');
-            if (window.improvementChartInstance) {
-                window.improvementChartInstance.destroy();
-            }
-            
-            // تجميع الطلاب حسب فئة التحسن
-            const categories = {
-                "تحسن كبير": appData.students.filter(s => parseFloat(s.improvement) >= 20).length,
-                "تحسن متوسط": appData.students.filter(s => parseFloat(s.improvement) >= 10 && parseFloat(s.improvement) < 20).length,
-                "تحسن محدود": appData.students.filter(s => parseFloat(s.improvement) > 0 && parseFloat(s.improvement) < 10).length,
-                "لم يتحسن": appData.students.filter(s => parseFloat(s.improvement) <= 0).length
-            };
-            
-            window.improvementChartInstance = new Chart(improvementCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(categories),
-                    datasets: [{
-                        data: Object.values(categories),
-                        backgroundColor: [
-                            'rgba(76, 175, 80, 0.7)',
-                            'rgba(255, 152, 0, 0.7)',
-                            'rgba(255, 193, 7, 0.7)',
-                            'rgba(244, 67, 54, 0.7)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-
-            // رسم بياني للمقارنة
-            const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
-            if (window.comparisonChartInstance) {
-                window.comparisonChartInstance.destroy();
-            }
-            window.comparisonChartInstance = new Chart(comparisonCtx, {
-                type: 'line',
-                data: {
-                    labels: appData.students.map(s => s.name.split(' ')[0] + ' ' + s.name.split(' ')[1]),
-                    datasets: [
-                        {
-                            label: 'الإجمالي قبل البرنامج',
-                            data: appData.students.map(s => s.preTotal),
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            backgroundColor: 'rgba(54, 162, 235, 0.1)',
-                            tension: 0.3,
-                            fill: false
-                        },
-                        {
-                            label: 'الإجمالي بعد البرنامج',
-                            data: appData.students.map(s => s.postTotal),
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
-                            tension: 0.3,
-                            fill: false
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-
-            // رسم بياني للفئات
-            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
-            if (window.categoryChartInstance) {
-                window.categoryChartInstance.destroy();
-            }
-            window.categoryChartInstance = new Chart(categoryCtx, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(categories),
-                    datasets: [{
-                        label: 'عدد الطلاب',
-                        data: Object.values(categories),
-                        backgroundColor: [
-                            'rgba(76, 175, 80, 0.7)',
-                            'rgba(255, 152, 0, 0.7)',
-                            'rgba(255, 193, 7, 0.7)',
-                            'rgba(244, 67, 54, 0.7)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-
-            // رسم بياني لتوزيع السلوكيات
-            if (appData.behaviorData.length > 0) {
-                const behaviorDistributionCtx = document.getElementById('behaviorDistributionChart').getContext('2d');
-                if (window.behaviorDistributionChartInstance) {
-                    window.behaviorDistributionChartInstance.destroy();
-                }
-                
-                const behaviorCategories = {
-                    "ممتاز (90-100%)": appData.behaviorData.filter(b => b.percentage >= 90).length,
-                    "جيد جداً (70-89%)": appData.behaviorData.filter(b => b.percentage >= 70 && b.percentage < 90).length,
-                    "متوسط (50-69%)": appData.behaviorData.filter(b => b.percentage >= 50 && b.percentage < 70).length,
-                    "يحتاج تحسين (أقل من 50%)": appData.behaviorData.filter(b => b.percentage < 50).length
-                };
-                
-                window.behaviorDistributionChartInstance = new Chart(behaviorDistributionCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: Object.keys(behaviorCategories),
-                        datasets: [{
-                            data: Object.values(behaviorCategories),
-                            backgroundColor: [
-                                'rgba(76, 175, 80, 0.7)',
-                                'rgba(100, 181, 246, 0.7)',
-                                'rgba(255, 193, 7, 0.7)',
-                                'rgba(244, 67, 54, 0.7)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false
-                    }
-                });
-
-                // رسم بياني للمقارنة بين السلوكيات الإيجابية والسلبية
-                const behaviorComparisonCtx = document.getElementById('behaviorComparisonChart').getContext('2d');
-                if (window.behaviorComparisonChartInstance) {
-                    window.behaviorComparisonChartInstance.destroy();
-                }
-                
-                // حساب المتوسطات
-                const avgPositive = appData.behaviorData.reduce((sum, b) => sum + b.positive, 0) / appData.behaviorData.length;
-                const avgNegative = appData.behaviorData.reduce((sum, b) => sum + b.negative, 0) / appData.behaviorData.length;
-                const avgPercentage = appData.behaviorData.reduce((sum, b) => sum + b.percentage, 0) / appData.behaviorData.length;
-                
-                window.behaviorComparisonChartInstance = new Chart(behaviorComparisonCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['النقاط الإيجابية', 'النقاط السلبية', 'النسبة الإيجابية'],
-                        datasets: [{
-                            label: 'المتوسط',
-                            data: [avgPositive, avgNegative, avgPercentage],
-                            backgroundColor: [
-                                'rgba(76, 175, 80, 0.7)',
-                                'rgba(244, 67, 54, 0.7)',
-                                'rgba(54, 162, 235, 0.7)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-
-                // رسم بياني للعلاقة بين السلوك والأداء الأكاديمي
-                const behaviorAcademicCtx = document.getElementById('behaviorAcademicCorrelationChart').getContext('2d');
-                if (window.behaviorAcademicChartInstance) {
-                    window.behaviorAcademicChartInstance.destroy();
-                }
-                
-                // تجميع البيانات حسب فئات السلوك
-                const excellentBehavior = appData.students.filter(s => {
-                    const behavior = appData.behaviorData.find(b => b.studentName === s.name);
-                    return behavior && behavior.percentage >= 90;
-                });
-                
-                const goodBehavior = appData.students.filter(s => {
-                    const behavior = appData.behaviorData.find(b => b.studentName === s.name);
-                    return behavior && behavior.percentage >= 70 && behavior.percentage < 90;
-                });
-                
-                const averageBehavior = appData.students.filter(s => {
-                    const behavior = appData.behaviorData.find(b => b.studentName === s.name);
-                    return behavior && behavior.percentage >= 50 && behavior.percentage < 70;
-                });
-                
-                const poorBehavior = appData.students.filter(s => {
-                    const behavior = appData.behaviorData.find(b => b.studentName === s.name);
-                    return behavior && behavior.percentage < 50;
-                });
-                
-                // حساب متوسط التحسن لكل فئة
-                const avgImprovementExcellent = excellentBehavior.length > 0 ? 
-                    excellentBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / excellentBehavior.length : 0;
-                
-                const avgImprovementGood = goodBehavior.length > 0 ? 
-                    goodBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / goodBehavior.length : 0;
-                
-                const avgImprovementAverage = averageBehavior.length > 0 ? 
-                    averageBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / averageBehavior.length : 0;
-                
-                const avgImprovementPoor = poorBehavior.length > 0 ? 
-                    poorBehavior.reduce((sum, s) => sum + parseFloat(s.improvement), 0) / poorBehavior.length : 0;
-                
-                window.behaviorAcademicChartInstance = new Chart(behaviorAcademicCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['ممتاز (90-100%)', 'جيد جداً (70-89%)', 'متوسط (50-69%)', 'يحتاج تحسين (<50%)'],
-                        datasets: [{
-                            label: 'متوسط التحسن الأكاديمي (%)',
-                            data: [avgImprovementExcellent, avgImprovementGood, avgImprovementAverage, avgImprovementPoor],
-                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'نسبة التحسن (%)'
-                                }
-                            }
-                        }
-                    }
-                });
-                
-                // تحديث تحليل العلاقة
-                document.getElementById('correlationBar1').style.width = '85%';
-                document.getElementById('correlationBar2').style.width = '45%';
-            }
-        }
-
-        // إضافة طالب جديد
-        function addStudent() {
-            document.getElementById('studentModalTitle').textContent = 'إضافة طالب جديد';
-            document.getElementById('studentForm').reset();
-            document.getElementById('studentId').value = '';
-            document.getElementById('studentModal').style.display = 'flex';
-        }
-
-        // تعديل طالب
-        function editStudent(id) {
-            const student = appData.students.find(s => s.id === id);
-            if (!student) return;
-            
-            document.getElementById('studentModalTitle').textContent = 'تعديل بيانات الطالب';
-            document.getElementById('studentId').value = student.id;
-            document.getElementById('studentName').value = student.name;
-            document.getElementById('preHomework').value = student.preHomework;
-            document.getElementById('preInteraction').value = student.preInteraction;
-            document.getElementById('preExam').value = student.preExam;
-            document.getElementById('postHomework').value = student.postHomework;
-            document.getElementById('postInteraction').value = student.postInteraction;
-            document.getElementById('postExam').value = student.postExam;
-            
-            document.getElementById('studentModal').style.display = 'flex';
-        }
-
-        // حذف طالب
-        function deleteStudent(id) {
-            if (confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
-                appData.students = appData.students.filter(s => s.id !== id);
-                saveData();
-                populateStudentsTables();
-                calculateStatistics();
-                createCharts();
-                updateStudentSelect();
-                updateBehaviorStudentSelect();
-            }
-        }
-
-        // حفظ بيانات الطالب
-        function saveStudent(event) {
-            event.preventDefault();
-            
-            const id = document.getElementById('studentId').value;
-            const name = document.getElementById('studentName').value;
-            const preHomework = parseFloat(document.getElementById('preHomework').value) || 0;
-            const preInteraction = parseFloat(document.getElementById('preInteraction').value) || 0;
-            const preExam = parseFloat(document.getElementById('preExam').value) || 0;
-            const postHomework = parseFloat(document.getElementById('postHomework').value) || 0;
-            const postInteraction = parseFloat(document.getElementById('postInteraction').value) || 0;
-            const postExam = parseFloat(document.getElementById('postExam').value) || 0;
-            
-            const preTotal = preHomework + preInteraction + preExam;
-            const postTotal = postHomework + postInteraction + postExam;
-            const improvement = preTotal > 0 ? ((postTotal - preTotal) / preTotal * 100).toFixed(1) : 0;
-            
-            if (id) {
-                // تحديث طالب موجود
-                const index = appData.students.findIndex(s => s.id == id);
-                if (index !== -1) {
-                    appData.students[index] = {
-                        id: parseInt(id),
-                        name,
-                        preHomework,
-                        preInteraction,
-                        preExam,
-                        preTotal,
-                        postHomework,
-                        postInteraction,
-                        postExam,
-                        postTotal,
-                        improvement
-                    };
-                }
-            } else {
-                // إضافة طالب جديد
-                const newId = appData.students.length > 0 ? Math.max(...appData.students.map(s => s.id)) + 1 : 1;
-                appData.students.push({
-                    id: newId,
-                    name,
-                    preHomework,
-                    preInteraction,
-                    preExam,
-                    preTotal,
-                    postHomework,
-                    postInteraction,
-                    postExam,
-                    postTotal,
-                    improvement
-                });
-            }
-            
-            saveData();
-            populateStudentsTables();
-            calculateStatistics();
-            createCharts();
-            updateStudentSelect();
-            updateBehaviorStudentSelect();
-            document.getElementById('studentModal').style.display = 'none';
-        }
-
-        // إضافة بيانات سلوكية
-        function addBehavior() {
-            document.getElementById('behaviorModalTitle').textContent = 'إضافة بيانات سلوكية';
-            document.getElementById('behaviorForm').reset();
-            document.getElementById('behaviorId').value = '';
-            document.getElementById('behaviorModal').style.display = 'flex';
-        }
-
-        // تعديل بيانات سلوكية
-        function editBehavior(studentName) {
-            const behavior = appData.behaviorData.find(b => b.studentName === studentName);
-            if (!behavior) return;
-            
-            document.getElementById('behaviorModalTitle').textContent = 'تعديل بيانات سلوكية';
-            document.getElementById('behaviorId').value = behavior.studentName;
-            document.getElementById('behaviorStudentName').value = behavior.studentName;
-            document.getElementById('positivePoints').value = behavior.positive;
-            document.getElementById('negativePoints').value = behavior.negative;
-            document.getElementById('behaviorNotes').value = behavior.notes || '';
-            
-            document.getElementById('behaviorModal').style.display = 'flex';
-        }
-
-        // حذف بيانات سلوكية
-        function deleteBehavior(studentName) {
-            if (confirm('هل أنت متأكد من حذف بيانات السلوك لهذا الطالب؟')) {
-                appData.behaviorData = appData.behaviorData.filter(b => b.studentName !== studentName);
-                saveData();
-                populateBehaviorTables();
-                calculateStatistics();
-                createCharts();
-            }
-        }
-
-        // حفظ بيانات السلوك
-        function saveBehavior(event) {
-            event.preventDefault();
-            
-            const studentName = document.getElementById('behaviorStudentName').value;
-            const positive = parseInt(document.getElementById('positivePoints').value) || 0;
-            const negative = parseInt(document.getElementById('negativePoints').value) || 0;
-            const notes = document.getElementById('behaviorNotes').value;
-            const percentage = positive + negative > 0 ? Math.round((positive / (positive + negative)) * 100) : 0;
-            
-            const existingIndex = appData.behaviorData.findIndex(b => b.studentName === studentName);
-            
-            if (existingIndex !== -1) {
-                // تحديث بيانات سلوكية موجودة
-                appData.behaviorData[existingIndex] = {
-                    studentName,
-                    positive,
-                    negative,
-                    percentage,
-                    notes
-                };
-            } else {
-                // إضافة بيانات سلوكية جديدة
-                appData.behaviorData.push({
-                    studentName,
-                    positive,
-                    negative,
-                    percentage,
-                    notes
-                });
-            }
-            
-            saveData();
-            populateBehaviorTables();
-            calculateStatistics();
-            createCharts();
-            document.getElementById('behaviorModal').style.display = 'none';
-        }
-
-        // تحديث قائمة اختيار الطلاب
-        function updateStudentSelect() {
-            const studentSelect = document.getElementById('studentSelect');
-            studentSelect.innerHTML = '<option value="">اختر طالباً لعرض خطته العلاجية</option>';
-            
-            appData.students.forEach(student => {
-                const improvementInfo = getImprovementCategory(parseFloat(student.improvement));
-                const option = document.createElement('option');
-                option.value = student.id;
-                option.textContent = `${student.name} - ${improvementInfo.category}`;
-                studentSelect.appendChild(option);
-            });
-        }
-
-        // تحديث قائمة اختيار الطلاب في نموذج السلوك
-        function updateBehaviorStudentSelect() {
-            const behaviorStudentSelect = document.getElementById('behaviorStudentName');
-            behaviorStudentSelect.innerHTML = '<option value="">اختر الطالب</option>';
-            
-            appData.students.forEach(student => {
-                const option = document.createElement('option');
-                option.value = student.name;
-                option.textContent = student.name;
-                behaviorStudentSelect.appendChild(option);
-            });
-        }
-
-        // إنشاء الخطط العلاجية
-        function generateTreatmentPlan(studentId) {
-            const student = appData.students.find(s => s.id === studentId);
-            if (!student) return;
-            
-            const improvementInfo = getImprovementCategory(parseFloat(student.improvement));
-            const plansContainer = document.getElementById('plansContainer');
-            
-            // إزالة الخطة الحالية للطالب إذا كانت موجودة
-            const existingPlan = document.getElementById(`plan-${studentId}`);
-            if (existingPlan) {
-                existingPlan.remove();
-            }
-            
-            const plan = document.createElement('div');
-            plan.className = 'treatment-plan';
-            plan.id = `plan-${studentId}`;
-            
-            // تحديد الاستراتيجيات بناءً على مستوى التحسن والسلوك
-            let strategies = [];
-            let behaviorStrategies = [];
-            
-            if (improvementInfo.level === 'high') {
-                strategies = [
-                    "تكليف الطالب بدور المساعد في المجموعات التعليمية",
-                    "توفير مشاريع إثرائية تتحدى قدراته",
-                    "تشجيعه على المشاركة في مسابقات وأنشطة إبداعية",
-                    "تطوير مهارات القيادة والتعليم الذاتي"
-                ];
-            } else if (improvementInfo.level === 'medium') {
-                strategies = [
-                    "تشجيع العمل الجماعي مع أقران متفوقين",
-                    "تطوير مهارات حل المسائل والتطبيقات العملية",
-                    "تعزيز الثقة بالنفس من خلال تكليفه بمهام قيادية",
-                    "توفير تحديات إضافية لتحفيز التفكير النقدي"
-                ];
-            } else {
-                strategies = [
-                    "جلسات علاجية أسبوعية مكثفة تركز على المفاهيم الأساسية",
-                    "توفير موارد إضافية ومراجعات مصغرة للمواضيع الصعبة",
-                    "تعزيز مهارات التعلم الذاتي وتنظيم الوقت",
-                    "متابعة فردية أسبوعية من المعلم لتقييم التقدم"
-                ];
-            }
-            
-            // استراتيجيات سلوكية
-            const behavior = appData.behaviorData.find(b => b.studentName === student.name);
-            if (behavior) {
-                const behaviorInfo = getBehaviorCategory(behavior.percentage);
-                
-                if (behaviorInfo.category === "يحتاج تحسين") {
-                    behaviorStrategies = [
-                        "وضع أهداف سلوكية واضحة وقابلة للتحقيق",
-                        "تعزيز السلوك الإيجابي بمكافآت فورية",
-                        "توفير دعم إضافي لتحسين المشاركة الصفية",
-                        "تعزيز العلاقة الإيجابية مع المعلم والأقران"
-                    ];
-                } else if (behaviorInfo.category === "متوسط") {
-                    behaviorStrategies = [
-                        "تشجيع المشاركة في الأنشطة الصفية",
-                        "تعزيز الثقة بالنفس من خلال التقدير الإيجابي",
-                        "تحديد نقاط القوة السلوكية والبناء عليها",
-                        "تعزيز مهارات التواصل والتعاون"
-                    ];
-                } else {
-                    behaviorStrategies = [
-                        "تكليف الطالب بدور القيادة في الأنشطة الصفية",
-                        "تشجيعه على مساعدة زملائه وتحفيزهم",
-                        "توفير فرص لتمثيل الصف في المناسبات المدرسية",
-                        "تعزيز مهارات القيادة والمسؤولية"
-                    ];
-                }
-            }
-            
-            plan.innerHTML = `
-                <div class="treatment-header">
-                    <h3>الخطة العلاجية للطالب: ${student.name}</h3>
-                </div>
-                
-                <div class="treatment-section">
-                    <h4>معلومات الطالب</h4>
-                    <p><strong>الدرجة الإجمالية قبل البرنامج:</strong> ${student.preTotal}</p>
-                    <p><strong>الدرجة الإجمالية بعد البرنامج:</strong> ${student.postTotal}</p>
-                    <p><strong>نسبة التحسن:</strong> <span class="${improvementInfo.class}">${student.improvement}%</span></p>
-                    <p><strong>التصنيف:</strong> ${improvementInfo.category}</p>
-                    ${behavior ? `<p><strong>النسبة السلوكية الإيجابية:</strong> <span class="${getBehaviorCategory(behavior.percentage).class}">${behavior.percentage}%</span></p>` : ''}
-                </div>
-                
-                <div class="treatment-section">
-                    <h4>الاستراتيجيات العلاجية الأكاديمية</h4>
-                    <ul>
-                        ${strategies.map(strategy => `<li>${strategy}</li>`).join('')}
-                    </ul>
-                </div>
-                
-                ${behaviorStrategies.length > 0 ? `
-                <div class="treatment-section">
-                    <h4>الاستراتيجيات العلاجية السلوكية</h4>
-                    <ul>
-                        ${behaviorStrategies.map(strategy => `<li>${strategy}</li>`).join('')}
-                    </ul>
-                </div>
-                ` : ''}
-                
-                <div class="treatment-section">
-                    <h4>مؤشرات التقدم المتوقعة</h4>
-                    <ul>
-                        <li>تحسن في الدرجات بمعدل 5-10% خلال الشهر القادم</li>
-                        <li>زيادة المشاركة الصفية والتفاعل مع الأنشطة</li>
-                        <li>تحسن في مهارات حل المسائل والتطبيقات العملية</li>
-                        <li>زيادة الثقة بالنفس والدافعية للتعلم</li>
-                    </ul>
-                </div>
-                
-                <div class="treatment-section">
-                    <h4>متابعة وتقييم</h4>
-                    <p><strong>مواعيد المتابعة:</strong> أسبوعياً</p>
-                    <p><strong>مسؤول المتابعة:</strong> معلم المادة + المرشد الطلابي</p>
-                    <p><strong>أدوات التقييم:</strong> اختبارات قصيرة - ملاحظة المشاركة - تقييم الأنشطة</p>
-                </div>
-                
-                <div class="plan-actions">
-                    <button class="btn btn-secondary" onclick="downloadPlan('${student.name}')">
-                        <i class="fas fa-download"></i> تحميل الخطة
-                    </button>
-                    <button class="btn" onclick="editPlan(${studentId})">
-                        <i class="fas fa-edit"></i> تعديل الخطة
-                    </button>
-                    <button class="btn btn-print" onclick="window.print()">
-                        <i class="fas fa-print"></i> طباعة الخطة
-                    </button>
-                </div>
-            `;
-            
-            plansContainer.appendChild(plan);
-            plansContainer.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // حفظ المعلومات الأساسية
-        function saveBasicInfo() {
-            appData.teacherName = document.getElementById('teacherNameInput').value || "اسم المعلم";
-            appData.subject = document.getElementById('subjectInput').value || "المادة الدراسية";
-            appData.class = document.getElementById('classInput').value || "الصف الدراسي";
-            appData.semester = document.getElementById('semesterInput').value || "الفصل الدراسي";
-            appData.programDescription = document.getElementById('programDescription').value || "برنامج تعليمي يهدف إلى رفع التحصيل الدراسي وتنمية المهارات التعاونية والرقمية للطلاب.";
-            
-            // تحديث الواجهة
-            document.getElementById('teacherName').textContent = appData.teacherName;
-            document.getElementById('teacherNameBadge').textContent = appData.teacherName;
-            document.getElementById('footerTeacherName').textContent = appData.teacherName;
-            document.querySelector('.program-info p').textContent = appData.programDescription;
-            
-            saveData();
-            alert('تم حفظ المعلومات الأساسية بنجاح');
-        }
-
-        // إنشاء بيانات نموذجية
-        function generateSampleData() {
-            if (confirm('سيتم إنشاء بيانات نموذجية للطلاب والسلوك. هل تريد المتابعة؟')) {
-                // بيانات الطلاب النموذجية
-                const sampleStudents = [
-                    { id: 1, name: "أسامة بن ابراھيم بن سعد الدوسري", preHomework: 8.75, preInteraction: 8, preExam: 8, postHomework: 10, postInteraction: 10, postExam: 12 },
-                    { id: 2, name: "الباسل بن فھد بن جسام الشمري", preHomework: 3.75, preInteraction: 8, preExam: 6.5, postHomework: 6, postInteraction: 10, postExam: 11 },
-                    { id: 3, name: "الوليد بن خالد بن سويلم الرويضي الرشيدي", preHomework: 5, preInteraction: 2, preExam: 3, postHomework: 7, postInteraction: 6, postExam: 7 },
-                    { id: 4, name: "باسل بن يحيى بن علي الزھراني", preHomework: 3.75, preInteraction: 2, preExam: 10.5, postHomework: 6, postInteraction: 6, postExam: 15 },
-                    { id: 5, name: "برزان بن نايف بن دعسان الشمري", preHomework: 1.25, preInteraction: 2, preExam: 4.5, postHomework: 5, postInteraction: 6, postExam: 9 }
-                ];
-                
-                // حساب الإجمالي والتحسن
-                sampleStudents.forEach(student => {
-                    student.preTotal = student.preHomework + student.preInteraction + student.preExam;
-                    student.postTotal = student.postHomework + student.postInteraction + student.postExam;
-                    student.improvement = ((student.postTotal - student.preTotal) / student.preTotal * 100).toFixed(1);
-                });
-                
-                appData.students = sampleStudents;
-                
-                // بيانات السلوك النموذجية
-                appData.behaviorData = [
-                    { studentName: "أسامة بن ابراھيم بن سعد الدوسري", positive: 9, negative: 1, percentage: 90 },
-                    { studentName: "الباسل بن فھد بن جسام الشمري", positive: 7, negative: 1, percentage: 88 },
-                    { studentName: "الوليد بن خالد بن سويلم الرويضي الرشيدي", positive: 3, negative: 8, percentage: 27 },
-                    { studentName: "باسل بن يحيى بن علي الزھراني", positive: 2, negative: 2, percentage: 50 },
-                    { studentName: "برزان بن نايف بن دعسان الشمري", positive: 6, negative: 10, percentage: 38 }
-                ];
-                
-                // بيانات السلوكيات التفصيلية
-                appData.positiveBehaviors = [
-                    { name: "المشاركة والتفاعل", score: 245 },
-                    { name: "العمل الجماعي", score: 142 },
-                    { name: "الاندماج والانتباه", score: 38 },
-                    { name: "مساعدة الآخرين", score: 25 }
-                ];
-                
-                appData.negativeBehaviors = [
-                    { name: "الكلام أثناء الشرح", score: 98 },
-                    { name: "عدم المشاركة", score: 74 },
-                    { name: "النوم في الصف", score: 52 },
-                    { name: "التأخر", score: 43 }
-                ];
-                
-                saveData();
-                populateStudentsTables();
-                populateBehaviorTables();
-                calculateStatistics();
-                createCharts();
-                updateStudentSelect();
-                updateBehaviorStudentSelect();
-                
-                alert('تم إنشاء البيانات النموذجية بنجاح');
-            }
-        }
-
-        // حفظ البيانات في التخزين المحلي
-        function saveData() {
-            localStorage.setItem('studentTrackerData', JSON.stringify(appData));
-        }
-
-        // تحميل البيانات من التخزين المحلي
-        function loadData() {
-            const savedData = localStorage.getItem('studentTrackerData');
-            if (savedData) {
-                appData = JSON.parse(savedData);
-            }
-            
-            // تحديث الواجهة بالبيانات المحملة
-            document.getElementById('teacherNameInput').value = appData.teacherName;
-            document.getElementById('subjectInput').value = appData.subject;
-            document.getElementById('classInput').value = appData.class;
-            document.getElementById('semesterInput').value = appData.semester;
-            document.getElementById('programDescription').value = appData.programDescription;
-            
-            document.getElementById('teacherName').textContent = appData.teacherName;
-            document.getElementById('teacherNameBadge').textContent = appData.teacherName;
-            document.getElementById('footerTeacherName').textContent = appData.teacherName;
-            
-            populateStudentsTables();
-            populateBehaviorTables();
-            calculateStatistics();
-            createCharts();
-            updateStudentSelect();
-            updateBehaviorStudentSelect();
-        }
-
-        // وظائف مساعدة
-        function downloadPlan(studentName) {
-            alert(`جارٍ تحميل الخطة العلاجية للطالب: ${studentName}`);
-        }
-
-        function editPlan(studentId) {
-            editStudent(studentId);
-        }
-
-        // تهيئة التطبيق
-        document.addEventListener('DOMContentLoaded', function() {
-            // تعيين السنة الحالية
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-            
-            // تحميل البيانات
-            loadData();
-            
-            // إضافة مستمعي الأحداث للأزرار
-            document.getElementById('addStudentBtn').addEventListener('click', addStudent);
-            document.getElementById('addBehaviorBtn').addEventListener('click', addBehavior);
-            document.getElementById('saveBasicInfo').addEventListener('click', saveBasicInfo);
-            document.getElementById('generateSampleData').addEventListener('click', generateSampleData);
-            document.getElementById('importDataBtn').addEventListener('click', function() {
-                document.getElementById('csvUploadArea').style.display = 'block';
-            });
-            document.getElementById('selectCsvFile').addEventListener('click', function() {
-                document.getElementById('csvFileInput').click();
-            });
-            
-            // استيراد ملف CSV
-            document.getElementById('csvFileInput').addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const contents = e.target.result;
-                        // هنا يمكن معالجة محتويات ملف CSV
-                        alert('تم استيراد ملف CSV بنجاح. سيتم معالجة البيانات قريباً.');
-                        document.getElementById('csvUploadArea').style.display = 'none';
-                    };
-                    reader.readAsText(file);
-                }
-            });
-            
-            // النماذج
-            document.getElementById('studentForm').addEventListener('submit', saveStudent);
-            document.getElementById('behaviorForm').addEventListener('submit', saveBehavior);
-            
-            // إغلاق النماذج
-            document.querySelectorAll('.close-modal').forEach(button => {
-                button.addEventListener('click', function() {
-                    this.closest('.modal').style.display = 'none';
-                });
-            });
-            
-            document.getElementById('cancelStudent').addEventListener('click', function() {
-                document.getElementById('studentModal').style.display = 'none';
-            });
-            
-            document.getElementById('cancelBehavior').addEventListener('click', function() {
-                document.getElementById('behaviorModal').style.display = 'none';
-            });
-            
-            // إغلاق النماذج بالنقر خارجها
-            window.addEventListener('click', function(e) {
-                if (e.target.classList.contains('modal')) {
-                    e.target.style.display = 'none';
-                }
-            });
-            
-            // الألسنة
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // إزالة النشاط من جميع الألسنة والمحتويات
-                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                    
-                    // إضافة النشاط للسان والمحتوى المحدد
-                    this.classList.add('active');
-                    const tabId = this.getAttribute('data-tab') + '-tab';
-                    document.getElementById(tabId).classList.add('active');
-                });
-            });
-            
-            // إنشاء خطة علاجية
-            document.getElementById('generatePlan').addEventListener('click', function() {
-                const studentSelect = document.getElementById('studentSelect');
-                const selectedStudentId = parseInt(studentSelect.value);
-                if (selectedStudentId) {
-                    generateTreatmentPlan(selectedStudentId);
-                } else {
-                    alert('يرجى اختيار طالب أولاً');
-                }
-            });
-            
-            // تصدير التقارير
-            document.getElementById('exportPdfBtn').addEventListener('click', function() {
-                alert('جاري تصدير التقرير إلى PDF');
-            });
-            
-            document.getElementById('exportExcelBtn').addEventListener('click', function() {
-                alert('جاري تصدير التقرير إلى Excel');
-            });
-            
-            // إنشاء التقارير
-            document.getElementById('generateClassReport').addEventListener('click', function() {
-                alert('جاري إنشاء تقرير الصف');
-            });
-            
-            document.getElementById('generateIndividualReport').addEventListener('click', function() {
-                alert('جاري إنشاء التقارير الفردية');
-            });
-            
-            document.getElementById('generateAnalysis').addEventListener('click', function() {
-                alert('جاري إنشاء تحليل النتائج');
-            });
+        // متغيرات المحاكاة
+        let experimentRunning = false;
+        let temperature = 25;
+        let pressure = 1;
+        let methane = 1;
+        let oxygen = 2;
+        
+        // العناصر DOM
+        const tempSlider = document.getElementById('temperature');
+        const pressureSlider = document.getElementById('pressure');
+        const methaneSlider = document.getElementById('methane');
+        const oxygenSlider = document.getElementById('oxygen');
+        const startBtn = document.getElementById('start-experiment');
+        const resetBtn = document.getElementById('reset-experiment');
+        const moleculesContainer = document.getElementById('molecules-container');
+        const resultsContainer = document.getElementById('results-container');
+        
+        // عرض القيم الحالية
+        const tempValue = document.getElementById('temp-value');
+        const pressureValue = document.getElementById('pressure-value');
+        const methaneValue = document.getElementById('methane-value');
+        const oxygenValue = document.getElementById('oxygen-value');
+        
+        // تهيئة المنزلقات
+        tempSlider.addEventListener('input', function() {
+            temperature = this.value;
+            tempValue.textContent = `${temperature}°C`;
+            if (!experimentRunning) updateMolecules();
         });
+        
+        pressureSlider.addEventListener('input', function() {
+            pressure = this.value;
+            pressureValue.textContent = `${pressure} atm`;
+            if (!experimentRunning) updateMolecules();
+        });
+        
+        methaneSlider.addEventListener('input', function() {
+            methane = this.value;
+            methaneValue.textContent = `${methane} mol`;
+            if (!experimentRunning) updateMolecules();
+        });
+        
+        oxygenSlider.addEventListener('input', function() {
+            oxygen = this.value;
+            let oxygenText = "نقص أكسجين";
+            if (oxygen > 2.5) oxygenText = "فائض أكسجين";
+            else if (oxygen >= 1.5 && oxygen <= 2.5) oxygenText = "نسبة مثالية (2)";
+            oxygenValue.textContent = oxygenText;
+            if (!experimentRunning) updateMolecules();
+        });
+        
+        // زر بدء التجربة
+        startBtn.addEventListener('click', function() {
+            if (experimentRunning) return;
+            
+            experimentRunning = true;
+            startBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التشغيل...';
+            startBtn.disabled = true;
+            
+            // محاكاة التفاعل
+            simulateReaction();
+        });
+        
+        // زر إعادة الضبط
+        resetBtn.addEventListener('click', function() {
+            resetExperiment();
+        });
+        
+        // وظيفة محاكاة التفاعل
+        function simulateReaction() {
+            // إعادة تعيين العرض
+            moleculesContainer.innerHTML = '';
+            resultsContainer.innerHTML = '';
+            
+            // إنشاء الجزيئات الأولية
+            createMolecule('CH₄', '#3498db', 100, 200, 'ميثان');
+            createMolecule('O₂', '#e74c3c', 400, 200, 'أكسجين');
+            
+            // إضافة سهم التفاعل
+            const arrow = document.createElement('div');
+            arrow.style.position = 'absolute';
+            arrow.style.left = '250px';
+            arrow.style.top = '220px';
+            arrow.style.fontSize = '2rem';
+            arrow.style.color = '#f39c12';
+            arrow.innerHTML = '→';
+            moleculesContainer.appendChild(arrow);
+            
+            // حساب نتائج التفاعل
+            const energyReleased = calculateEnergyReleased();
+            const reactionRate = calculateReactionRate();
+            const products = calculateProducts();
+            
+            // عرض النتائج
+            setTimeout(() => {
+                // إزالة الجزيئات الأولية
+                document.querySelectorAll('.molecule').forEach(mol => {
+                    mol.style.opacity = '0';
+                    mol.style.transform = 'scale(0)';
+                });
+                
+                arrow.style.opacity = '0';
+                
+                // إظهار الجزيئات الناتجة
+                setTimeout(() => {
+                    moleculesContainer.innerHTML = '';
+                    
+                    createMolecule('CO₂', '#2c3e50', 150, 200, 'ثاني أكسيد الكربون');
+                    createMolecule('H₂O', '#1abc9c', 350, 200, 'ماء');
+                    
+                    // إضافة تأثير الحرارة
+                    const heatEffect = document.createElement('div');
+                    heatEffect.style.position = 'absolute';
+                    heatEffect.style.left = '250px';
+                    heatEffect.style.top = '100px';
+                    heatEffect.style.fontSize = '3rem';
+                    heatEffect.style.color = '#e74c3c';
+                    heatEffect.innerHTML = '<i class="fas fa-fire"></i>';
+                    heatEffect.style.animation = 'pulse 1s infinite';
+                    moleculesContainer.appendChild(heatEffect);
+                    
+                    // إضافة توهج
+                    moleculesContainer.style.boxShadow = '0 0 30px rgba(231, 76, 60, 0.5)';
+                    
+                    // عرض النتائج في لوحة البيانات
+                    displayResults(energyReleased, reactionRate, products);
+                    
+                    // إعادة تمكين الزر
+                    setTimeout(() => {
+                        experimentRunning = false;
+                        startBtn.innerHTML = '<i class="fas fa-play"></i> بدء التجربة';
+                        startBtn.disabled = false;
+                        
+                        // إزالة التوهج
+                        moleculesContainer.style.boxShadow = 'inset 0 0 10px rgba(0, 0, 0, 0.1)';
+                    }, 3000);
+                }, 500);
+            }, 2000);
+        }
+        
+        // وظيفة إنشاء جزيء
+        function createMolecule(formula, color, x, y, name) {
+            const molecule = document.createElement('div');
+            molecule.className = 'molecule';
+            molecule.style.left = `${x}px`;
+            molecule.style.top = `${y}px`;
+            
+            const atom = document.createElement('div');
+            atom.className = 'atom';
+            atom.style.backgroundColor = color;
+            atom.textContent = formula;
+            
+            const label = document.createElement('div');
+            label.className = 'atom-label';
+            label.textContent = name;
+            
+            molecule.appendChild(atom);
+            molecule.appendChild(label);
+            moleculesContainer.appendChild(molecule);
+            
+            return molecule;
+        }
+        
+        // وظيفة تحديث الجزيئات بناءً على المعلمات
+        function updateMolecules() {
+            moleculesContainer.innerHTML = '';
+            
+            // حجم الجزيء يعتمد على الكمية
+            const ch4Size = 40 + methane * 10;
+            const o2Size = 40 + oxygen * 5;
+            
+            // لون الجزيء يعتمد على درجة الحرارة
+            const ch4Color = temperature > 100 ? '#2980b9' : '#3498db';
+            const o2Color = temperature > 100 ? '#c0392b' : '#e74c3c';
+            
+            createMolecule('CH₄', ch4Color, 100, 200, 'ميثان');
+            createMolecule('O₂', o2Color, 400, 200, 'أكسجين');
+            
+            // إضافة سهم التفاعل
+            const arrow = document.createElement('div');
+            arrow.style.position = 'absolute';
+            arrow.style.left = '250px';
+            arrow.style.top = '220px';
+            arrow.style.fontSize = '2rem';
+            arrow.style.color = '#f39c12';
+            arrow.innerHTML = '→';
+            moleculesContainer.appendChild(arrow);
+        }
+        
+        // وظيفة حساب الطاقة المنطلقة
+        function calculateEnergyReleased() {
+            // معادلة تقريبية: CH4 + 2O2 → CO2 + 2H2O + طاقة
+            let baseEnergy = 890; // kJ/mol للتفاعل المثالي
+            
+            // تعديل بناءً على المعلمات
+            let energy = baseEnergy * methane;
+            
+            // تأثير درجة الحرارة
+            if (temperature > 100) energy *= 1.2;
+            if (temperature > 300) energy *= 1.5;
+            
+            // تأثير الضغط
+            energy *= (1 + (pressure - 1) * 0.1);
+            
+            // تأثير نسبة الأكسجين
+            if (oxygen < 1.5) energy *= 0.7; // نقص أكسجين
+            if (oxygen > 2.5) energy *= 0.9; // فائض أكسجين
+            
+            return Math.round(energy);
+        }
+        
+        // وظيفة حساب سرعة التفاعل
+        function calculateReactionRate() {
+            let rate = 1.0;
+            
+            // تأثير درجة الحرارة (قاعدة فانت هوف)
+            rate *= Math.pow(2, (temperature - 25) / 10);
+            
+            // تأثير الضغط
+            rate *= pressure;
+            
+            // تأثير التركيز
+            rate *= methane;
+            rate *= Math.min(oxygen, 2);
+            
+            return rate.toFixed(2);
+        }
+        
+        // وظيفة حساب النواتج
+        function calculateProducts() {
+            const co2 = methane; // مولات CO2 الناتجة
+            const h2o = 2 * methane; // مولات H2O الناتجة
+            
+            // إذا كان هناك نقص في الأكسجين
+            if (oxygen < 2) {
+                return {
+                    co2: (methane * oxygen / 2).toFixed(2),
+                    h2o: (methane * oxygen).toFixed(2),
+                    co: (methane * (2 - oxygen) / 2).toFixed(2),
+                    incomplete: true
+                };
+            }
+            
+            return {
+                co2: co2.toFixed(2),
+                h2o: h2o.toFixed(2),
+                co: 0,
+                incomplete: false
+            };
+        }
+        
+        // وظيفة عرض النتائج
+        function displayResults(energy, rate, products) {
+            resultsContainer.innerHTML = '';
+            
+            const results = [
+                { title: 'الطاقة المنطلقة', value: `${energy} kJ/mol`, icon: 'fas fa-bolt' },
+                { title: 'سرعة التفاعل', value: rate, icon: 'fas fa-tachometer-alt' },
+                { title: 'CO₂ الناتج', value: `${products.co2} mol`, icon: 'fas fa-cloud' },
+                { title: 'H₂O الناتج', value: `${products.h2o} mol`, icon: 'fas fa-tint' }
+            ];
+            
+            if (products.incomplete) {
+                results.push({ 
+                    title: 'CO الناتج (احتراق غير كامل)', 
+                    value: `${products.co} mol`, 
+                    icon: 'fas fa-skull-crossbones',
+                    warning: true 
+                });
+            }
+            
+            results.forEach(result => {
+                const card = document.createElement('div');
+                card.className = 'result-card';
+                if (result.warning) {
+                    card.style.borderRightColor = 'var(--danger-color)';
+                }
+                
+                card.innerHTML = `
+                    <h5><i class="${result.icon}"></i> ${result.title}</h5>
+                    <p style="font-size: 1.2rem; font-weight: bold;">${result.value}</p>
+                `;
+                
+                resultsContainer.appendChild(card);
+            });
+        }
+        
+        // وظيفة إعادة تعيين التجربة
+        function resetExperiment() {
+            experimentRunning = false;
+            
+            // إعادة تعيين المنزلقات
+            tempSlider.value = 25;
+            pressureSlider.value = 1;
+            methaneSlider.value = 1;
+            oxygenSlider.value = 2;
+            
+            // تحديث القيم المعروضة
+            temperature = 25;
+            pressure = 1;
+            methane = 1;
+            oxygen = 2;
+            
+            tempValue.textContent = '25°C';
+            pressureValue.textContent = '1 atm';
+            methaneValue.textContent = '1 mol';
+            oxygenValue.textContent = 'نسبة مثالية (2)';
+            
+            // إعادة تعيين الزر
+            startBtn.innerHTML = '<i class="fas fa-play"></i> بدء التجربة';
+            startBtn.disabled = false;
+            
+            // إعادة تعيين العرض
+            moleculesContainer.innerHTML = '';
+            resultsContainer.innerHTML = '';
+            
+            // إعادة الرسومات الأولية
+            updateMolecules();
+        }
+        
+        // إضافة أنيميشن النبض
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); opacity: 1; }
+                50% { transform: scale(1.2); opacity: 0.7; }
+                100% { transform: scale(1); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // التهيئة الأولية
+        updateMolecules();
     </script>
 </body>
 </html>
