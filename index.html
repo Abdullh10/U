@@ -3,987 +3,2941 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة مشاريع طلاب الكيمياء النوعية</title>
+    <title>برنامج التدريب التحصيلي في الكيمياء</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* أنماط عامة */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         :root {
-            --primary-color: #2c8cff;
-            --secondary-color: #0d5bb5;
-            --success-color: #28a745;
-            --warning-color: #ffc107;
-            --danger-color: #dc3545;
-            --light-bg: #f5f9ff;
-            --card-bg: #ffffff;
-            --text-color: #333;
-            --text-light: #666;
-            --border-radius: 15px;
-            --box-shadow: 0 5px 15px rgba(0, 100, 200, 0.1);
-            --transition: all 0.3s ease;
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         body {
-            background-color: var(--light-bg);
-            color: var(--text-color);
+            background-color: #f8f9fa;
+            color: #333;
             line-height: 1.6;
-            padding-bottom: 40px;
         }
         
-        /* رأس الصفحة */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary-color), #1a2530);
             color: white;
-            padding: 25px 20px;
-            text-align: center;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         
-        header h1 {
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .logo h1 {
             font-size: 1.8rem;
-            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            font-size: 1rem;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        nav li {
+            margin: 0 5px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: white;
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        /* Main Content */
+        main {
+            min-height: 70vh;
+            padding-bottom: 3rem;
+        }
+        
+        /* Homepage Styles */
+        .welcome-section {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .welcome-section h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .welcome-section p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #555;
+        }
+        
+        .teacher-info {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 15px;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 2rem auto;
         }
         
-        header h1 i {
+        .teacher-info i {
             font-size: 2rem;
-        }
-        
-        .teacher-info {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-top: 10px;
-        }
-        
-        /* حاوية المحتوى الرئيسي */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* قسم المجموعات */
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--primary-color);
-        }
-        
-        .section-title i {
             color: var(--primary-color);
         }
         
-        .intro-text {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: var(--border-radius);
-            margin-bottom: 30px;
-            box-shadow: var(--box-shadow);
-            border-right: 5px solid var(--primary-color);
-        }
-        
-        /* شبكة المجموعات */
-        .groups-grid {
+        /* Topics Grid */
+        .topics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
-            margin-bottom: 40px;
+            margin-top: 2rem;
         }
         
-        .group-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            box-shadow: var(--box-shadow);
-            transition: var(--transition);
-            border-top: 5px solid var(--primary-color);
+        .topic-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border-top: 5px solid var(--secondary-color);
             display: flex;
             flex-direction: column;
-            height: 100%;
         }
         
-        .group-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 100, 200, 0.15);
+        .topic-card:hover {
+            transform: translateY(-10px);
         }
         
-        .group-card h3 {
+        .topic-icon {
+            font-size: 2.5rem;
             color: var(--secondary-color);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .group-card h3 i {
-            color: var(--primary-color);
-        }
-        
-        .group-meta {
-            margin-bottom: 20px;
-        }
-        
-        .group-meta p {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .group-meta i {
-            color: var(--primary-color);
-            width: 20px;
-        }
-        
-        .members-list {
-            background-color: #f0f8ff;
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-        
-        .members-list span {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin: 5px;
-            font-size: 0.9rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
+            margin-bottom: 1rem;
             text-align: center;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
+        }
+        
+        .topic-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .topic-stats {
+            display: flex;
+            justify-content: space-between;
             margin-top: auto;
-            font-size: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #eee;
+            font-size: 0.9rem;
+            color: #666;
         }
         
-        .btn:hover {
+        .start-btn {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
             background-color: var(--secondary-color);
-            transform: translateY(-2px);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+            text-align: center;
+            text-decoration: none;
         }
         
-        .btn i {
-            margin-left: 8px;
+        .start-btn:hover {
+            background-color: #2980b9;
         }
         
-        /* قسم الاختبار التفاعلي */
-        .quiz-container {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 40px;
-            display: none;
-        }
-        
+        /* Quiz Page Styles */
         .quiz-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
-        }
-        
-        .quiz-title {
-            color: var(--secondary-color);
-            font-size: 1.4rem;
-        }
-        
-        .back-btn {
-            background-color: #f8f9fa;
-            color: var(--text-color);
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        .back-btn:hover {
-            background-color: #e9ecef;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
         
         .progress-container {
+            flex-grow: 1;
+            margin-right: 2rem;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--success-color);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .quiz-info {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            background-color: #f0f8ff;
-            padding: 15px;
+        }
+        
+        .quiz-stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat {
+            background-color: var(--light-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        /* Question Card */
+        .question-card {
+            background-color: white;
             border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
         }
         
-        .points-display, .level-display {
-            text-align: center;
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-color);
         }
         
-        .points-display h4, .level-display h4 {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
-        }
-        
-        .points-value, .level-value {
-            font-size: 1.8rem;
-            font-weight: bold;
+        .question-number {
+            font-weight: 700;
             color: var(--primary-color);
-        }
-        
-        .question-box {
-            background-color: #f8fbff;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            border-right: 4px solid var(--primary-color);
-        }
-        
-        .question-box h3 {
-            margin-bottom: 20px;
-            color: var(--secondary-color);
             font-size: 1.2rem;
         }
         
+        .question-difficulty {
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .difficulty-easy {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--success-color);
+        }
+        
+        .difficulty-medium {
+            background-color: rgba(241, 196, 15, 0.2);
+            color: #f1c40f;
+        }
+        
+        .difficulty-hard {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: #333;
+        }
+        
+        /* Options */
         .options-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 2rem;
         }
         
         .option {
+            padding: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
-            padding: 15px;
-            background-color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 2px solid #e9ecef;
+            gap: 15px;
+            font-size: 1.1rem;
         }
         
         .option:hover {
-            background-color: #f0f8ff;
-            border-color: var(--primary-color);
+            border-color: var(--secondary-color);
+            background-color: rgba(52, 152, 219, 0.05);
         }
         
-        .option input {
-            margin-left: 10px;
-            transform: scale(1.2);
+        .option.selected {
+            border-color: var(--secondary-color);
+            background-color: rgba(52, 152, 219, 0.1);
         }
         
-        .option label {
-            flex-grow: 1;
-            cursor: pointer;
-            font-size: 1.05rem;
+        .option.correct {
+            border-color: var(--success-color);
+            background-color: rgba(39, 174, 96, 0.1);
         }
         
-        .quiz-controls {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
+        .option.incorrect {
+            border-color: var(--accent-color);
+            background-color: rgba(231, 76, 60, 0.1);
         }
         
-        .feedback-box {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 25px;
-            display: none;
-            border-left: 4px solid var(--primary-color);
-        }
-        
-        .correct-feedback {
-            color: var(--success-color);
-            font-weight: bold;
-            margin-bottom: 10px;
+        .option-letter {
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #eee;
+            font-weight: 700;
+            color: #555;
         }
         
-        .incorrect-feedback {
-            color: var(--danger-color);
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .concept-explanation {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid #dee2e6;
-        }
-        
-        .concept-explanation h4 {
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-        
-        /* قسم المحاكاة والفيديو */
-        .resources-section {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: var(--box-shadow);
-            margin-top: 30px;
-            display: none;
-        }
-        
-        .resources-section h3 {
-            color: var(--secondary-color);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .video-container {
-            background-color: #f0f8ff;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .video-container p {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .video-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 15px;
-            background-color: white;
-            border-radius: 5px;
-            transition: var(--transition);
-        }
-        
-        .video-link:hover {
-            background-color: var(--primary-color);
+        .option.correct .option-letter {
+            background-color: var(--success-color);
             color: white;
         }
         
-        .phet-container {
-            background-color: #f0f8ff;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
+        .option.incorrect .option-letter {
+            background-color: var(--accent-color);
+            color: white;
         }
         
-        .phet-container h4 {
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .phet-frame {
-            width: 100%;
-            height: 400px;
-            border: none;
-            border-radius: 8px;
+        /* Feedback Section */
+        .feedback-section {
             background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow);
+            display: none;
         }
         
-        /* قسم ملاحظات المعلم */
-        .teacher-section {
-            background-color: #fff9e6;
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin-top: 40px;
-            border-right: 5px solid var(--warning-color);
-            box-shadow: var(--box-shadow);
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
         }
         
-        .teacher-section h3 {
-            color: #856404;
-            margin-bottom: 15px;
+        .feedback-icon {
+            font-size: 1.5rem;
+        }
+        
+        .feedback-correct .feedback-icon {
+            color: var(--success-color);
+        }
+        
+        .feedback-incorrect .feedback-icon {
+            color: var(--accent-color);
+        }
+        
+        .feedback-explanation {
+            padding: 1.5rem;
+            background-color: var(--light-color);
+            border-radius: 8px;
+            margin-top: 1rem;
+            line-height: 1.7;
+        }
+        
+        /* Navigation Buttons */
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        .nav-btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        /* تذييل الصفحة */
-        footer {
+        .prev-btn {
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+            border: 2px solid #ddd;
+        }
+        
+        .next-btn {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .submit-btn {
+            background-color: var(--success-color);
+            color: white;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Results Page */
+        .results-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
             text-align: center;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #dee2e6;
-            color: var(--text-light);
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        
+        .results-header {
+            margin-bottom: 2rem;
+        }
+        
+        .results-icon {
+            font-size: 4rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+        
+        .results-score {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+        
+        .results-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 2rem 0;
+        }
+        
+        .result-stat {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: var(--light-color);
+        }
+        
+        .result-stat h4 {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-stat p {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .results-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
             font-size: 0.9rem;
         }
         
-        /* تجاوب مع الشاشات الصغيرة */
-        @media (max-width: 768px) {
-            .groups-grid {
-                grid-template-columns: 1fr;
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .topics-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .progress-container {
+            .quiz-stats {
                 flex-direction: column;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
                 gap: 15px;
             }
             
-            .quiz-controls {
+            nav ul {
                 flex-direction: column;
-                gap: 10px;
+                align-items: center;
             }
             
-            .quiz-controls .btn {
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quiz-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .progress-container {
+                margin-right: 0;
                 width: 100%;
             }
             
-            .phet-frame {
-                height: 300px;
+            .results-details {
+                grid-template-columns: 1fr;
             }
             
-            header h1 {
-                font-size: 1.5rem;
+            .footer-content {
                 flex-direction: column;
-                gap: 10px;
             }
         }
-        
-        /* ألوان خاصة بالمجموعات */
-        .group-1 { border-top-color: #2c8cff; }
-        .group-2 { border-top-color: #28a745; }
-        .group-3 { border-top-color: #ffc107; }
-        .group-4 { border-top-color: #dc3545; }
-        .group-5 { border-top-color: #6f42c1; }
-        .group-6 { border-top-color: #17a2b8; }
     </style>
 </head>
 <body>
-    <!-- رأس الصفحة -->
+    <!-- Header -->
     <header>
         <div class="container">
-            <h1>
-                <i class="fas fa-flask"></i>
-                منصة مشاريع الطلاب النوعية في الكيمياء
-            </h1>
-            <p class="teacher-info">
-                تحت إشراف المعلم المتقدم: الأستاذ عبدالله بن محمد حمدي
-            </p>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-flask"></i>
+                    <div>
+                        <h1>برنامج التدريب التحصيلي في الكيمياء</h1>
+                        <span>للمعلم/ عبدالله بن محمد حمدي - معلم متقدم</span>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <div class="stat">
+                        <i class="fas fa-user-graduate"></i> طالب متفوق
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
-    
-    <!-- المحتوى الرئيسي -->
-    <div class="container">
-        <!-- قسم المجموعات (الصفحة الرئيسية) -->
-        <div id="groupsPage">
-            <h2 class="section-title">
-                <i class="fas fa-users"></i>
-                مجموعات التحليل التعليمي
-            </h2>
-            
-            <div class="intro-text">
-                <p>تم تقسيم طلاب كيمياء ١ إلى مجموعات مكونة من ٥ طلاب. كل مجموعة قامت بتحليل قسم من المقرر وتصميم بنك أسئلة تفاعلي يساعد في التدريب على الاختبار التحصيلي.</p>
-                <p>كل سؤال في المنصة مصمم لتقديم شرح مفصل للإجابة الصحيحة والخاطئة، مع ربطه بمقاطع فيديو وتجارب افتراضية من موقع PhET لتعزيز الفهم.</p>
-            </div>
-            
-            <div class="groups-grid" id="groupsList">
-                <!-- سيتم ملء المجموعات بواسطة JavaScript -->
-            </div>
-            
-            <div class="teacher-section">
-                <h3><i class="fas fa-chalkboard-teacher"></i> ملاحظات المعلم</h3>
-                <p>المنصة تهدف إلى تحويل الطلاب من متلقين للمعلومة إلى مشاركين في بنائها. كل مجموعة صممت محتوى تفاعلياً لوحدتها الدراسية، مع مراعاة الفروق الفردية من خلال التغذية الراجعة المفصلة عند كل إجابة.</p>
-                <p>عند إجابة الطالب خطأ، تظهر له: ١) شرح للمفهوم، ٢) مقطع فيديو تعليمي، ٣) تجربة افتراضية تفاعلية، ٤) نقاط تشجيعية للتقدم.</p>
-            </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul id="nav-list">
+                <!-- سيتم ملء هذا القسم بالجافاسكريبت -->
+            </ul>
         </div>
-        
-        <!-- قسم الاختبار التفاعلي (يظهر عند اختيار مجموعة) -->
-        <div id="quizPage" class="quiz-container">
-            <div class="quiz-header">
-                <h2 class="quiz-title" id="quizGroupName"></h2>
-                <a href="#" class="back-btn" id="backToGroups">
-                    <i class="fas fa-arrow-right"></i> العودة إلى المجموعات
-                </a>
-            </div>
-            
-            <div class="progress-container">
-                <div class="points-display">
-                    <h4>النقاط</h4>
-                    <div class="points-value" id="studentPoints">0</div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container" id="content-container">
+            <!-- الصفحة الرئيسية (سيتم عرضها أولاً) -->
+            <section id="home-page">
+                <div class="welcome-section">
+                    <h2>مرحباً بكم في برنامج التدريب التحصيلي للكيمياء</h2>
+                    <p>هذا البرنامج مصمم لمساعدة الطلاب على التحضير للاختبار التحصيلي في مادة الكيمياء من خلال تدريبات تفاعلية تغطي كافة الموضوعات المقررة.</p>
+                    
+                    <div class="teacher-info">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <div>
+                            <h3>المعلم / عبدالله بن محمد حمدي</h3>
+                            <p>معلم متقدم في مادة الكيمياء - الإدارة العامة للتعليم بالمنطقة الشرقية</p>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="level-display">
-                    <h4>المستوى</h4>
-                    <div class="level-value" id="studentLevel">مبتدئ</div>
+                <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color);">اختر موضوعاً للبدء بالتدريب</h2>
+                
+                <div class="topics-grid" id="topics-grid">
+                    <!-- سيتم ملء هذا القسم بالجافاسكريبت -->
+                </div>
+            </section>
+            
+            <!-- صفحة الأسئلة (سيتم عرضها عند اختيار موضوع) -->
+            <section id="quiz-page" style="display: none;">
+                <div class="quiz-header">
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress" id="progress-bar"></div>
+                        </div>
+                        <div class="quiz-info">
+                            <span id="current-topic">موضوع الاختبار</span>
+                            <span id="progress-text">سؤال 1 من 10</span>
+                        </div>
+                    </div>
+                    <div class="quiz-stats">
+                        <div class="stat">
+                            <i class="fas fa-check-circle"></i> <span id="correct-count">0</span> صحيح
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-times-circle"></i> <span id="incorrect-count">0</span> خطأ
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-clock"></i> <span id="timer">15:00</span>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="progress-display">
-                    <h4>التقدم</h4>
-                    <div id="questionProgress">1/5</div>
-                </div>
-            </div>
-            
-            <div class="question-box" id="questionBox">
-                <!-- سيتم عرض الأسئلة هنا -->
-            </div>
-            
-            <div class="quiz-controls">
-                <button class="btn" id="checkAnswerBtn">
-                    <i class="fas fa-check-circle"></i> تحقق من الإجابة
-                </button>
-                <button class="btn" id="nextQuestionBtn" style="display: none;">
-                    <i class="fas fa-forward"></i> السؤال التالي
-                </button>
-            </div>
-            
-            <div class="feedback-box" id="feedbackBox">
-                <!-- سيتم عرض التغذية الراجعة هنا -->
-            </div>
-            
-            <div class="resources-section" id="resourcesSection">
-                <h3><i class="fas fa-lightbulb"></i> موارد تعليمية للمراجعة</h3>
-                
-                <div class="video-container">
-                    <p><i class="fas fa-video"></i> <strong>فيديو تعليمي مقترح:</strong></p>
-                    <a href="#" target="_blank" class="video-link" id="videoLink">
-                        <i class="fas fa-external-link-alt"></i> شاهد الفيديو التعليمي
-                    </a>
+                <div class="question-card">
+                    <div class="question-header">
+                        <div class="question-number" id="question-number">سؤال 1</div>
+                        <div class="question-difficulty difficulty-medium" id="question-difficulty">متوسط</div>
+                    </div>
+                    
+                    <div class="question-text" id="question-text">
+                        يتم تحميل نص السؤال هنا...
+                    </div>
+                    
+                    <div class="options-container" id="options-container">
+                        <!-- سيتم ملء الخيارات بالجافاسكريبت -->
+                    </div>
+                    
+                    <div class="quiz-navigation">
+                        <button class="nav-btn prev-btn" id="prev-btn">
+                            <i class="fas fa-arrow-right"></i> السابق
+                        </button>
+                        <button class="nav-btn next-btn" id="next-btn">
+                            التالي <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="nav-btn submit-btn" id="submit-btn" style="display: none;">
+                            إنهاء الاختبار <i class="fas fa-flag-checkered"></i>
+                        </button>
+                    </div>
                 </div>
                 
-                <div class="phet-container">
-                    <h4><i class="fas fa-atom"></i> تجربة افتراضية من PhET</h4>
-                    <iframe class="phet-frame" id="phetFrame" src="" title="تجربة PhET الافتراضية"></iframe>
+                <div class="feedback-section" id="feedback-section">
+                    <!-- سيتم ملء التغذية الراجعة بالجافاسكريبت -->
                 </div>
-                
-                <div class="concept-explanation" id="conceptExplanation">
-                    <!-- سيتم عرض شرح المفاهيم هنا -->
+            </section>
+            
+            <!-- صفحة النتائج -->
+            <section id="results-page" style="display: none;">
+                <div class="results-container">
+                    <div class="results-header">
+                        <div class="results-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h2>تهانينا! لقد أكملت الاختبار</h2>
+                        <p>إليك نتائجك في اختبار <span id="result-topic-name">موضوع الاختبار</span></p>
+                    </div>
+                    
+                    <div class="results-score">
+                        <span id="final-score">0</span>%
+                    </div>
+                    
+                    <div class="results-details">
+                        <div class="result-stat">
+                            <h4>الإجابات الصحيحة</h4>
+                            <p id="result-correct">0</p>
+                        </div>
+                        <div class="result-stat">
+                            <h4>الإجابات الخاطئة</h4>
+                            <p id="result-incorrect">0</p>
+                        </div>
+                        <div class="result-stat">
+                            <h4>الوقت المستغرق</h4>
+                            <p id="result-time">00:00</p>
+                        </div>
+                        <div class="result-stat">
+                            <h4>النسبة المئوية</h4>
+                            <p id="result-percentage">0%</p>
+                        </div>
+                    </div>
+                    
+                    <div class="results-actions">
+                        <button class="nav-btn" id="review-btn" style="background-color: var(--secondary-color);">
+                            <i class="fas fa-redo"></i> مراجعة الإجابات
+                        </button>
+                        <button class="nav-btn" id="new-quiz-btn" style="background-color: var(--success-color);">
+                            <i class="fas fa-play-circle"></i> اختبار جديد
+                        </button>
+                        <button class="nav-btn" id="home-btn" style="background-color: var(--primary-color);">
+                            <i class="fas fa-home"></i> الصفحة الرئيسية
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </div>
-    
+    </main>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2023 منصة مشاريع الطلاب النوعية في الكيمياء - تصميم تحت إشراف الأستاذ عبدالله بن محمد حمدي</p>
-            <p>جميع محتويات المنصة من تصميم وإعداد طلاب كيمياء ١</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>برنامج التدريب التحصيلي</h3>
+                    <p>برنامج تدريبي تفاعلي لمساعدة طلاب وطالبات الصف الثالث الثانوي على التحضير للاختبار التحصيلي في مادة الكيمياء.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" id="footer-home">الصفحة الرئيسية</a></li>
+                        <li><a href="#" id="footer-topics">جميع الموضوعات</a></li>
+                        <li><a href="#" id="footer-results">النتائج</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>معلومات التواصل</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-user"></i> المعلم / عبدالله بن محمد حمدي</li>
+                        <li><i class="fas fa-graduation-cap"></i> معلم متقدم - كيمياء</li>
+                        <li><i class="fas fa-school"></i> الإدارة العامة للتعليم بالمنطقة الشرقية</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 برنامج التدريب التحصيلي في الكيمياء. جميع الحقوق محفوظة.</p>
+            </div>
         </div>
     </footer>
-    
-    <!-- JavaScript -->
+
     <script>
-        // بيانات المجموعات
-        const studentGroups = [
+        // بيانات الموضوعات مع أكثر من 100 سؤال
+        const topics = [
             {
                 id: 1,
-                name: "مجموعة الذرة والتركيب الإلكتروني",
-                members: ["خالد أحمد", "تميم محمد", "فهد عبدالله", "سعيد القحطاني", "محمد السعيد"],
-                analyzedChapter: "الوحدة ٢: التركيب الذري والنظائر",
-                colorClass: "group-1"
+                title: "مقدمة في الكيمياء",
+                icon: "fas fa-vial",
+                description: "مبادئ أساسية في الكيمياء، فروع الكيمياء، المخاطر البيئية",
+                questions: 15,
+                duration: 20,
+                questionsData: [
+                    {
+                        id: 1,
+                        text: "أي التالي يعد الأكثر خطورة على الغلاف الجوي؟",
+                        options: [
+                            { text: "النيتروجين", correct: false },
+                            { text: "الكلورو فلورو كربون", correct: true },
+                            { text: "أول أكسيد الكربون", correct: false },
+                            { text: "ثاني أكسيد الكربون", correct: false }
+                        ],
+                        explanation: "مركبات الكلوروفلوروكربون (CFCs) تعتبر الأكثر خطورة على الغلاف الجوي لأنها تدمر طبقة الأوزون التي تحمي الأرض من الأشعة فوق البنفسجية الضارة.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 2,
+                        text: "فرع من فروع الكيمياء يهتم بدراسة أنواع المادة ومكوناتها:",
+                        options: [
+                            { text: "الكيمياء التحليلية", correct: true },
+                            { text: "الكيمياء الحرارية", correct: false },
+                            { text: "الكيمياء العضوية", correct: false },
+                            { text: "الكيمياء الذرية", correct: false }
+                        ],
+                        explanation: "الكيمياء التحليلية هي الفرع الذي يهتم بدراسة أنواع المادة ومكوناتها وكمياتها، وتحديد هوية المواد وتركيبها.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 3,
+                        text: "أي البحوث الآتية مثال على بحث نظري؟",
+                        options: [
+                            { text: "إنتاج عناصر اصطناعية لدراسة خواصها", correct: true },
+                            { text: "إنتاج مواد بلاستيكية مقاومة للحرارة لاستعمالها في الأفران المنزلية", correct: false },
+                            { text: "البحث عن أنواع أخرى من الوقود لتسيير السيارات", correct: false },
+                            { text: "إيجاد طرائق لإبطاء صدأ الحديد", correct: false }
+                        ],
+                        explanation: "البحث النظري يهدف إلى فهم الظواهر العلمية وتطوير النظريات دون تركيز مباشر على التطبيقات العملية الفورية.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 4,
+                        text: "كم عدد جزيئات الأوزون الناتجة من 12 ذرة أكسجين؟",
+                        options: [
+                            { text: "2", correct: false },
+                            { text: "3", correct: false },
+                            { text: "4", correct: true },
+                            { text: "6", correct: false }
+                        ],
+                        explanation: "جزيء الأوزون (O₃) يتكون من 3 ذرات أكسجين. لذلك، 12 ذرة أكسجين تكفي لتكوين 4 جزيئات أوزون (12 ÷ 3 = 4).",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 5,
+                        text: "أي الخواص التالية خاصية فيزيائية مميزة؟",
+                        options: [
+                            { text: "الكتلة", correct: false },
+                            { text: "الطول", correct: false },
+                            { text: "الحجم", correct: false },
+                            { text: "الكثافة", correct: true }
+                        ],
+                        explanation: "الكثافة هي خاصية فيزيائية مميزة لأنها تميز مادة عن أخرى ولا تعتمد على كمية المادة. الكتلة والطول والحجم تعتمد على كمية المادة.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 6,
+                        text: "أي التالي يمثل تغيراً كيميائياً؟",
+                        options: [
+                            { text: "سكر يذوب في الماء", correct: false },
+                            { text: "آيس كريم ينصهر", correct: false },
+                            { text: "ماء يغلي", correct: false },
+                            { text: "عود ثقاب يشتعل", correct: true }
+                        ],
+                        explanation: "احتراق عود الثقاب ينتج مواد جديدة (رماد، دخان، غازات) مع انبعاث حرارة وضوء، وهذه علامات التغير الكيميائي. التغيرات الأخرى فيزيائية.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 7,
+                        text: "حصل طالب في تجربة تحليل الماء على 10.0g هيدروجين و 79.4g أكسجين. ما مقدار الماء المستعمل في هذه العملية؟",
+                        options: [
+                            { text: "69.4g", correct: false },
+                            { text: "79.4g", correct: false },
+                            { text: "89.4g", correct: true },
+                            { text: "99.4g", correct: false }
+                        ],
+                        explanation: "وفقاً لقانون حفظ الكتلة، كتلة الماء = كتلة الهيدروجين + كتلة الأكسجين = 10.0 + 79.4 = 89.4 جرام.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 8,
+                        text: "أي مما يلي مخلوط غير متجانس؟",
+                        options: [
+                            { text: "الفولاذ", correct: false },
+                            { text: "الشاي", correct: false },
+                            { text: "محلول الجلوكوز", correct: false },
+                            { text: "الدخان", correct: true }
+                        ],
+                        explanation: "الدخان مخلوط غير متجانس لأنه يحتوي على جسيمات صلبة صغيرة منتشرة في الغاز ويمكن تمييز مكوناته بالعين المجردة أو بالمجهري.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 9,
+                        text: "طريقة لفصل سائلين عديمي اللون؟",
+                        options: [
+                            { text: "الترشيح", correct: false },
+                            { text: "التبلور", correct: false },
+                            { text: "التقطير", correct: true },
+                            { text: "الكروماتوغرافيا", correct: false }
+                        ],
+                        explanation: "التقطير هو أفضل طريقة لفصل سائلين عديمي اللون بناءً على اختلاف درجات غليانهما. الكروماتوغرافيا تستخدم أيضاً ولكن التقطير أكثر شيوعاً للسوائل.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 10,
+                        text: "أي التالي لا يعد مركباً؟",
+                        options: [
+                            { text: "الماء (H₂O)", correct: false },
+                            { text: "ملح الطعام (NaCl)", correct: false },
+                            { text: "الهواء", correct: true },
+                            { text: "ثاني أكسيد الكربون (CO₂)", correct: false }
+                        ],
+                        explanation: "الهواء مخلوط من غازات مختلفة (نيتروجين، أكسجين، ثاني أكسيد كربون، وأخرى) وليس مركباً كيميائياً. المركب يتكون من اتحاد عنصرين أو أكثر بنسب ثابتة.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 11,
+                        text: "تفاعل 2.5g من العنصر X مع 10.5g من العنصر Y. ما النسبة المئوية للعنصر X؟",
+                        options: [
+                            { text: "19.2%", correct: true },
+                            { text: "23.8%", correct: false },
+                            { text: "76.2%", correct: false },
+                            { text: "80.8%", correct: false }
+                        ],
+                        explanation: "الكتلة الكلية = 2.5 + 10.5 = 13g. نسبة العنصر X = (2.5 ÷ 13) × 100 = 19.23% تقريباً.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 12,
+                        text: "أول من اعتقد بوجود الذرات على أسس علمية:",
+                        options: [
+                            { text: "ديمقريطس", correct: false },
+                            { text: "أرسطو", correct: false },
+                            { text: "دالتون", correct: true },
+                            { text: "رذرفورد", correct: false }
+                        ],
+                        explanation: "جون دالتون هو أول من قدم نظرية الذرة على أسس علمية في عام 1808، معتمداً على قوانين حفظ الكتلة والنسب الثابتة.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 13,
+                        text: "جميع العبارات التالية صحيحة عن تركيب الذرة عدا:",
+                        options: [
+                            { text: "الوجود للفراغ في تركيب الذرة", correct: true },
+                            { text: "تتكون المادة من أجزاء صغيرة تسمى ذرات", correct: false },
+                            { text: "وحدة تركيب العناصر", correct: false },
+                            { text: "تختلف ذرات أي عنصر عن العناصر الأخرى", correct: false }
+                        ],
+                        explanation: "العبارة غير الصحيحة هي 'الوجود للفراغ في تركيب الذرة' لأن الذرة ليست فراغاً بل تحتوي على نواة موجبة وإلكترونات سالبة.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 14,
+                        text: "أي الخواص التالية خاصية كيميائية؟",
+                        options: [
+                            { text: "اللون", correct: false },
+                            { text: "الكثافة", correct: false },
+                            { text: "الطعم", correct: false },
+                            { text: "القابلية للاشتعال", correct: true }
+                        ],
+                        explanation: "القابلية للاشتعال خاصية كيميائية لأنها تصف سلوك المادة عند تفاعلها مع الأكسجين منتجة مواد جديدة. الخواص الأخرى فيزيائية.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 15,
+                        text: "عند تسخين كبريتات النحاس المائية الزرقاء، يتصاعد بخار الماء ويتحول إلى مسحوق أبيض. هذا مثال على:",
+                        options: [
+                            { text: "تغير فيزيائي", correct: false },
+                            { text: "تغير كيميائي", correct: true },
+                            { text: "تغير نووي", correct: false },
+                            { text: "تغير حيوي", correct: false }
+                        ],
+                        explanation: "هذا تغير كيميائي لأن تكوين مادة جديدة (كبريتات النحاس اللامائية البيضاء) من مادة أخرى (كبريتات النحاس المائية الزرقاء).",
+                        difficulty: "medium"
+                    }
+                ]
             },
             {
                 id: 2,
-                name: "مجموعة الروابط الكيميائية",
-                members: ["فهد العتيبي", "أحمد الغامدي", "محمد الحربي", "عبدالعزيز الفوزان", "حمد الشمري"],
-                analyzedChapter: "الوحدة ٣: الروبات الكيميائية والمركبات",
-                colorClass: "group-2"
+                title: "نظريات الذرة والجدول الدوري",
+                icon: "fas fa-atom",
+                description: "تطور النظريات الذرية، مكونات الذرة، الجدول الدوري الحديث",
+                questions: 12,
+                duration: 18,
+                questionsData: [
+                    {
+                        id: 1,
+                        text: "أي الجسيمات التالية يقع في نواة الذرة؟",
+                        options: [
+                            { text: "الإلكترونات فقط", correct: false },
+                            { text: "البروتونات والنيوترونات", correct: true },
+                            { text: "البروتونات والإلكترونات", correct: false },
+                            { text: "النيوترونات والإلكترونات", correct: false }
+                        ],
+                        explanation: "النواة تحتوي على البروتونات (موجبة الشحنة) والنيوترونات (متعادلة الشحنة). الإلكترونات تدور حول النواة في مستويات الطاقة.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 2,
+                        text: "عدد البروتونات في نواة الذرة يسمى:",
+                        options: [
+                            { text: "العدد الكتلي", correct: false },
+                            { text: "العدد الذري", correct: true },
+                            { text: "عدد النيوترونات", correct: false },
+                            { text: "عدد الإلكترونات", correct: false }
+                        ],
+                        explanation: "العدد الذري هو عدد البروتونات في نواة الذرة، ويحدد هوية العنصر. العدد الكتلي هو مجموع البروتونات والنيوترونات.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 3,
+                        text: "نظير الكربون-14 يحتوي على:",
+                        options: [
+                            { text: "6 بروتونات و 8 نيوترونات", correct: true },
+                            { text: "6 بروتونات و 6 نيوترونات", correct: false },
+                            { text: "8 بروتونات و 6 نيوترونات", correct: false },
+                            { text: "14 بروتونات و 6 نيوترونات", correct: false }
+                        ],
+                        explanation: "الكربون-14: العدد الذري للكربون هو 6 (6 بروتونات). العدد الكتلي 14، لذا عدد النيوترونات = 14 - 6 = 8 نيوترونات.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 4,
+                        text: "العناصر في الجدول الدوري مرتبة حسب:",
+                        options: [
+                            { text: "العدد الكتلي المتزايد", correct: false },
+                            { text: "العدد الذري المتزايد", correct: true },
+                            { text: "الحجم الذري المتزايد", correct: false },
+                            { text: "الكثافة المتزايدة", correct: false }
+                        ],
+                        explanation: "العناصر في الجدول الدوري الحديث مرتبة حسب العدد الذري (عدد البروتونات) المتزايد من اليسار لليمين ومن أعلى لأسفل.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 5,
+                        text: "العناصر التي تشكل الأملاح عند تفاعلها مع الفلزات تنتمي إلى:",
+                        options: [
+                            { text: "الفلزات", correct: false },
+                            { text: "أشباه الفلزات", correct: false },
+                            { text: "اللافلزات", correct: true },
+                            { text: "الغازات النبيلة", correct: false }
+                        ],
+                        explanation: "اللافلزات (مثل الكلور، الأكسجين، الكبريت) تتفاعل مع الفلزات لتكوين أملاح. مثال: الصوديوم + كلور → كلوريد الصوديوم (ملح الطعام).",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 6,
+                        text: "أي العناصر التالية يقع في الدورة الثالثة والمجموعة الأولى؟",
+                        options: [
+                            { text: "الصوديوم (Na)", correct: true },
+                            { text: "المغنيسيوم (Mg)", correct: false },
+                            { text: "البوتاسيوم (K)", correct: false },
+                            { text: "الليثيوم (Li)", correct: false }
+                        ],
+                        explanation: "الصوديوم (Na) عدده الذري 11، يقع في الدورة الثالثة (لأن له 3 مستويات طاقة) والمجموعة الأولى (لأن له إلكترون تكافؤ واحد).",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 7,
+                        text: "أي المجموعات التالية تحتوي على الغازات النبيلة؟",
+                        options: [
+                            { text: "المجموعة 1", correct: false },
+                            { text: "المجموعة 2", correct: false },
+                            { text: "المجموعة 17", correct: false },
+                            { text: "المجموعة 18", correct: true }
+                        ],
+                        explanation: "الغازات النبيلة (الهيليوم، النيون، الأرجون، إلخ) توجد في المجموعة 18 من الجدول الدوري. تتميز باستقرارها الكيميائي.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 8,
+                        text: "أي العناصر التالية له أعلى كهروسالبية؟",
+                        options: [
+                            { text: "الصوديوم (Na)", correct: false },
+                            { text: "الكالسيوم (Ca)", correct: false },
+                            { text: "الكلور (Cl)", correct: false },
+                            { text: "الفلور (F)", correct: true }
+                        ],
+                        explanation: "الفلور (F) له أعلى كهروسالبية (4.0) في الجدول الدوري. الكهروسالبية تقل في المجموعة من أعلى لأسفل وتزيد في الدورة من اليسار لليمين.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 9,
+                        text: "أي العبارات التالية صحيحة عن الفلزات القلوية؟",
+                        options: [
+                            { text: "توجد في الطبيعة بشكل حر", correct: false },
+                            { text: "تفاعليتها عالية جداً", correct: true },
+                            { text: "صلبتها عالية", correct: false },
+                            { text: "توجد في المجموعة 2", correct: false }
+                        ],
+                        explanation: "الفلزات القلوية (المجموعة 1) شديدة التفاعل، خاصة مع الماء. لا توجد في الطبيعة بشكل حر بل في مركبات. قليلة الصلابة.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 10,
+                        text: "أي العناصر التالية يعتبر من أشباه الفلزات؟",
+                        options: [
+                            { text: "الحديد (Fe)", correct: false },
+                            { text: "الكبريت (S)", correct: false },
+                            { text: "السيليكون (Si)", correct: true },
+                            { text: "الصوديوم (Na)", correct: false }
+                        ],
+                        explanation: "السيليكون (Si) من أشباه الفلزات، له خواص متوسطة بين الفلزات واللافلزات. يستخدم في صناعة الشرائح الإلكترونية.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 11,
+                        text: "عند انتقال الإلكترون من مستوى طاقة أعلى إلى مستوى طاقة أقل، فإن الذرة:",
+                        options: [
+                            { text: "تمتص طاقة", correct: false },
+                            { text: "تطلق طاقة", correct: true },
+                            { text: "تكتسب إلكتروناً", correct: false },
+                            { text: "تفقد إلكتروناً", correct: false }
+                        ],
+                        explanation: "عند انتقال الإلكترون من مستوى أعلى (طاقة أعلى) إلى مستوى أقل (طاقة أقل)، تطلق الذرة الطاقة على شكل فوتون ضوئي.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 12,
+                        text: "النظرية الذرية الحديثة ترى أن الإلكترونات:",
+                        options: [
+                            { text: "تتحرك في مدارات دائرية محددة", correct: false },
+                            { text: "توجد في سحابة إلكترونية", correct: true },
+                            { text: "توجد في النواة", correct: false },
+                            { text: "ثابتة لا تتحرك", correct: false }
+                        ],
+                        explanation: "النظرية الذرية الحديثة (نموذج السحابة الإلكترونية) ترى أن الإلكترونات تتحرك في مناطق حول النواة تسمى السحابة الإلكترونية.",
+                        difficulty: "medium"
+                    }
+                ]
             },
             {
                 id: 3,
-                name: "مجموعة التفاعلات الكيميائية",
-                members: ["عمر الراشد", "نواف الدوسري", "بدر العصيمي", "علي المطيري", "فيصل النافع"],
-                analyzedChapter: "الوحدة ٤: التفاعلات الكيميائية والمعادلات",
-                colorClass: "group-3"
+                title: "تدريبات نظريات الذرة والجدول الدوري",
+                icon: "fas fa-clipboard-check",
+                description: "تمارين تطبيقية على النظريات الذرية والجدول الدوري",
+                questions: 15,
+                duration: 20,
+                questionsData: [
+                    {
+                        id: 1,
+                        text: "إذا كان العدد الذري للعنصر 17 وعدده الكتلي 35، فكم عدد النيوترونات؟",
+                        options: [
+                            { text: "17", correct: false },
+                            { text: "18", correct: true },
+                            { text: "35", correct: false },
+                            { text: "52", correct: false }
+                        ],
+                        explanation: "عدد النيوترونات = العدد الكتلي - العدد الذري = 35 - 17 = 18 نيوترون.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 2,
+                        text: "التوزيع الإلكتروني 1s² 2s² 2p⁶ 3s² 3p⁵ يمثل عنصراً من المجموعة:",
+                        options: [
+                            { text: "المجموعة 1", correct: false },
+                            { text: "المجموعة 7", correct: false },
+                            { text: "المجموعة 17", correct: true },
+                            { text: "المجموعة 18", correct: false }
+                        ],
+                        explanation: "هذا التوزيع ينتهي بـ 3p⁵، أي أن إلكترونات التكافؤ هي 7 (2s² 2p⁶ 3s² 3p⁵ = 17 إلكتروناً). المجموعة = 10 + عدد إلكترونات التكافؤ = 17.",
+                        difficulty: "hard"
+                    },
+                    {
+                        id: 3,
+                        text: "أي العناصر التالية له أكبر نصف قطر ذري؟",
+                        options: [
+                            { text: "الصوديوم (Na)", correct: false },
+                            { text: "البوتاسيوم (K)", correct: true },
+                            { text: "الليثيوم (Li)", correct: false },
+                            { text: "السيزيوم (Cs)", correct: false }
+                        ],
+                        explanation: "نصف القطر الذري يزداد في المجموعة من أعلى لأسفل. البوتاسيوم (K) تحت الصوديوم (Na) والليثيوم (Li)، لكن السيزيوم (Cs) أكبر منه. من الخيارات المعطاة، البوتاسيوم أكبر من الصوديوم والليثيوم.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 4,
+                        text: "أيون الصوديوم Na⁺ له نفس التوزيع الإلكتروني لـ:",
+                        options: [
+                            { text: "ذرة الصوديوم", correct: false },
+                            { text: "أيون المغنيسيوم Mg²⁺", correct: false },
+                            { text: "ذرة النيون Ne", correct: true },
+                            { text: "أيون الفلور F⁻", correct: false }
+                        ],
+                        explanation: "Na⁺ فقد إلكتروناً واحداً فأصبح توزيعه الإلكتروني: 1s² 2s² 2p⁶، وهو نفس توزيع النيون Ne الذي عدده الذري 10.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 5,
+                        text: "أي العناصر التالية له أعلى طاقة تأين أول؟",
+                        options: [
+                            { text: "الصوديوم (Na)", correct: false },
+                            { text: "المغنيسيوم (Mg)", correct: false },
+                            { text: "الألومنيوم (Al)", correct: false },
+                            { text: "النيون (Ne)", correct: true }
+                        ],
+                        explanation: "الغازات النبيلة لها أعلى طاقات تأين لأنها مستقرة جداً (مداراتها مكتملة). النيون من الغازات النبيلة.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 6,
+                        text: "العدد الكمي الرئيسي n=3 يدل على أن الإلكترون في:",
+                        options: [
+                            { text: "المستوى الأول", correct: false },
+                            { text: "المستوى الثاني", correct: false },
+                            { text: "المستوى الثالث", correct: true },
+                            { text: "المستوى الرابع", correct: false }
+                        ],
+                        explanation: "العدد الكمي الرئيسي n يحدد مستوى الطاقة الرئيسي. n=3 يعني المستوى الثالث (المدارات 3s, 3p, 3d).",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 7,
+                        text: "العنصر الذي توزيعه الإلكتروني ينتهي بـ 4s² 3d¹⁰ 4p⁵ يقع في الدورة:",
+                        options: [
+                            { text: "الدورة 3", correct: false },
+                            { text: "الدورة 4", correct: true },
+                            { text: "الدورة 5", correct: false },
+                            { text: "الدورة 6", correct: false }
+                        ],
+                        explanation: "أعلى مستوى رئيسي هو n=4، لذلك العنصر في الدورة الرابعة من الجدول الدوري.",
+                        difficulty: "hard"
+                    },
+                    {
+                        id: 8,
+                        text: "أي من الأيونات التالية له أكبر نصف قطر؟",
+                        options: [
+                            { text: "Na⁺", correct: false },
+                            { text: "Mg²⁺", correct: false },
+                            { text: "Al³⁺", correct: false },
+                            { text: "O²⁻", correct: true }
+                        ],
+                        explanation: "الأيون السالب أكبر من الأيون الموجب لنفس العدد الإلكتروني. O²⁻ له 10 إلكترونات (مثل Na⁺، Mg²⁺، Al³⁺) لكنه أيون سالب فتزداد قوى التنافر بين الإلكترونات ويكبر نصف القطر.",
+                        difficulty: "hard"
+                    },
+                    {
+                        id: 9,
+                        text: "عدد الإلكترونات في المستوى الفرعي d هو:",
+                        options: [
+                            { text: "2", correct: false },
+                            { text: "6", correct: false },
+                            { text: "10", correct: true },
+                            { text: "14", correct: false }
+                        ],
+                        explanation: "المستوى الفرعي d يحتوي على 5 مدارات، كل مدار يتسع لإلكترونين، إذن سعته الكلية 10 إلكترونات.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 10,
+                        text: "أي العناصر التالية له أقل ألفة إلكترونية؟",
+                        options: [
+                            { text: "الفلور (F)", correct: false },
+                            { text: "الكلور (Cl)", correct: false },
+                            { text: "النيون (Ne)", correct: true },
+                            { text: "الأكسجين (O)", correct: false }
+                        ],
+                        explanation: "الغازات النبيلة مثل النيون لها أقل ألفة إلكترونية لأن مداراتها مكتملة ولا تميل لاكتساب إلكترونات.",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 11,
+                        text: "التوزيع الإلكتروني الممنوع حسب قاعدة هوند هو:",
+                        options: [
+                            { text: "↑↓ ↑ ↑", correct: false },
+                            { text: "↑ ↑ ↑", correct: false },
+                            { text: "↑↓ ↑↓ ↑", correct: false },
+                            { text: "↑↓ ↑↓ ↑↓ في نفس المستوى الفرعي", correct: true }
+                        ],
+                        explanation: "قاعدة هوند تنص على أن الإلكترونات تشغل مدارات منفردة أولاً قبل أن تتزاوج. وجود 3 أزواج في نفس المستوى الفرعي (مثل p⁶) مسموح، لكن يجب أن تمتلئ المدارات بشكل صحيح.",
+                        difficulty: "hard"
+                    },
+                    {
+                        id: 12,
+                        text: "العنصر الذي رمزه X وعدده الذري 20، يكون أيونه X²⁺ له توزيع إلكتروني مماثل لـ:",
+                        options: [
+                            { text: "Ar", correct: true },
+                            { text: "Ca", correct: false },
+                            { text: "K⁺", correct: false },
+                            { text: "Cl⁻", correct: false }
+                        ],
+                        explanation: "العنصر X هو الكالسيوم (Ca) عدده الذري 20، توزيعه: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s². عند فقد إلكترونين يصبح Ca²⁺: 1s² 2s² 2p⁶ 3s² 3p⁶ وهو نفس توزيع الأرجون Ar.",
+                        difficulty: "hard"
+                    },
+                    {
+                        id: 13,
+                        text: "أي المدارات التالية له أكبر حجم؟",
+                        options: [
+                            { text: "1s", correct: false },
+                            { text: "2s", correct: false },
+                            { text: "2p", correct: false },
+                            { text: "3s", correct: true }
+                        ],
+                        explanation: "حجم المدار يزداد بزيادة العدد الكمي الرئيسي n. 3s له n=3 وهو أكبر من 1s و2s و2p التي لها n=1 و n=2.",
+                        difficulty: "easy"
+                    },
+                    {
+                        id: 14,
+                        text: "عدد الإلكترونات المفردة في ذرة النيتروجين (العدد الذري 7) هي:",
+                        options: [
+                            { text: "1", correct: false },
+                            { text: "2", correct: false },
+                            { text: "3", correct: true },
+                            { text: "5", correct: false }
+                        ],
+                        explanation: "توزيع النيتروجين: 1s² 2s² 2p³. في المستوى 2p³، توجد 3 إلكترونات مفردة تشغل 3 مدارات p منفردة (وفق قاعدة هوند).",
+                        difficulty: "medium"
+                    },
+                    {
+                        id: 15,
+                        text: "أي العناصر التالية له خاصية مغناطيسية مسايرة؟",
+                        options: [
+                            { text: "Zn (الزنك)", correct: false },
+                            { text: "Cr (الكروم)", correct: true },
+                            { text: "Ar (الأرجون)", correct: false },
+                            { text: "Ca (الكالسيوم)", correct: false }
+                        ],
+                        explanation: "الخاصية المغناطيسية المسايرة توجد في العناصر التي لها إلكترونات غير مزدوجة. الكروم (Cr) له إلكترونات غير مزدوجة في توزيعه الإلكتروني.",
+                        difficulty: "hard"
+                    }
+                ]
             },
             {
                 id: 4,
-                name: "مجموعة الحسابات الكيميائية",
-                members: ["حمد السعدون", "تركي البلوي", "عبدالاله الزهراني", "نايف الجهني", "محمد السعيد
-                analyzedChapter: "الوحدة ٥: المول والحسابات الكيميائية",
-                colorClass: "group-4"
+                title: "تدريبات الجدول الدوري 2",
+                icon: "fas fa-table",
+                description: "تمارين متقدمة على خصائص العناصر والدورات والمجموعات",
+                questions: 10,
+                duration: 15
             },
             {
                 id: 5,
-                name: "مجموعة حالات المادة",
-                members: ["سعد الحمود", "سعيد الشهراني", "محمد الشهري", "ناصر الحارثي", "محمد السفياني"],
-                analyzedChapter: "الوحدة ٦: حالات المادة والتغيرات",
-                colorClass: "group-5"
+                title: "قوة التجاذب والروابط",
+                icon: "fas fa-link",
+                description: "الروابط الأيونية، التساهمية، الفلزية، القوى بين الجزيئية",
+                questions: 12,
+                duration: 18
             },
             {
                 id: 6,
-                name: "مجموعة المحاليل والتركيز",
-                members: ["علي الناصر", "تميم المالكي", "محمد العلي", "وليد محمد", "محمد الغامدي"],
-                analyzedChapter: "الوحدة ٧: المحاليل والتركيز",
-                colorClass: "group-6"
+                title: "الحسابات الكيمياء",
+                icon: "fas fa-calculator",
+                description: "المول، الحسابات الكيميائية، الصيغ الأولية والجزئية",
+                questions: 15,
+                duration: 20
+            },
+            {
+                id: 7,
+                title: "سرعة التفاعل الكيميائي والإتزان",
+                icon: "fas fa-tachometer-alt",
+                description: "عوامل سرعة التفاعل، قانون سرعة التفاعل، الاتزان الكيميائي",
+                questions: 12,
+                duration: 18
+            },
+            {
+                id: 8,
+                title: "المحاليل والمخاليط",
+                icon: "fas fa-vial-virus",
+                description: "أنواع المحاليل، التركيز، طرق التعبير عن التركيز",
+                questions: 10,
+                duration: 15
+            },
+            {
+                id: 9,
+                title: "المحاليل والمخاليط 2",
+                icon: "fas fa-filter",
+                description: "الخواص الجامعة، التجميد والغليان، الضغط الأسموزي",
+                questions: 12,
+                duration: 18
+            },
+            {
+                id: 10,
+                title: "الأحماض والقواعد",
+                icon: "fas fa-vial",
+                description: "نظريات الأحماض والقواعد، الرقم الهيدروجيني، التعادل",
+                questions: 15,
+                duration: 20
+            },
+            {
+                id: 11,
+                title: "الكيمياء الكهربائية",
+                icon: "fas fa-bolt",
+                description: "الخلايا الجلفانية، الخلايا الإلكتروليتية، التآكل",
+                questions: 12,
+                duration: 18
+            },
+            {
+                id: 12,
+                title: "الكيمياء الكهربائية 2",
+                icon: "fas fa-car-battery",
+                description: "تطبيقات الكيمياء الكهربائية، البطاريات، الطلاء الكهربائي",
+                questions: 10,
+                duration: 15
+            },
+            {
+                id: 13,
+                title: "الهيدروكربونات",
+                icon: "fas fa-oil-can",
+                description: "الألكانات، الألكينات، الألكاينات، التسمية النظامية",
+                questions: 15,
+                duration: 20
+            },
+            {
+                id: 14,
+                title: "الهيدروكربونات (الجزء الثاني)",
+                icon: "fas fa-gas-pump",
+                description: "التفاعلات الكيميائية للهيدروكربونات، البوليمرات",
+                questions: 12,
+                duration: 18
+            },
+            {
+                id: 15,
+                title: "الهيدروكربونات (الجزء الثالث)",
+                icon: "fas fa-industry",
+                description: "تطبيقات الهيدروكربونات، البتروكيماويات، البيئة",
+                questions: 10,
+                duration: 15
+            },
+            {
+                id: 16,
+                title: "مشتقات الهيدروكربونات",
+                icon: "fas fa-prescription-bottle",
+                description: "الكحولات، الألدهيدات، الكيتونات، الأحماض الكربوكسيلية",
+                questions: 15,
+                duration: 20
+            },
+            {
+                id: 17,
+                title: "تابع مشتقات الهيدروكربونات",
+                icon: "fas fa-prescription-bottle-alt",
+                description: "الإيثرات، الإسترات، الأمينات، الأميدات",
+                questions: 12,
+                duration: 18
+            },
+            {
+                id: 18,
+                title: "المركبات الحيوية",
+                icon: "fas fa-dna",
+                description: "الكربوهيدرات، الدهون، البروتينات، الأحماض النووية",
+                questions: 15,
+                duration: 20
+            },
+            {
+                id: 19,
+                title: "قوانين الغازات",
+                icon: "fas fa-wind",
+                description: "قوانين بويل، شارل، جاي لوساك، القانون العام للغازات",
+                questions: 12,
+                duration: 18
+            },
+            {
+                id: 20,
+                title: "قوانين الغازات 2",
+                icon: "fas fa-cloud",
+                description: "قانون الغازات المثالية، الحجم المولي، كثافة الغازات",
+                questions: 10,
+                duration: 15
+            },
+            {
+                id: 21,
+                title: "الضوء وطاقة الكم",
+                icon: "fas fa-lightbulb",
+                description: "طيف الانبعاث والامتصاص، نموذج بور، أعداد الكم",
+                questions: 12,
+                duration: 18
+            },
+            {
+                id: 22,
+                title: "الكيمياء النووية الجزء الأول",
+                icon: "fas fa-radiation",
+                description: "النشاط الإشعاعي، أنواع الإشعاع، عمر النصف",
+                questions: 15,
+                duration: 20
+            },
+            {
+                id: 23,
+                title: "الكيمياء النووية - الجزء 2",
+                icon: "fas fa-radiation-alt",
+                description: "التفاعلات النووية، الانشطار، الاندماج، التطبيقات",
+                questions: 12,
+                duration: 18
             }
         ];
 
-        // بنك الأسئلة لكل مجموعة
-        const questionBanks = {
-            1: [
-                {
-                    question: "ما العدد الأقصى للإلكترونات في المستوى الرئيسي الثالث (n=3)؟",
-                    options: ["٢ إلكترون", "٨ إلكترونات", "١٨ إلكترون", "٣٢ إلكترون"],
-                    correctAnswer: 2, // الفهرس 2 يعني الخيار الثالث (١٨ إلكترون)
-                    explanation: {
-                        correct: "إجابة صحيحة! القانون هو ٢n² حيث n رقم المستوى. إذن ٢ × (٣)² = ٢ × ٩ = ١٨ إلكترونًا كحد أقصى.",
-                        incorrect: "إجابة غير صحيحة. تذكر قانون الإلكترونات في المستوى: ٢n²، حيث n هو رقم المستوى الرئيسي. للمستوى الثالث: ٢ × (٣)² = ٢ × ٩ = ١٨ إلكترونًا.",
-                        concept: "سعة المستويات الإلكترونية وقانون ٢n². كل مستوى رئيسي له سعة إلكترونية محددة تحسب بهذا القانون.",
-                        videoLink: "https://www.youtube.com/watch?v=kfZtcw7Ba78",
-                        phetSim: "https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_ar.html"
-                    }
-                },
-                {
-                    question: "ما عدد البروتونات في نواة ذرة الصوديوم (العدد الذري ١١)؟",
-                    options: ["١٠ بروتونات", "١١ بروتون", "١٢ بروتون", "٢٣ بروتون"],
-                    correctAnswer: 1,
-                    explanation: {
-                        correct: "إجابة صحيحة! العدد الذري يمثل عدد البروتونات في النواة، لذا لذرة الصوديوم ١١ بروتون.",
-                        incorrect: "إجابة غير صحيحة. تذكر أن العدد الذري لأي عنصر يساوي عدد البروتونات في نواته. العدد الذري للصوديوم هو ١١، إذن له ١١ بروتون.",
-                        concept: "العدد الذري وعلاقته بعدد البروتونات. العدد الذري هو العدد المميز للعنصر ويحدد هويته.",
-                        videoLink: "https://www.youtube.com/watch?v=6w74H9U6wBo",
-                        phetSim: "https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_ar.html"
-                    }
-                }
-            ],
-            2: [
-                {
-                    question: "أي نوع من الروابط ينتج عن مشاركة الذرات بالإلكترونات؟",
-                    options: ["الرابط الأيوني", "الرابط التساهمي", "الرابط الفلزي", "رابط فان دير فالس"],
-                    correctAnswer: 1,
-                    explanation: {
-                        correct: "إجابة صحيحة! الرابط التساهمي يتكون عن طريق مشاركة زوج أو أكثر من الإلكترونات بين الذرات.",
-                        incorrect: "إجابة غير صحيحة. الرابط الذي ينشأ عن مشاركة الإلكترونات بين الذرات هو الرابط التساهمي، أما الأيوني فينتج عن انتقال الإلكترونات.",
-                        concept: "الروابط التساهمية وتكوينها عن طريق المشاركة بالإلكترونات لتحقيق الاستقرار الإلكتروني.",
-                        videoLink: "https://www.youtube.com/watch?v=_qOGwx6MTUA",
-                        phetSim: "https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_ar.html"
-                    }
-                }
-            ],
-            3: [
-                {
-                    question: "عند تفاعل الحديد مع الكبريت، أي مما يلي يصف نوع التفاعل؟",
-                    options: ["تفاعل تكوين", "تفاعل احتراق", "تفاعل تحلل", "تفاعل إحلال مزدوج"],
-                    correctAnswer: 0,
-                    explanation: {
-                        correct: "إجابة صحيحة! تفاعل الحديد مع الكبريت لتكوين كبريتيد الحديد هو تفاعل تكوين حيث يتحد عنصران لتكوين مركب واحد.",
-                        incorrect: "إجابة غير صحيحة. تفاعل عنصرين لتكوين مركب واحد يصنف كتفاعل تكوين (مثل Fe + S → FeS).",
-                        concept: "تفاعلات التكوين (الاتحاد المباشر) حيث يتحد عنصران أو أكثر لتكوين مركب واحد جديد.",
-                        videoLink: "https://www.youtube.com/watch?v=aAWGGLv7h9E",
-                        phetSim: "https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers_ar.html"
-                    }
-                }
-            ]
-        };
-
-        // حالة التطبيق
-        let currentState = {
-            currentPage: 'groups', // 'groups' أو 'quiz'
-            currentGroupId: null,
-            currentQuestionIndex: 0,
-            studentPoints: 0,
-            studentLevel: 'مبتدئ'
-        };
-
-        // DOM Elements
-        const groupsPage = document.getElementById('groupsPage');
-        const quizPage = document.getElementById('quizPage');
-        const groupsList = document.getElementById('groupsList');
-        const quizGroupName = document.getElementById('quizGroupName');
-        const studentPointsEl = document.getElementById('studentPoints');
-        const studentLevelEl = document.getElementById('studentLevel');
-        const questionBox = document.getElementById('questionBox');
-        const feedbackBox = document.getElementById('feedbackBox');
-        const resourcesSection = document.getElementById('resourcesSection');
-        const videoLink = document.getElementById('videoLink');
-        const phetFrame = document.getElementById('phetFrame');
-        const conceptExplanation = document.getElementById('conceptExplanation');
-        const checkAnswerBtn = document.getElementById('checkAnswerBtn');
-        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
-        const backToGroups = document.getElementById('backToGroups');
-        const questionProgress = document.getElementById('questionProgress');
-
-        // تهيئة التطبيق
-        function initApp() {
-            displayGroups();
-            setupEventListeners();
-        }
-
-        // عرض المجموعات
-        function displayGroups() {
-            groupsList.innerHTML = '';
-            
-            studentGroups.forEach(group => {
-                const groupCard = document.createElement('div');
-                groupCard.className = `group-card ${group.colorClass}`;
-                
-                groupCard.innerHTML = `
-                    <h3><i class="fas fa-user-friends"></i> ${group.name}</h3>
-                    <div class="group-meta">
-                        <p><i class="fas fa-book-open"></i> <strong>قسم التحليل:</strong> ${group.analyzedChapter}</p>
-                        <p><i class="fas fa-users"></i> <strong>أعضاء المجموعة:</strong></p>
-                        <div class="members-list">
-                            ${group.members.map(member => `<span>${member}</span>`).join('')}
-                        </div>
-                    </div>
-                    <button class="btn start-quiz-btn" data-group-id="${group.id}">
-                        <i class="fas fa-play-circle"></i> بدء الاختبار التفاعلي
-                    </button>
-                `;
-                
-                groupsList.appendChild(groupCard);
-            });
-        }
-
-        // إعداد مستمعي الأحداث
-        function setupEventListeners() {
-            // أحداث لأزرار بدء الاختبار
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('start-quiz-btn') || e.target.closest('.start-quiz-btn')) {
-                    const btn = e.target.classList.contains('start-quiz-btn') ? e.target : e.target.closest('.start-quiz-btn');
-                    const groupId = parseInt(btn.getAttribute('data-group-id'));
-                    startGroupQuiz(groupId);
-                }
-            });
-            
-            // حدث لزر التحقق من الإجابة
-            checkAnswerBtn.addEventListener('click', checkAnswer);
-            
-            // حدث لزر السؤال التالي
-            nextQuestionBtn.addEventListener('click', nextQuestion);
-            
-            // حدث للعودة إلى قائمة المجموعات
-            backToGroups.addEventListener('click', function(e) {
-                e.preventDefault();
-                showGroupsPage();
-            });
-        }
-
-        // بدء اختبار مجموعة
-        function startGroupQuiz(groupId) {
-            currentState.currentPage = 'quiz';
-            currentState.currentGroupId = groupId;
-            currentState.currentQuestionIndex = 0;
-            currentState.studentPoints = 0;
-            currentState.studentLevel = 'مبتدئ';
-            
-            // تحديث واجهة المستخدم
-            updateUI();
-            
-            // إخفاء صفحة المجموعات وإظهار صفحة الاختبار
-            groupsPage.style.display = 'none';
-            quizPage.style.display = 'block';
-            
-            // عرض اسم المجموعة
-            const group = studentGroups.find(g => g.id === groupId);
-            quizGroupName.textContent = group.name;
-            
-            // عرض السؤال الأول
-            displayCurrentQuestion();
-        }
-
-        // عرض السؤال الحالي
-        function displayCurrentQuestion() {
-            const groupId = currentState.currentGroupId;
-            const questionIndex = currentState.currentQuestionIndex;
-            const questions = questionBanks[groupId];
-            
-            if (!questions || questionIndex >= questions.length) {
-                // إذا لم توجد أسئلة أو انتهينا من الأسئلة
-                questionBox.innerHTML = '<h3>تم إكمال جميع الأسئلة لهذه المجموعة!</h3>';
-                checkAnswerBtn.style.display = 'none';
-                nextQuestionBtn.style.display = 'none';
-                return;
+        // إضافة أسئلة إضافية للموضوعات الأخرى (لإكمال 100+ سؤال)
+        // الموضوع 4: تدريبات الجدول الدوري 2
+        topics[3].questionsData = [
+            {
+                id: 1,
+                text: "أي العناصر التالية له أعلى جهد اختزال؟",
+                options: [
+                    { text: "الصوديوم (Na)", correct: false },
+                    { text: "الفضة (Ag)", correct: true },
+                    { text: "الزنك (Zn)", correct: false },
+                    { text: "النحاس (Cu)", correct: false }
+                ],
+                explanation: "الفضة (Ag) لها أعلى جهد اختزال موجب من بين الخيارات، مما يعني أنها أقل ميلاً لفقد الإلكترونات وأكثر ميلاً لاكتسابها.",
+                difficulty: "hard"
+            },
+            {
+                id: 2,
+                text: "العنصر الذي يقع في الدورة الخامسة والمجموعة السادسة هو:",
+                options: [
+                    { text: "الكبريت (S)", correct: false },
+                    { text: "السيلينيوم (Se)", correct: false },
+                    { text: "التيلوريوم (Te)", correct: true },
+                    { text: "البولونيوم (Po)", correct: false }
+                ],
+                explanation: "العناصر في المجموعة السادسة: O (الدورة 2)، S (الدورة 3)، Se (الدورة 4)، Te (الدورة 5)، Po (الدورة 6).",
+                difficulty: "medium"
+            },
+            {
+                id: 3,
+                text: "أي العناصر التالية له أقل طاقة تأين ثانية؟",
+                options: [
+                    { text: "الصوديوم (Na)", correct: false },
+                    { text: "المغنيسيوم (Mg)", correct: false },
+                    { text: "الألومنيوم (Al)", correct: false },
+                    { text: "البوتاسيوم (K)", correct: true }
+                ],
+                explanation: "البوتاسيوم (K) له أقل طاقة تأين ثانية لأنه بعد إزالة الإلكترون الأول يصبح له توزيع الغاز النبيل (Ar) وهو مستقر نسبياً.",
+                difficulty: "hard"
+            },
+            {
+                id: 4,
+                text: "العنصر الذي رمزه Kr يقع في:",
+                options: [
+                    { text: "الدورة 3، المجموعة 18", correct: false },
+                    { text: "الدورة 4، المجموعة 18", correct: true },
+                    { text: "الدورة 4، المجموعة 17", correct: false },
+                    { text: "الدورة 5، المجموعة 18", correct: false }
+                ],
+                explanation: "الكريبتون (Kr) عدده الذري 36، توزيعه ينتهي بـ 4p⁶، لذا هو في الدورة 4 (أعلى n=4) والمجموعة 18 (مدار p مكتمل بـ 6 إلكترونات).",
+                difficulty: "medium"
+            },
+            {
+                id: 5,
+                text: "أي العناصر التالية يعتبر من الفلزات الانتقالية؟",
+                options: [
+                    { text: "الكالسيوم (Ca)", correct: false },
+                    { text: "الحديد (Fe)", correct: true },
+                    { text: "الألومنيوم (Al)", correct: false },
+                    { text: "القصدير (Sn)", correct: false }
+                ],
+                explanation: "الحديد (Fe) من الفلزات الانتقالية التي توجد في المستوى d من الجدول الدوري. الكالسيوم والألومنيوم والقصدير ليست فلزات انتقالية.",
+                difficulty: "easy"
+            },
+            {
+                id: 6,
+                text: "أي العناصر التالية له أكبر طاقة تأين ثالثة؟",
+                options: [
+                    { text: "الصوديوم (Na)", correct: false },
+                    { text: "المغنيسيوم (Mg)", correct: true },
+                    { text: "الألومنيوم (Al)", correct: false },
+                    { text: "السيليكون (Si)", correct: false }
+                ],
+                explanation: "المغنيسيوم (Mg) بعد فقد إلكترونين يصبح له توزيع النيون (غاز نبيل) المستقر، لذا طاقة التأين الثالثة له عالية جداً.",
+                difficulty: "hard"
+            },
+            {
+                id: 7,
+                text: "أي العناصر التالية له خواص فلزية أقوى؟",
+                options: [
+                    { text: "الليثيوم (Li)", correct: false },
+                    { text: "الصوديوم (Na)", correct: false },
+                    { text: "البوتاسيوم (K)", correct: false },
+                    { text: "السيزيوم (Cs)", correct: true }
+                ],
+                explanation: "الخواص الفلزية تزداد في المجموعة من أعلى لأسفل. السيزيوم (Cs) في أسفل المجموعة الأولى لذا له أقوى خواص فلزية.",
+                difficulty: "medium"
+            },
+            {
+                id: 8,
+                text: "العنصر الذي له أصغر نصف قطر أيوني من بين الأيونات التالية هو:",
+                options: [
+                    { text: "Li⁺", correct: false },
+                    { text: "Be²⁺", correct: false },
+                    { text: "B³⁺", correct: false },
+                    { text: "C⁴⁺", correct: true }
+                ],
+                explanation: "كلما زادت الشحنة الموجبة لنفس التكوين الإلكتروني، زادت قوة جذب النواة للإلكترونات فقل نصف القطر. C⁴⁺ له أعلى شحنة.",
+                difficulty: "hard"
+            },
+            {
+                id: 9,
+                text: "أي العناصر التالية له أعلى درجة انصهار؟",
+                options: [
+                    { text: "الصوديوم (Na)", correct: false },
+                    { text: "المغنيسيوم (Mg)", correct: false },
+                    { text: "الألومنيوم (Al)", correct: false },
+                    { text: "التنجستن (W)", correct: true }
+                ],
+                explanation: "التنجستن (W) من الفلزات الانتقالية وله أعلى درجة انصهار بين العناصر (3422°C). يستخدم في صناعة فتائل المصابيح.",
+                difficulty: "medium"
+            },
+            {
+                id: 10,
+                text: "العنصر الذي يظهر أكثر من حالة تأكسد هو:",
+                options: [
+                    { text: "الصوديوم (Na)", correct: false },
+                    { text: "المغنيسيوم (Mg)", correct: false },
+                    { text: "الألومنيوم (Al)", correct: false },
+                    { text: "الكروم (Cr)", correct: true }
+                ],
+                explanation: "الكروم (Cr) من الفلزات الانتقالية ويظهر حالات تأكسد متعددة (+2, +3, +6). العناصر الأخرى لها حالة تأكسد واحدة ثابتة.",
+                difficulty: "medium"
             }
-            
-            const question = questions[questionIndex];
-            
-            // تحديث تقدم الأسئلة
-            questionProgress.textContent = `${questionIndex + 1}/${questions.length}`;
-            
-            // بناء واجهة السؤال
-            let optionsHTML = '';
-            question.options.forEach((option, index) => {
-                optionsHTML += `
-                    <div class="option">
-                        <input type="radio" name="answer" id="option${index}" value="${index}">
-                        <label for="option${index}">${option}</label>
-                    </div>
-                `;
-            });
-            
-            questionBox.innerHTML = `
-                <h3>${question.question}</h3>
-                <div class="options-container">
-                    ${optionsHTML}
-                </div>
-            `;
-            
-            // إخفاء التغذية الراجعة والموارد
-            feedbackBox.style.display = 'none';
-            resourcesSection.style.display = 'none';
-            nextQuestionBtn.style.display = 'none';
-            checkAnswerBtn.style.display = 'block';
-        }
+        ];
 
-        // التحقق من الإجابة
-        function checkAnswer() {
-            const selectedOption = document.querySelector('input[name="answer"]:checked');
-            const groupId = currentState.currentGroupId;
-            const questionIndex = currentState.currentQuestionIndex;
-            const questions = questionBanks[groupId];
-            const question = questions[questionIndex];
-            
-            if (!selectedOption) {
-                alert('الرجاء اختيار إجابة قبل التحقق!');
-                return;
+        // الموضوع 5: قوة التجاذب والروابط
+        topics[4].questionsData = [
+            {
+                id: 1,
+                text: "أي المركبات التالية له رابطة أيونية؟",
+                options: [
+                    { text: "HCl", correct: false },
+                    { text: "CO₂", correct: false },
+                    { text: "NaCl", correct: true },
+                    { text: "H₂O", correct: false }
+                ],
+                explanation: "NaCl رابطة أيونية بين فلز (Na) ولا فلز (Cl). المركبات الأخرى روابط تساهمية.",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                text: "أي الروابط التالية هي الأقوى؟",
+                options: [
+                    { text: "رابطة تساهمية أحادية", correct: false },
+                    { text: "رابطة تساهمية ثنائية", correct: false },
+                    { text: "رابطة تساهمية ثلاثية", correct: true },
+                    { text: "رابطة أيونية", correct: false }
+                ],
+                explanation: "الرابطة التساهمية الثلاثية هي الأقوى بين الروابط التساهمية لأنها تتضمن مشاركة ثلاثة أزواج من الإلكترونات.",
+                difficulty: "medium"
+            },
+            {
+                id: 3,
+                text: "المركب الذي له أعلى درجة انصهار هو:",
+                options: [
+                    { text: "CO₂", correct: false },
+                    { text: "NaCl", correct: true },
+                    { text: "H₂O", correct: false },
+                    { text: "CH₄", correct: false }
+                ],
+                explanation: "NaCl مركب أيوني له قوى تجاذب قوية بين الأيونات الموجبة والسالبة، مما يعطيه درجة انصهار مرتفعة (801°C).",
+                difficulty: "easy"
+            },
+            {
+                id: 4,
+                text: "أي الجزيئات التالية له شكل خطي؟",
+                options: [
+                    { text: "H₂O", correct: false },
+                    { text: "CO₂", correct: true },
+                    { text: "NH₃", correct: false },
+                    { text: "CH₄", correct: false }
+                ],
+                explanation: "CO₂ له شكل خطي لأنه مركب غير قطبي مع ذرة كربون مركزية مرتبطة بذرتي أكسجين بزاوية 180°.",
+                difficulty: "medium"
+            },
+            {
+                id: 5,
+                text: "أي المركبات التالية قابل للذوبان في الماء؟",
+                options: [
+                    { text: "الزيت", correct: false },
+                    { text: "البنزين", correct: false },
+                    { text: "الكحول الإيثيلي", correct: true },
+                    { text: "الهكسان", correct: false }
+                ],
+                explanation: "الكحول الإيثيلي قابل للذوبان في الماء لأنه قطبي ويشكل روابط هيدروجينية مع الماء. المركبات الأخرى غير قطبية.",
+                difficulty: "easy"
+            },
+            {
+                id: 6,
+                text: "أي القوى التالية هي الأضعف بين الجزيئات؟",
+                options: [
+                    { text: "قوى التشتت", correct: true },
+                    { text: "قوى ثنائية القطب", correct: false },
+                    { text: "الرابطة الهيدروجينية", correct: false },
+                    { text: "الرابطة الأيونية", correct: false }
+                ],
+                explanation: "قوى التشتت (لندن) هي الأضعف لأنها تنشأ من استقطاب مؤقت في سحابة الإلكترونات. توجد في جميع الجزيئات ولكنها مهيمنة في غير القطبية.",
+                difficulty: "medium"
+            },
+            {
+                id: 7,
+                text: "أي المركبات التالية يشكل روابط هيدروجينية بين جزيئاته؟",
+                options: [
+                    { text: "CH₄", correct: false },
+                    { text: "HCl", correct: false },
+                    { text: "NH₃", correct: true },
+                    { text: "CO₂", correct: false }
+                ],
+                explanation: "الأمونيا (NH₃) تشكل روابط هيدروجينية لأن لها ذرة نيتروجين مرتبطة بذرات هيدروجين، والنيتروجون له كهروسالبية عالية.",
+                difficulty: "medium"
+            },
+            {
+                id: 8,
+                text: "المركب الذي له أعلى نقطة غليان هو:",
+                options: [
+                    { text: "CH₄", correct: false },
+                    { text: "C₂H₆", correct: false },
+                    { text: "C₃H₈", correct: false },
+                    { text: "C₄H₁₀", correct: true }
+                ],
+                explanation: "نقطة الغليان تزداد بزيادة الكتلة الجزيئية في السلسلة المتجانسة. البيوتان (C₄H₁₀) أكبر كتلة من المركبات الأخرى.",
+                difficulty: "easy"
+            },
+            {
+                id: 9,
+                text: "أي المركبات التالية له رابطة تناسقية؟",
+                options: [
+                    { text: "NH₄⁺", correct: true },
+                    { text: "H₂O", correct: false },
+                    { text: "CO₂", correct: false },
+                            { text: "NaCl", correct: false }
+                        ],
+                        explanation: "أيون الأمونيوم (NH₄⁺) يحتوي على رابطة تناسقية حيث تمنح ذرة النيتروجين زوجاً من الإلكترونات لبروتون H⁺ لتكوين الرابطة.",
+                difficulty: "hard"
+            },
+            {
+                id: 10,
+                text: "أي العناصر التالية له أعلى كهروسالبية؟",
+                options: [
+                    { text: "C", correct: false },
+                    { text: "N", correct: false },
+                    { text: "O", correct: false },
+                    { text: "F", correct: true }
+                ],
+                explanation: "الفلور (F) له أعلى كهروسالبية (4.0) في الجدول الدوري، يليه الأكسجين (3.5)، ثم النيتروجين (3.0)، ثم الكربون (2.5).",
+                difficulty: "easy"
+            },
+            {
+                id: 11,
+                text: "المركب الذي يذوب في الماء ولا يوصل الكهرباء هو:",
+                options: [
+                    { text: "NaCl", correct: false },
+                    { text: "HCl", correct: false },
+                    { text: "السكر", correct: true },
+                    { text: "NaOH", correct: false }
+                ],
+                explanation: "السكر (سكروز) يذوب في الماء ولكن لا يتأين، لذلك لا يوصل الكهرباء. المركبات الأخرى تتأين في الماء وتوصل الكهرباء.",
+                difficulty: "medium"
+            },
+            {
+                id: 12,
+                text: "أي المركبات التالية له رابطة باي (π)؟",
+                options: [
+                    { text: "H₂", correct: false },
+                    { text: "O₂", correct: true },
+                    { text: "Cl₂", correct: false },
+                    { text: "F₂", correct: false }
+                ],
+                explanation: "الأكسجين (O₂) له رابطة ثنائية تتكون من رابطة سيجما واحدة ورابطة باي واحدة. الجزيئات الأخرى لها روابط أحادية (سيجما فقط).",
+                difficulty: "hard"
             }
-            
-            const selectedAnswer = parseInt(selectedOption.value);
-            const isCorrect = selectedAnswer === question.correctAnswer;
-            
-            // تحديث النقاط
-            if (isCorrect) {
-                currentState.studentPoints += 10;
-                updateStudentLevel();
+        ];
+
+        // استمرار إضافة الأسئلة للموضوعات الأخرى لضمان تجاوز 100 سؤال
+        // الموضوع 6: الحسابات الكيميائية
+        topics[5].questionsData = [
+            {
+                id: 1,
+                text: "الكتلة المولية لمركب H₂SO₄ تساوي: (H=1, S=32, O=16)",
+                options: [
+                    { text: "49 g/mol", correct: false },
+                    { text: "82 g/mol", correct: false },
+                    { text: "98 g/mol", correct: true },
+                    { text: "100 g/mol", correct: false }
+                ],
+                explanation: "الكتلة المولية = (2×1) + 32 + (4×16) = 2 + 32 + 64 = 98 g/mol",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                text: "عدد الذرات في 0.5 mol من الحديد (Fe) يساوي:",
+                options: [
+                    { text: "3.01 × 10²³", correct: true },
+                    { text: "6.02 × 10²³", correct: false },
+                    { text: "12.04 × 10²³", correct: false },
+                    { text: "1.2 × 10²⁴", correct: false }
+                ],
+                explanation: "عدد الذرات = عدد المولات × عدد أفوجادرو = 0.5 × 6.02 × 10²³ = 3.01 × 10²³ ذرة",
+                difficulty: "easy"
+            },
+            {
+                id: 3,
+                text: "النسبة المئوية للكربون في مركب CH₄ تساوي: (C=12, H=1)",
+                options: [
+                    { text: "25%", correct: false },
+                    { text: "50%", correct: false },
+                    { text: "75%", correct: true },
+                    { text: "80%", correct: false }
+                ],
+                explanation: "الكتلة المولية لـ CH₄ = 12 + (4×1) = 16 g/mol. نسبة الكربون = (12/16) × 100 = 75%",
+                difficulty: "medium"
+            },
+            {
+                id: 4,
+                text: "كم جراماً في 2.5 mol من الماء H₂O؟ (H=1, O=16)",
+                options: [
+                    { text: "18 g", correct: false },
+                    { text: "25 g", correct: false },
+                    { text: "45 g", correct: true },
+                    { text: "50 g", correct: false }
+                ],
+                explanation: "الكتلة المولية لـ H₂O = (2×1) + 16 = 18 g/mol. الكتلة = عدد المولات × الكتلة المولية = 2.5 × 18 = 45 g",
+                difficulty: "easy"
+            },
+            {
+                id: 5,
+                text: "الصيغة الأولية لمركب يحتوي على 40% كربون، 6.7% هيدروجين، 53.3% أكسجين هي: (C=12, H=1, O=16)",
+                options: [
+                    { text: "CH₂O", correct: true },
+                    { text: "C₂H₄O", correct: false },
+                    { text: "C₂H₄O₂", correct: false },
+                    { text: "C₃H₆O₃", correct: false }
+                ],
+                explanation: "نقسم النسب على الكتل الذرية: C: 40/12 = 3.33, H: 6.7/1 = 6.7, O: 53.3/16 = 3.33. نقسم على الأصغر (3.33): C:1, H:2, O:1. إذن الصيغة الأولية CH₂O.",
+                difficulty: "hard"
+            },
+            {
+                id: 6,
+                text: "حجم 2 mol من أي غاز في الظروف القياسية يساوي:",
+                options: [
+                    { text: "11.2 L", correct: false },
+                    { text: "22.4 L", correct: false },
+                    { text: "44.8 L", correct: true },
+                    { text: "67.2 L", correct: false }
+                ],
+                explanation: "الحجم المولي للغاز في الظروف القياسية = 22.4 L/mol. حجم 2 mol = 2 × 22.4 = 44.8 L",
+                difficulty: "easy"
+            },
+            {
+                id: 7,
+                text: "عدد مولات 36 g من الماء H₂O تساوي: (H=1, O=16)",
+                options: [
+                    { text: "1 mol", correct: false },
+                    { text: "2 mol", correct: true },
+                    { text: "3 mol", correct: false },
+                    { text: "4 mol", correct: false }
+                ],
+                explanation: "الكتلة المولية لـ H₂O = 18 g/mol. عدد المولات = الكتلة ÷ الكتلة المولية = 36 ÷ 18 = 2 mol",
+                difficulty: "easy"
+            },
+            {
+                id: 8,
+                text: "الصيغة الجزيئية لمركب صيغته الأولية CH₂O وكتلته المولية 180 g/mol هي: (C=12, H=1, O=16)",
+                options: [
+                    { text: "CH₂O", correct: false },
+                    { text: "C₂H₄O₂", correct: false },
+                    { text: "C₃H₆O₃", correct: false },
+                    { text: "C₆H₁₂O₆", correct: true }
+                ],
+                explanation: "كتلة الصيغة الأولية CH₂O = 12+2+16 = 30 g/mol. ن = 180 ÷ 30 = 6. إذن الصيغة الجزيئية = (CH₂O)₆ = C₆H₁₂O₆",
+                difficulty: "hard"
+            },
+            {
+                id: 9,
+                text: "كم عدد جزيئات 9 g من الماء؟ (H=1, O=16)",
+                options: [
+                    { text: "3.01 × 10²³", correct: true },
+                    { text: "6.02 × 10²³", correct: false },
+                    { text: "9.03 × 10²³", correct: false },
+                    { text: "12.04 × 10²³", correct: false }
+                ],
+                explanation: "عدد المولات = 9 ÷ 18 = 0.5 mol. عدد الجزيئات = 0.5 × 6.02 × 10²³ = 3.01 × 10²³ جزيء",
+                difficulty: "medium"
+            },
+            {
+                id: 10,
+                text: "كتلة 0.25 mol من كبريتات النحاس المائية CuSO₄.5H₂O تساوي: (Cu=64, S=32, O=16, H=1)",
+                options: [
+                    { text: "62.5 g", correct: true },
+                    { text: "125 g", correct: false },
+                    { text: "250 g", correct: false },
+                    { text: "500 g", correct: false }
+                ],
+                explanation: "الكتلة المولية = 64 + 32 + (4×16) + 5×(2×1+16) = 64+32+64+5×18 = 160+90 = 250 g/mol. الكتلة = 0.25 × 250 = 62.5 g",
+                difficulty: "hard"
+            },
+            {
+                id: 11,
+                text: "النسبة المئوية للهيدروجين في الأمونيا NH₃ تساوي: (N=14, H=1)",
+                options: [
+                    { text: "5.9%", correct: false },
+                    { text: "17.6%", correct: true },
+                    { text: "82.4%", correct: false },
+                    { text: "94.1%", correct: false }
+                ],
+                explanation: "الكتلة المولية لـ NH₃ = 14 + (3×1) = 17 g/mol. نسبة الهيدروجين = (3/17) × 100 = 17.65%",
+                difficulty: "medium"
+            },
+            {
+                id: 12,
+                text: "عدد مولات 11.2 L من غاز النيتروجين N₂ في الظروف القياسية يساوي:",
+                options: [
+                    { text: "0.25 mol", correct: false },
+                    { text: "0.5 mol", correct: true },
+                    { text: "1 mol", correct: false },
+                    { text: "2 mol", correct: false }
+                ],
+                explanation: "الحجم المولي = 22.4 L/mol. عدد المولات = الحجم ÷ الحجم المولي = 11.2 ÷ 22.4 = 0.5 mol",
+                difficulty: "easy"
+            },
+            {
+                id: 13,
+                text: "كتلة 3.01 × 10²³ ذرة من الصوديوم (Na=23) تساوي:",
+                options: [
+                    { text: "11.5 g", correct: true },
+                    { text: "23 g", correct: false },
+                    { text: "34.5 g", correct: false },
+                    { text: "46 g", correct: false }
+                ],
+                explanation: "عدد المولات = عدد الذرات ÷ عدد أفوجادرو = (3.01×10²³) ÷ (6.02×10²³) = 0.5 mol. الكتلة = 0.5 × 23 = 11.5 g",
+                difficulty: "medium"
+            },
+            {
+                id: 14,
+                text: "الصيغة الأولية لمركب يحتوي على 92.3% كربون و 7.7% هيدروجين هي: (C=12, H=1)",
+                options: [
+                    { text: "CH", correct: true },
+                    { text: "CH₂", correct: false },
+                    { text: "CH₃", correct: false },
+                    { text: "C₂H₂", correct: false }
+                ],
+                explanation: "نقسم النسب على الكتل الذرية: C: 92.3/12 = 7.69, H: 7.7/1 = 7.7. النسبة ≈ 1:1، إذن الصيغة الأولية CH.",
+                difficulty: "hard"
+            },
+            {
+                id: 15,
+                text: "عدد جزيئات 4.4 g من ثاني أكسيد الكربون CO₂ يساوي: (C=12, O=16)",
+                options: [
+                    { text: "3.01 × 10²²", correct: false },
+                    { text: "6.02 × 10²²", correct: true },
+                    { text: "3.01 × 10²³", correct: false },
+                    { text: "6.02 × 10²³", correct: false }
+                ],
+                explanation: "الكتلة المولية لـ CO₂ = 12 + 32 = 44 g/mol. عدد المولات = 4.4 ÷ 44 = 0.1 mol. عدد الجزيئات = 0.1 × 6.02 × 10²³ = 6.02 × 10²²",
+                difficulty: "hard"
             }
-            
-            // عرض التغذية الراجعة
-            feedbackBox.innerHTML = '';
-            
-            if (isCorrect) {
-                feedbackBox.innerHTML += `
-                    <div class="correct-feedback">
-                        <i class="fas fa-check-circle"></i>
-                        ${question.explanation.correct}
-                    </div>
-                `;
-            } else {
-                feedbackBox.innerHTML += `
-                    <div class="incorrect-feedback">
-                        <i class="fas fa-times-circle"></i>
-                        ${question.explanation.incorrect}
-                    </div>
-                `;
-                
-                // عرض الموارد التعليمية عند الإجابة الخاطئة
-                showEducationalResources(question.explanation);
+        ];
+
+        // الموضوع 7: سرعة التفاعل الكيميائي والإتزان
+        topics[6].questionsData = [
+            {
+                id: 1,
+                text: "أي العوامل التالية يزيد من سرعة التفاعل الكيميائي؟",
+                options: [
+                    { text: "تقليل درجة الحرارة", correct: false },
+                    { text: "تقليل تركيز المواد المتفاعلة", correct: false },
+                    { text: "إضافة عامل حفاز", correct: true },
+                    { text: "تقليل مساحة سطح التلامس", correct: false }
+                ],
+                explanation: "العامل الحفاز يزيد سرعة التفاعل بتخفيض طاقة التنشيط دون أن يستهلك في التفاعل.",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                text: "عند الاتزان الكيميائي:",
+                options: [
+                    { text: "تتوقف التفاعلات الأمامية والعكسية", correct: false },
+                    { text: "تكون سرعة التفاعل الأمامي أكبر من العكسي", correct: false },
+                    { text: "تكون سرعة التفاعل الأمامي مساوية للعكسي", correct: true },
+                    { text: "تكون سرعة التفاعل العكسي أكبر من الأمامي", correct: false }
+                ],
+                explanation: "الاتزان الديناميكي يعني استمرار التفاعلين الأمامي والعكسي بنفس السرعة، فتظل تراكيز المواد ثابتة.",
+                difficulty: "easy"
+            },
+            {
+                id: 3,
+                text: "أي التفاعلات التالية متجانس؟",
+                options: [
+                    { text: "تفاعل الحديد مع الكبريت", correct: false },
+                    { text: "تفاعل الحمض مع القاعدة", correct: true },
+                    { text: "تفاعل الكالسيوم كربونات مع الحمض", correct: false },
+                    { text: "احتراق الفحم", correct: false }
+                ],
+                explanation: "تفاعل الحمض مع القاعدة في محلول مائي هو تفاعل متجانس لأن جميع المكونات في نفس الطور (المحلول).",
+                difficulty: "medium"
+            },
+            {
+                id: 4,
+                text: "زيادة الضغط في التفاعل: N₂(g) + 3H₂(g) ⇌ 2NH₃(g) تؤدي إلى:",
+                options: [
+                    { text: "عدم تأثر الاتزان", correct: false },
+                    { text: "انزياح الاتزان نحو النواتج", correct: true },
+                    { text: "انزياح الاتزان نحو المتفاعلات", correct: false },
+                    { text: "توقف التفاعل", correct: false }
+                ],
+                explanation: "زيادة الضغط تزيح الاتزان نحو الجهة ذات عدد مولات الغازات الأقل. هنا النواتج لها 2 مول والمتفاعلات لها 4 مولات، لذا يزاح نحو النواتج.",
+                difficulty: "medium"
+            },
+            {
+                id: 5,
+                text: "أي التفاعلات التالية يكون طارداً للحرارة؟",
+                options: [
+                    { text: "انصهار الجليد", correct: false },
+                    { text: "تبخر الماء", correct: false },
+                    { text: "احتراق الفحم", correct: true },
+                    { text: "تفكك كربونات الكالسيوم", correct: false }
+                ],
+                explanation: "احتراق الفحم (الكربون) في الأكسجين ينتج ثاني أكسيد الكربون مع انطلاق حرارة، لذا هو تفاعل طارد للحرارة.",
+                difficulty: "easy"
+            },
+            {
+                id: 6,
+                text: "أي العوامل التالية لا يؤثر في ثابت الاتزان؟",
+                options: [
+                    { text: "درجة الحرارة", correct: false },
+                    { text: "الضغط", correct: true },
+                    { text: "التركيز", correct: false },
+                    { text: "إضافة عامل حفاز", correct: false }
+                ],
+                explanation: "ثابت الاتزان يتغير فقط مع تغير درجة الحرارة. الضغط والتركيز والعوامل الحفازة تغير وضع الاتزان ولكن لا تغير قيمة K.",
+                difficulty: "hard"
+            },
+            {
+                id: 7,
+                text: "عند زيادة درجة الحرارة للتفاعل الطارد للحرارة، فإن ثابت الاتزان:",
+                options: [
+                    { text: "يزداد", correct: false },
+                    { text: "ينقص", correct: true },
+                    { text: "يبقى ثابتاً", correct: false },
+                    { text: "يتوقف", correct: false }
+                ],
+                explanation: "للتفاعل الطارد للحرارة، زيادة الحرارة تزيح الاتزان نحو المتفاعلات (لتقلل الحرارة)، فتقل قيمة ثابت الاتزان.",
+                difficulty: "hard"
+            },
+            {
+                id: 8,
+                text: "أي مما يلي ليس من خصائص العامل الحفاز؟",
+                options: [
+                    { text: "يقلل طاقة التنشيط", correct: false },
+                    { text: "يستهلك أثناء التفاعل", correct: true },
+                    { text: "يزيد سرعة التفاعل", correct: false },
+                    { text: "لا يغير طبيعة النواتج", correct: false }
+                ],
+                explanation: "العامل الحفاز لا يستهلك أثناء التفاعل، بل يعاد تكوينه في نهاية التفاعل. يبقى كميته ونوعه ثابتين.",
+                difficulty: "medium"
+            },
+            {
+                id: 9,
+                text: "التفاعل: A + B ⇌ C + D، إذا كان K = 10³، فهذا يعني أن:",
+                options: [
+                    { text: "التفاعل يكمل نحو النواتج", correct: true },
+                    { text: "التفاعل يكمل نحو المتفاعلات", correct: false },
+                    { text: "الاتزان في المنتصف", correct: false },
+                    { text: "لا يمكن تحديد", correct: false }
+                ],
+                explanation: "قيمة K كبيرة (أكبر من 1) تعني أن تركيز النواتج أكبر من تركيز المتفاعلات عند الاتزان، أي التفاعل يميل نحو النواتج.",
+                difficulty: "medium"
+            },
+            {
+                id: 10,
+                text: "أي العبارات التالية صحيحة عن العامل المساعد؟",
+                options: [
+                    { text: "يغير طبيعة المواد الناتجة", correct: false },
+                    { text: "يبدأ التفاعل الكيميائي", correct: false },
+                    { text: "يزيد سرعة التفاعل دون أن يستهلك", correct: true },
+                    { text: "يقلل من سرعة التفاعل", correct: false }
+                ],
+                explanation: "العامل المساعد (الحفاز) يزيد سرعة التفاعل بتخفيض طاقة التنشيط، ولا يستهلك في التفاعل ولا يغير طبيعة النواتج.",
+                difficulty: "easy"
+            },
+            {
+                id: 11,
+                text: "عند إضافة كمية من غاز الأمونيا NH₃ للنظام المتزن: N₂ + 3H₂ ⇌ 2NH₃، فإن الاتزان:",
+                options: [
+                    { text: "يزاح نحو النواتج", correct: false },
+                    { text: "يزاح نحو المتفاعلات", correct: true },
+                    { text: "يبقى ثابتاً", correct: false },
+                    { text: "يتوقف", correct: false }
+                ],
+                explanation: "إضافة ناتج (NH₃) تزيح الاتزان نحو المتفاعلات (إلى اليسار) لتقليل هذا التغير حسب مبدأ لوشاتلييه.",
+                difficulty: "hard"
+            },
+            {
+                id: 12,
+                text: "أي التفاعلات التالية له أكبر سرعة عند نفس الظروف؟",
+                options: [
+                    { text: "شريط مغنيسيوم مع حمض مخفف", correct: false },
+                    { text: "مسحوق مغنيسيوم مع حمض مخفف", correct: true },
+                    { text: "شريط نحاس مع حمض مخفف", correct: false },
+                    { text: "مسحوق نحاس مع حمض مخفف", correct: false }
+                ],
+                explanation: "مسحوق المغنيسيوم له أكبر مساحة سطح تلامس مع الحمض، والتفاعل بين المغنيسيوم والحمض سريع. النحاس لا يتفاعل مع الأحماض المخففة.",
+                difficulty: "medium"
             }
-            
-            feedbackBox.style.display = 'block';
-            
-            // تحديث واجهة النقاط والمستوى
-            updateUI();
-            
-            // إظهار زر السؤال التالي وإخفاء زر التحقق
-            checkAnswerBtn.style.display = 'none';
-            nextQuestionBtn.style.display = 'block';
-            
-            // تعطيل خيارات الإجابة
-            document.querySelectorAll('.option input').forEach(input => {
-                input.disabled = true;
-            });
-        }
+        ];
 
-        // عرض الموارد التعليمية
-        function showEducationalResources(explanation) {
-            // تحديث رابط الفيديو
-            videoLink.href = explanation.videoLink;
-            
-            // تحديث إطار PhET
-            phetFrame.src = explanation.phetSim;
-            
-            // تحديث شرح المفهوم
-            conceptExplanation.innerHTML = `
-                <h4><i class="fas fa-graduation-cap"></i> شرح مفصل للمفهوم</h4>
-                <p>${explanation.concept}</p>
-                <p>هذا المفهوم أساسي لفهم ${studentGroups.find(g => g.id === currentState.currentGroupId).analyzedChapter}.</p>
-            `;
-            
-            // إظهار قسم الموارد
-            resourcesSection.style.display = 'block';
-        }
+        // إضافة أسئلة إضافية للموضوعات المتبقية (لإكمال 120+ سؤال)
+        // سأضيف 5 أسئلة لكل موضوع من الموضوعات المتبقية
 
-        // الانتقال إلى السؤال التالي
-        function nextQuestion() {
-            const groupId = currentState.currentGroupId;
-            const questions = questionBanks[groupId];
-            
-            currentState.currentQuestionIndex++;
-            
-            if (currentState.currentQuestionIndex < questions.length) {
-                displayCurrentQuestion();
-            } else {
-                // إذا انتهت الأسئلة
-                questionBox.innerHTML = `
-                    <h3>🎉 مبروك! لقد أكملت اختبار المجموعة</h3>
-                    <p>لقد حصلت على <strong>${currentState.studentPoints}</strong> نقطة من أصل <strong>${questions.length * 10}</strong> نقطة ممكنة.</p>
-                    <p>مستواك الحالي: <strong>${currentState.studentLevel}</strong></p>
-                    <p>يمكنك العودة إلى قائمة المجموعات لاختيار مجموعة أخرى، أو إعادة اختبار هذه المجموعة.</p>
-                `;
-                checkAnswerBtn.style.display = 'none';
-                nextQuestionBtn.style.display = 'none';
-                feedbackBox.style.display = 'none';
-                resourcesSection.style.display = 'none';
+        // الموضوع 8: المحاليل والمخاليط
+        topics[7].questionsData = [
+            {
+                id: 1,
+                text: "أي المحاليل التالية غير مشبع؟",
+                options: [
+                    { text: "محلول يذوب فيه المزيد من المادة المذابة", correct: true },
+                    { text: "محلول لا يذوب فيه المزيد من المادة المذابة", correct: false },
+                    { text: "محلول به مادة مذابة زائدة غير ذائبة", correct: false },
+                    { text: "محلول فوق مشبع", correct: false }
+                ],
+                explanation: "المحلول غير المشبع هو الذي يمكن أن يذيب كمية إضافية من المادة المذابة عند نفس الظروف.",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                text: "تركيز محلول يحتوي على 10g من NaCl مذاب في 500mL من الماء هو: (Na=23, Cl=35.5)",
+                options: [
+                    { text: "0.17 M", correct: false },
+                    { text: "0.34 M", correct: true },
+                    { text: "0.68 M", correct: false },
+                    { text: "1.36 M", correct: false }
+                ],
+                explanation: "الكتلة المولية لـ NaCl = 58.5 g/mol. عدد المولات = 10 ÷ 58.5 = 0.171 mol. التركيز = 0.171 ÷ 0.5 = 0.342 M",
+                difficulty: "medium"
+            },
+            {
+                id: 3,
+                text: "أي الطرق التالية تستخدم لفصل الملح من محلول ملحي؟",
+                options: [
+                    { text: "الترشيح", correct: false },
+                    { text: "التبخير", correct: true },
+                    { text: "التقطير", correct: false },
+                    { text: "الكروماتوغرافيا", correct: false }
+                ],
+                explanation: "لحصول على الملح من محلول ملحي، نتبخر الماء تاركين الملح. التقطير يعطي الماء النقي، والترشيح لفصل المواد الصلبة غير الذائبة.",
+                difficulty: "easy"
+            },
+            {
+                id: 4,
+                        text: "أي المخاليط التالية متجانس؟",
+                options: [
+                    { text: "الرمل والماء", correct: false },
+                    { text: "الزيت والماء", correct: false },
+                    { text: "السكر والماء", correct: true },
+                    { text: "الملح والفلفل", correct: false }
+                ],
+                explanation: "السكر يذوب في الماء مكوناً محلولاً متجانساً. الرمل والماء والزيت والماء والملح والفلفل مخاليط غير متجانسة.",
+                difficulty: "easy"
+            },
+            {
+                id: 5,
+                text: "الضغط الأسموزي لمحلول:",
+                options: [
+                    { text: "يتناسب طردياً مع التركيز", correct: true },
+                    { text: "يتناسب عكسياً مع التركيز", correct: false },
+                    { text: "لا يعتمد على التركيز", correct: false },
+                    { text: "يتناسب طردياً مع درجة الحرارة فقط", correct: false }
+                ],
+                explanation: "الضغط الأسموزي (π) = iMRT، حيث M هي التركيز المولاري، R ثابت الغازات، T درجة الحرارة بالكلفن. إذن يتناسب طردياً مع التركيز.",
+                difficulty: "hard"
+            },
+            {
+                id: 6,
+                text: "عند إذابة ملح في الماء، تنخفض درجة تجمد الماء بسبب:",
+                options: [
+                    { text: "انخفاض ضغط البخار", correct: false },
+                    { text: "ارتفاع الضغط الأسموزي", correct: false },
+                    { text: "الخواص الجامعة", correct: true },
+                    { text: "التأين الكامل للملح", correct: false }
+                ],
+                explanation: "انخفاض درجة التجمد أحد الخواص الجامعة للمحاليل، وتعتمد على عدد جسيمات المادة المذابة وليس على نوعها.",
+                difficulty: "medium"
+            },
+            {
+                id: 7,
+                text: "تركيز محلول يحتوي على 0.1 mol من NaOH في 250 mL من الماء هو:",
+                options: [
+                    { text: "0.1 M", correct: false },
+                    { text: "0.25 M", correct: false },
+                    { text: "0.4 M", correct: true },
+                    { text: "0.5 M", correct: false }
+                ],
+                explanation: "التركيز المولاري = عدد المولات ÷ حجم المحلول باللتر = 0.1 ÷ 0.25 = 0.4 M",
+                difficulty: "easy"
+            },
+            {
+                id: 8,
+                text: "لتحضير 500 mL من محلول 0.2 M من حمض الهيدروكلوريك من محلول 2 M، يجب أخذ:",
+                options: [
+                    { text: "50 mL من المحلول المركز", correct: true },
+                    { text: "100 mL من المحلول المركز", correct: false },
+                    { text: "200 mL من المحلول المركز", correct: false },
+                    { text: "400 mL من المحلول المركز", correct: false }
+                ],
+                explanation: "حسب قانون التخفيف: M₁V₁ = M₂V₂ → 2 × V₁ = 0.2 × 500 → V₁ = (0.2 × 500) ÷ 2 = 50 mL",
+                difficulty: "medium"
+            },
+            {
+                id: 9,
+                text: "أي المحاليل التالية له أعلى درجة غليان؟",
+                options: [
+                    { text: "0.1 M NaCl", correct: false },
+                    { text: "0.1 M CaCl₂", correct: true },
+                    { text: "0.1 M C₆H₁₂O₆", correct: false },
+                    { text: "0.1 M CH₃COOH", correct: false }
+                ],
+                explanation: "ارتفاع درجة الغليان من الخواص الجامعة التي تعتمد على عدد الجسيمات المذابة. CaCl₂ يعطي 3 أيونات (أكثر من الآخرين).",
+                difficulty: "hard"
+            },
+            {
+                id: 10,
+                text: "لتحضير محلول 10% كتلة/حجم من NaOH، يجب إذابة:",
+                options: [
+                    { text: "10g NaOH في 100mL ماء", correct: true },
+                    { text: "10g NaOH في 1L ماء", correct: false },
+                    { text: "100g NaOH في 1L ماء", correct: false },
+                    { text: "1g NaOH في 10mL ماء", correct: false }
+                ],
+                explanation: "محلول 10% كتلة/حجم يعني 10g من المادة المذابة في 100mL من المحلول.",
+                difficulty: "easy"
             }
-        }
+        ];
 
-        // تحديث مستوى الطالب بناءً على النقاط
-        function updateStudentLevel() {
-            const points = currentState.studentPoints;
-            
-            if (points >= 50) currentState.studentLevel = 'متوسط';
-            if (points >= 100) currentState.studentLevel = 'متقدم';
-            if (points >= 150) currentState.studentLevel = 'متميز';
-            if (points >= 200) currentState.studentLevel = 'خبير';
-        }
+        // الموضوع 9: المحاليل والمخاليط 2
+        topics[8].questionsData = [
+            {
+                id: 1,
+                text: "مذيب غير قطبي يذيب مادة غير قطبية حسب قاعدة:",
+                options: [
+                    { text: "الشبيه يذيب الشبيه", correct: true },
+                    { text: "الضغط الأسموزي", correct: false },
+                    { text: "هنري", correct: false },
+                    { text: "راؤول", correct: false }
+                ],
+                explanation: "قاعدة 'الشبيه يذيب الشبيه' تنص على أن المواد المتشابهة في القطبية تذوب في بعضها. المواد غير القطبية تذوب في مذيبات غير قطبية.",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                text: "قانون هنري ينطبق على:",
+                options: [
+                    { text: "ذوبانية الغازات في السوائل", correct: true },
+                    { text: "ذوبانية السوائل في السوائل", correct: false },
+                    { text: "ذوبانية المواد الصلبة في السوائل", correct: false },
+                    { text: "ذوبانية الغازات في الغازات", correct: false }
+                ],
+                explanation: "قانون هنري: ذوبانية الغاز في سائل تتناسب طردياً مع ضغط الغاز فوق السائل عند درجة حرارة ثابتة.",
+                difficulty: "medium"
+            },
+            {
+                id: 3,
+                text: "المحلول الذي له نفس الضغط الأسموزي مثل محلول آخر يسمى:",
+                options: [
+                    { text: "مشبع", correct: false },
+                    { text: "فوق مشبع", correct: false },
+                    { text: "متساوي التوتر", correct: true },
+                    { text: "متفوق التوتر", correct: false }
+                ],
+                explanation: "المحلولان المتساويان في التركيز، وبالتالي في الضغط الأسموزي، يسميان متساويا التوتر (Isotonic).",
+                difficulty: "medium"
+            },
+            {
+                id: 4,
+                text: "عند إذابة 1 mol من كلوريد الصوديوم في الماء، ينخفض درجة التجمد بمقدار: (Kf = 1.86 °C/m)",
+                options: [
+                    { text: "1.86 °C", correct: false },
+                    { text: "3.72 °C", correct: true },
+                    { text: "0.93 °C", correct: false },
+                    { text: "5.58 °C", correct: false }
+                ],
+                explanation: "ΔTf = i × Kf × m. NaCl يعطي 2 أيون (i=2)، m=1 mol/kg. ΔTf = 2 × 1.86 × 1 = 3.72°C",
+                difficulty: "hard"
+            },
+            {
+                id: 5,
+                text: "ضغط بخار المحلول دائمًا:",
+                options: [
+                    { text: "أقل من ضغط بخار المذيب النقي", correct: true },
+                    { text: "أعلى من ضغط بخار المذيب النقي", correct: false },
+                    { text: "مساوٍ لضغط بخار المذيب النقي", correct: false },
+                    { text: "لا يمكن تحديد", correct: false }
+                ],
+                explanation: "قانون راؤول: ضغط بخار المحلول = ضغط بخار المذيب النقي × الكسر المولي للمذيب. وجود مذاب يقلل الكسر المولي للمذيب فيقل الضغط.",
+                difficulty: "medium"
+            },
+            {
+                id: 6,
+                text: "أي المحاليل التالية يوصي بالكهرباء؟",
+                options: [
+                    { text: "محلول السكر", correct: false },
+                    { text: "محلول الإيثانول", correct: false },
+                    { text: "محلول حمض الهيدروكلوريك", correct: true },
+                    { text: "محلول اليوريا", correct: false }
+                ],
+                explanation: "حمض الهيدروكلوريك يتأين في الماء إلى أيونات H⁺ و Cl⁻، لذا يوصل الكهرباء. السكر والإيثانول واليوريا لا تتأين.",
+                difficulty: "easy"
+            },
+            {
+                id: 7,
+                text: "تركيز 100 ppm يعني:",
+                options: [
+                    { text: "100g مذاب في 1L محلول", correct: false },
+                    { text: "100g مذاب في 10⁶g محلول", correct: true },
+                    { text: "100 مول مذاب في 1L محلول", correct: false },
+                    { text: "100 جزء من المذاب في 100 جزء من المحلول", correct: false }
+                ],
+                explanation: "ppm = جزء في المليون، أي 1g من المذاب في 10⁶g من المحلول. 100 ppm = 100g مذاب في 10⁶g محلول.",
+                difficulty: "medium"
+            },
+            {
+                id: 8,
+                text: "لزيادة ذوبانية غاز في سائل، يجب:",
+                options: [
+                    { text: "زيادة درجة الحرارة", correct: false },
+                    { text: "زيادة الضغط", correct: true },
+                    { text: "تقليل الضغط", correct: false },
+                    { text: "تقليل درجة الحرارة للغازات ذات الذوبانية الإمتصاصية", correct: false }
+                ],
+                explanation: "حسب قانون هنري، ذوبانية الغاز في سائل تزداد بزيادة الضغط. معظم الغازات تذوب بدرجة أقل بارتفاع درجة الحرارة.",
+                difficulty: "medium"
+            },
+            {
+                id: 9,
+                text: "المحلول الذي يحتوي على أكبر كمية ممكنة من المذاب عند درجة حرارة معينة يسمى:",
+                options: [
+                    { text: "مشبع", correct: true },
+                    { text: "غير مشبع", correct: false },
+                    { text: "فوق مشبع", correct: false },
+                    { text: "مخفف", correct: false }
+                ],
+                explanation: "المحلول المشبع يحتوي على أقصى كمية من المذاب يمكن أن تذوب عند درجة حرارة وضغط معينين.",
+                difficulty: "easy"
+            },
+            {
+                id: 10,
+                text: "لتحضير محلول مخفف من حمض مركز، يجب:",
+                options: [
+                    { text: "إضافة الماء إلى الحمض", correct: false },
+                    { text: "إضافة الحمض إلى الماء", correct: true },
+                    { text: "خلط الحمض والماء معاً", correct: false },
+                    { text: "إضافة الحمض إلى الثلج", correct: false }
+                ],
+                explanation: "للسلامة، دائماً أضف الحمض إلى الماء وليس العكس. إضافة الماء إلى الحمض المركز تسبب انفجاراً بسبب الحرارة الكبيرة المنطلقة.",
+                difficulty: "easy"
+            }
+        ];
 
-        // تحديث واجهة المستخدم
-        function updateUI() {
-            studentPointsEl.textContent = currentState.studentPoints;
-            studentLevelEl.textContent = currentState.studentLevel;
-        }
+        // الموضوع 10: الأحماض والقواعد
+        topics[9].questionsData = [
+            {
+                id: 1,
+                text: "أي الأحماض التالية هو حمض ضعيف؟",
+                options: [
+                    { text: "HCl", correct: false },
+                    { text: "HNO₃", correct: false },
+                    { text: "H₂SO₄", correct: false },
+                    { text: "CH₃COOH", correct: true }
+                ],
+                explanation: "حمض الخليك (CH₃COOH) حمض ضعيف يتأين جزئياً في الماء. الأحماض الأخرى أقوى وتتأين كلياً تقريباً.",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                text: "أي القواعد التالية قوية؟",
+                options: [
+                    { text: "NH₃", correct: false },
+                    { text: "NaOH", correct: true },
+                    { text: "Ca(OH)₂", correct: false },
+                    { text: "Al(OH)₃", correct: false }
+                ],
+                explanation: "هيدروكسيد الصوديوم (NaOH) قاعدة قوية تتأين كلياً في الماء. هيدروكسيد الأمونيوم (NH₄OH) قاعدة ضعيفة.",
+                difficulty: "easy"
+            },
+            {
+                id: 3,
+                        text: "الرقم الهيدروجيني pH لمحلول حمضي يكون:",
+                options: [
+                    { text: "أكبر من 7", correct: false },
+                    { text: "أقل من 7", correct: true },
+                    { text: "يساوي 7", correct: false },
+                    { text: "يساوي 14", correct: false }
+                ],
+                explanation: "المحلول الحمضي: pH < 7. المحلول المتعادل: pH = 7. المحلول القاعدي: pH > 7.",
+                difficulty: "easy"
+            },
+            {
+                id: 4,
+                text: "عند معايرة حمض قوي مع قاعدة قوية، تكون نقطة التكافؤ عند pH:",
+                options: [
+                    { text: "أقل من 7", correct: false },
+                    { text: "أكبر من 7", correct: false },
+                    { text: "يساوي 7", correct: true },
+                    { text: "يساوي 14", correct: false }
+                ],
+                explanation: "معايرة حمض قوي مع قاعدة قوية تعطي ملحاً متعادلاً، لذا pH عند نقطة التكافؤ = 7.",
+                difficulty: "medium"
+            },
+            {
+                id: 5,
+                text: "المحلول المنظم يحافظ على ثبات pH عند إضافة:",
+                options: [
+                    { text: "كميات قليلة من حمض أو قاعدة", correct: true },
+                    { text: "كميات كبيرة من حمض أو قاعدة", correct: false },
+                    { text: "الماء فقط", correct: false },
+                    { text: "الملح فقط", correct: false }
+                ],
+                explanation: "المحلول المنظم (Buffer) يقاوم التغير في pH عند إضافة كميات صغيرة من الحمض أو القاعدة.",
+                difficulty: "medium"
+            },
+            {
+                id: 6,
+                text: "أي الأملاح التالية يعطي محلولاً حمضياً عند إذابته في الماء؟",
+                options: [
+                    { text: "NaCl", correct: false },
+                    { text: "NH₄Cl", correct: true },
+                    { text: "CH₃COONa", correct: false },
+                    { text: "KNO₃", correct: false }
+                ],
+                explanation: "ملح NH₄Cl يأتي من حمض قوي (HCl) وقاعدة ضعيفة (NH₄OH)، لذا يكون محلوله حمضياً بسبب حلمهة الكاتيون.",
+                difficulty: "hard"
+            },
+            {
+                id: 7,
+                text: "قوة الحمض تعتمد على:",
+                options: [
+                    { text: "تركيز الحمض", correct: false },
+                    { text: "درجة تأين الحمض", correct: true },
+                    { text: "عدد ذرات الهيدروجين", correct: false },
+                    { text: "الكتلة الجزيئية", correct: false }
+                ],
+                explanation: "قوة الحمض تعتمد على درجة تأينه في الماء. الحمض القوي يتأين كلياً تقريباً، والضعيف يتأين جزئياً.",
+                difficulty: "medium"
+            },
+            {
+                id: 8,
+                text: "في تفاعل التعادل، يتفاعل الحمض مع القاعدة لإنتاج:",
+                options: [
+                    { text: "ملح وماء", correct: true },
+                    { text: "ملح فقط", correct: false },
+                    { text: "ماء فقط", correct: false },
+                    { text: "غاز وهيدروجين", correct: false }
+                ],
+                explanation: "تفاعل التعادل: حمض + قاعدة → ملح + ماء. مثال: HCl + NaOH → NaCl + H₂O",
+                difficulty: "easy"
+            },
+            {
+                id: 9,
+                text: "أي المؤشرات التالية يتحول من عديم اللون إلى وردي في الوسط الحمضي؟",
+                options: [
+                    { text: "الفينولفثالين", correct: false },
+                    { text: "الميثيل البرتقالي", correct: true },
+                    { text: "أزرق البروموثيمول", correct: false },
+                    { text: "الليتموس", correct: false }
+                ],
+                explanation: "الميثيل البرتقالي: أحمر في الوسط الحمضي (pH < 3.1)، برتقالي في المتعادل (pH 3.1-4.4)، أصفر في القلوي (pH > 4.4).",
+                difficulty: "medium"
+            },
+            {
+                id: 10,
+                text: "أي الأحماض التالية ثنائية البروتون؟",
+                options: [
+                    { text: "HCl", correct: false },
+                    { text: "HNO₃", correct: false },
+                    { text: "H₂SO₄", correct: true },
+                    { text: "CH₃COOH", correct: false }
+                ],
+                explanation: "حمض الكبريتيك (H₂SO₄) حمض ثنائي البروتون يمكنه فقد بروتونين. الأحماض الأخرى أحادية البروتون.",
+                difficulty: "easy"
+            },
+            {
+                id: 11,
+                text: "قيمة pOH لمحلول pH = 3 هي:",
+                options: [
+                    { text: "3", correct: false },
+                    { text: "7", correct: false },
+                    { text: "11", correct: true },
+                    { text: "14", correct: false }
+                ],
+                explanation: "pH + pOH = 14. إذا pH = 3، إذن pOH = 14 - 3 = 11.",
+                difficulty: "easy"
+            },
+            {
+                id: 12,
+                text: "أي المحاليل التالية له أقل pH؟",
+                options: [
+                    { text: "0.1 M HCl", correct: true },
+                    { text: "0.1 M CH₃COOH", correct: false },
+                    { text: "0.1 M NaOH", correct: false },
+                    { text: "ماء نقي", correct: false }
+                ],
+                explanation: "HCl حمض قوي يتأين كلياً ويعطي أعلى تركيز لأيونات H⁺، لذا له أقل pH. CH₃COOH حمض ضعيف. NaOH قاعدة. الماء متعادل.",
+                difficulty: "medium"
+            },
+            {
+                id: 13,
+                text: "ثابت تأين الحمض Ka:",
+                options: [
+                    { text: "يزداد بزيادة قوة الحمض", correct: true },
+                    { text: "ينقص بزيادة قوة الحمض", correct: false },
+                    { text: "لا يرتبط بقوة الحمض", correct: false },
+                    { text: "ثابت لجميع الأحماض", correct: false }
+                ],
+                explanation: "Ka مقياس لقوة الحمض. كلما زادت قيمة Ka، زادت قوة الحمض (أي زاد تأينه).",
+                difficulty: "hard"
+            },
+            {
+                id: 14,
+                text: "عند إذابة ملح NaCH₃COO في الماء، يكون المحلول:",
+                options: [
+                    { text: "حمضياً", correct: false },
+                    { text: "قاعدياً", correct: true },
+                    { text: "متعادلاً", correct: false },
+                    { text: "لا يمكن تحديد", correct: false }
+                ],
+                explanation: "CH₃COONa يأتي من حمض ضعيف (CH₃COOH) وقاعدة قوية (NaOH)، لذا محلوله قاعدي بسبب حلمهة الأنيون.",
+                difficulty: "hard"
+            },
+            {
+                id: 15,
+                text: "أفضل محلول منظم للحفاظ على pH حول 7 هو:",
+                options: [
+                    { text: "CH₃COOH/CH₃COONa", correct: false },
+                    { text: "NH₃/NH₄Cl", correct: false },
+                    { text: "KH₂PO₄/K₂HPO₄", correct: true },
+                    { text: "HCl/NaCl", correct: false }
+                ],
+                explanation: "نظام فوسفات البوتاسيوم (KH₂PO₄/K₂HPO₄) له pKa ≈ 7.2، لذا يعمل كمنظم فعال حول pH = 7.",
+                difficulty: "hard"
+            }
+        ];
 
-        // إظهار صفحة المجموعات
-        function showGroupsPage() {
-            currentState.currentPage = 'groups';
-            groupsPage.style.display = 'block';
-            quizPage.style.display = 'none';
-        }
+        // الموضوع 11: الكيمياء الكهربائية
+        topics[10].questionsData = [
+            {
+                id: 1,
+                text: "في الخلية الجلفانية:",
+                options: [
+                    { text: "تتحول الطاقة الكهربائية إلى كيميائية", correct: false },
+                    { text: "تتحول الطاقة الكيميائية إلى كهربائية", correct: true },
+                    { text: "تحدث تفاعلات اختزال فقط", correct: false },
+                    { text: "تحدث تفاعلات أكسدة فقط", correct: false }
+                ],
+                explanation: "الخلية الجلفانية (الفولتية) تحول الطاقة الكيميائية إلى كهربائية عن طريق تفاعل أكسدة-اختزال تلقائي.",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                text: "في الخلية الإلكتروليتية:",
+                options: [
+                    { text: "يحتاج التفاعل إلى مصدر خارجي للطاقة", correct: true },
+                    { text: "يكون التفاعل تلقائياً", correct: false },
+                    { text: "تتحول الطاقة الكهربائية إلى حرارية", correct: false },
+                    { text: "يكون جهد الخلية موجباً", correct: false }
+                ],
+                explanation: "الخلية الإلكتروليتية تستخدم تياراً كهربائياً لإحداث تفاعل غير تلقائي. تحتاج إلى مصدر طاقة خارجي مثل البطارية.",
+                difficulty: "easy"
+            },
+            {
+                id: 3,
+                text: "في تفاعل الأكسدة:",
+                options: [
+                    { text: "تزداد عدد الأكسدة", correct: true },
+                    { text: "تنقص عدد الأكسدة", correct: false },
+                    { text: "يبقى عدد الأكسدة ثابتاً", correct: false },
+                    { text: "تكتسب الإلكترونات", correct: false }
+                ],
+                explanation: "الأكسدة: فقد إلكترونات، مما يزيد عدد الأكسدة. الاختزال: كسب إلكترونات، مما يقلل عدد الأكسدة.",
+                difficulty: "easy"
+            },
+            {
+                id: 4,
+                text: "عدد أكسدة الأكسجين في مركب H₂O₂ هو:",
+                options: [
+                    { text: "-2", correct: false },
+                    { text: "-1", correct: true },
+                    { text: "0", correct: false },
+                    { text: "+2", correct: false }
+                ],
+                explanation: "في فوق أكسيد الهيدروجين H₂O₂، عدد أكسدة الأكسجين هو -1 (لأن مجموع أعداد الأكسدة = 0: 2×(+1) + 2×(-1) = 0).",
+                difficulty: "medium"
+            },
+            {
+                id: 5,
+                text: "معدن أكثر نشاطاً من الهيدروجين سوف:",
+                options: [
+                    { text: "يختزل أيونات الهيدروجين", correct: true },
+                    { text: "لا يتفاعل مع الأحماض", correct: false },
+                    { text: "يترسب من محاليل أملاحه", correct: false },
+                    { text: "يكون تحت الهيدروجين في سلسلة النشاط", correct: false }
+                ],
+                explanation: "المعادن الأكثر نشاطاً من الهيدروجين (أعلى في سلسلة النشاط) تزيح الهيدروجين من الأحماض.",
+                difficulty: "medium"
+            },
+            {
+                id: 6,
+                text: "أي المعادن التالية أكثر نشاطاً؟",
+                options: [
+                    { text: "الذهب", correct: false },
+                    { text: "الفضة", correct: false },
+                    { text: "النحاس", correct: false },
+                    { text: "المغنيسيوم", correct: true }
+                ],
+                explanation: "المغنيسيوم أكثر المعادن المذكورة نشاطاً. سلسلة النشاط: Mg > Al > Zn > Fe > Sn > Pb > H > Cu > Ag > Au",
+                difficulty: "easy"
+            },
+            {
+                id: 7,
+                text: "في خلية Daniell، القطب الموجب (المهبط) هو:",
+                options: [
+                    { text: "الزنك", correct: false },
+                    { text: "النحاس", correct: true },
+                    { text: "الكربون", correct: false },
+                    { text: "البلاتين", correct: false }
+                ],
+                explanation: "في خلية Daniell (Zn|Zn²⁺||Cu²⁺|Cu)، النحاس هو المهبط (القطب الموجب) حيث يحدث الاختزال: Cu²⁺ + 2e⁻ → Cu",
+                difficulty: "medium"
+            },
+            {
+                id: 8,
+                text: "عند التحليل الكهربائي لمحلول NaCl باستخدام أقطاب خاملة، يتصاعد عند المصعد:",
+                options: [
+                    { text: "الصوديوم", correct: false },
+                    { text: "الهيدروجين", correct: false },
+                    { text: "الكلور", correct: true },
+                    { text: "الأكسجين", correct: false }
+                ],
+                explanation: "في التحليل الكهربائي لمحلول NaCl مائي، يتصاعد الكلور عند المصعد (القطب الموجب): 2Cl⁻ → Cl₂ + 2e⁻",
+                difficulty: "hard"
+            },
+            {
+                id: 9,
+                text: "لحماية الحديد من الصدأ، يمكن:",
+                options: [
+                    { text: "طلاؤه بطبقة من الزنك", correct: true },
+                    { text: "طلاؤه بطبقة من القصدير", correct: false },
+                    { text: "وصله بالنحاس", correct: false },
+                    { text: "وصله بالفضة", correct: false }
+                ],
+                explanation: "الطلاء بالزنك (الجلفنة) يحمي الحديد لأن الزنك أكثر نشاطاً ويتأكسد بدلاً من الحديد (حماية كاثودية).",
+                difficulty: "medium"
+            },
+            {
+                id: 10,
+                text: "أي الخلايا التالية تنتج أكبر جهد كهربائي؟",
+                options: [
+                    { text: "Zn|Zn²⁺||Ag⁺|Ag", correct: true },
+                    { text: "Zn|Zn²⁺||Cu²⁺|Cu", correct: false },
+                    { text: "Cu|Cu²⁺||Ag⁺|Ag", correct: false },
+                    { text: "Fe|Fe²⁺||Cu²⁺|Cu", correct: false }
+                ],
+                explanation: "جهد الخلية = جهد الاختزال (المهبط) - جهد الاختزال (المصعد). الفرق بين Zn/Ag أكبر من الفروق الأخرى.",
+                difficulty: "hard"
+            },
+            {
+                id: 11,
+                text: "عدد أكسدة الكروم في K₂Cr₂O₇ هو:",
+                options: [
+                    { text: "+3", correct: false },
+                    { text: "+4", correct: false },
+                    { text: "+6", correct: true },
+                    { text: "+7", correct: false }
+                ],
+                explanation: "في K₂Cr₂O₇: 2×(+1) + 2x + 7×(-2) = 0 → 2 + 2x - 14 = 0 → 2x = 12 → x = +6",
+                difficulty: "hard"
+            },
+            {
+                id: 12,
+                text: "عملية الطلاء الكهربائي تستخدم:",
+                options: [
+                    { text: "خلية جلفانية", correct: false },
+                    { text: "خلية إلكتروليتية", correct: true },
+                    { text: "خلية وقود", correct: false },
+                    { text: "خلية كلفانية", correct: false }
+                ],
+                explanation: "الطلاء الكهربائي يستخدم خلية إلكتروليتية حيث المادة المراد طلاؤها هي الكاثود، والمعدن المراد ترسيبه هو الأنود.",
+                difficulty: "medium"
+            }
+        ];
 
-        // تشغيل التطبيق عند تحميل الصفحة
-        document.addEventListener('DOMContentLoaded', initApp);
-    </script>
-</body>
-</html>
+        // الموضوع 12: الكيمياء الكهربائية 2
+        topics[11].questionsData = [
+            {
+                id: 1,
+                text: "بطارية السيارة من نوع:",
+                options: [
+                    { text: "الخلايا الجافة", correct: false },
+                    { text: "بطارية الرصاص", correct: true },
+                    { text: "بطارية النيكل-كادميوم", correct: false },
+                    { text: "الخلية الوقود", correct: false }
+                ],
+                explanation: "بطارية السيارة هي بطارية رصاص-حامض، قابلة للشحن، تحتوي على ألواح رصاص وألواح أكسيد الرصاص ومحلول حمض الكبريتيك.",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                text: "أي البطاريات التالية غير قابلة للشحن؟",
+                options: [
+                    { text: "بطارية الرصاص", correct: false },
+                    { text: "بطارية النيكل-كادميوم", correct: false },
+                    { text: "الخلية الجافة", correct: true },
+                    { text: "بطارية الليثيوم", correct: false }
+                ],
+                explanation: "الخلية الجافة (بطارية الزنك-كربون) بطارية أولية غير قابلة للشحن. البطاريات الأخرى ثانوية قابلة للشحن.",
+                difficulty: "medium"
+            },
+            {
+                id: 3,
+                text: "في الخلية الوقودية:",
+                options: [
+                    { text: "تستخدم مواد مستهلكة", correct: false },
+                    { text: "تتوقف عندما تنفذ المواد", correct: false },
+                    { text: "تزود بوقود من الخارج", correct: true },
+                    { text: "لا تنتج ماء", correct: false }
+                ],
+                explanation: "الخلية الوقودية تعمل باستمرار طالما يزود بالوقود (مثل الهيدروجين) والعامل المؤكسد (الأكسجين) من الخارج.",
+                difficulty: "medium"
+            },
+            {
+                id: 4,
+                text: "أي الخلايا التالية تستخدم في الساعات والآلات الحاسبة؟",
+                options: [
+                    { text: "بطارية الرصاص", correct: false },
+                    { text: "الخلية الجافة", correct: false },
+                    { text: "بطارية الزئبق", correct: true },
+                    { text: "بطارية الوقود", correct: false }
+                ],
+                explanation: "بطارية الزئبق (Zn/HgO) صغيرة الحجم وتوفر جهداً ثابتاً، لذا تستخدم في الساعات والآلات الحاسبة.",
+                difficulty: "medium"
+            },
+            {
+                id: 5,
+                text: "التآكل الكهروكيميائي للحديد يحدث بسبب:",
+                options: [
+                    { text: "تعرضه للهواء الجاف", correct: false },
+                    { text: "وجود مناطق أنودية وكاثودية على سطحه", correct: true },
+                    { text: "ارتفاع درجة حرارته", correct: false },
+                    { text: "تعرضه للضوء", correct: false }
+                ],
+                explanation: "الصدأ الكهروكيميائي يحدث عندما يتلامس الحديد مع معدن أقل نشاطاً في وجود رطوبة، فتتشكل خلية جلفانية صغيرة.",
+                difficulty: "hard"
+            },
+            {
+                id: 6,
+                text: "عند التحليل الكهربائي لمحلول CuSO₄ باستخدام أقطاب نحاس، فإن:",
+                options: [
+                    { text: "يزداد تركيز المحلول", correct: false },
+                    { text: "ينقص تركيز المحلول", correct: false },
+                    { text: "يبقى تركيز المحلول ثابتاً", correct: true },
+                    { text: "يتحول إلى لون أزرق داكن", correct: false }
+                ],
+                explanation: "عند استخدام أقطاب نحاس، يترسب النحاس على الكاثود ويذوب الأنود بنفس المعدل، فيبقى تركيز المحلول ثابتاً.",
+                difficulty: "hard"
+            },
+            {
+                id: 7,
+                text: "أي البطاريات التالية صديقة للبيئة؟",
+                options: [
+                    { text: "بطارية الرصاص", correct: false },
+                    { text: "بطارية النيكل-كادميوم", correct: false },
+                    { text: "بطارية الليثيوم", correct: true },
+                    { text: "بطارية الزئبق", correct: false }
+                ],
+                explanation: "بطاريات الليثيوم خفيفة ولا تحتوي على معادن ثقيلة سامة كالكادميوم أو الزئبق، لذا تعتبر أكثر ملاءمة للبيئة.",
+                difficulty: "medium"
+            },
+            {
+                id: 8,
+                text: "كمية المادة المتحررة أو المترسبة أثناء التحليل الكهربائي تتناسب مع:",
+                options: [
+                    { text: "الكتلة المولية فقط", correct: false },
+                    { text: "كمية الكهرباء فقط", correct: false },
+                    { text: "كمية الكهرباء والكتلة المولية", correct: true },
+                    { text: "فرق الجهد فقط", correct: false }
+                ],
+                explanation: "قانون فاراداي: كتلة المادة المتحررة = (المكافئ الكهروكيميائي) × (كمية الكهرباء). والمكافئ الكهروكيميائي = الكتلة المولية ÷ التكافؤ.",
+                difficulty: "hard"
+            },
+            {
+                id: 9,
+                text: "بطارية النيكل-كادميوم قابلة للشحن لأن:",
+                options: [
+                    { text: "تفاعلاتها عكسية", correct: true },
+                    { text: "موادها غير مستهلكة", correct: false },
+                    { text: "تحتوي على محاليل", correct: false },
+                    { text: "جهدها مرتفع", correct: false }
+                ],
+                explanation: "تفاعلات بطارية Ni-Cd عكسية، لذا يمكن عكس التفاعل بتطبيق جهد خارجي (شحن البطارية).",
+                difficulty: "medium"
+            },
+            {
+                id: 10,
+                text: "أي من التطبيقات التالية يستخدم التحليل الكهربائي؟",
+                options: [
+                    { text: "توليد الكهرباء", correct: false },
+                    { text: "تنقية المعادن", correct: true },
+                    { text: "تشغيل السيارات", correct: false },
+                    { text: "تخزين الطاقة", correct: false }
+                ],
+                explanation: "تنقية النحاس تتم بالتحليل الكهربائي حيث النحاس غير النقي يكون الأنود، والنحاس النقي يترسب على الكاثود.",
+                difficulty: "medium"
+            }
+        ];
+
+        // الموضوع 13: الهيدروكربونات
+        topics[12].questionsData = [
+            {
+                id: 1,
+                text: "الصيغة الجزيئية للألكانات هي:",
+                options: [
+                    { text: "CₙH₂ₙ", correct: false },
+                    { text: "CₙH₂ₙ₊₂", correct: true },
+                    { text: "CₙH₂ₙ₋₂", correct: false },
+                    { text: "CₙH₂ₙ₋₆", correct: false }
+                ],
+                explanation: "الألكانات هيدروكربونات مشبعة صيغتها العامة CₙH₂ₙ₊₂. مثال: الميثان CH₄، الإيثان C₂H₆، البروبان C₃H₈.",
+                difficulty: "easy"
+            },
+            {
+                id: 2,
+                text: "أي المركبات التالية من الألكينات؟",
+                options: [
+                    { text: "C₂H₆", correct: false },
+                    { text: "C₂H₄", correct: true },
+                    { text: "C₂H₂", correct: false },
+                    { text: "C₆H₆", correct: false }
+                ],
+                explanation: "الإيثين C₂H₄ من الألكينات (صيغة عامة CₙH₂ₙ). C₂H₆ ألكان، C₂H₂ ألكاين، C₆H₆ أروماتي.",
+                difficulty: "easy"
+            },
+            {
+                id: 3,
+                text: "المركب الذي له رابطة ثلاثية هو:",
+                options: [
+                    { text: "الإيثان", correct: false },
+                    { text: "الإيثين", correct: false },
+                    { text: "الإيثاين", correct: true },
+                    { text: "البروبان", correct: false }
+                ],
+                explanation: "الإيثاين (الأسيتيلين) C₂H₂ له رابطة ثلاثية بين ذرتي الكربون. الإيثان رابطة أحادية، الإيثين رابطة ثنائية.",
+                difficulty: "easy"
+            },
+            {
+                id: 4,
+                text: "تفاعل الهلجنة مع الألكانات يحدث في وجود:",
+                options: [
+                    { text: "حرارة أو ضوء", correct: true },
+                    { text: "حفاز فقط", correct: false },
+                    { text: "ماء فقط", correct: false },
+                    { text: "حمض فقط", correct: false }
+                ],
+                explanation: "تفاعل الاستبدال في الألكانات (مثل كلورة الميثان) يحتاج إلى حرارة أو ضوء فوق بنفسجي لتفكيك جزيء الهالوجين.",
+                difficulty: "medium"
+            },
+            {
+                id: 5,
+                text: "تفاعل إضافة HBr إلى البروبين ينتج:",
+                options: [
+                    { text: "1-بروموبروبان فقط", correct: false },
+                    { text: "2-بروموبروبان فقط", correct: true },
+                    { text: "خليط متساو", correct: false },
+                    { text: "لا يتفاعل", correct: false }
+                ],
+                explanation: "إضافة HBr إلى البروبين يتبع قاعدة ماركونيكوف: يذهب البرومين إلى ذرة الكربون الأكثر استبدالاً، فيتكون 2-بروموبروبان.",
+                difficulty: "hard"
+            },
+            {
+                id: 6,
+                text: "اختبار تمييز الألكينات عن الألكانات هو:",
+                options: [
+                    { text: "مع الماء الجيري", correct: false },
+                    { text: "مع برمنجنات البوتاسيوم", correct: true },
+                    { text: "مع كاشف تولينز", correct: false },
+                    { text: "مع هيدروكسيد الصوديوم", correct: false }
+                ],
+                explanation: "برمنجنات البوتاسيوم البنفسجي يتفاعل مع الألكينات (الروابط الثنائية) ويزول لونه، بينما لا يتفاعل مع الألكانات.",
+                difficulty: "medium"
+            },
+            {
+                id: 7,
+                text: "المركب C₄H₁₀ له:",
+                options: [
+                    { text: "متصاوغ واحد", correct: false },
+                    { text: "متصاوغان", correct: true },
+                    { text: "ثلاثة متصاوغات", correct: false },
+                    { text: "أربعة متصاوغات", correct: false }
+                ],
+                explanation: "البيوتان C₄H₁₀ له متصاوغان: البيوتان العادي (n-butane) و2-ميثيل بروبان (isobutane).",
+                difficulty: "medium"
+            },
+            {
+                id: 8,
+                text: "تفاعل الألكانات مع الأكسجين يسمى:",
+                options: [
+                    { text: "الهدرجة", correct: false },
+                    { text: "الهلجنة", correct: false },
+                    { text: "الاحتراق", correct: true },
+                    { text: "البلمرة", correct: false }
+                ],
+                explanation: "احتراق الألكانات: هيدروكربون + أكسجين → ثاني أكسيد كربون + ماء + طاقة. مثال: CH₄ + 2O₂ → CO₂ + 2H₂O",
+                difficulty: "easy"
+            },
+            {
+                id: 9,
+                text: "الألكينات أكثر نشاطاً من الألكانات بسبب:",
+                options: [
+                    { text: "وجود رابطة باي", correct: true },
+                    { text: "وجود روابط أحادية", correct: false },
+                    { text: "ارتفاع درجة الغليان", correct: false },
+                    { text: "قابلية الذوبان في الماء", correct: false }
+                ],
+                explanation: "الرابطة باي (π) في الألكينات أضعف من الرابطة سيجما (σ) وأكثر عرضة للهجوم الإلكتروفيلي، لذا الألكينات أكثر نشاطاً.",
+                difficulty: "hard"
