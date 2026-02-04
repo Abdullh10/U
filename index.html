@@ -3,1194 +3,987 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مختبر الكيمياء الافتراضي - الصف الثاني الثانوي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>منصة مشاريع طلاب الكيمياء النوعية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #1abc9c;
-            --danger-color: #e74c3c;
-            --warning-color: #f39c12;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #333;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
+        /* أنماط عامة */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
         }
-
+        
+        :root {
+            --primary-color: #2c8cff;
+            --secondary-color: #0d5bb5;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --light-bg: #f5f9ff;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --text-light: #666;
+            --border-radius: 15px;
+            --box-shadow: 0 5px 15px rgba(0, 100, 200, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
         body {
-            font-family: 'Cairo', sans-serif;
+            background-color: var(--light-bg);
             color: var(--text-color);
-            background-color: #f9f9f9;
             line-height: 1.6;
+            padding-bottom: 40px;
         }
-
-        /* الترويسة */
+        
+        /* رأس الصفحة */
         header {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 1rem 2rem;
-            box-shadow: var(--box-shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
+        
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 15px;
         }
-
-        .logo i {
-            font-size: 2.5rem;
-            color: var(--accent-color);
+        
+        header h1 i {
+            font-size: 2rem;
         }
-
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo span {
-            color: var(--accent-color);
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
+        
+        .teacher-info {
             font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: var(--border-radius);
-            transition: var(--transition);
+            opacity: 0.9;
+            margin-top: 10px;
         }
-
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+        
+        /* حاوية المحتوى الرئيسي */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-
-        nav a.active {
-            background-color: var(--accent-color);
-        }
-
-        .user-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .btn {
-            padding: 0.6rem 1.5rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Cairo', sans-serif;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #16a085;
-            transform: translateY(-3px);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background-color: white;
-            color: var(--primary-color);
-        }
-
-        /* المحتوى الرئيسي */
-        .main-container {
-            max-width: 1400px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            display: flex;
-            gap: 2rem;
-        }
-
-        /* الشريط الجانبي */
-        .sidebar {
-            width: 300px;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            height: fit-content;
-        }
-
-        .sidebar h2 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--light-color);
-            font-size: 1.4rem;
-        }
-
-        .units-list {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .units-list li {
-            margin-bottom: 0.8rem;
-        }
-
-        .units-list a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0.8rem 1rem;
-            text-decoration: none;
-            color: var(--text-color);
-            border-radius: var(--border-radius);
-            transition: var(--transition);
-        }
-
-        .units-list a:hover {
-            background-color: var(--light-color);
-            transform: translateX(-5px);
-        }
-
-        .units-list a.active {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .units-list i {
-            font-size: 1.2rem;
-        }
-
-        .filter-section {
-            margin-top: 2rem;
-        }
-
-        .filter-section h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .filter-group {
-            margin-bottom: 1rem;
-        }
-
-        .filter-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        select {
-            width: 100%;
-            padding: 0.7rem;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            font-family: 'Cairo', sans-serif;
-            background-color: white;
-        }
-
-        /* منطقة المحاكاة */
-        .simulation-area {
-            flex: 1;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            overflow: hidden;
-        }
-
-        .simulation-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .simulation-header h2 {
-            font-size: 1.6rem;
-        }
-
-        .experiment-info {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .difficulty {
-            background-color: var(--warning-color);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .simulation-container {
-            display: flex;
-            height: 600px;
-        }
-
-        .control-panel {
-            width: 300px;
-            padding: 1.5rem;
-            border-left: 1px solid #eee;
-            overflow-y: auto;
-        }
-
-        .control-panel h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-        }
-
-        .control-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .control-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        input[type="range"] {
-            width: 100%;
-            margin-bottom: 0.5rem;
-        }
-
-        .value-display {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        .simulation-visualization {
-            flex: 1;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #f8f9fa;
-            position: relative;
-        }
-
-        .molecules-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 400px;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .molecule {
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-
-        .atom {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px;
-        }
-
-        .atom-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--dark-color);
-        }
-
-        .bond {
-            position: absolute;
-            height: 5px;
-            background-color: #333;
-            transform-origin: left center;
-        }
-
-        .data-display {
-            margin-top: 2rem;
-            width: 100%;
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-        }
-
-        .data-display h4 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .results-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .result-card {
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: var(--border-radius);
-            border-right: 4px solid var(--secondary-color);
-        }
-
-        .result-card h5 {
+        
+        /* قسم المجموعات */
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
             color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        /* مكتبة التجارب */
-        .experiments-library {
-            margin-top: 3rem;
-        }
-
-        .library-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .library-header h2 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-        }
-
-        .search-box {
-            display: flex;
             gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-color);
         }
-
-        .search-box input {
-            padding: 0.7rem 1rem;
-            border: 1px solid #ddd;
+        
+        .section-title i {
+            color: var(--primary-color);
+        }
+        
+        .intro-text {
+            background-color: var(--card-bg);
+            padding: 20px;
             border-radius: var(--border-radius);
-            width: 300px;
-            font-family: 'Cairo', sans-serif;
+            margin-bottom: 30px;
+            box-shadow: var(--box-shadow);
+            border-right: 5px solid var(--primary-color);
         }
-
-        .experiments-grid {
+        
+        /* شبكة المجموعات */
+        .groups-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            gap: 25px;
+            margin-bottom: 40px;
         }
-
-        .experiment-card {
-            background-color: white;
+        
+        .group-card {
+            background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            overflow: hidden;
+            padding: 25px;
             box-shadow: var(--box-shadow);
             transition: var(--transition);
+            border-top: 5px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
-
-        .experiment-card:hover {
-            transform: translateY(-10px);
+        
+        .group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 100, 200, 0.15);
         }
-
-        .experiment-image {
-            height: 180px;
-            background-color: var(--secondary-color);
+        
+        .group-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
+            gap: 10px;
         }
-
-        .experiment-content {
-            padding: 1.5rem;
-        }
-
-        .experiment-content h3 {
+        
+        .group-card h3 i {
             color: var(--primary-color);
-            margin-bottom: 0.8rem;
         }
-
-        .experiment-content p {
-            color: #666;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+        
+        .group-meta {
+            margin-bottom: 20px;
         }
-
-        .experiment-meta {
+        
+        .group-meta p {
+            margin-bottom: 8px;
             display: flex;
-            justify-content: space-between;
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            align-items: center;
+            gap: 8px;
         }
-
-        /* التذييل */
-        footer {
+        
+        .group-meta i {
+            color: var(--primary-color);
+            width: 20px;
+        }
+        
+        .members-list {
+            background-color: #f0f8ff;
+            padding: 12px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        .members-list span {
+            display: inline-block;
             background-color: var(--primary-color);
             color: white;
-            padding: 3rem 2rem 1.5rem;
-            margin-top: 4rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
         }
-
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-section a {
-            color: #ddd;
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
             text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            margin-top: auto;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .btn i {
+            margin-left: 8px;
+        }
+        
+        /* قسم الاختبار التفاعلي */
+        .quiz-container {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+            display: none;
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .quiz-title {
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+        }
+        
+        .back-btn {
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .back-btn:hover {
+            background-color: #e9ecef;
+        }
+        
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .points-display, .level-display {
+            text-align: center;
+        }
+        
+        .points-display h4, .level-display h4 {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .points-value, .level-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .question-box {
+            background-color: #f8fbff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-right: 4px solid var(--primary-color);
+        }
+        
+        .question-box h3 {
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+        
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid #e9ecef;
+        }
+        
+        .option:hover {
+            background-color: #f0f8ff;
+            border-color: var(--primary-color);
+        }
+        
+        .option input {
+            margin-left: 10px;
+            transform: scale(1.2);
+        }
+        
+        .option label {
+            flex-grow: 1;
+            cursor: pointer;
+            font-size: 1.05rem;
+        }
+        
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .feedback-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            display: none;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .correct-feedback {
+            color: var(--success-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .incorrect-feedback {
+            color: var(--danger-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .concept-explanation {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .concept-explanation h4 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        /* قسم المحاكاة والفيديو */
+        .resources-section {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .resources-section h3 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .video-container {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .video-container p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .video-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background-color: white;
+            border-radius: 5px;
             transition: var(--transition);
         }
-
-        .footer-section a:hover {
-            color: var(--accent-color);
-            padding-right: 5px;
+        
+        .video-link:hover {
+            background-color: var(--primary-color);
+            color: white;
         }
-
-        .copyright {
+        
+        .phet-container {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .phet-container h4 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .phet-frame {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+            background-color: white;
+        }
+        
+        /* قسم ملاحظات المعلم */
+        .teacher-section {
+            background-color: #fff9e6;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-top: 40px;
+            border-right: 5px solid var(--warning-color);
+            box-shadow: var(--box-shadow);
+        }
+        
+        .teacher-section h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* تذييل الصفحة */
+        footer {
             text-align: center;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
-
-        /* تصميم متجاوب */
-        @media (max-width: 1200px) {
-            .main-container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .simulation-container {
-                flex-direction: column;
-                height: auto;
-            }
-            
-            .control-panel {
-                width: 100%;
-                border-left: none;
-                border-top: 1px solid #eee;
-            }
-            
-            .experiments-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            
-            nav ul {
-                gap: 1rem;
-            }
-        }
-
+        
+        /* تجاوب مع الشاشات الصغيرة */
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .user-actions {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            .library-header {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: flex-start;
-            }
-            
-            .search-box {
-                width: 100%;
-            }
-            
-            .search-box input {
-                width: 100%;
-            }
-            
-            .experiments-grid {
+            .groups-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .progress-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .quiz-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .quiz-controls .btn {
+                width: 100%;
+            }
+            
+            .phet-frame {
+                height: 300px;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+                flex-direction: column;
+                gap: 10px;
+            }
         }
+        
+        /* ألوان خاصة بالمجموعات */
+        .group-1 { border-top-color: #2c8cff; }
+        .group-2 { border-top-color: #28a745; }
+        .group-3 { border-top-color: #ffc107; }
+        .group-4 { border-top-color: #dc3545; }
+        .group-5 { border-top-color: #6f42c1; }
+        .group-6 { border-top-color: #17a2b8; }
     </style>
 </head>
 <body>
-    <!-- الترويسة -->
+    <!-- رأس الصفحة -->
     <header>
-        <div class="header-container">
-            <div class="logo">
+        <div class="container">
+            <h1>
                 <i class="fas fa-flask"></i>
-                <div>
-                    <h1>مختبر <span>الكيمياء</span> الافتراضي</h1>
-                    <p>محاكاة تفاعلية للصف الثاني الثانوي</p>
-                </div>
-            </div>
-            
-            <nav>
-                <ul>
-                    <li><a href="#" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
-                    <li><a href="#"><i class="fas fa-vial"></i> التجارب</a></li>
-                    <li><a href="#"><i class="fas fa-chart-line"></i> التقدم</a></li>
-                    <li><a href="#"><i class="fas fa-graduation-cap"></i> الدروس</a></li>
-                    <li><a href="#"><i class="fas fa-question-circle"></i> المساعدة</a></li>
-                </ul>
-            </nav>
-            
-            <div class="user-actions">
-                <button class="btn btn-secondary"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
-                <button class="btn btn-primary"><i class="fas fa-user-plus"></i> حساب جديد</button>
-            </div>
+                منصة مشاريع الطلاب النوعية في الكيمياء
+            </h1>
+            <p class="teacher-info">
+                تحت إشراف المعلم المتقدم: الأستاذ عبدالله بن محمد حمدي
+            </p>
         </div>
     </header>
-
+    
     <!-- المحتوى الرئيسي -->
-    <div class="main-container">
-        <!-- الشريط الجانبي -->
-        <aside class="sidebar">
-            <h2><i class="fas fa-book-open"></i> وحدات المنهج</h2>
-            <ul class="units-list">
-                <li><a href="#" class="active"><i class="fas fa-fire"></i> الحرارة والطاقة</a></li>
-                <li><a href="#"><i class="fas fa-tachometer-alt"></i> سرعة التفاعلات</a></li>
-                <li><a href="#"><i class="fas fa-atom"></i> الكيمياء العضوية</a></li>
-                <li><a href="#"><i class="fas fa-dna"></i> الكيمياء الحيوية</a></li>
-            </ul>
+    <div class="container">
+        <!-- قسم المجموعات (الصفحة الرئيسية) -->
+        <div id="groupsPage">
+            <h2 class="section-title">
+                <i class="fas fa-users"></i>
+                مجموعات التحليل التعليمي
+            </h2>
             
-            <div class="filter-section">
-                <h3><i class="fas fa-filter"></i> تصفية التجارب</h3>
-                <div class="filter-group">
-                    <label for="difficulty">مستوى الصعوبة</label>
-                    <select id="difficulty">
-                        <option value="all">جميع المستويات</option>
-                        <option value="1">سهل</option>
-                        <option value="2" selected>متوسط</option>
-                        <option value="3">صعب</option>
-                    </select>
-                </div>
-                
-                <div class="filter-group">
-                    <label for="time">مدة التجربة</label>
-                    <select id="time">
-                        <option value="all">أي مدة</option>
-                        <option value="short">قصيرة (أقل من 10 دقائق)</option>
-                        <option value="medium" selected>متوسطة (10-20 دقيقة)</option>
-                        <option value="long">طويلة (أكثر من 20 دقيقة)</option>
-                    </select>
-                </div>
-                
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;"><i class="fas fa-search"></i> بحث</button>
+            <div class="intro-text">
+                <p>تم تقسيم طلاب كيمياء ١ إلى مجموعات مكونة من ٥ طلاب. كل مجموعة قامت بتحليل قسم من المقرر وتصميم بنك أسئلة تفاعلي يساعد في التدريب على الاختبار التحصيلي.</p>
+                <p>كل سؤال في المنصة مصمم لتقديم شرح مفصل للإجابة الصحيحة والخاطئة، مع ربطه بمقاطع فيديو وتجارب افتراضية من موقع PhET لتعزيز الفهم.</p>
             </div>
             
-            <div class="recent-experiments" style="margin-top: 2rem;">
-                <h3><i class="fas fa-history"></i> تجارب حديثة</h3>
-                <ul style="list-style: none; margin-top: 1rem;">
-                    <li style="margin-bottom: 0.7rem;"><a href="#" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-vial"></i> تفاعل الاحتراق</a></li>
-                    <li style="margin-bottom: 0.7rem;"><a href="#" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-vial"></i> قياس التغير في المحتوى الحراري</a></li>
-                    <li style="margin-bottom: 0.7rem;"><a href="#" style="color: var(--secondary-color); text-decoration: none;"><i class="fas fa-vial"></i> العوامل المؤثرة على سرعة التفاعل</a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <!-- منطقة المحاكاة الرئيسية -->
-        <main class="simulation-area">
-            <div class="simulation-header">
-                <h2>تفاعل الاحتراق (ميثان + أكسجين)</h2>
-                <div class="experiment-info">
-                    <span class="difficulty">مستوى متوسط</span>
-                    <span><i class="far fa-clock"></i> 15 دقيقة</span>
-                    <span><i class="fas fa-fire"></i> الحرارة والطاقة</span>
-                </div>
+            <div class="groups-grid" id="groupsList">
+                <!-- سيتم ملء المجموعات بواسطة JavaScript -->
             </div>
             
-            <div class="simulation-container">
-                <div class="simulation-visualization">
-                    <div class="molecules-container" id="molecules-container">
-                        <!-- ستعرض جافاسكريبت الجزيئات هنا -->
-                    </div>
-                    
-                    <div class="data-display">
-                        <h4><i class="fas fa-chart-bar"></i> النتائج والملاحظات</h4>
-                        <div class="results-container" id="results-container">
-                            <!-- ستعرض جافاسكريبت النتائج هنا -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-panel">
-                    <h3><i class="fas fa-sliders-h"></i> لوحة التحكم</h3>
-                    
-                    <div class="control-group">
-                        <label for="temperature">درجة الحرارة (°C)</label>
-                        <input type="range" id="temperature" min="0" max="500" value="25" step="1">
-                        <div class="value-display">
-                            <span>0°C</span>
-                            <span id="temp-value">25°C</span>
-                            <span>500°C</span>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="pressure">الضغط (atm)</label>
-                        <input type="range" id="pressure" min="0.5" max="5" value="1" step="0.1">
-                        <div class="value-display">
-                            <span>0.5 atm</span>
-                            <span id="pressure-value">1 atm</span>
-                            <span>5 atm</span>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="methane">كمية الميثان (mol)</label>
-                        <input type="range" id="methane" min="0.1" max="2" value="1" step="0.1">
-                        <div class="value-display">
-                            <span>0.1 mol</span>
-                            <span id="methane-value">1 mol</span>
-                            <span>2 mol</span>
-                        </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label for="oxygen">نسبة الأكسجين</label>
-                        <input type="range" id="oxygen" min="1" max="4" value="2" step="0.1">
-                        <div class="value-display">
-                            <span>نقص أكسجين</span>
-                            <span id="oxygen-value">نسبة مثالية (2)</span>
-                            <span>فائض أكسجين</span>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-primary" id="start-experiment" style="width: 100%; margin-top: 1.5rem;">
-                        <i class="fas fa-play"></i> بدء التجربة
-                    </button>
-                    
-                    <button class="btn btn-secondary" id="reset-experiment" style="width: 100%; margin-top: 0.8rem;">
-                        <i class="fas fa-redo"></i> إعادة الضبط
-                    </button>
-                    
-                    <div class="instructions" style="margin-top: 2rem; padding: 1rem; background-color: #f8f9fa; border-radius: var(--border-radius);">
-                        <h4><i class="fas fa-info-circle"></i> تعليمات</h4>
-                        <p style="font-size: 0.9rem; margin-top: 0.5rem;">قم بتغيير المعلمات في لوحة التحكم ثم اضغط على "بدء التجربة" لمشاهدة تأثيرها على التفاعل الكيميائي.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- مكتبة التجارب -->
-            <div class="experiments-library">
-                <div class="library-header">
-                    <h2><i class="fas fa-book"></i> مكتبة التجارب التفاعلية</h2>
-                    <div class="search-box">
-                        <input type="text" placeholder="ابحث عن تجربة...">
-                        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                    </div>
-                </div>
-                
-                <div class="experiments-grid">
-                    <!-- التجربة 1 -->
-                    <div class="experiment-card">
-                        <div class="experiment-image" style="background-color: #3498db;">
-                            <i class="fas fa-temperature-high"></i>
-                        </div>
-                        <div class="experiment-content">
-                            <h3>قياس التغير في المحتوى الحراري</h3>
-                            <p>تجربة لقياس كمية الحرارة المنطلقة أو الممتصة في التفاعلات الكيميائية باستخدام المسعر.</p>
-                            <div class="experiment-meta">
-                                <span><i class="fas fa-fire"></i> الحرارة والطاقة</span>
-                                <span><i class="fas fa-signal"></i> متوسط</span>
-                            </div>
-                            <button class="btn btn-primary" style="width: 100%;">بدء التجربة</button>
-                        </div>
-                    </div>
-                    
-                    <!-- التجربة 2 -->
-                    <div class="experiment-card">
-                        <div class="experiment-image" style="background-color: #e74c3c;">
-                            <i class="fas fa-tachometer-alt"></i>
-                        </div>
-                        <div class="experiment-content">
-                            <h3>العوامل المؤثرة على سرعة التفاعل</h3>
-                            <p>استكشاف تأثير التركيز، درجة الحرارة، والعوامل الحفازة على سرعة التفاعل الكيميائي.</p>
-                            <div class="experiment-meta">
-                                <span><i class="fas fa-tachometer-alt"></i> سرعة التفاعلات</span>
-                                <span><i class="fas fa-signal"></i> سهل</span>
-                            </div>
-                            <button class="btn btn-primary" style="width: 100%;">بدء التجربة</button>
-                        </div>
-                    </div>
-                    
-                    <!-- التجربة 3 -->
-                    <div class="experiment-card">
-                        <div class="experiment-image" style="background-color: #1abc9c;">
-                            <i class="fas fa-atom"></i>
-                        </div>
-                        <div class="experiment-content">
-                            <h3>بناء الجزيئات العضوية</h3>
-                            <p>محاكاة لبناء جزيئات الهيدروكربونات المختلفة وتسميتها وفق نظام الأيوباك.</p>
-                            <div class="experiment-meta">
-                                <span><i class="fas fa-atom"></i> الكيمياء العضوية</span>
-                                <span><i class="fas fa-signal"></i> صعب</span>
-                            </div>
-                            <button class="btn btn-primary" style="width: 100%;">بدء التجربة</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- التذييل -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>مختبر الكيمياء الافتراضي</h3>
-                <p>منصة تعليمية تفاعلية تهدف إلى تعزيز فهم مادة الكيمياء للصف الثاني الثانوي من خلال المحاكاة والتجارب الافتراضية.</p>
-                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
-                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
-                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
-                    <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h3>روابط سريعة</h3>
-                <ul>
-                    <li><a href="#"><i class="fas fa-arrow-left"></i> جميع التجارب</a></li>
-                    <li><a href="#"><i class="fas fa-arrow-left"></i> خطط الدروس</a></li>
-                    <li><a href="#"><i class="fas fa-arrow-left"></i> أدلة المعلم</a></li>
-                    <li><a href="#"><i class="fas fa-arrow-left"></i> الأسئلة الشائعة</a></li>
-                    <li><a href="#"><i class="fas fa-arrow-left"></i> اتصل بنا</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>الوحدات التعليمية</h3>
-                <ul>
-                    <li><a href="#"><i class="fas fa-arrow-left"></i> الحرارة والطاقة</a></li>
-                    <li><a href="#"><i class="fas fa-arrow-left"></i> سرعة التفاعلات</a></li>
-                    <li><a href="#"><i class="fas fa-arrow-left"></i> الكيمياء العضوية</a></li>
-                    <li><a href="#"><i class="fas fa-arrow-left"></i> الكيمياء الحيوية</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>النشرة الإخبارية</h3>
-                <p>اشترك في نشرتنا الإخبارية للحصول على آخر التجارب والإضافات.</p>
-                <div style="margin-top: 1rem; display: flex;">
-                    <input type="email" placeholder="بريدك الإلكتروني" style="padding: 0.7rem; border: none; border-radius: var(--border-radius) 0 0 var(--border-radius); flex: 1;">
-                    <button class="btn btn-primary" style="border-radius: 0 var(--border-radius) var(--border-radius) 0;"><i class="fas fa-paper-plane"></i></button>
-                </div>
+            <div class="teacher-section">
+                <h3><i class="fas fa-chalkboard-teacher"></i> ملاحظات المعلم</h3>
+                <p>المنصة تهدف إلى تحويل الطلاب من متلقين للمعلومة إلى مشاركين في بنائها. كل مجموعة صممت محتوى تفاعلياً لوحدتها الدراسية، مع مراعاة الفروق الفردية من خلال التغذية الراجعة المفصلة عند كل إجابة.</p>
+                <p>عند إجابة الطالب خطأ، تظهر له: ١) شرح للمفهوم، ٢) مقطع فيديو تعليمي، ٣) تجربة افتراضية تفاعلية، ٤) نقاط تشجيعية للتقدم.</p>
             </div>
         </div>
         
-        <div class="copyright">
-            <p>© 2023 مختبر الكيمياء الافتراضي. جميع الحقوق محفوظة. | تم التطوير بأيدي عربية</p>
+        <!-- قسم الاختبار التفاعلي (يظهر عند اختيار مجموعة) -->
+        <div id="quizPage" class="quiz-container">
+            <div class="quiz-header">
+                <h2 class="quiz-title" id="quizGroupName"></h2>
+                <a href="#" class="back-btn" id="backToGroups">
+                    <i class="fas fa-arrow-right"></i> العودة إلى المجموعات
+                </a>
+            </div>
+            
+            <div class="progress-container">
+                <div class="points-display">
+                    <h4>النقاط</h4>
+                    <div class="points-value" id="studentPoints">0</div>
+                </div>
+                
+                <div class="level-display">
+                    <h4>المستوى</h4>
+                    <div class="level-value" id="studentLevel">مبتدئ</div>
+                </div>
+                
+                <div class="progress-display">
+                    <h4>التقدم</h4>
+                    <div id="questionProgress">1/5</div>
+                </div>
+            </div>
+            
+            <div class="question-box" id="questionBox">
+                <!-- سيتم عرض الأسئلة هنا -->
+            </div>
+            
+            <div class="quiz-controls">
+                <button class="btn" id="checkAnswerBtn">
+                    <i class="fas fa-check-circle"></i> تحقق من الإجابة
+                </button>
+                <button class="btn" id="nextQuestionBtn" style="display: none;">
+                    <i class="fas fa-forward"></i> السؤال التالي
+                </button>
+            </div>
+            
+            <div class="feedback-box" id="feedbackBox">
+                <!-- سيتم عرض التغذية الراجعة هنا -->
+            </div>
+            
+            <div class="resources-section" id="resourcesSection">
+                <h3><i class="fas fa-lightbulb"></i> موارد تعليمية للمراجعة</h3>
+                
+                <div class="video-container">
+                    <p><i class="fas fa-video"></i> <strong>فيديو تعليمي مقترح:</strong></p>
+                    <a href="#" target="_blank" class="video-link" id="videoLink">
+                        <i class="fas fa-external-link-alt"></i> شاهد الفيديو التعليمي
+                    </a>
+                </div>
+                
+                <div class="phet-container">
+                    <h4><i class="fas fa-atom"></i> تجربة افتراضية من PhET</h4>
+                    <iframe class="phet-frame" id="phetFrame" src="" title="تجربة PhET الافتراضية"></iframe>
+                </div>
+                
+                <div class="concept-explanation" id="conceptExplanation">
+                    <!-- سيتم عرض شرح المفاهيم هنا -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 منصة مشاريع الطلاب النوعية في الكيمياء - تصميم تحت إشراف الأستاذ عبدالله بن محمد حمدي</p>
+            <p>جميع محتويات المنصة من تصميم وإعداد طلاب كيمياء ١</p>
         </div>
     </footer>
-
+    
+    <!-- JavaScript -->
     <script>
-        // متغيرات المحاكاة
-        let experimentRunning = false;
-        let temperature = 25;
-        let pressure = 1;
-        let methane = 1;
-        let oxygen = 2;
-        
-        // العناصر DOM
-        const tempSlider = document.getElementById('temperature');
-        const pressureSlider = document.getElementById('pressure');
-        const methaneSlider = document.getElementById('methane');
-        const oxygenSlider = document.getElementById('oxygen');
-        const startBtn = document.getElementById('start-experiment');
-        const resetBtn = document.getElementById('reset-experiment');
-        const moleculesContainer = document.getElementById('molecules-container');
-        const resultsContainer = document.getElementById('results-container');
-        
-        // عرض القيم الحالية
-        const tempValue = document.getElementById('temp-value');
-        const pressureValue = document.getElementById('pressure-value');
-        const methaneValue = document.getElementById('methane-value');
-        const oxygenValue = document.getElementById('oxygen-value');
-        
-        // تهيئة المنزلقات
-        tempSlider.addEventListener('input', function() {
-            temperature = this.value;
-            tempValue.textContent = `${temperature}°C`;
-            if (!experimentRunning) updateMolecules();
-        });
-        
-        pressureSlider.addEventListener('input', function() {
-            pressure = this.value;
-            pressureValue.textContent = `${pressure} atm`;
-            if (!experimentRunning) updateMolecules();
-        });
-        
-        methaneSlider.addEventListener('input', function() {
-            methane = this.value;
-            methaneValue.textContent = `${methane} mol`;
-            if (!experimentRunning) updateMolecules();
-        });
-        
-        oxygenSlider.addEventListener('input', function() {
-            oxygen = this.value;
-            let oxygenText = "نقص أكسجين";
-            if (oxygen > 2.5) oxygenText = "فائض أكسجين";
-            else if (oxygen >= 1.5 && oxygen <= 2.5) oxygenText = "نسبة مثالية (2)";
-            oxygenValue.textContent = oxygenText;
-            if (!experimentRunning) updateMolecules();
-        });
-        
-        // زر بدء التجربة
-        startBtn.addEventListener('click', function() {
-            if (experimentRunning) return;
-            
-            experimentRunning = true;
-            startBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري التشغيل...';
-            startBtn.disabled = true;
-            
-            // محاكاة التفاعل
-            simulateReaction();
-        });
-        
-        // زر إعادة الضبط
-        resetBtn.addEventListener('click', function() {
-            resetExperiment();
-        });
-        
-        // وظيفة محاكاة التفاعل
-        function simulateReaction() {
-            // إعادة تعيين العرض
-            moleculesContainer.innerHTML = '';
-            resultsContainer.innerHTML = '';
-            
-            // إنشاء الجزيئات الأولية
-            createMolecule('CH₄', '#3498db', 100, 200, 'ميثان');
-            createMolecule('O₂', '#e74c3c', 400, 200, 'أكسجين');
-            
-            // إضافة سهم التفاعل
-            const arrow = document.createElement('div');
-            arrow.style.position = 'absolute';
-            arrow.style.left = '250px';
-            arrow.style.top = '220px';
-            arrow.style.fontSize = '2rem';
-            arrow.style.color = '#f39c12';
-            arrow.innerHTML = '→';
-            moleculesContainer.appendChild(arrow);
-            
-            // حساب نتائج التفاعل
-            const energyReleased = calculateEnergyReleased();
-            const reactionRate = calculateReactionRate();
-            const products = calculateProducts();
-            
-            // عرض النتائج
-            setTimeout(() => {
-                // إزالة الجزيئات الأولية
-                document.querySelectorAll('.molecule').forEach(mol => {
-                    mol.style.opacity = '0';
-                    mol.style.transform = 'scale(0)';
-                });
-                
-                arrow.style.opacity = '0';
-                
-                // إظهار الجزيئات الناتجة
-                setTimeout(() => {
-                    moleculesContainer.innerHTML = '';
-                    
-                    createMolecule('CO₂', '#2c3e50', 150, 200, 'ثاني أكسيد الكربون');
-                    createMolecule('H₂O', '#1abc9c', 350, 200, 'ماء');
-                    
-                    // إضافة تأثير الحرارة
-                    const heatEffect = document.createElement('div');
-                    heatEffect.style.position = 'absolute';
-                    heatEffect.style.left = '250px';
-                    heatEffect.style.top = '100px';
-                    heatEffect.style.fontSize = '3rem';
-                    heatEffect.style.color = '#e74c3c';
-                    heatEffect.innerHTML = '<i class="fas fa-fire"></i>';
-                    heatEffect.style.animation = 'pulse 1s infinite';
-                    moleculesContainer.appendChild(heatEffect);
-                    
-                    // إضافة توهج
-                    moleculesContainer.style.boxShadow = '0 0 30px rgba(231, 76, 60, 0.5)';
-                    
-                    // عرض النتائج في لوحة البيانات
-                    displayResults(energyReleased, reactionRate, products);
-                    
-                    // إعادة تمكين الزر
-                    setTimeout(() => {
-                        experimentRunning = false;
-                        startBtn.innerHTML = '<i class="fas fa-play"></i> بدء التجربة';
-                        startBtn.disabled = false;
-                        
-                        // إزالة التوهج
-                        moleculesContainer.style.boxShadow = 'inset 0 0 10px rgba(0, 0, 0, 0.1)';
-                    }, 3000);
-                }, 500);
-            }, 2000);
-        }
-        
-        // وظيفة إنشاء جزيء
-        function createMolecule(formula, color, x, y, name) {
-            const molecule = document.createElement('div');
-            molecule.className = 'molecule';
-            molecule.style.left = `${x}px`;
-            molecule.style.top = `${y}px`;
-            
-            const atom = document.createElement('div');
-            atom.className = 'atom';
-            atom.style.backgroundColor = color;
-            atom.textContent = formula;
-            
-            const label = document.createElement('div');
-            label.className = 'atom-label';
-            label.textContent = name;
-            
-            molecule.appendChild(atom);
-            molecule.appendChild(label);
-            moleculesContainer.appendChild(molecule);
-            
-            return molecule;
-        }
-        
-        // وظيفة تحديث الجزيئات بناءً على المعلمات
-        function updateMolecules() {
-            moleculesContainer.innerHTML = '';
-            
-            // حجم الجزيء يعتمد على الكمية
-            const ch4Size = 40 + methane * 10;
-            const o2Size = 40 + oxygen * 5;
-            
-            // لون الجزيء يعتمد على درجة الحرارة
-            const ch4Color = temperature > 100 ? '#2980b9' : '#3498db';
-            const o2Color = temperature > 100 ? '#c0392b' : '#e74c3c';
-            
-            createMolecule('CH₄', ch4Color, 100, 200, 'ميثان');
-            createMolecule('O₂', o2Color, 400, 200, 'أكسجين');
-            
-            // إضافة سهم التفاعل
-            const arrow = document.createElement('div');
-            arrow.style.position = 'absolute';
-            arrow.style.left = '250px';
-            arrow.style.top = '220px';
-            arrow.style.fontSize = '2rem';
-            arrow.style.color = '#f39c12';
-            arrow.innerHTML = '→';
-            moleculesContainer.appendChild(arrow);
-        }
-        
-        // وظيفة حساب الطاقة المنطلقة
-        function calculateEnergyReleased() {
-            // معادلة تقريبية: CH4 + 2O2 → CO2 + 2H2O + طاقة
-            let baseEnergy = 890; // kJ/mol للتفاعل المثالي
-            
-            // تعديل بناءً على المعلمات
-            let energy = baseEnergy * methane;
-            
-            // تأثير درجة الحرارة
-            if (temperature > 100) energy *= 1.2;
-            if (temperature > 300) energy *= 1.5;
-            
-            // تأثير الضغط
-            energy *= (1 + (pressure - 1) * 0.1);
-            
-            // تأثير نسبة الأكسجين
-            if (oxygen < 1.5) energy *= 0.7; // نقص أكسجين
-            if (oxygen > 2.5) energy *= 0.9; // فائض أكسجين
-            
-            return Math.round(energy);
-        }
-        
-        // وظيفة حساب سرعة التفاعل
-        function calculateReactionRate() {
-            let rate = 1.0;
-            
-            // تأثير درجة الحرارة (قاعدة فانت هوف)
-            rate *= Math.pow(2, (temperature - 25) / 10);
-            
-            // تأثير الضغط
-            rate *= pressure;
-            
-            // تأثير التركيز
-            rate *= methane;
-            rate *= Math.min(oxygen, 2);
-            
-            return rate.toFixed(2);
-        }
-        
-        // وظيفة حساب النواتج
-        function calculateProducts() {
-            const co2 = methane; // مولات CO2 الناتجة
-            const h2o = 2 * methane; // مولات H2O الناتجة
-            
-            // إذا كان هناك نقص في الأكسجين
-            if (oxygen < 2) {
-                return {
-                    co2: (methane * oxygen / 2).toFixed(2),
-                    h2o: (methane * oxygen).toFixed(2),
-                    co: (methane * (2 - oxygen) / 2).toFixed(2),
-                    incomplete: true
-                };
+        // بيانات المجموعات
+        const studentGroups = [
+            {
+                id: 1,
+                name: "مجموعة الذرة والتركيب الإلكتروني",
+                members: ["خالد أحمد", "تميم محمد", "فهد عبدالله", "سعيد القحطاني", "محمد السعيد"],
+                analyzedChapter: "الوحدة ٢: التركيب الذري والنظائر",
+                colorClass: "group-1"
+            },
+            {
+                id: 2,
+                name: "مجموعة الروابط الكيميائية",
+                members: ["فهد العتيبي", "أحمد الغامدي", "محمد الحربي", "عبدالعزيز الفوزان", "حمد الشمري"],
+                analyzedChapter: "الوحدة ٣: الروبات الكيميائية والمركبات",
+                colorClass: "group-2"
+            },
+            {
+                id: 3,
+                name: "مجموعة التفاعلات الكيميائية",
+                members: ["عمر الراشد", "نواف الدوسري", "بدر العصيمي", "علي المطيري", "فيصل النافع"],
+                analyzedChapter: "الوحدة ٤: التفاعلات الكيميائية والمعادلات",
+                colorClass: "group-3"
+            },
+            {
+                id: 4,
+                name: "مجموعة الحسابات الكيميائية",
+                members: ["حمد السعدون", "تركي البلوي", "عبدالاله الزهراني", "نايف الجهني", "محمد السعيد
+                analyzedChapter: "الوحدة ٥: المول والحسابات الكيميائية",
+                colorClass: "group-4"
+            },
+            {
+                id: 5,
+                name: "مجموعة حالات المادة",
+                members: ["سعد الحمود", "سعيد الشهراني", "محمد الشهري", "ناصر الحارثي", "محمد السفياني"],
+                analyzedChapter: "الوحدة ٦: حالات المادة والتغيرات",
+                colorClass: "group-5"
+            },
+            {
+                id: 6,
+                name: "مجموعة المحاليل والتركيز",
+                members: ["علي الناصر", "تميم المالكي", "محمد العلي", "وليد محمد", "محمد الغامدي"],
+                analyzedChapter: "الوحدة ٧: المحاليل والتركيز",
+                colorClass: "group-6"
             }
-            
-            return {
-                co2: co2.toFixed(2),
-                h2o: h2o.toFixed(2),
-                co: 0,
-                incomplete: false
-            };
-        }
-        
-        // وظيفة عرض النتائج
-        function displayResults(energy, rate, products) {
-            resultsContainer.innerHTML = '';
-            
-            const results = [
-                { title: 'الطاقة المنطلقة', value: `${energy} kJ/mol`, icon: 'fas fa-bolt' },
-                { title: 'سرعة التفاعل', value: rate, icon: 'fas fa-tachometer-alt' },
-                { title: 'CO₂ الناتج', value: `${products.co2} mol`, icon: 'fas fa-cloud' },
-                { title: 'H₂O الناتج', value: `${products.h2o} mol`, icon: 'fas fa-tint' }
-            ];
-            
-            if (products.incomplete) {
-                results.push({ 
-                    title: 'CO الناتج (احتراق غير كامل)', 
-                    value: `${products.co} mol`, 
-                    icon: 'fas fa-skull-crossbones',
-                    warning: true 
-                });
-            }
-            
-            results.forEach(result => {
-                const card = document.createElement('div');
-                card.className = 'result-card';
-                if (result.warning) {
-                    card.style.borderRightColor = 'var(--danger-color)';
+        ];
+
+        // بنك الأسئلة لكل مجموعة
+        const questionBanks = {
+            1: [
+                {
+                    question: "ما العدد الأقصى للإلكترونات في المستوى الرئيسي الثالث (n=3)؟",
+                    options: ["٢ إلكترون", "٨ إلكترونات", "١٨ إلكترون", "٣٢ إلكترون"],
+                    correctAnswer: 2, // الفهرس 2 يعني الخيار الثالث (١٨ إلكترون)
+                    explanation: {
+                        correct: "إجابة صحيحة! القانون هو ٢n² حيث n رقم المستوى. إذن ٢ × (٣)² = ٢ × ٩ = ١٨ إلكترونًا كحد أقصى.",
+                        incorrect: "إجابة غير صحيحة. تذكر قانون الإلكترونات في المستوى: ٢n²، حيث n هو رقم المستوى الرئيسي. للمستوى الثالث: ٢ × (٣)² = ٢ × ٩ = ١٨ إلكترونًا.",
+                        concept: "سعة المستويات الإلكترونية وقانون ٢n². كل مستوى رئيسي له سعة إلكترونية محددة تحسب بهذا القانون.",
+                        videoLink: "https://www.youtube.com/watch?v=kfZtcw7Ba78",
+                        phetSim: "https://phet.colorado.edu/sims/html/build-an-atom/latest/build-an-atom_ar.html"
+                    }
+                },
+                {
+                    question: "ما عدد البروتونات في نواة ذرة الصوديوم (العدد الذري ١١)؟",
+                    options: ["١٠ بروتونات", "١١ بروتون", "١٢ بروتون", "٢٣ بروتون"],
+                    correctAnswer: 1,
+                    explanation: {
+                        correct: "إجابة صحيحة! العدد الذري يمثل عدد البروتونات في النواة، لذا لذرة الصوديوم ١١ بروتون.",
+                        incorrect: "إجابة غير صحيحة. تذكر أن العدد الذري لأي عنصر يساوي عدد البروتونات في نواته. العدد الذري للصوديوم هو ١١، إذن له ١١ بروتون.",
+                        concept: "العدد الذري وعلاقته بعدد البروتونات. العدد الذري هو العدد المميز للعنصر ويحدد هويته.",
+                        videoLink: "https://www.youtube.com/watch?v=6w74H9U6wBo",
+                        phetSim: "https://phet.colorado.edu/sims/html/isotopes-and-atomic-mass/latest/isotopes-and-atomic-mass_ar.html"
+                    }
                 }
+            ],
+            2: [
+                {
+                    question: "أي نوع من الروابط ينتج عن مشاركة الذرات بالإلكترونات؟",
+                    options: ["الرابط الأيوني", "الرابط التساهمي", "الرابط الفلزي", "رابط فان دير فالس"],
+                    correctAnswer: 1,
+                    explanation: {
+                        correct: "إجابة صحيحة! الرابط التساهمي يتكون عن طريق مشاركة زوج أو أكثر من الإلكترونات بين الذرات.",
+                        incorrect: "إجابة غير صحيحة. الرابط الذي ينشأ عن مشاركة الإلكترونات بين الذرات هو الرابط التساهمي، أما الأيوني فينتج عن انتقال الإلكترونات.",
+                        concept: "الروابط التساهمية وتكوينها عن طريق المشاركة بالإلكترونات لتحقيق الاستقرار الإلكتروني.",
+                        videoLink: "https://www.youtube.com/watch?v=_qOGwx6MTUA",
+                        phetSim: "https://phet.colorado.edu/sims/html/molecule-shapes/latest/molecule-shapes_ar.html"
+                    }
+                }
+            ],
+            3: [
+                {
+                    question: "عند تفاعل الحديد مع الكبريت، أي مما يلي يصف نوع التفاعل؟",
+                    options: ["تفاعل تكوين", "تفاعل احتراق", "تفاعل تحلل", "تفاعل إحلال مزدوج"],
+                    correctAnswer: 0,
+                    explanation: {
+                        correct: "إجابة صحيحة! تفاعل الحديد مع الكبريت لتكوين كبريتيد الحديد هو تفاعل تكوين حيث يتحد عنصران لتكوين مركب واحد.",
+                        incorrect: "إجابة غير صحيحة. تفاعل عنصرين لتكوين مركب واحد يصنف كتفاعل تكوين (مثل Fe + S → FeS).",
+                        concept: "تفاعلات التكوين (الاتحاد المباشر) حيث يتحد عنصران أو أكثر لتكوين مركب واحد جديد.",
+                        videoLink: "https://www.youtube.com/watch?v=aAWGGLv7h9E",
+                        phetSim: "https://phet.colorado.edu/sims/html/reactants-products-and-leftovers/latest/reactants-products-and-leftovers_ar.html"
+                    }
+                }
+            ]
+        };
+
+        // حالة التطبيق
+        let currentState = {
+            currentPage: 'groups', // 'groups' أو 'quiz'
+            currentGroupId: null,
+            currentQuestionIndex: 0,
+            studentPoints: 0,
+            studentLevel: 'مبتدئ'
+        };
+
+        // DOM Elements
+        const groupsPage = document.getElementById('groupsPage');
+        const quizPage = document.getElementById('quizPage');
+        const groupsList = document.getElementById('groupsList');
+        const quizGroupName = document.getElementById('quizGroupName');
+        const studentPointsEl = document.getElementById('studentPoints');
+        const studentLevelEl = document.getElementById('studentLevel');
+        const questionBox = document.getElementById('questionBox');
+        const feedbackBox = document.getElementById('feedbackBox');
+        const resourcesSection = document.getElementById('resourcesSection');
+        const videoLink = document.getElementById('videoLink');
+        const phetFrame = document.getElementById('phetFrame');
+        const conceptExplanation = document.getElementById('conceptExplanation');
+        const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+        const backToGroups = document.getElementById('backToGroups');
+        const questionProgress = document.getElementById('questionProgress');
+
+        // تهيئة التطبيق
+        function initApp() {
+            displayGroups();
+            setupEventListeners();
+        }
+
+        // عرض المجموعات
+        function displayGroups() {
+            groupsList.innerHTML = '';
+            
+            studentGroups.forEach(group => {
+                const groupCard = document.createElement('div');
+                groupCard.className = `group-card ${group.colorClass}`;
                 
-                card.innerHTML = `
-                    <h5><i class="${result.icon}"></i> ${result.title}</h5>
-                    <p style="font-size: 1.2rem; font-weight: bold;">${result.value}</p>
+                groupCard.innerHTML = `
+                    <h3><i class="fas fa-user-friends"></i> ${group.name}</h3>
+                    <div class="group-meta">
+                        <p><i class="fas fa-book-open"></i> <strong>قسم التحليل:</strong> ${group.analyzedChapter}</p>
+                        <p><i class="fas fa-users"></i> <strong>أعضاء المجموعة:</strong></p>
+                        <div class="members-list">
+                            ${group.members.map(member => `<span>${member}</span>`).join('')}
+                        </div>
+                    </div>
+                    <button class="btn start-quiz-btn" data-group-id="${group.id}">
+                        <i class="fas fa-play-circle"></i> بدء الاختبار التفاعلي
+                    </button>
                 `;
                 
-                resultsContainer.appendChild(card);
+                groupsList.appendChild(groupCard);
             });
         }
-        
-        // وظيفة إعادة تعيين التجربة
-        function resetExperiment() {
-            experimentRunning = false;
+
+        // إعداد مستمعي الأحداث
+        function setupEventListeners() {
+            // أحداث لأزرار بدء الاختبار
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('start-quiz-btn') || e.target.closest('.start-quiz-btn')) {
+                    const btn = e.target.classList.contains('start-quiz-btn') ? e.target : e.target.closest('.start-quiz-btn');
+                    const groupId = parseInt(btn.getAttribute('data-group-id'));
+                    startGroupQuiz(groupId);
+                }
+            });
             
-            // إعادة تعيين المنزلقات
-            tempSlider.value = 25;
-            pressureSlider.value = 1;
-            methaneSlider.value = 1;
-            oxygenSlider.value = 2;
+            // حدث لزر التحقق من الإجابة
+            checkAnswerBtn.addEventListener('click', checkAnswer);
             
-            // تحديث القيم المعروضة
-            temperature = 25;
-            pressure = 1;
-            methane = 1;
-            oxygen = 2;
+            // حدث لزر السؤال التالي
+            nextQuestionBtn.addEventListener('click', nextQuestion);
             
-            tempValue.textContent = '25°C';
-            pressureValue.textContent = '1 atm';
-            methaneValue.textContent = '1 mol';
-            oxygenValue.textContent = 'نسبة مثالية (2)';
-            
-            // إعادة تعيين الزر
-            startBtn.innerHTML = '<i class="fas fa-play"></i> بدء التجربة';
-            startBtn.disabled = false;
-            
-            // إعادة تعيين العرض
-            moleculesContainer.innerHTML = '';
-            resultsContainer.innerHTML = '';
-            
-            // إعادة الرسومات الأولية
-            updateMolecules();
+            // حدث للعودة إلى قائمة المجموعات
+            backToGroups.addEventListener('click', function(e) {
+                e.preventDefault();
+                showGroupsPage();
+            });
         }
-        
-        // إضافة أنيميشن النبض
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes pulse {
-                0% { transform: scale(1); opacity: 1; }
-                50% { transform: scale(1.2); opacity: 0.7; }
-                100% { transform: scale(1); opacity: 1; }
+
+        // بدء اختبار مجموعة
+        function startGroupQuiz(groupId) {
+            currentState.currentPage = 'quiz';
+            currentState.currentGroupId = groupId;
+            currentState.currentQuestionIndex = 0;
+            currentState.studentPoints = 0;
+            currentState.studentLevel = 'مبتدئ';
+            
+            // تحديث واجهة المستخدم
+            updateUI();
+            
+            // إخفاء صفحة المجموعات وإظهار صفحة الاختبار
+            groupsPage.style.display = 'none';
+            quizPage.style.display = 'block';
+            
+            // عرض اسم المجموعة
+            const group = studentGroups.find(g => g.id === groupId);
+            quizGroupName.textContent = group.name;
+            
+            // عرض السؤال الأول
+            displayCurrentQuestion();
+        }
+
+        // عرض السؤال الحالي
+        function displayCurrentQuestion() {
+            const groupId = currentState.currentGroupId;
+            const questionIndex = currentState.currentQuestionIndex;
+            const questions = questionBanks[groupId];
+            
+            if (!questions || questionIndex >= questions.length) {
+                // إذا لم توجد أسئلة أو انتهينا من الأسئلة
+                questionBox.innerHTML = '<h3>تم إكمال جميع الأسئلة لهذه المجموعة!</h3>';
+                checkAnswerBtn.style.display = 'none';
+                nextQuestionBtn.style.display = 'none';
+                return;
             }
-        `;
-        document.head.appendChild(style);
-        
-        // التهيئة الأولية
-        updateMolecules();
+            
+            const question = questions[questionIndex];
+            
+            // تحديث تقدم الأسئلة
+            questionProgress.textContent = `${questionIndex + 1}/${questions.length}`;
+            
+            // بناء واجهة السؤال
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                optionsHTML += `
+                    <div class="option">
+                        <input type="radio" name="answer" id="option${index}" value="${index}">
+                        <label for="option${index}">${option}</label>
+                    </div>
+                `;
+            });
+            
+            questionBox.innerHTML = `
+                <h3>${question.question}</h3>
+                <div class="options-container">
+                    ${optionsHTML}
+                </div>
+            `;
+            
+            // إخفاء التغذية الراجعة والموارد
+            feedbackBox.style.display = 'none';
+            resourcesSection.style.display = 'none';
+            nextQuestionBtn.style.display = 'none';
+            checkAnswerBtn.style.display = 'block';
+        }
+
+        // التحقق من الإجابة
+        function checkAnswer() {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            const groupId = currentState.currentGroupId;
+            const questionIndex = currentState.currentQuestionIndex;
+            const questions = questionBanks[groupId];
+            const question = questions[questionIndex];
+            
+            if (!selectedOption) {
+                alert('الرجاء اختيار إجابة قبل التحقق!');
+                return;
+            }
+            
+            const selectedAnswer = parseInt(selectedOption.value);
+            const isCorrect = selectedAnswer === question.correctAnswer;
+            
+            // تحديث النقاط
+            if (isCorrect) {
+                currentState.studentPoints += 10;
+                updateStudentLevel();
+            }
+            
+            // عرض التغذية الراجعة
+            feedbackBox.innerHTML = '';
+            
+            if (isCorrect) {
+                feedbackBox.innerHTML += `
+                    <div class="correct-feedback">
+                        <i class="fas fa-check-circle"></i>
+                        ${question.explanation.correct}
+                    </div>
+                `;
+            } else {
+                feedbackBox.innerHTML += `
+                    <div class="incorrect-feedback">
+                        <i class="fas fa-times-circle"></i>
+                        ${question.explanation.incorrect}
+                    </div>
+                `;
+                
+                // عرض الموارد التعليمية عند الإجابة الخاطئة
+                showEducationalResources(question.explanation);
+            }
+            
+            feedbackBox.style.display = 'block';
+            
+            // تحديث واجهة النقاط والمستوى
+            updateUI();
+            
+            // إظهار زر السؤال التالي وإخفاء زر التحقق
+            checkAnswerBtn.style.display = 'none';
+            nextQuestionBtn.style.display = 'block';
+            
+            // تعطيل خيارات الإجابة
+            document.querySelectorAll('.option input').forEach(input => {
+                input.disabled = true;
+            });
+        }
+
+        // عرض الموارد التعليمية
+        function showEducationalResources(explanation) {
+            // تحديث رابط الفيديو
+            videoLink.href = explanation.videoLink;
+            
+            // تحديث إطار PhET
+            phetFrame.src = explanation.phetSim;
+            
+            // تحديث شرح المفهوم
+            conceptExplanation.innerHTML = `
+                <h4><i class="fas fa-graduation-cap"></i> شرح مفصل للمفهوم</h4>
+                <p>${explanation.concept}</p>
+                <p>هذا المفهوم أساسي لفهم ${studentGroups.find(g => g.id === currentState.currentGroupId).analyzedChapter}.</p>
+            `;
+            
+            // إظهار قسم الموارد
+            resourcesSection.style.display = 'block';
+        }
+
+        // الانتقال إلى السؤال التالي
+        function nextQuestion() {
+            const groupId = currentState.currentGroupId;
+            const questions = questionBanks[groupId];
+            
+            currentState.currentQuestionIndex++;
+            
+            if (currentState.currentQuestionIndex < questions.length) {
+                displayCurrentQuestion();
+            } else {
+                // إذا انتهت الأسئلة
+                questionBox.innerHTML = `
+                    <h3>🎉 مبروك! لقد أكملت اختبار المجموعة</h3>
+                    <p>لقد حصلت على <strong>${currentState.studentPoints}</strong> نقطة من أصل <strong>${questions.length * 10}</strong> نقطة ممكنة.</p>
+                    <p>مستواك الحالي: <strong>${currentState.studentLevel}</strong></p>
+                    <p>يمكنك العودة إلى قائمة المجموعات لاختيار مجموعة أخرى، أو إعادة اختبار هذه المجموعة.</p>
+                `;
+                checkAnswerBtn.style.display = 'none';
+                nextQuestionBtn.style.display = 'none';
+                feedbackBox.style.display = 'none';
+                resourcesSection.style.display = 'none';
+            }
+        }
+
+        // تحديث مستوى الطالب بناءً على النقاط
+        function updateStudentLevel() {
+            const points = currentState.studentPoints;
+            
+            if (points >= 50) currentState.studentLevel = 'متوسط';
+            if (points >= 100) currentState.studentLevel = 'متقدم';
+            if (points >= 150) currentState.studentLevel = 'متميز';
+            if (points >= 200) currentState.studentLevel = 'خبير';
+        }
+
+        // تحديث واجهة المستخدم
+        function updateUI() {
+            studentPointsEl.textContent = currentState.studentPoints;
+            studentLevelEl.textContent = currentState.studentLevel;
+        }
+
+        // إظهار صفحة المجموعات
+        function showGroupsPage() {
+            currentState.currentPage = 'groups';
+            groupsPage.style.display = 'block';
+            quizPage.style.display = 'none';
+        }
+
+        // تشغيل التطبيق عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
