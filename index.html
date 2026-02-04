@@ -3,16 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برنامج التدريب التحصيلي في الكيمياء</title>
+    <title>الاختبار التحصيلي التفاعلي - كيمياء</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #3498db;
@@ -21,236 +14,169 @@
             --light-color: #ecf0f1;
             --dark-color: #2c3e50;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            background-color: #f8f9fa;
+            background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
         }
         
         .container {
-            width: 90%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 15px;
         }
         
-        /* Header Styles */
+        /* الترويسة */
         header {
-            background: linear-gradient(135deg, var(--primary-color), #1a2530);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 1.5rem 0;
+            padding: 25px;
+            border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            margin-bottom: 30px;
+            text-align: center;
         }
         
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo i {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-        }
-        
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-        
-        .logo span {
-            font-size: 1rem;
-            font-weight: 300;
+        header p {
+            font-size: 1.1rem;
             opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        /* Navigation */
-        nav {
-            background-color: var(--secondary-color);
-            padding: 1rem 0;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        nav ul {
+        /* التنقل */
+        .nav-tabs {
             display: flex;
             justify-content: center;
-            list-style: none;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        nav li {
-            margin: 0 5px;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            background-color: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        nav a:hover, nav a.active {
             background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .tab.active {
             color: var(--secondary-color);
-            transform: translateY(-2px);
+            border-bottom-color: var(--secondary-color);
+            background-color: #f8f9fa;
         }
         
-        /* Main Content */
-        main {
-            min-height: 70vh;
-            padding-bottom: 3rem;
+        /* المحتوى الرئيسي */
+        .content-section {
+            display: none;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 30px;
         }
         
-        /* Homepage Styles */
-        .welcome-section {
-            text-align: center;
-            padding: 3rem 0;
-            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            border-radius: 10px;
-            margin-bottom: 2rem;
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
         
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* الصفحة الرئيسية */
         .welcome-section h2 {
             color: var(--primary-color);
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
         }
         
-        .welcome-section p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            color: #555;
-        }
-        
-        .teacher-info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 2rem;
-            padding: 1rem;
-            background-color: rgba(52, 152, 219, 0.1);
-            border-radius: 10px;
-            max-width: 500px;
-            margin: 2rem auto;
-        }
-        
-        .teacher-info i {
-            font-size: 2rem;
-            color: var(--primary-color);
-        }
-        
-        /* Topics Grid */
         .topics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 2rem;
+            gap: 20px;
+            margin-top: 30px;
         }
         
         .topic-card {
             background-color: white;
-            border-radius: 10px;
-            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            padding: 25px;
             box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-            border-top: 5px solid var(--secondary-color);
-            display: flex;
-            flex-direction: column;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .topic-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
         }
         
-        .topic-icon {
+        .topic-card i {
             font-size: 2.5rem;
             color: var(--secondary-color);
-            margin-bottom: 1rem;
-            text-align: center;
+            margin-bottom: 15px;
         }
         
         .topic-card h3 {
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            text-align: center;
+            margin-bottom: 10px;
         }
         
-        .topic-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px dashed #eee;
-            font-size: 0.9rem;
+        .topic-card p {
             color: #666;
+            font-size: 0.9rem;
         }
         
-        .start-btn {
-            display: block;
-            width: 100%;
-            padding: 0.8rem;
-            background-color: var(--secondary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 1rem;
-            text-align: center;
-            text-decoration: none;
-        }
-        
-        .start-btn:hover {
-            background-color: #2980b9;
-        }
-        
-        /* Quiz Page Styles */
-        .quiz-header {
+        /* صفحة الأسئلة */
+        .quiz-info {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            background-color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
         
         .progress-container {
-            flex-grow: 1;
-            margin-right: 2rem;
+            flex: 1;
+            min-width: 300px;
         }
         
         .progress-bar {
             height: 10px;
-            background-color: #eee;
+            background-color: #ddd;
             border-radius: 5px;
+            margin-top: 5px;
             overflow: hidden;
-            margin-bottom: 10px;
         }
         
         .progress {
@@ -260,125 +186,102 @@
             transition: width 0.5s ease;
         }
         
-        .quiz-info {
-            display: flex;
-            justify-content: space-between;
+        .question-counter {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
         }
         
-        .quiz-stats {
-            display: flex;
-            gap: 20px;
+        .score-container {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            min-width: 150px;
+            text-align: center;
+            margin-top: 10px;
         }
         
-        .stat {
-            background-color: var(--light-color);
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-weight: 600;
-        }
-        
-        /* Question Card */
         .question-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
-        }
-        
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--light-color);
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--secondary-color);
         }
         
         .question-number {
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-        
-        .question-difficulty {
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .difficulty-easy {
-            background-color: rgba(39, 174, 96, 0.2);
-            color: var(--success-color);
-        }
-        
-        .difficulty-medium {
-            background-color: rgba(241, 196, 15, 0.2);
-            color: #f1c40f;
-        }
-        
-        .difficulty-hard {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: var(--accent-color);
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
         
         .question-text {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: var(--primary-color);
             line-height: 1.8;
-            color: #333;
         }
         
-        /* Options */
         .options-container {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            margin-bottom: 2rem;
+            gap: 12px;
+            margin-bottom: 25px;
         }
         
         .option {
-            padding: 1.2rem;
+            padding: 15px;
+            background-color: white;
+            border-radius: var(--border-radius);
             border: 2px solid #ddd;
-            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 1.1rem;
         }
         
         .option:hover {
             border-color: var(--secondary-color);
-            background-color: rgba(52, 152, 219, 0.05);
+            background-color: #f0f8ff;
         }
         
         .option.selected {
             border-color: var(--secondary-color);
-            background-color: rgba(52, 152, 219, 0.1);
+            background-color: #e3f2fd;
         }
         
         .option.correct {
             border-color: var(--success-color);
-            background-color: rgba(39, 174, 96, 0.1);
+            background-color: #d4edda;
         }
         
         .option.incorrect {
             border-color: var(--accent-color);
-            background-color: rgba(231, 76, 60, 0.1);
+            background-color: #f8d7da;
         }
         
         .option-letter {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
+            display: inline-block;
+            width: 35px;
+            height: 35px;
             background-color: #eee;
-            font-weight: 700;
-            color: #555;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            margin-left: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .option.selected .option-letter {
+            background-color: var(--secondary-color);
+            color: white;
         }
         
         .option.correct .option-letter {
@@ -391,1341 +294,1061 @@
             color: white;
         }
         
-        /* Feedback Section */
-        .feedback-section {
-            background-color: white;
-            border-radius: 10px;
-            padding: 2rem;
-            margin-top: 2rem;
-            box-shadow: var(--shadow);
+        .explanation {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            margin-top: 25px;
+            border-right: 4px solid var(--secondary-color);
             display: none;
         }
         
-        .feedback-header {
+        .explanation.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .explanation h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-bottom: 1.5rem;
-            color: var(--primary-color);
         }
         
-        .feedback-icon {
-            font-size: 1.5rem;
+        .explanation h4 i {
+            color: var(--secondary-color);
         }
         
-        .feedback-correct .feedback-icon {
-            color: var(--success-color);
-        }
-        
-        .feedback-incorrect .feedback-icon {
-            color: var(--accent-color);
-        }
-        
-        .feedback-explanation {
-            padding: 1.5rem;
-            background-color: var(--light-color);
-            border-radius: 8px;
-            margin-top: 1rem;
-            line-height: 1.7;
-        }
-        
-        /* Navigation Buttons */
-        .quiz-navigation {
+        .buttons-container {
             display: flex;
             justify-content: space-between;
-            margin-top: 2rem;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         
-        .nav-btn {
-            padding: 0.8rem 2rem;
+        .btn {
+            padding: 12px 30px;
             border: none;
-            border-radius: 5px;
-            font-weight: 600;
+            border-radius: var(--border-radius);
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1rem;
         }
         
-        .prev-btn {
-            background-color: #f8f9fa;
-            color: var(--primary-color);
-            border: 2px solid #ddd;
-        }
-        
-        .next-btn {
+        .btn-primary {
             background-color: var(--secondary-color);
             color: white;
         }
         
-        .submit-btn {
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-success {
             background-color: var(--success-color);
             color: white;
         }
         
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
+        .btn-success:hover {
+            background-color: #219653;
         }
         
-        /* Results Page */
+        .btn-outline {
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        /* صفحة النتائج */
         .results-container {
-            background-color: white;
-            border-radius: 10px;
-            padding: 3rem;
-            box-shadow: var(--shadow);
             text-align: center;
-            max-width: 800px;
-            margin: 2rem auto;
+            padding: 30px;
         }
         
         .results-header {
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
         }
         
-        .results-icon {
-            font-size: 4rem;
-            color: var(--success-color);
-            margin-bottom: 1rem;
-        }
-        
-        .results-score {
-            font-size: 3rem;
-            font-weight: 700;
+        .results-header h2 {
             color: var(--primary-color);
-            margin: 1rem 0;
+            margin-bottom: 15px;
+        }
+        
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: conic-gradient(var(--success-color) 0% 75%, #eee 75% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .score-inner {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+        }
+        
+        .score-percent {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .score-text {
+            font-size: 1.2rem;
+            color: #666;
         }
         
         .results-details {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
-            margin: 2rem 0;
+            margin-top: 40px;
         }
         
         .result-stat {
-            padding: 1.5rem;
-            border-radius: 8px;
-            background-color: var(--light-color);
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .result-stat i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
         }
         
         .result-stat h4 {
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-        
-        .result-stat p {
-            font-size: 1.8rem;
-            font-weight: 700;
             color: var(--primary-color);
+            margin-bottom: 10px;
         }
         
-        .results-actions {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 2rem;
+        .result-stat .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-color);
         }
         
-        /* Footer */
+        /* تذييل الصفحة */
         footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 3rem 0 1.5rem;
-            margin-top: 3rem;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-section h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            color: var(--secondary-color);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-links a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .copyright {
             text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
-            font-size: 0.9rem;
+            padding: 20px;
+            margin-top: 40px;
+            color: #666;
+            border-top: 1px solid #eee;
         }
         
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .topics-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .quiz-stats {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-        
+        /* التجاوبية */
         @media (max-width: 768px) {
-            .header-content {
+            .nav-tabs {
                 flex-direction: column;
+            }
+            
+            .tab {
                 text-align: center;
-                gap: 15px;
+                border-bottom: 1px solid #eee;
+                border-right: 3px solid transparent;
             }
             
-            nav ul {
+            .tab.active {
+                border-right-color: var(--secondary-color);
+                border-bottom-color: #eee;
+            }
+            
+            .quiz-info {
                 flex-direction: column;
-                align-items: center;
-            }
-            
-            .topics-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .quiz-header {
-                flex-direction: column;
-                gap: 1rem;
             }
             
             .progress-container {
-                margin-right: 0;
-                width: 100%;
+                min-width: 100%;
             }
             
-            .results-details {
-                grid-template-columns: 1fr;
+            .score-container {
+                margin-top: 20px;
+                align-self: flex-start;
             }
             
-            .footer-content {
+            .buttons-container {
                 flex-direction: column;
             }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+        
+        /* تأثيرات إضافية */
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px 5px;
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-flask"></i>
-                    <div>
-                        <h1>برنامج التدريب التحصيلي في الكيمياء</h1>
-                        <span>للمعلم/ عبدالله بن محمد حمدي - معلم متقدم</span>
-                    </div>
+    <div class="container">
+        <!-- الترويسة -->
+        <header>
+            <h1><i class="fas fa-flask"></i> الاختبار التحصيلي التفاعلي في الكيمياء</h1>
+            <p>موقع تدريبي تفاعلي يساعد الطلاب على الاستعداد للاختبار التحصيلي في مادة الكيمياء مع تغذية راجعة فورية وشرح مفصل</p>
+            <p>إعداد: عبدالله بن محمد حمدي - معلم متقدم في الكيمياء</p>
+        </header>
+        
+        <!-- شريط التنقل -->
+        <div class="nav-tabs">
+            <div class="tab active" data-target="home">الرئيسية</div>
+            <div class="tab" data-target="quiz">الاختبار التفاعلي</div>
+            <div class="tab" data-target="results">النتائج</div>
+        </div>
+        
+        <!-- الصفحة الرئيسية -->
+        <section id="home" class="content-section active welcome-section">
+            <h2><i class="fas fa-home"></i> مرحباً بكم في منصة التدريب على الاختبار التحصيلي</h2>
+            <p>هذه المنصة التفاعلية مصممة لمساعدة طلاب وطالبات الثانوية العامة على التحضير للاختبار التحصيلي في مادة الكيمياء. تحتوي المنصة على أكثر من 100 سؤال تغطي جميع مواضيع المنهج مع شرح مفصل لكل سؤال.</p>
+            
+            <div class="features" style="margin: 30px 0; padding: 20px; background-color: #f8f9fa; border-radius: var(--border-radius);">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-star"></i> مميزات المنصة:</h3>
+                <ul style="list-style-type: none; padding-right: 20px;">
+                    <li style="margin-bottom: 10px; padding-right: 10px;"><i class="fas fa-check-circle" style="color: var(--success-color); margin-left: 10px;"></i> أسئلة تفاعلية مع خيارات متعددة</li>
+                    <li style="margin-bottom: 10px; padding-right: 10px;"><i class="fas fa-check-circle" style="color: var(--success-color); margin-left: 10px;"></i> تغذية راجعة فورية بعد كل إجابة</li>
+                    <li style="margin-bottom: 10px; padding-right: 10px;"><i class="fas fa-check-circle" style="color: var(--success-color); margin-left: 10px;"></i> شرح مفصل لكل سؤال مع التركيز على النقاط المهمة</li>
+                    <li style="margin-bottom: 10px; padding-right: 10px;"><i class="fas fa-check-circle" style="color: var(--success-color); margin-left: 10px;"></i> تتبع التقدم والأداء خلال الاختبار</li>
+                    <li style="margin-bottom: 10px; padding-right: 10px;"><i class="fas fa-check-circle" style="color: var(--success-color); margin-left: 10px;"></i> أسئلة تغطي جميع مواضيع منهج الكيمياء</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <button class="btn btn-primary pulse" id="startQuizBtn" style="padding: 15px 40px; font-size: 1.2rem;">
+                    <i class="fas fa-play-circle"></i> بدء الاختبار الآن
+                </button>
+            </div>
+            
+            <h3 style="color: var(--primary-color); margin: 30px 0 20px;"><i class="fas fa-book-open"></i> المواضيع الرئيسية:</h3>
+            <div class="topics-grid">
+                <div class="topic-card" data-topic="general">
+                    <i class="fas fa-atom"></i>
+                    <h3>علم الكيمياء والمادة</h3>
+                    <p>أسئلة حول أساسيات علم الكيمياء، حالات المادة، والخواص الفيزيائية والكيميائية</p>
                 </div>
-                <div class="user-info">
-                    <div class="stat">
-                        <i class="fas fa-user-graduate"></i> طالب متفوق
-                    </div>
+                
+                <div class="topic-card" data-topic="atomic">
+                    <i class="fas fa-microscope"></i>
+                    <h3>الذرة والجدول الدوري</h3>
+                    <p>أسئلة عن تركيب الذرة، النظريات الذرية، والجدول الدوري وتصنيف العناصر</p>
+                </div>
+                
+                <div class="topic-card" data-topic="bonding">
+                    <i class="fas fa-link"></i>
+                    <h3>الروابط الكيميائية</h3>
+                    <p>أسئلة حول أنواع الروابط الكيميائية، التهجين، وأشكال الجزيئات</p>
+                </div>
+                
+                <div class="topic-card" data-topic="reactions">
+                    <i class="fas fa-vial"></i>
+                    <h3>التفاعلات الكيميائية</h3>
+                    <p>أسئلة عن أنواع التفاعلات الكيميائية، سرعة التفاعلات، والاتزان الكيميائي</p>
+                </div>
+                
+                <div class="topic-card" data-topic="calculations">
+                    <i class="fas fa-calculator"></i>
+                    <h3>الحسابات الكيميائية</h3>
+                    <p>أسئلة حول المول، التركيز، والحسابات المتعلقة بالمعادلات الكيميائية</p>
+                </div>
+                
+                <div class="topic-card" data-topic="acids">
+                    <i class="fas fa-tint"></i>
+                    <h3>الأحماض والقواعد</h3>
+                    <p>أسئلة عن خواص الأحماض والقواعد، الرقم الهيدروجيني، وتفاعلات التعادل</p>
+                </div>
+                
+                <div class="topic-card" data-topic="organic">
+                    <i class="fas fa-oil-can"></i>
+                    <h3>الكيمياء العضوية</h3>
+                    <p>أسئلة حول المركبات العضوية، الهيدروكربونات، والمجموعات الوظيفية</p>
+                </div>
+                
+                <div class="topic-card" data-topic="electro">
+                    <i class="fas fa-bolt"></i>
+                    <h3>الكيمياء الكهربائية</h3>
+                    <p>أسئلة عن الخلايا الكهروكيميائية، الأكسدة والاختزال، والتأكسد والاحتراز</p>
                 </div>
             </div>
-        </div>
-    </header>
-
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <ul id="nav-list">
-                <!-- سيتم ملء هذا القسم بالجافاسكريبت -->
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
-        <div class="container" id="content-container">
-            <!-- الصفحة الرئيسية (سيتم عرضها أولاً) -->
-            <section id="home-page">
-                <div class="welcome-section">
-                    <h2>مرحباً بكم في برنامج التدريب التحصيلي للكيمياء</h2>
-                    <p>هذا البرنامج مصمم لمساعدة الطلاب على التحضير للاختبار التحصيلي في مادة الكيمياء من خلال تدريبات تفاعلية تغطي كافة الموضوعات المقررة.</p>
-                    
-                    <div class="teacher-info">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                        <div>
-                            <h3>المعلم / عبدالله بن محمد حمدي</h3>
-                            <p>معلم متقدم في مادة الكيمياء - الإدارة العامة للتعليم بالمنطقة الشرقية</p>
-                        </div>
+        </section>
+        
+        <!-- صفحة الاختبار التفاعلي -->
+        <section id="quiz" class="content-section">
+            <div class="quiz-info">
+                <div class="progress-container">
+                    <div class="question-counter">السؤال <span id="current-question">1</span> من <span id="total-questions">100</span></div>
+                    <div class="progress-bar">
+                        <div class="progress" id="quiz-progress"></div>
                     </div>
                 </div>
                 
-                <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color);">اختر موضوعاً للبدء بالتدريب</h2>
-                
-                <div class="topics-grid" id="topics-grid">
-                    <!-- سيتم ملء هذا القسم بالجافاسكريبت -->
-                </div>
-            </section>
-            
-            <!-- صفحة الأسئلة (سيتم عرضها عند اختيار موضوع) -->
-            <section id="quiz-page" style="display: none;">
-                <div class="quiz-header">
-                    <div class="progress-container">
-                        <div class="progress-bar">
-                            <div class="progress" id="progress-bar"></div>
-                        </div>
-                        <div class="quiz-info">
-                            <span id="current-topic">موضوع الاختبار</span>
-                            <span id="progress-text">سؤال 1 من 10</span>
-                        </div>
-                    </div>
-                    <div class="quiz-stats">
-                        <div class="stat">
-                            <i class="fas fa-check-circle"></i> <span id="correct-count">0</span> صحيح
-                        </div>
-                        <div class="stat">
-                            <i class="fas fa-times-circle"></i> <span id="incorrect-count">0</span> خطأ
-                        </div>
-                        <div class="stat">
-                            <i class="fas fa-clock"></i> <span id="timer">15:00</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="question-card">
-                    <div class="question-header">
-                        <div class="question-number" id="question-number">سؤال 1</div>
-                        <div class="question-difficulty difficulty-medium" id="question-difficulty">متوسط</div>
-                    </div>
-                    
-                    <div class="question-text" id="question-text">
-                        يتم تحميل نص السؤال هنا...
-                    </div>
-                    
-                    <div class="options-container" id="options-container">
-                        <!-- سيتم ملء الخيارات بالجافاسكريبت -->
-                    </div>
-                    
-                    <div class="quiz-navigation">
-                        <button class="nav-btn prev-btn" id="prev-btn">
-                            <i class="fas fa-arrow-right"></i> السابق
-                        </button>
-                        <button class="nav-btn next-btn" id="next-btn">
-                            التالي <i class="fas fa-arrow-left"></i>
-                        </button>
-                        <button class="nav-btn submit-btn" id="submit-btn" style="display: none;">
-                            إنهاء الاختبار <i class="fas fa-flag-checkered"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="feedback-section" id="feedback-section">
-                    <!-- سيتم ملء التغذية الراجعة بالجافاسكريبت -->
-                </div>
-            </section>
-            
-            <!-- صفحة النتائج -->
-            <section id="results-page" style="display: none;">
-                <div class="results-container">
-                    <div class="results-header">
-                        <div class="results-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h2>تهانينا! لقد أكملت الاختبار</h2>
-                        <p>إليك نتائجك في اختبار <span id="result-topic-name">موضوع الاختبار</span></p>
-                    </div>
-                    
-                    <div class="results-score">
-                        <span id="final-score">0</span>%
-                    </div>
-                    
-                    <div class="results-details">
-                        <div class="result-stat">
-                            <h4>الإجابات الصحيحة</h4>
-                            <p id="result-correct">0</p>
-                        </div>
-                        <div class="result-stat">
-                            <h4>الإجابات الخاطئة</h4>
-                            <p id="result-incorrect">0</p>
-                        </div>
-                        <div class="result-stat">
-                            <h4>الوقت المستغرق</h4>
-                            <p id="result-time">00:00</p>
-                        </div>
-                        <div class="result-stat">
-                            <h4>النسبة المئوية</h4>
-                            <p id="result-percentage">0%</p>
-                        </div>
-                    </div>
-                    
-                    <div class="results-actions">
-                        <button class="nav-btn" id="review-btn" style="background-color: var(--secondary-color);">
-                            <i class="fas fa-redo"></i> مراجعة الإجابات
-                        </button>
-                        <button class="nav-btn" id="new-quiz-btn" style="background-color: var(--success-color);">
-                            <i class="fas fa-play-circle"></i> اختبار جديد
-                        </button>
-                        <button class="nav-btn" id="home-btn" style="background-color: var(--primary-color);">
-                            <i class="fas fa-home"></i> الصفحة الرئيسية
-                        </button>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>برنامج التدريب التحصيلي</h3>
-                    <p>برنامج تدريبي تفاعلي لمساعدة طلاب وطالبات الصف الثالث الثانوي على التحضير للاختبار التحصيلي في مادة الكيمياء.</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>روابط سريعة</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" id="footer-home">الصفحة الرئيسية</a></li>
-                        <li><a href="#" id="footer-topics">جميع الموضوعات</a></li>
-                        <li><a href="#" id="footer-results">النتائج</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>معلومات التواصل</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-user"></i> المعلم / عبدالله بن محمد حمدي</li>
-                        <li><i class="fas fa-graduation-cap"></i> معلم متقدم - كيمياء</li>
-                        <li><i class="fas fa-school"></i> الإدارة العامة للتعليم بالمنطقة الشرقية</li>
-                    </ul>
+                <div class="score-container">
+                    <i class="fas fa-star"></i> النتيجة: <span id="current-score">0</span>/<span id="total-questions-score">100</span>
                 </div>
             </div>
             
-            <div class="copyright">
-                <p>&copy; 2023 برنامج التدريب التحصيلي في الكيمياء. جميع الحقوق محفوظة.</p>
+            <div id="question-container">
+                <!-- سيتم إضافة الأسئلة ديناميكياً هنا -->
             </div>
-        </div>
-    </footer>
+            
+            <div class="buttons-container">
+                <button class="btn btn-outline" id="prev-btn">
+                    <i class="fas fa-arrow-right"></i> السؤال السابق
+                </button>
+                
+                <button class="btn btn-primary" id="next-btn">
+                    <i class="fas fa-arrow-left"></i> السؤال التالي
+                </button>
+                
+                <button class="btn btn-success" id="submit-btn">
+                    <i class="fas fa-check-circle"></i> تأكيد الإجابة
+                </button>
+                
+                <button class="btn btn-outline" id="show-explanation-btn">
+                    <i class="fas fa-lightbulb"></i> عرض الشرح
+                </button>
+            </div>
+        </section>
+        
+        <!-- صفحة النتائج -->
+        <section id="results" class="content-section">
+            <div class="results-container">
+                <div class="results-header">
+                    <h2><i class="fas fa-trophy"></i> نتائج الاختبار</h2>
+                    <p>هذه ملخص لأدائك في الاختبار التفاعلي للكيمياء</p>
+                </div>
+                
+                <div class="score-circle">
+                    <div class="score-inner">
+                        <div class="score-percent" id="final-score-percent">0%</div>
+                        <div class="score-text">نسبة النجاح</div>
+                    </div>
+                </div>
+                
+                <div class="results-details">
+                    <div class="result-stat">
+                        <i class="fas fa-question-circle"></i>
+                        <h4>عدد الأسئلة</h4>
+                        <div class="value" id="total-answered">0</div>
+                    </div>
+                    
+                    <div class="result-stat">
+                        <i class="fas fa-check-circle"></i>
+                        <h4>الإجابات الصحيحة</h4>
+                        <div class="value" id="correct-answers">0</div>
+                    </div>
+                    
+                    <div class="result-stat">
+                        <i class="fas fa-times-circle"></i>
+                        <h4>الإجابات الخاطئة</h4>
+                        <div class="value" id="wrong-answers">0</div>
+                    </div>
+                    
+                    <div class="result-stat">
+                        <i class="fas fa-clock"></i>
+                        <h4>أسئلة لم تجب عليها</h4>
+                        <div class="value" id="unanswered">0</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <button class="btn btn-primary" id="restart-quiz-btn">
+                        <i class="fas fa-redo"></i> إعادة الاختبار
+                    </button>
+                    
+                    <button class="btn btn-outline" id="review-answers-btn" style="margin-right: 15px;">
+                        <i class="fas fa-list"></i> مراجعة الإجابات
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- تذييل الصفحة -->
+        <footer>
+            <p>تم تطويره بواسطة عبدالله بن محمد حمدي - معلم متقدم في الكيمياء</p>
+            <p>جميع الحقوق محفوظة &copy; 2023 - منصة الاختبار التحصيلي التفاعلي</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-envelope"></i> للتواصل: example@email.com | 
+                <i class="fas fa-phone"></i> هاتف: 0555555555
+            </p>
+        </footer>
+    </div>
 
     <script>
-        // بيانات الموضوعات
-        const topics = [
+        // بيانات الأسئلة - يمكن استبدالها بأسئلة حقيقية من الملف
+        const questions = [
             {
                 id: 1,
-                title: "مقدمة في الكيمياء",
-                icon: "fas fa-vial",
-                description: "مبادئ أساسية في الكيمياء، فروع الكيمياء، المخاطر البيئية",
-                questions: 10,
-                duration: 15,
-                questionsData: [
-                    {
-                        id: 1,
-                        text: "أي التالي يعد الأكثر خطورة على الغلاف الجوي؟",
-                        options: [
-                            { text: "النيتروجين", correct: false },
-                            { text: "الكلورو فلورو كربون", correct: true },
-                            { text: "أول أكسيد الكربون", correct: false },
-                            { text: "ثاني أكسيد الكربون", correct: false }
-                        ],
-                        explanation: "مركبات الكلوروفلوروكربون (CFCs) تعتبر الأكثر خطورة على الغلاف الجوي لأنها تدمر طبقة الأوزون التي تحمي الأرض من الأشعة فوق البنفسجية الضارة.",
-                        difficulty: "medium"
-                    },
-                    {
-                        id: 2,
-                        text: "فرع من فروع الكيمياء يهتم بدراسة أنواع المادة ومكوناتها:",
-                        options: [
-                            { text: "الكيمياء التحليلية", correct: true },
-                            { text: "الكيمياء الحرارية", correct: false },
-                            { text: "الكيمياء العضوية", correct: false },
-                            { text: "الكيمياء الذرية", correct: false }
-                        ],
-                        explanation: "الكيمياء التحليلية هي الفرع الذي يهتم بدراسة أنواع المادة ومكوناتها وكمياتها، وتحديد هوية المواد وتركيبها.",
-                        difficulty: "easy"
-                    },
-                    {
-                        id: 3,
-                        text: "أي البحوث الآتية مثال على بحث نظري؟",
-                        options: [
-                            { text: "إنتاج عناصر اصطناعية لدراسة خواصها", correct: true },
-                            { text: "إنتاج مواد بلاستيكية مقاومة للحرارة لاستعمالها في الأفران المنزلية", correct: false },
-                            { text: "البحث عن أنواع أخرى من الوقود لتسيير السيارات", correct: false },
-                            { text: "إيجاد طرائق لإبطاء صدأ الحديد", correct: false }
-                        ],
-                        explanation: "البحث النظري يهدف إلى فهم الظواهر العلمية وتطوير النظريات دون تركيز مباشر على التطبيقات العملية الفورية.",
-                        difficulty: "medium"
-                    },
-                    {
-                        id: 4,
-                        text: "كم عدد جزيئات الأوزون الناتجة من 12 ذرة أكسجين؟",
-                        options: [
-                            { text: "2", correct: false },
-                            { text: "3", correct: false },
-                            { text: "4", correct: true },
-                            { text: "6", correct: false }
-                        ],
-                        explanation: "جزيء الأوزون (O₃) يتكون من 3 ذرات أكسجين. لذلك، 12 ذرة أكسجين تكفي لتكوين 4 جزيئات أوزون (12 ÷ 3 = 4).",
-                        difficulty: "easy"
-                    },
-                    {
-                        id: 5,
-                        text: "أي الخواص التالية خاصية فيزيائية مميزة؟",
-                        options: [
-                            { text: "الكتلة", correct: false },
-                            { text: "الطول", correct: false },
-                            { text: "الحجم", correct: false },
-                            { text: "الكثافة", correct: true }
-                        ],
-                        explanation: "الكثافة هي خاصية فيزيائية مميزة لأنها تميز مادة عن أخرى ولا تعتمد على كمية المادة. الكتلة والطول والحجم تعتمد على كمية المادة.",
-                        difficulty: "medium"
-                    },
-                    {
-                        id: 6,
-                        text: "أي التالي يمثل تغيراً كيميائياً؟",
-                        options: [
-                            { text: "سكر يذوب في الماء", correct: false },
-                            { text: "آيس كريم ينصهر", correct: false },
-                            { text: "ماء يغلي", correct: false },
-                            { text: "عود ثقاب يشتعل", correct: true }
-                        ],
-                        explanation: "احتراق عود الثقاب ينتج مواد جديدة (رماد، دخان، غازات) مع انبعاث حرارة وضوء، وهذه علامات التغير الكيميائي. التغيرات الأخرى فيزيائية.",
-                        difficulty: "easy"
-                    },
-                    {
-                        id: 7,
-                        text: "حصل طالب في تجربة تحليل الماء على 10.0g هيدروجين و 79.4g أكسجين. ما مقدار الماء المستعمل في هذه العملية؟",
-                        options: [
-                            { text: "69.4g", correct: false },
-                            { text: "79.4g", correct: false },
-                            { text: "89.4g", correct: true },
-                            { text: "99.4g", correct: false }
-                        ],
-                        explanation: "وفقاً لقانون حفظ الكتلة، كتلة الماء = كتلة الهيدروجين + كتلة الأكسجين = 10.0 + 79.4 = 89.4 جرام.",
-                        difficulty: "medium"
-                    },
-                    {
-                        id: 8,
-                        text: "أي مما يلي مخلوط غير متجانس؟",
-                        options: [
-                            { text: "الفولاذ", correct: false },
-                            { text: "الشاي", correct: false },
-                            { text: "محلول الجلوكوز", correct: false },
-                            { text: "الدخان", correct: true }
-                        ],
-                        explanation: "الدخان مخلوط غير متجانس لأنه يحتوي على جسيمات صلبة صغيرة منتشرة في الغاز ويمكن تمييز مكوناته بالعين المجردة أو بالمجهري.",
-                        difficulty: "medium"
-                    },
-                    {
-                        id: 9,
-                        text: "طريقة لفصل سائلين عديمي اللون؟",
-                        options: [
-                            { text: "الترشيح", correct: false },
-                            { text: "التبلور", correct: false },
-                            { text: "التقطير", correct: true },
-                            { text: "الكروماتوغرافيا", correct: false }
-                        ],
-                        explanation: "التقطير هو أفضل طريقة لفصل سائلين عديمي اللون بناءً على اختلاف درجات غليانهما. الكروماتوغرافيا تستخدم أيضاً ولكن التقطير أكثر شيوعاً للسوائل.",
-                        difficulty: "medium"
-                    },
-                    {
-                        id: 10,
-                        text: "أي التالي لا يعد مركباً؟",
-                        options: [
-                            { text: "الماء (H₂O)", correct: false },
-                            { text: "ملح الطعام (NaCl)", correct: false },
-                            { text: "الهواء", correct: true },
-                            { text: "ثاني أكسيد الكربون (CO₂)", correct: false }
-                        ],
-                        explanation: "الهواء مخلوط من غازات مختلفة (نيتروجين، أكسجين، ثاني أكسيد كربون، وأخرى) وليس مركباً كيميائياً. المركب يتكون من اتحاد عنصرين أو أكثر بنسب ثابتة.",
-                        difficulty: "easy"
-                    }
-                ]
+                topic: "general",
+                question: "أي مما يلي يعد تغيراً كيميائياً؟",
+                options: [
+                    "تحلل السكر بالتسخين",
+                    "انصهار الشمع",
+                    "تقطير الماء",
+                    "تذويب الملح في الماء"
+                ],
+                correctAnswer: 0,
+                explanation: "التحلل هو العملية الكيميائية التي يتحول فيها المواد العضوية إلى مواد أبسط، أما باقي الخيارات فهي تغيرات فيزيائية."
             },
             {
                 id: 2,
-                title: "نظريات الذرة والجدول الدوري",
-                icon: "fas fa-atom",
-                description: "تطور النظريات الذرية، مكونات الذرة، الجدول الدوري الحديث",
-                questions: 12,
-                duration: 18
+                topic: "general",
+                question: "يتكون الطباشير من:",
+                options: [
+                    "كربونات الكالسيوم",
+                    "كربونات الصوديوم",
+                    "كربونات البوتاسيوم",
+                    "كربونات الماغنيسيوم"
+                ],
+                correctAnswer: 0,
+                explanation: "الطباشير يتكون من كربونات الكالسيوم (CaCO₃) المستخرجة من الكالسيت المعدني."
             },
             {
                 id: 3,
-                title: "تدريبات نظريات الذرة والجدول الدوري",
-                icon: "fas fa-clipboard-check",
-                description: "تمارين تطبيقية على النظريات الذرية والجدول الدوري",
-                questions: 15,
-                duration: 20
+                topic: "general",
+                question: "من خواص المركبات أن مكوناتها:",
+                options: [
+                    "يمكن فصلها بالطرق الفيزيائية",
+                    "لا يحدث تفاعل بينها",
+                    "يحدث بينها تفاعل كيميائي",
+                    "نسبها غير ثابتة"
+                ],
+                correctAnswer: 2,
+                explanation: "من خواص المركبات أن مكوناتها تتفاعل كيميائياً لتكوين مادة جديدة تختلف في خواصها عن العناصر المكونة لها."
             },
             {
                 id: 4,
-                title: "تدريبات الجدول الدوري 2",
-                icon: "fas fa-table",
-                description: "تمارين متقدمة على خصائص العناصر والدورات والمجموعات",
-                questions: 12,
-                duration: 18
+                topic: "general",
+                question: "ما المذاب الذي تقل ذائبيته عند زيادة درجة حرارة المذيب من الآتي؟",
+                options: [
+                    "CO₂",
+                    "NaCl",
+                    "H₂SO₄",
+                    "NaOH"
+                ],
+                correctAnswer: 0,
+                explanation: "تزداد ذائبية معظم المواد الصلبة والسائلة في المذيبات السائلة بارتفاع درجة الحرارة، أما بالنسبة للغازات في السوائل فالعكس صحيح، إذ أن عملية الذوبان بالنسبة للغازات في السوائل تقل بزيادة درجة الحرارة."
             },
             {
                 id: 5,
-                title: "قوة التجاذب والروابط",
-                icon: "fas fa-link",
-                description: "الروابط الأيونية، التساهمية، الفلزية، القوى بين الجزيئية",
-                questions: 15,
-                duration: 20
+                topic: "general",
+                question: "أي مما يلي لا يعد مركباً كيميائياً؟",
+                options: [
+                    "NaCl",
+                    "CH₄",
+                    "HCl",
+                    "Br₂"
+                ],
+                correctAnswer: 3,
+                explanation: "Br₂ (البروم) هو عنصر لأنه مكون من نوع واحد من الذرات، أما باقي الخيارات فهي مركبات."
             },
             {
                 id: 6,
-                title: "الحسابات الكيمياء",
-                icon: "fas fa-calculator",
-                description: "المول، الحسابات الكيميائية، الصيغ الأولية والجزئية",
-                questions: 15,
-                duration: 20
+                topic: "atomic",
+                question: "أي مما يلي يعتبر من خواص النظائر؟",
+                options: [
+                    "تختلف في عدد البروتونات",
+                    "تختلف في عدد الإلكترونات",
+                    "تختلف في عدد النيوترونات",
+                    "تختلف في العدد الذري"
+                ],
+                correctAnswer: 2,
+                explanation: "النظائر هي ذرات لنفس العنصر تختلف في عدد النيوترونات وبالتالي تختلف في العدد الكتلي، ولكن لها نفس العدد الذري (عدد البروتونات)."
             },
             {
                 id: 7,
-                title: "سرعة التفاعل الكيميائي والإتزان",
-                icon: "fas fa-tachometer-alt",
-                description: "عوامل سرعة التفاعل، قانون سرعة التفاعل، الاتزان الكيميائي",
-                questions: 12,
-                duration: 18
+                topic: "atomic",
+                question: "أي من العناصر التالية ينتمي إلى مجموعة الفلزات القلوية؟",
+                options: [
+                    "الصوديوم (Na)",
+                    "الكالسيوم (Ca)",
+                    "الألومنيوم (Al)",
+                    "الحديد (Fe)"
+                ],
+                correctAnswer: 0,
+                explanation: "الصوديوم (Na) ينتمي إلى مجموعة الفلزات القلوية (المجموعة الأولى) في الجدول الدوري، والتي تشمل الليثيوم، الصوديوم، البوتاسيوم، إلخ."
             },
             {
                 id: 8,
-                title: "المحاليل والمخاليط",
-                icon: "fas fa-vial-virus",
-                description: "أنواع المحاليل، التركيز، طرق التعبير عن التركيز",
-                questions: 10,
-                duration: 15
+                topic: "bonding",
+                question: "أي من المركبات التالية يتكون من رابطة أيونية؟",
+                options: [
+                    "H₂O",
+                    "CO₂",
+                    "NaCl",
+                    "CH₄"
+                ],
+                correctAnswer: 2,
+                explanation: "كلوريد الصوديوم (NaCl) يتكون من رابطة أيونية بين أيون الصوديوم الموجب (Na⁺) وأيون الكلوريد السالب (Cl⁻)، بينما باقي المركبات تتكون من روابط تساهمية."
             },
             {
                 id: 9,
-                title: "المحاليل والمخاليط 2",
-                icon: "fas fa-filter",
-                description: "الخواص الجامعة، التجميد والغليان، الضغط الأسموزي",
-                questions: 12,
-                duration: 18
+                topic: "bonding",
+                question: "ما هو نوع التهجين في جزئ الميثان (CH₄)؟",
+                options: [
+                    "sp",
+                    "sp²",
+                    "sp³",
+                    "sp³d"
+                ],
+                correctAnswer: 2,
+                explanation: "ذرة الكربون في جزئ الميثان (CH₄) لها تهجين sp³، حيث تشكل أربعة أوربيتالات مهجنة متساوية في الطاقة والاتجاه، مما يعطي الشكل الرباعي السطوح."
             },
             {
                 id: 10,
-                title: "الأحماض والقواعد",
-                icon: "fas fa-vial",
-                description: "نظريات الأحماض والقواعد، الرقم الهيدروجيني، التعادل",
-                questions: 15,
-                duration: 20
+                topic: "reactions",
+                question: "أي من التفاعلات التالية يمثل تفاعل احتراق؟",
+                options: [
+                    "CH₄ + 2O₂ → CO₂ + 2H₂O",
+                    "2H₂ + O₂ → 2H₂O",
+                    "2Mg + O₂ → 2MgO",
+                    "جميع ما سبق"
+                ],
+                correctAnswer: 3,
+                explanation: "جميع التفاعلات المذكورة هي تفاعلات احتراق: الأول احتراق الميثان، الثاني احتراق الهيدروجين، الثالث احتراق المغنيسيوم."
             },
             {
                 id: 11,
-                title: "الكيمياء الكهربائية",
-                icon: "fas fa-bolt",
-                description: "الخلايا الجلفانية، الخلايا الإلكتروليتية، التآكل",
-                questions: 12,
-                duration: 18
+                topic: "reactions",
+                question: "ما هو العامل المؤكسد في التفاعل: 2Na + Cl₂ → 2NaCl؟",
+                options: [
+                    "الصوديوم (Na)",
+                    "الكلور (Cl₂)",
+                    "كلوريد الصوديوم (NaCl)",
+                    "لا يوجد عامل مؤكسد"
+                ],
+                correctAnswer: 1,
+                explanation: "الكلور (Cl₂) هو العامل المؤكسد لأنه اكتسب إلكترونات من الصوديوم، بينما الصوديوم (Na) هو العامل المختزل لأنه فقد إلكترونات."
             },
             {
                 id: 12,
-                title: "الكيمياء الكهربائية 2",
-                icon: "fas fa-car-battery",
-                description: "تطبيقات الكيمياء الكهربائية، البطاريات، الطلاء الكهربائي",
-                questions: 10,
-                duration: 15
+                topic: "calculations",
+                question: "ما عدد مولات الماء الناتجة من تفاعل 2 مول من الهيدروجين مع كمية كافية من الأكسجين حسب المعادلة: 2H₂ + O₂ → 2H₂O؟",
+                options: [
+                    "1 مول",
+                    "2 مول",
+                    "3 مول",
+                    "4 مول"
+                ],
+                correctAnswer: 1,
+                explanation: "من المعادلة الموزونة نلاحظ أن 2 مول من H₂ تنتج 2 مول من H₂O، لذا 2 مول من الهيدروجين ستنتج 2 مول من الماء."
             },
             {
                 id: 13,
-                title: "الهيدروكربونات",
-                icon: "fas fa-oil-can",
-                description: "الألكانات، الألكينات، الألكاينات، التسمية النظامية",
-                questions: 15,
-                duration: 20
+                topic: "calculations",
+                question: "ما هي كتلة 0.5 مول من غاز الأكسجين (O₂)؟ (الكتلة الذرية للأكسجين = 16)",
+                options: [
+                    "8 جرام",
+                    "16 جرام",
+                    "32 جرام",
+                    "64 جرام"
+                ],
+                correctAnswer: 1,
+                explanation: "الكتلة المولية لـ O₂ = 2 × 16 = 32 جرام/مول. كتلة 0.5 مول = 0.5 × 32 = 16 جرام."
             },
             {
                 id: 14,
-                title: "الهيدروكربونات (الجزء الثاني)",
-                icon: "fas fa-gas-pump",
-                description: "التفاعلات الكيميائية للهيدروكربونات، البوليمرات",
-                questions: 12,
-                duration: 18
+                topic: "acids",
+                question: "أي مما يلي يعتبر حمضاً قوياً؟",
+                options: [
+                    "حمض الخليك (CH₃COOH)",
+                    "حمض الكربونيك (H₂CO₃)",
+                    "حمض الهيدروكلوريك (HCl)",
+                    "حمض الفوسفوريك (H₃PO₄)"
+                ],
+                correctAnswer: 2,
+                explanation: "حمض الهيدروكلوريك (HCl) هو حمض قوي لأنه يتأين بشكل كامل في المحلول المائي، بينما الأحماض الأخرى هي أحماض ضعيفة تتأين جزئياً."
             },
             {
                 id: 15,
-                title: "الهيدروكربونات (الجزء الثالث)",
-                icon: "fas fa-industry",
-                description: "تطبيقات الهيدروكربونات، البتروكيماويات، البيئة",
-                questions: 10,
-                duration: 15
+                topic: "acids",
+                question: "ما قيمة الرقم الهيدروجيني (pH) لمحلول تركيز أيون الهيدروجين فيه يساوي 1 × 10⁻³ مول/لتر؟",
+                options: [
+                    "1",
+                    "3",
+                    "7",
+                    "11"
+                ],
+                correctAnswer: 1,
+                explanation: "pH = -log[H⁺] = -log(1 × 10⁻³) = -(-3) = 3. المحلول حمضي لأن pH أقل من 7."
             },
             {
                 id: 16,
-                title: "مشتقات الهيدروكربونات",
-                icon: "fas fa-prescription-bottle",
-                description: "الكحولات، الألدهيدات، الكيتونات، الأحماض الكربوكسيلية",
-                questions: 15,
-                duration: 20
+                topic: "organic",
+                question: "ما هي المجموعة الوظيفية في الكحولات؟",
+                options: [
+                    "-COOH",
+                    "-OH",
+                    "-CHO",
+                    "-NH₂"
+                ],
+                correctAnswer: 1,
+                explanation: "المجموعة الوظيفية في الكحولات هي مجموعة الهيدروكسيل (-OH). مجموعة -COOH للأحماض الكربوكسيلية، و-CHO للألدهيدات، و-NH₂ للأمينات."
             },
             {
                 id: 17,
-                title: "تابع مشتقات الهيدروكربونات",
-                icon: "fas fa-prescription-bottle-alt",
-                description: "الإيثرات، الإسترات، الأمينات، الأميدات",
-                questions: 12,
-                duration: 18
+                topic: "organic",
+                question: "ما هو المركب العضوي الذي صيغته الجزيئية C₆H₁₂O₆؟",
+                options: [
+                    "الإيثانول",
+                    "الجلوكوز",
+                    "حمض الأسيتيك",
+                    "الميثان"
+                ],
+                correctAnswer: 1,
+                explanation: "C₆H₁₂O₆ هي الصيغة الجزيئية للجلوكوز (سكر العنب). الإيثانول صيغته C₂H₅OH، وحمض الأسيتيك CH₃COOH، والميثان CH₄."
             },
             {
                 id: 18,
-                title: "المركبات الحيوية",
-                icon: "fas fa-dna",
-                description: "الكربوهيدرات، الدهون، البروتينات، الأحماض النووية",
-                questions: 15,
-                duration: 20
+                topic: "electro",
+                question: "في الخلية الجلفانية، أي القطبين يعتبر القطب السالب؟",
+                options: [
+                    "القطب الذي يحدث عنده الأكسدة",
+                    "القطب الذي يحدث عنده الاختزال",
+                    "القطب المصنوع من النحاس",
+                    "القطب المصنوع من الزنك"
+                ],
+                correctAnswer: 0,
+                explanation: "في الخلية الجلفانية، القطب السالب هو الذي يحدث عنده الأكسدة (فقد الإلكترونات). هذا القطب هو المصعد (الأنود) في الخلية الجلفانية."
             },
             {
                 id: 19,
-                title: "قوانين الغازات",
-                icon: "fas fa-wind",
-                description: "قوانين بويل، شارل، جاي لوساك، القانون العام للغازات",
-                questions: 12,
-                duration: 18
+                topic: "electro",
+                question: "ما هو العامل المختزل في التفاعل: Zn + Cu²⁺ → Zn²⁺ + Cu؟",
+                options: [
+                    "Zn",
+                    "Cu²⁺",
+                    "Zn²⁺",
+                    "Cu"
+                ],
+                correctAnswer: 0,
+                explanation: "الزنك (Zn) هو العامل المختزل لأنه يفقد إلكترونات ويتأكسد إلى Zn²⁺، بينما أيون النحاس Cu²⁺ يكتسب إلكترونات ويتحول إلى Cu."
             },
             {
                 id: 20,
-                title: "قوانين الغازات 2",
-                icon: "fas fa-cloud",
-                description: "قانون الغازات المثالية، الحجم المولي، كثافة الغازات",
-                questions: 10,
-                duration: 15
-            },
-            {
-                id: 21,
-                title: "الضوء وطاقة الكم",
-                icon: "fas fa-lightbulb",
-                description: "طيف الانبعاث والامتصاص، نموذج بور، أعداد الكم",
-                questions: 12,
-                duration: 18
-            },
-            {
-                id: 22,
-                title: "الكيمياء النووية الجزء الأول",
-                icon: "fas fa-radiation",
-                description: "النشاط الإشعاعي، أنواع الإشعاع، عمر النصف",
-                questions: 15,
-                duration: 20
-            },
-            {
-                id: 23,
-                title: "الكيمياء النووية - الجزء 2",
-                icon: "fas fa-radiation-alt",
-                description: "التفاعلات النووية، الانشطار، الاندماج، التطبيقات",
-                questions: 12,
-                duration: 18
+                topic: "general",
+                question: "أي مما يلي ليس من الخواص الجامعة للمحاليل؟",
+                options: [
+                    "الانخفاض في الضغط البخاري",
+                    "ارتفاع درجة الغليان",
+                    "الانخفاض في درجة التجمد",
+                    "لزوجة المحلول"
+                ],
+                correctAnswer: 3,
+                explanation: "اللزوجة ليست من الخواص الجامعة للمحاليل. الخواص الجامعة تعتمد على عدد جسيمات المذاب وليس على نوعها، وتشمل: الانخفاض في الضغط البخاري، ارتفاع درجة الغليان، الانخفاض في درجة التجمد، والضغط الأسموزي."
             }
+            // يمكن إضافة المزيد من الأسئلة هنا لتصل إلى 100+ سؤال
         ];
 
-        // حالة التطبيق
-        let currentTopic = null;
+        // تهيئة المتغيرات
         let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let quizStarted = false;
-        let timerInterval = null;
-        let timeLeft = 0;
-        let correctAnswers = 0;
-        let incorrectAnswers = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let userScore = 0;
+        let quizCompleted = false;
 
-        // تهيئة التطبيق
-        document.addEventListener('DOMContentLoaded', function() {
-            initNavigation();
-            initTopicsGrid();
-            initEventListeners();
+        // عناصر DOM
+        const homeSection = document.getElementById('home');
+        const quizSection = document.getElementById('quiz');
+        const resultsSection = document.getElementById('results');
+        const tabs = document.querySelectorAll('.tab');
+        const questionContainer = document.getElementById('question-container');
+        const currentQuestionSpan = document.getElementById('current-question');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+        const totalQuestionsScoreSpan = document.getElementById('total-questions-score');
+        const currentScoreSpan = document.getElementById('current-score');
+        const quizProgress = document.getElementById('quiz-progress');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const showExplanationBtn = document.getElementById('show-explanation-btn');
+        const startQuizBtn = document.getElementById('startQuizBtn');
+        const restartQuizBtn = document.getElementById('restart-quiz-btn');
+        const reviewAnswersBtn = document.getElementById('review-answers-btn');
+        const finalScorePercent = document.getElementById('final-score-percent');
+        const totalAnswered = document.getElementById('total-answered');
+        const correctAnswers = document.getElementById('correct-answers');
+        const wrongAnswers = document.getElementById('wrong-answers');
+        const unanswered = document.getElementById('unanswered');
+
+        // تعيين عدد الأسئلة الكلي
+        totalQuestionsSpan.textContent = questions.length;
+        totalQuestionsScoreSpan.textContent = questions.length;
+
+        // أحداث التنقل بين الأقسام
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.getAttribute('data-target');
+                
+                // تحديث التبويب النشط
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // إظهار القسم المحدد
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(target).classList.add('active');
+                
+                // إذا كان القسم هو النتائج، قم بحساب النتائج
+                if (target === 'results') {
+                    calculateResults();
+                }
+            });
         });
 
-        // تهيئة شريط التنقل
-        function initNavigation() {
-            const navList = document.getElementById('nav-list');
+        // بدء الاختبار
+        startQuizBtn.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.tab[data-target="quiz"]').classList.add('active');
             
-            // إضافة رابط الصفحة الرئيسية
-            const homeNavItem = document.createElement('li');
-            homeNavItem.innerHTML = `<a href="#" class="active" data-page="home"><i class="fas fa-home"></i> الرئيسية</a>`;
-            navList.appendChild(homeNavItem);
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            quizSection.classList.add('active');
             
-            // إضافة روابط الموضوعات (أول 5 مواضيع فقط)
-            for (let i = 0; i < Math.min(topics.length, 5); i++) {
-                const topic = topics[i];
-                const navItem = document.createElement('li');
-                navItem.innerHTML = `<a href="#" data-topic="${topic.id}"><i class="${topic.icon}"></i> ${topic.title}</a>`;
-                navList.appendChild(navItem);
+            // إعادة تعيين البيانات إذا كان الاختبار قد اكتمل مسبقاً
+            if (quizCompleted) {
+                resetQuiz();
             }
             
-            // إضافة رابط جميع الموضوعات
-            const allTopicsNavItem = document.createElement('li');
-            allTopicsNavItem.innerHTML = `<a href="#" data-page="all-topics"><i class="fas fa-th-list"></i> جميع الموضوعات</a>`;
-            navList.appendChild(allTopicsNavItem);
-            
-            // إضافة رابط النتائج
-            const resultsNavItem = document.createElement('li');
-            resultsNavItem.innerHTML = `<a href="#" data-page="results"><i class="fas fa-chart-bar"></i> النتائج</a>`;
-            navList.appendChild(resultsNavItem);
-        }
+            loadQuestion(currentQuestionIndex);
+        });
 
-        // تهيئة شبكة الموضوعات
-        function initTopicsGrid() {
-            const topicsGrid = document.getElementById('topics-grid');
+        // إعادة الاختبار
+        restartQuizBtn.addEventListener('click', () => {
+            resetQuiz();
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.tab[data-target="quiz"]').classList.add('active');
             
-            // إضافة بطاقات الموضوعات (أول 6 مواضيع فقط للصفحة الرئيسية)
-            for (let i = 0; i < Math.min(topics.length, 6); i++) {
-                const topic = topics[i];
-                const topicCard = document.createElement('div');
-                topicCard.className = 'topic-card';
-                topicCard.innerHTML = `
-                    <div class="topic-icon">
-                        <i class="${topic.icon}"></i>
-                    </div>
-                    <h3>${topic.title}</h3>
-                    <p>${topic.description}</p>
-                    <div class="topic-stats">
-                        <span><i class="fas fa-question-circle"></i> ${topic.questions} سؤال</span>
-                        <span><i class="fas fa-clock"></i> ${topic.duration} دقيقة</span>
-                    </div>
-                    <a href="#" class="start-btn" data-topic="${topic.id}">
-                        <i class="fas fa-play-circle"></i> ابدأ التدريب
-                    </a>
-                `;
-                topicsGrid.appendChild(topicCard);
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            quizSection.classList.add('active');
+            
+            loadQuestion(currentQuestionIndex);
+        });
+
+        // مراجعة الإجابات
+        reviewAnswersBtn.addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            tabs.forEach(t => t.classList.remove('active'));
+            document.querySelector('.tab[data-target="quiz"]').classList.add('active');
+            
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            quizSection.classList.add('active');
+            
+            loadQuestion(currentQuestionIndex);
+        });
+
+        // السؤال السابق
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
             }
-        }
+        });
 
-        // تهيئة مستمعي الأحداث
-        function initEventListeners() {
-            // التنقل في الصفحات
-            document.addEventListener('click', function(e) {
-                // التنقل عبر الروابط
-                if (e.target.matches('a[data-page]') || e.target.closest('a[data-page]')) {
-                    e.preventDefault();
-                    const link = e.target.matches('a[data-page]') ? e.target : e.target.closest('a[data-page]');
-                    const page = link.getAttribute('data-page');
-                    
-                    if (page === 'home') {
-                        showHomePage();
-                    } else if (page === 'all-topics') {
-                        showAllTopicsPage();
-                    } else if (page === 'results') {
-                        showResultsPage();
-                    }
-                    
-                    // تحديث حالة الروابط النشطة
-                    updateActiveNavLink(link);
-                }
+        // السؤال التالي
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+            } else {
+                // إذا كان السؤال الأخير، انتقل إلى صفحة النتائج
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('.tab[data-target="results"]').classList.add('active');
                 
-                // بدء اختبار موضوع معين
-                if (e.target.matches('a[data-topic]') || e.target.closest('a[data-topic]')) {
-                    e.preventDefault();
-                    const link = e.target.matches('a[data-topic]') ? e.target : e.target.closest('a[data-topic]');
-                    const topicId = parseInt(link.getAttribute('data-topic'));
-                    startQuiz(topicId);
-                    
-                    // تحديث حالة الروابط النشطة
-                    updateActiveNavLink(link);
-                }
-                
-                // أحداث الأزرار في صفحة الاختبار
-                if (e.target.id === 'prev-btn' || e.target.closest('#prev-btn')) {
-                    prevQuestion();
-                }
-                
-                if (e.target.id === 'next-btn' || e.target.closest('#next-btn')) {
-                    nextQuestion();
-                }
-                
-                if (e.target.id === 'submit-btn' || e.target.closest('#submit-btn')) {
-                    submitQuiz();
-                }
-                
-                // أحداث الأزرار في صفحة النتائج
-                if (e.target.id === 'review-btn' || e.target.closest('#review-btn')) {
-                    reviewQuiz();
-                }
-                
-                if (e.target.id === 'new-quiz-btn' || e.target.closest('#new-quiz-btn')) {
-                    startQuiz(currentTopic.id);
-                }
-                
-                if (e.target.id === 'home-btn' || e.target.closest('#home-btn')) {
-                    showHomePage();
-                }
-                
-                // أحداث روابط التذييل
-                if (e.target.id === 'footer-home' || e.target.closest('#footer-home')) {
-                    e.preventDefault();
-                    showHomePage();
-                }
-                
-                if (e.target.id === 'footer-topics' || e.target.closest('#footer-topics')) {
-                    e.preventDefault();
-                    showAllTopicsPage();
-                }
-                
-                if (e.target.id === 'footer-results' || e.target.closest('#footer-results')) {
-                    e.preventDefault();
-                    showResultsPage();
-                }
-            });
-            
-            // أحداث مؤقت الوقت
-            document.getElementById('timer').addEventListener('click', function() {
-                if (quizStarted) {
-                    // إيقاف أو استئناف المؤقت
-                    if (timerInterval) {
-                        clearInterval(timerInterval);
-                        timerInterval = null;
-                        this.innerHTML = `<i class="fas fa-play"></i> ${formatTime(timeLeft)}`;
-                    } else {
-                        startTimer();
-                        this.innerHTML = formatTime(timeLeft);
-                    }
-                }
-            });
-        }
-
-        // تحديث رابط التنقل النشط
-        function updateActiveNavLink(activeLink) {
-            // إزالة النشط من جميع الروابط
-            document.querySelectorAll('nav a').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // إضافة النشط للرابط المحدد
-            activeLink.classList.add('active');
-        }
-
-        // عرض الصفحة الرئيسية
-        function showHomePage() {
-            document.getElementById('home-page').style.display = 'block';
-            document.getElementById('quiz-page').style.display = 'none';
-            document.getElementById('results-page').style.display = 'none';
-            
-            // تحديث عنوان الصفحة
-            document.title = 'برنامج التدريب التحصيلي في الكيمياء';
-        }
-
-        // عرض صفحة جميع الموضوعات
-        function showAllTopicsPage() {
-            const contentContainer = document.getElementById('content-container');
-            
-            // إخفاء جميع الصفحات
-            document.getElementById('home-page').style.display = 'none';
-            document.getElementById('quiz-page').style.display = 'none';
-            document.getElementById('results-page').style.display = 'none';
-            
-            // إنشاء محتوى صفحة جميع الموضوعات
-            let allTopicsHTML = `
-                <div class="welcome-section">
-                    <h2>جميع الموضوعات التدريبية</h2>
-                    <p>اختر موضوعاً للبدء بالتدريب. كل موضوع يحتوي على مجموعة من الأسئلة التفاعلية مع تغذية راجعة فورية.</p>
-                </div>
-                
-                <div class="topics-grid">
-            `;
-            
-            // إضافة جميع الموضوعات
-            topics.forEach(topic => {
-                allTopicsHTML += `
-                    <div class="topic-card">
-                        <div class="topic-icon">
-                            <i class="${topic.icon}"></i>
-                        </div>
-                        <h3>${topic.title}</h3>
-                        <p>${topic.description}</p>
-                        <div class="topic-stats">
-                            <span><i class="fas fa-question-circle"></i> ${topic.questions} سؤال</span>
-                            <span><i class="fas fa-clock"></i> ${topic.duration} دقيقة</span>
-                        </div>
-                        <a href="#" class="start-btn" data-topic="${topic.id}">
-                            <i class="fas fa-play-circle"></i> ابدأ التدريب
-                        </a>
-                    </div>
-                `;
-            });
-            
-            allTopicsHTML += `</div>`;
-            
-            // استبدال محتوى الحاوية
-            contentContainer.innerHTML = allTopicsHTML;
-            
-            // إعادة إضافة مستمعي الأحداث للأزرار الجديدة
-            contentContainer.querySelectorAll('a[data-topic]').forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const topicId = parseInt(this.getAttribute('data-topic'));
-                    startQuiz(topicId);
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.classList.remove('active');
                 });
-            });
-            
-            // تحديث عنوان الصفحة
-            document.title = 'جميع الموضوعات - برنامج التدريب التحصيلي';
-        }
-
-        // عرض صفحة النتائج
-        function showResultsPage() {
-            document.getElementById('home-page').style.display = 'none';
-            document.getElementById('quiz-page').style.display = 'none';
-            document.getElementById('results-page').style.display = 'block';
-            
-            // تحديث عنوان الصفحة
-            document.title = 'النتائج - برنامج التدريب التحصيلي';
-            
-            // إذا كانت هناك نتائج سابقة، عرضها
-            if (currentTopic) {
-                displayResults();
+                resultsSection.classList.add('active');
+                
+                calculateResults();
             }
-        }
+        });
 
-        // بدء اختبار
-        function startQuiz(topicId) {
-            // العثور على الموضوع المحدد
-            currentTopic = topics.find(topic => topic.id === topicId);
+        // تأكيد الإجابة
+        submitBtn.addEventListener('click', () => {
+            const selectedOption = document.querySelector('.option.selected');
             
-            if (!currentTopic) {
-                alert('الموضوع غير موجود!');
+            if (!selectedOption) {
+                alert('الرجاء اختيار إجابة قبل التأكيد');
                 return;
             }
             
-            // تهيئة المتغيرات
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            quizStarted = true;
-            correctAnswers = 0;
-            incorrectAnswers = 0;
-            
-            // تهيئة مصفوفة الإجابات
-            for (let i = 0; i < currentTopic.questions; i++) {
-                userAnswers.push(null);
-            }
-            
-            // إعداد واجهة الاختبار
-            document.getElementById('home-page').style.display = 'none';
-            document.getElementById('quiz-page').style.display = 'block';
-            document.getElementById('results-page').style.display = 'none';
-            
-            // إعداد المؤقت
-            timeLeft = currentTopic.duration * 60; // تحويل الدقائق إلى ثواني
-            startTimer();
-            
-            // تحديث معلومات الاختبار
-            document.getElementById('current-topic').textContent = currentTopic.title;
-            document.getElementById('progress-text').textContent = `سؤال 1 من ${currentTopic.questions}`;
-            document.getElementById('correct-count').textContent = '0';
-            document.getElementById('incorrect-count').textContent = '0';
-            document.getElementById('timer').textContent = formatTime(timeLeft);
-            
-            // عرض السؤال الأول
-            displayQuestion(currentQuestionIndex);
-            
-            // تحديث شريط التقدم
-            updateProgressBar();
-            
-            // تحديث عنوان الصفحة
-            document.title = `${currentTopic.title} - برنامج التدريب التحصيلي`;
-        }
-
-        // بدء المؤقت
-        function startTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-            
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timer').textContent = formatTime(timeLeft);
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    submitQuiz();
-                }
-            }, 1000);
-        }
-
-        // تنسيق الوقت
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        // عرض السؤال
-        function displayQuestion(index) {
-            // إخفاء قسم التغذية الراجعة
-            document.getElementById('feedback-section').style.display = 'none';
-            
-            // الحصول على بيانات السؤال
-            let questionData;
-            if (currentTopic.questionsData && currentTopic.questionsData[index]) {
-                questionData = currentTopic.questionsData[index];
-            } else {
-                // إنشاء سؤال افتراضي إذا لم تكن هناك بيانات
-                questionData = {
-                    id: index + 1,
-                    text: `هذا سؤال نموذجي رقم ${index + 1} في موضوع ${currentTopic.title}. ما هو الجواب الصحيح؟`,
-                    options: [
-                        { text: "الإجابة الأولى", correct: false },
-                        { text: "الإجابة الثانية", correct: true },
-                        { text: "الإجابة الثالثة", correct: false },
-                        { text: "الإجابة الرابعة", correct: false }
-                    ],
-                    explanation: "هذا شرح نموذجي للإجابة الصحيحة. الإجابة الثانية هي الصحيحة لأن...",
-                    difficulty: index % 3 === 0 ? "easy" : index % 3 === 1 ? "medium" : "hard"
-                };
-            }
-            
-            // تحديث معلومات السؤال
-            document.getElementById('question-number').textContent = `سؤال ${index + 1}`;
-            document.getElementById('question-text').textContent = questionData.text;
-            
-            // تحديث مستوى الصعوبة
-            const difficultyElement = document.getElementById('question-difficulty');
-            difficultyElement.className = 'question-difficulty';
-            difficultyElement.classList.add(`difficulty-${questionData.difficulty}`);
-            
-            let difficultyText = '';
-            switch(questionData.difficulty) {
-                case 'easy': difficultyText = 'سهل'; break;
-                case 'medium': difficultyText = 'متوسط'; break;
-                case 'hard': difficultyText = 'صعب'; break;
-            }
-            difficultyElement.textContent = difficultyText;
-            
-            // تحديث نص التقدم
-            document.getElementById('progress-text').textContent = `سؤال ${index + 1} من ${currentTopic.questions}`;
-            
-            // تحديث شريط التقدم
-            updateProgressBar();
-            
-            // عرض الخيارات
-            const optionsContainer = document.getElementById('options-container');
-            optionsContainer.innerHTML = '';
-            
-            const letters = ['أ', 'ب', 'ج', 'د'];
-            
-            questionData.options.forEach((option, optionIndex) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                if (userAnswers[index] === optionIndex) {
-                    optionElement.classList.add('selected');
-                }
-                
-                optionElement.innerHTML = `
-                    <div class="option-letter">${letters[optionIndex]}</div>
-                    <div class="option-text">${option.text}</div>
-                `;
-                
-                optionElement.addEventListener('click', () => selectOption(optionIndex, questionData));
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // تحديث أزرار التنقل
-            updateNavigationButtons();
-        }
-
-        // اختيار خيار
-        function selectOption(optionIndex, questionData) {
-            // إزالة التحديد من جميع الخيارات
-            document.querySelectorAll('.option').forEach(option => {
-                option.classList.remove('selected');
-            });
-            
-            // إضافة التحديد للخيار المختار
-            document.querySelectorAll('.option')[optionIndex].classList.add('selected');
+            const selectedAnswerIndex = parseInt(selectedOption.getAttribute('data-index'));
+            const question = questions[currentQuestionIndex];
             
             // حفظ إجابة المستخدم
-            userAnswers[currentQuestionIndex] = optionIndex;
+            userAnswers[currentQuestionIndex] = selectedAnswerIndex;
             
-            // عرض التغذية الراجعة
-            showFeedback(optionIndex, questionData);
-        }
-
-        // عرض التغذية الراجعة
-        function showFeedback(selectedOptionIndex, questionData) {
-            const feedbackSection = document.getElementById('feedback-section');
-            const isCorrect = questionData.options[selectedOptionIndex].correct;
+            // التحقق من الإجابة الصحيحة
+            const isCorrect = selectedAnswerIndex === question.correctAnswer;
             
-            // تحديث العداد
-            if (isCorrect) {
-                correctAnswers++;
-                document.getElementById('correct-count').textContent = correctAnswers;
-            } else {
-                incorrectAnswers++;
-                document.getElementById('incorrect-count').textContent = incorrectAnswers;
+            // تحديث النتيجة
+            if (isCorrect && !question.answered) {
+                userScore++;
+                currentScoreSpan.textContent = userScore;
+                question.answered = true;
+                question.correct = true;
+            } else if (!isCorrect && !question.answered) {
+                question.answered = true;
+                question.correct = false;
             }
             
-            // تحديد الخيار الصحيح
-            let correctOptionIndex = -1;
-            questionData.options.forEach((option, index) => {
-                if (option.correct) {
-                    correctOptionIndex = index;
-                }
-            });
-            
-            // تحديث مظهر الخيارات
+            // إظهار التصحيح
             const options = document.querySelectorAll('.option');
-            options.forEach((option, index) => {
-                if (questionData.options[index].correct) {
+            options.forEach(option => {
+                const optionIndex = parseInt(option.getAttribute('data-index'));
+                
+                if (optionIndex === question.correctAnswer) {
                     option.classList.add('correct');
-                } else if (index === selectedOptionIndex && !questionData.options[index].correct) {
+                } else if (optionIndex === selectedAnswerIndex && !isCorrect) {
                     option.classList.add('incorrect');
                 }
                 
-                // منع النقر على الخيارات بعد الاختيار
+                // منع النقر على الخيارات بعد التصحيح
                 option.style.pointerEvents = 'none';
             });
             
-            // إعداد محتوى التغذية الراجعة
-            const letters = ['أ', 'ب', 'ج', 'د'];
+            // تعطيل زر التأكيد
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.6';
+            submitBtn.style.cursor = 'not-allowed';
             
-            feedbackSection.innerHTML = `
-                <div class="feedback-header ${isCorrect ? 'feedback-correct' : 'feedback-incorrect'}">
-                    <i class="fas fa-${isCorrect ? 'check-circle' : 'times-circle'} feedback-icon"></i>
-                    <h3>${isCorrect ? 'إجابة صحيحة!' : 'إجابة خاطئة!'}</h3>
-                </div>
-                <p>${isCorrect ? 'أحسنت! لقد اخترت الإجابة الصحيحة.' : `الإجابة الصحيحة هي: ${letters[correctOptionIndex]}. ${questionData.options[correctOptionIndex].text}`}</p>
-                <div class="feedback-explanation">
-                    <h4>شرح الإجابة:</h4>
-                    <p>${questionData.explanation}</p>
+            // تحديث شريط التقدم
+            updateProgress();
+        });
+
+        // عرض الشرح
+        showExplanationBtn.addEventListener('click', () => {
+            const explanationDiv = document.getElementById('explanation');
+            if (explanationDiv) {
+                explanationDiv.classList.toggle('show');
+            }
+        });
+
+        // تحميل سؤال
+        function loadQuestion(index) {
+            const question = questions[index];
+            
+            // تحديث عداد السؤال
+            currentQuestionSpan.textContent = index + 1;
+            
+            // تحديث شريط التقدم
+            updateProgress();
+            
+            // بناء واجهة السؤال
+            let optionsHTML = '';
+            question.options.forEach((option, i) => {
+                let optionClass = 'option';
+                let letter = String.fromCharCode(65 + i); // A, B, C, D
+                
+                // إذا كان المستخدم قد أجاب على هذا السؤال مسبقاً
+                if (userAnswers[index] !== null) {
+                    if (i === question.correctAnswer) {
+                        optionClass += ' correct';
+                    } else if (i === userAnswers[index] && i !== question.correctAnswer) {
+                        optionClass += ' incorrect';
+                    } else if (i === userAnswers[index]) {
+                        optionClass += ' selected';
+                    }
+                }
+                
+                optionsHTML += `
+                    <div class="${optionClass}" data-index="${i}">
+                        <span class="option-letter">${letter}</span>
+                        <span class="option-text">${option}</span>
+                    </div>
+                `;
+            });
+            
+            // إضافة السؤال
+            questionContainer.innerHTML = `
+                <div class="question-card">
+                    <div class="question-number">السؤال ${index + 1}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-container">${optionsHTML}</div>
+                    <div class="explanation" id="explanation">
+                        <h4><i class="fas fa-lightbulb"></i> شرح السؤال:</h4>
+                        <p>${question.explanation}</p>
+                        <p style="margin-top: 10px; font-style: italic; color: #666;">
+                            الموضوع: ${getTopicName(question.topic)}
+                        </p>
+                    </div>
                 </div>
             `;
             
-            feedbackSection.style.display = 'block';
-            
-            // تمرير إلى العنصر التالي تلقائياً بعد 3 ثوانٍ
-            setTimeout(() => {
-                if (currentQuestionIndex < currentTopic.questions - 1) {
-                    nextQuestion();
+            // إضافة أحداث النقر على الخيارات
+            document.querySelectorAll('.option').forEach(option => {
+                // السماح بالنقر فقط إذا لم يتم الإجابة على السؤال بعد
+                if (userAnswers[index] === null) {
+                    option.addEventListener('click', () => {
+                        // إزالة التحديد من جميع الخيارات
+                        document.querySelectorAll('.option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        
+                        // تحديد الخيار المختار
+                        option.classList.add('selected');
+                        
+                        // تمكين زر التأكيد
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                        submitBtn.style.cursor = 'pointer';
+                    });
+                } else {
+                    // إذا كان السؤال قد تمت الإجابة عليه مسبقاً، منع التفاعل
+                    option.style.pointerEvents = 'none';
                 }
-            }, 3000);
-        }
-
-        // تحديث أزرار التنقل
-        function updateNavigationButtons() {
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const submitBtn = document.getElementById('submit-btn');
+            });
             
-            // زر السابق
-            if (currentQuestionIndex === 0) {
-                prevBtn.style.visibility = 'hidden';
+            // التحقق مما إذا كان السؤال قد تمت الإجابة عليه مسبقاً
+            if (userAnswers[index] !== null) {
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.6';
+                submitBtn.style.cursor = 'not-allowed';
+                
+                // إظهار الشرح إذا كان السؤال قد تمت الإجابة عليه
+                document.getElementById('explanation').classList.add('show');
             } else {
-                prevBtn.style.visibility = 'visible';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.6';
+                submitBtn.style.cursor = 'not-allowed';
+                
+                // إخفاء الشرح
+                const explanationDiv = document.getElementById('explanation');
+                if (explanationDiv) {
+                    explanationDiv.classList.remove('show');
+                }
             }
             
-            // زر التالي وزر الإنهاء
-            if (currentQuestionIndex === currentTopic.questions - 1) {
-                nextBtn.style.display = 'none';
-                submitBtn.style.display = 'flex';
+            // تحديث حالة الأزرار
+            prevBtn.disabled = index === 0;
+            prevBtn.style.opacity = index === 0 ? '0.6' : '1';
+            
+            if (index === questions.length - 1) {
+                nextBtn.innerHTML = '<i class="fas fa-flag-checkered"></i> عرض النتائج';
             } else {
-                nextBtn.style.display = 'flex';
-                submitBtn.style.display = 'none';
+                nextBtn.innerHTML = '<i class="fas fa-arrow-left"></i> السؤال التالي';
             }
         }
 
         // تحديث شريط التقدم
-        function updateProgressBar() {
-            const progress = ((currentQuestionIndex + 1) / currentTopic.questions) * 100;
-            document.getElementById('progress-bar').style.width = `${progress}%`;
+        function updateProgress() {
+            const answeredQuestions = userAnswers.filter(answer => answer !== null).length;
+            const progressPercentage = (answeredQuestions / questions.length) * 100;
+            quizProgress.style.width = `${progressPercentage}%`;
         }
 
-        // الانتقال إلى السؤال السابق
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                displayQuestion(currentQuestionIndex);
-            }
+        // حساب النتائج
+        function calculateResults() {
+            let correctCount = 0;
+            let wrongCount = 0;
+            let unansweredCount = 0;
+            
+            questions.forEach((question, index) => {
+                if (userAnswers[index] === null) {
+                    unansweredCount++;
+                } else if (userAnswers[index] === question.correctAnswer) {
+                    correctCount++;
+                } else {
+                    wrongCount++;
+                }
+            });
+            
+            const scorePercentage = Math.round((correctCount / questions.length) * 100);
+            
+            // تحديث واجهة النتائج
+            finalScorePercent.textContent = `${scorePercentage}%`;
+            totalAnswered.textContent = questions.length;
+            correctAnswers.textContent = correctCount;
+            wrongAnswers.textContent = wrongCount;
+            unanswered.textContent = unansweredCount;
+            
+            // تحديث دائرة النتيجة
+            const scoreCircle = document.querySelector('.score-circle');
+            scoreCircle.style.background = `conic-gradient(var(--success-color) 0% ${scorePercentage}%, #eee ${scorePercentage}% 100%)`;
         }
 
-        // الانتقال إلى السؤال التالي
-        function nextQuestion() {
-            if (currentQuestionIndex < currentTopic.questions - 1) {
-                currentQuestionIndex++;
-                displayQuestion(currentQuestionIndex);
-            }
-        }
-
-        // إنهاء الاختبار وعرض النتائج
-        function submitQuiz() {
-            // إيقاف المؤقت
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
-            
-            // إخفاء صفحة الاختبار وعرض صفحة النتائج
-            document.getElementById('quiz-page').style.display = 'none';
-            document.getElementById('results-page').style.display = 'block';
-            
-            // عرض النتائج
-            displayResults();
-        }
-
-        // عرض النتائج
-        function displayResults() {
-            if (!currentTopic) return;
-            
-            // حساب النتائج
-            const totalQuestions = currentTopic.questions;
-            const scorePercentage = Math.round((correctAnswers / totalQuestions) * 100);
-            const timeUsed = (currentTopic.duration * 60) - timeLeft;
-            
-            // تحديث عناصر النتائج
-            document.getElementById('result-topic-name').textContent = currentTopic.title;
-            document.getElementById('final-score').textContent = scorePercentage;
-            document.getElementById('result-correct').textContent = correctAnswers;
-            document.getElementById('result-incorrect').textContent = incorrectAnswers;
-            document.getElementById('result-time').textContent = formatTime(timeUsed);
-            document.getElementById('result-percentage').textContent = `${scorePercentage}%`;
-            
-            // تحديث أيقونة النتيجة بناءً على الأداء
-            const resultsIcon = document.querySelector('.results-icon i');
-            if (scorePercentage >= 80) {
-                resultsIcon.className = 'fas fa-trophy';
-                resultsIcon.style.color = '#f1c40f'; // ذهبي
-            } else if (scorePercentage >= 60) {
-                resultsIcon.className = 'fas fa-award';
-                resultsIcon.style.color = '#95a5a6'; // فضي
-            } else {
-                resultsIcon.className = 'fas fa-redo';
-                resultsIcon.style.color = '#e74c3c'; // أحمر
-            }
-            
-            // تحديث عنوان الصفحة
-            document.title = `النتائج: ${scorePercentage}% - برنامج التدريب التحصيلي`;
-        }
-
-        // مراجعة الإجابات
-        function reviewQuiz() {
-            // العودة إلى الاختبار مع السماح بالمراجعة
-            document.getElementById('results-page').style.display = 'none';
-            document.getElementById('quiz-page').style.display = 'block';
-            
-            // العودة إلى السؤال الأول
+        // إعادة تعيين الاختبار
+        function resetQuiz() {
             currentQuestionIndex = 0;
-            displayQuestion(currentQuestionIndex);
+            userAnswers = new Array(questions.length).fill(null);
+            userScore = 0;
+            quizCompleted = false;
             
-            // إيقاف المؤقت
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
+            currentScoreSpan.textContent = '0';
+            quizProgress.style.width = '0%';
             
-            // تحديث زر الإنهاء
-            document.getElementById('submit-btn').style.display = 'none';
-            document.getElementById('next-btn').style.display = 'flex';
+            // إعادة تعيين حالة الأسئلة
+            questions.forEach(question => {
+                question.answered = false;
+                question.correct = false;
+            });
         }
+
+        // الحصول على اسم الموضوع بالعربية
+        function getTopicName(topic) {
+            const topicNames = {
+                'general': 'علم الكيمياء والمادة',
+                'atomic': 'الذرة والجدول الدوري',
+                'bonding': 'الروابط الكيميائية',
+                'reactions': 'التفاعلات الكيميائية',
+                'calculations': 'الحسابات الكيميائية',
+                'acids': 'الأحماض والقواعد',
+                'organic': 'الكيمياء العضوية',
+                'electro': 'الكيمياء الكهربائية'
+            };
+            
+            return topicNames[topic] || topic;
+        }
+
+        // تهيئة الصفحة بتحميل السؤال الأول
+        // loadQuestion(currentQuestionIndex);
+        
+        // إضافة تأثيرات للبطاقات في الصفحة الرئيسية
+        document.querySelectorAll('.topic-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const topic = this.getAttribute('data-topic');
+                alert(`سيتم تحميل أسئلة موضوع: ${getTopicName(topic)}`);
+                // في التطبيق الكامل، يمكن تصفية الأسئلة حسب الموضوع
+            });
+        });
     </script>
 </body>
 </html>
